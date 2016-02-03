@@ -1,0 +1,2838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BaseUtils - 底层工具类</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Application - 用户后台.html">Application - 用户后台</a></li>
+            
+                <li><a href="../classes/BaseCollection 集合类.html">BaseCollection 集合类</a></li>
+            
+                <li><a href="../classes/BaseDetail - 详细页面.html">BaseDetail - 详细页面</a></li>
+            
+                <li><a href="../classes/BaseError - 错误信息.html">BaseError - 错误信息</a></li>
+            
+                <li><a href="../classes/BaseItem - 单视图.html">BaseItem - 单视图</a></li>
+            
+                <li><a href="../classes/BaseList - 列表视图.html">BaseList - 列表视图</a></li>
+            
+                <li><a href="../classes/BaseModel - 模型类.html">BaseModel - 模型类</a></li>
+            
+                <li><a href="../classes/BaseService - 数据请求.html">BaseService - 数据请求</a></li>
+            
+                <li><a href="../classes/BaseUtils - 底层工具类.html">BaseUtils - 底层工具类</a></li>
+            
+                <li><a href="../classes/BaseView - 普通视图.html">BaseView - 普通视图</a></li>
+            
+                <li><a href="../classes/Est - 工具类库.html">Est - 工具类库</a></li>
+            
+                <li><a href="../classes/HandlebarsHelper - 标签库.html">HandlebarsHelper - 标签库</a></li>
+            
+                <li><a href="../classes/SuperView - 所有BaseXxx模块的超类.html">SuperView - 所有BaseXxx模块的超类</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>BaseUtils - 底层工具类 Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l1"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:1</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>BaseUtils</p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_[上传] - initUpload ( 图片上传 )">[上传] - initUpload ( 图片上传 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[加载] - addLoading">[加载] - addLoading</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[加载] - addLoading ( 添加加载动画 )">[加载] - addLoading ( 添加加载动画 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[加载] - removeLoading">[加载] - removeLoading</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[加载] - removeLoading ( 移除加载动画 )">[加载] - removeLoading ( 移除加载动画 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[动画] - initAnimate ( 初始化动画 )">[动画] - initAnimate ( 初始化动画 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[地区] - initDistrict ( 初始化级联地区 )">[地区] - initDistrict ( 初始化级联地区 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[复制] - initCopy ( 初始化复制按钮 )">[复制] - initCopy ( 初始化复制按钮 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[对话框] - dialog">[对话框] - dialog</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[对话框] - iframeDialog">[对话框] - iframeDialog</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[对话框] - initConfirm">[对话框] - initConfirm</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[对话框] - initTip">[对话框] - initTip</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[拖放] - initDrag ( 初始化拖动 )">[拖放] - initDrag ( 初始化拖动 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[提示] - initTooltip">[提示] - initTooltip</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[编辑器] - initInlineEditor">[编辑器] - initInlineEditor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[缩放] - initResize ( 初始化缩放 )">[缩放] - initResize ( 初始化缩放 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - initCombox ( 初始化多标签组件 )">[表单] - initCombox ( 初始化多标签组件 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - initDate ( 初始化时间组件 )">[表单] - initDate ( 初始化时间组件 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - initDropDown ( 初始化下拉框 )">[表单] - initDropDown ( 初始化下拉框 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - initEditor ( 初始化编辑器 )">[表单] - initEditor ( 初始化编辑器 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - initSelect ( 初始化选择框 )">[表单] - initSelect ( 初始化选择框 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[调用] - execute ( 调用方法 )">[调用] - execute ( 调用方法 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[选项卡] - initButtonTab ( 初始化按钮形式的tab选项卡 )">[选项卡] - initButtonTab ( 初始化按钮形式的tab选项卡 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[选项卡] - initTab ( 初始化tab选项卡 )">[选项卡] - initTab ( 初始化tab选项卡 )</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_[上传] - initUpload ( 图片上传 )" class="method item">
+    <h3 class="name"><code>[上传] - initUpload ( 图片上传 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l374"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:374</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>图片上传</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[render:　选择符][context: 上下文]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> // 图片添加
+ Utils.openUpload({
+  albumId: app.getData(&#39;curAlbumId&#39;),
+  username: app.getData(&#39;user&#39;).username, // 必填
+  auto: true,
+  oniframeload: function(){
+    this.iframeNode.contentWindow.uploadCallback = doResult;
+  }
+ });
+ // 图片替换 主要用于图片空间里的图片替换操作
+ Utils.openUpload({
+   id: &#39;replaceDialog&#39; + id,
+   title: &#39;图片替换&#39;,
+   albumId: app.getData(&#39;curAlbumId&#39;), // 必填
+   username: app.getData(&#39;user&#39;).username, // 必填
+   replace: true, // 必填
+   attId: this.model.get(&#39;attId&#39;), // 必填
+   oniframeload: function () {
+     this.iframeNode.contentWindow.uploadCallback = function (results) { // results返回结果
+     ctx.model.set(&#39;uploadTime&#39;, new Date().getTime());
+     window[&#39;replaceDialog&#39; + id].close().remove();
+     };
+   }
+ });
+ // 选取图片
+ Utils.openUpload({
+           id: &#39;uploadDialog&#39;,
+           type: type, // [local / source]打开的窗口类型， 如上传、资源库
+           albumId: app.getData(&#39;curAlbumId&#39;),
+           username: app.getData(&#39;user&#39;) &amp;&amp; app.getData(&#39;user&#39;).username,
+           auto: true,
+           oniframeload: function(){
+             this.iframeNode.contentWindow.uploadCallback = function(result){
+               ctx.addItems(result);
+             };
+           },
+           success: function(){
+             var result = this.iframeNode.contentWindow.app.getView(&#39;picSource&#39;).getItems();
+             ctx.addItems(result);
+           }
+         });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[加载] - addLoading" class="method item">
+    <h3 class="name"><code>[加载] - addLoading</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>optoins</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l1012"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:1012</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>添加加载动画</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">optoins</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.addLoading();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[加载] - addLoading ( 添加加载动画 )" class="method item">
+    <h3 class="name"><code>[加载] - addLoading ( 添加加载动画 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l313"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:313</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>添加加载动画</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.addLoading();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[加载] - removeLoading" class="method item">
+    <h3 class="name"><code>[加载] - removeLoading</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l1030"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:1030</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>移除加载动画</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.removeLoading();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[加载] - removeLoading ( 移除加载动画 )" class="method item">
+    <h3 class="name"><code>[加载] - removeLoading ( 移除加载动画 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l331"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:331</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>移除加载动画</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.removeLoading();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[动画] - initAnimate ( 初始化动画 )" class="method item">
+    <h3 class="name"><code>[动画] - initAnimate ( 初始化动画 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>target</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l285"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:285</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化动画</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">target</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   Utils.initAnimate(this);</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[地区] - initDistrict ( 初始化级联地区 )" class="method item">
+    <h3 class="name"><code>[地区] - initDistrict ( 初始化级联地区 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l343"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:343</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化级联地区</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Utils.initDistrict({
+            id: &#39;district1&#39; ,// 必填
+            render: &#39;#district-container&#39;, // 目标选择符
+            target: &#39;#model-dist&#39;,
+            path: &#39;...&#39;,
+            url: CONST.API + &#39;/shop/receiver/list&#39; // 自定义请求地址
+          });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[复制] - initCopy ( 初始化复制按钮 )" class="method item">
+    <h3 class="name"><code>[复制] - initCopy ( 初始化复制按钮 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>selecter</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l626"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:626</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化复制按钮</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">selecter</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   html: &lt;span id=&quot;&quot; class=&quot;design-leaflet-url-copy&quot; clipboard=&quot;&quot; data-clipboard-text=&quot;{{staticUrl}}&quot;&gt;复制&lt;/span&gt;
+   javascript:
+       Utils.initCopy(&#39;#photo-copy-dialog&#39;, {
+      success: function(){
+        // 成功复制后回调
+      }
+    });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[对话框] - dialog" class="method item">
+    <h3 class="name"><code>[对话框] - dialog</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l807"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:807</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>对话框</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[title: ][width: ][height: ][target: ][success: 确定按钮回调]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.dialog({
+    id: &#39;copyDialog&#39;,
+    title: &#39;复制图片&#39;,
+    target: &#39;.btn-email-bind&#39;,
+    width: 800,
+    quickClose: true, // 点击空白处关闭对话框
+    hideCloseBtn: false, // 是否隐藏关闭按钮
+    content: this.copyDetail({
+      filename: this.model.get(&#39;filename&#39;),
+      serverPath: this.model.get(&#39;serverPath&#39;)
+    }),
+    cover: true, // 是否显示遮罩
+    onshow: function(){// 对话框显示时回调
+    },
+    load: function(){ // iframe载入完成后回调
+      ...base.js
+    },
+    success: function(){// 按确定按钮时回调
+      this.close();
+    }
+  });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[对话框] - iframeDialog" class="method item">
+    <h3 class="name"><code>[对话框] - iframeDialog</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l880"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:880</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>打开iframe对话框</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[url: &#39;&#39;] [title: 标题][width: ][height: ][success: 确定按钮成功回调方法][target:　绑定到对象]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initIframeDialog({
+    title: &#39;黑名单&#39;,
+    url: CONST.DOMAIN + &#39;/user/blacklist/view&#39;,
+    width: 500,
+    target: &#39;.name&#39;,
+    success: function(){
+        this.title(CONST.SUBMIT_TIP);
+        this.iframeNode.contentWindow.$(&quot;#submit&quot;).click();
+        return false;
+    }
+  });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[对话框] - initConfirm" class="method item">
+    <h3 class="name"><code>[对话框] - initConfirm</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>opts</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l957"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:957</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>确认框， 比如删除操作</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">opts</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[title: 标题][content: 内容][success: 成功回调]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initConfirm({
+   title: &#39;提示&#39;,
+   target: this.$(&#39;.name&#39;).get(0),
+   content: &#39;是否删除?&#39;,
+   success: function(){
+     ...
+   },
+   cancel: function(){
+     ...
+   }
+ });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[对话框] - initTip" class="method item">
+    <h3 class="name"><code>[对话框] - initTip</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>msg</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l929"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:929</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>提示信息</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">msg</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initTip(&#39;提示内容&#39;, {
+   time: 1000,
+   title: &#39;温馨提示&#39;
+ });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[拖放] - initDrag ( 初始化拖动 )" class="method item">
+    <h3 class="name"><code>[拖放] - initDrag ( 初始化拖动 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l667"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:667</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化拖动</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>Utils.initDrag({
+   render: &#39;.drag&#39;,
+   resize: true, // 是否启用缩放
+   dragend: function (ev, dd) { // 拖放结束后执行
+     $(this).css({
+       left: ((dd.offsetX * 100) / 320) + &#39;%&#39;,
+       top: ((dd.offsetY * 100) / 480) + &#39;%&#39;,
+       width: ($(this).width() * 100) / 320 + &#39;%&#39;,
+       height: ($(this).height() * 100) / 480 + &#39;%&#39;
+     });
+   },
+   resizeend: function(ev, dd){ // 缩放结束后执行
+     $(this).css({
+       width: ($(this).width() * 100) / 320 + &#39;%&#39;,
+       height: ($(this).height() * 100) / 480 + &#39;%&#39;
+     });
+   },
+   callback: function (ev, dd) {
+   }
+ });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[提示] - initTooltip" class="method item">
+    <h3 class="name"><code>[提示] - initTooltip</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>msg</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l1041"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:1041</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>input鼠标点击提示</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">msg</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   this.$(&#39;input, textarea&#39;).each(function(){
+     var title = $(this).attr(&#39;title&#39;);
+     if (title){
+       $(this).click(function(){
+       Utils.initTooltip(title, {
+         align: &#39;right&#39;,
+         target: $(this).get(0)
+       });
+     });
+     }
+   });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[编辑器] - initInlineEditor" class="method item">
+    <h3 class="name"><code>[编辑器] - initInlineEditor</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l600"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:600</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化内联编辑器</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initInlineEditor(target, callback);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[缩放] - initResize ( 初始化缩放 )" class="method item">
+    <h3 class="name"><code>[缩放] - initResize ( 初始化缩放 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l778"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:778</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化缩放</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initResize({
+   render: &#39;img&#39;,
+   callback: function(ev, dd){}
+ });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - initCombox ( 初始化多标签组件 )" class="method item">
+    <h3 class="name"><code>[表单] - initCombox ( 初始化多标签组件 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Est.promise</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l243"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:243</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化多标签</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Est.promise</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initCombox({
+    render: &#39;#tag&#39;,
+    target: &#39;#model-tag&#39;,
+    itemId: &#39;categoryId&#39;
+      items: [ &#39;选项一&#39;, &#39;选项二&#39;, &#39;选项三&#39;, &#39;选项四&#39; ]
+  });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - initDate ( 初始化时间组件 )" class="method item">
+    <h3 class="name"><code>[表单] - initDate ( 初始化时间组件 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l210"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:210</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化日期选择器</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[render: 选择符][showTime: true/false 是否显示时间]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initDate({
+    render: &#39;.calendar&#39;,
+    showTime: false,
+    target: &#39;#model-addTime&#39;, // 绑定隐藏域model
+    change: function(ev){
+     ...
+    }
+  });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - initDropDown ( 初始化下拉框 )" class="method item">
+    <h3 class="name"><code>[表单] - initDropDown ( 初始化下拉框 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l68"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:68</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化下拉框</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initDropDown({
+       target: &#39;#drop-down-content&#39;, // 显示下拉框的触发按钮
+       height: 250, // 默认为auto
+       width: 150, // 默认为auto
+       //overflowX: &#39;auto&#39;, // 默认为hidden
+       content: $(&#39;#template-drop-down&#39;).html(), // 显示内容
+       callback: function (options) { // 下拉框渲染完成后的回调函数
+           setTimeout(function(){
+               app.getView(options.dropDownId).reflesh(function () { // 刷新
+                   this._options.items = [&#39;111&#39;]; // 重新设置options参数里的items
+               });
+               app.getView(options.dropDownId).hide(); // dropDownId 为当前下拉框的viewId
+           }, 1000);
+       }
+   });</code></pre>
+<p>  Utils.initDropDown({
+           target: &#39;#drop-down-module-id&#39;,
+           moduleId: &#39;AttributesAdd&#39;,
+           items: [&#39;111&#39;, &#39;222&#39;, &#39;333&#39;],
+           callback: function(options){
+               setTimeout(function(){
+                   app.getView(options.dropDownId).hide();
+               }, 1000);
+           }
+       });</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - initEditor ( 初始化编辑器 )" class="method item">
+    <h3 class="name"><code>[表单] - initEditor ( 初始化编辑器 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l431"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:431</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化编辑器</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initEditor({
+   render: &#39;.ckeditor&#39;
+ });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - initSelect ( 初始化选择框 )" class="method item">
+    <h3 class="name"><code>[表单] - initSelect ( 初始化选择框 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l7"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:7</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化选择框</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.initSelect({
+       render: &#39;#select&#39;,  // 渲染区域
+       target: &#39;#model-categoryId&#39;, // 目标input元素
+       text: &#39;name&#39;, // 名称字段
+       value: &#39;categoryId&#39;, // 值字段
+       items: app.getData(&#39;product_category_list&#39;), // 列表
+       search: true, // 是否显示搜索框
+       change: function (ev) { // select事件
+           console.log(ev);
+       }
+   });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[调用] - execute ( 调用方法 )" class="method item">
+    <h3 class="name"><code>[调用] - execute ( 调用方法 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l1077"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:1077</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>调用方法 - 命令模式[说明， 只有在需要记录日志，撤销、恢复操作等功能时调用该方法]</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Utils.execute( &quot;initSelect&quot;, {
+   ...
+ }, this);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[选项卡] - initButtonTab ( 初始化按钮形式的tab选项卡 )" class="method item">
+    <h3 class="name"><code>[选项卡] - initButtonTab ( 初始化按钮形式的tab选项卡 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l169"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:169</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化button tab选项卡</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Utils.initButtonTab({
+     render: &#39;#tab&#39;,
+     elCls: &#39;button-tabs&#39;,
+     autoRender: true,
+     children: [
+       {title: &#39;常规&#39;, value: &#39;1&#39;, selected: true},
+       {title: &#39;产品描述&#39;, value: &#39;2&#39;},
+       {title: &#39;产品属性&#39;, value: &#39;3&#39;},
+       {title: &#39;商城属性&#39;, value: &#39;4&#39;},
+       {title: &#39;产品标签&#39;, value: &#39;5&#39;},
+       {title: &#39;搜索引擎优化&#39;, value: &#39;6&#39;}
+     ],
+     change: function(ev){ // 点击标签页面回调事件
+         console.log(ev);
+     }
+   });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[选项卡] - initTab ( 初始化tab选项卡 )" class="method item">
+    <h3 class="name"><code>[选项卡] - initTab ( 初始化tab选项卡 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseUtils.js.html#l128"><code>c:\software\WorkProjects\Build\app\backbone\BaseUtils.js:128</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化tab选项卡</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   Utils.initTab({
+     render: &#39;#tab&#39;,
+     elCls: &#39;nav-tabs&#39;,
+     panelContainer: &#39;#panel&#39;,
+     autoRender: true,
+     children: [
+       {title: &#39;常规&#39;, value: &#39;1&#39;, selected: true},
+       {title: &#39;产品描述&#39;, value: &#39;2&#39;},
+       {title: &#39;产品属性&#39;, value: &#39;3&#39;},
+       {title: &#39;商城属性&#39;, value: &#39;4&#39;},
+       {title: &#39;产品标签&#39;, value: &#39;5&#39;},
+       {title: &#39;搜索引擎优化&#39;, value: &#39;6&#39;}
+     ],
+     change: function(ev){ // 点击标签页面回调事件
+         console.log(ev);
+     }
+   });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

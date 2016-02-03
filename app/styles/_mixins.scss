@@ -1,0 +1,18 @@
+@mixin box-sizing ($sizing) {
+  -webkit-box-sizing: $sizing;
+  -moz-box-sizing: $sizing;
+  box-sizing: $sizing;
+}
+
+@mixin text-size-adjust($adjust) {
+  -webkit-text-size-adjust: $adjust;
+  -moz-text-size-adjust: $adjust;
+  text-size-adjust: $adjust;
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  transition: $transition;
+}

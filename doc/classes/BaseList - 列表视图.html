@@ -1,0 +1,4849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>BaseList - 列表视图</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Application - 用户后台.html">Application - 用户后台</a></li>
+            
+                <li><a href="../classes/BaseCollection 集合类.html">BaseCollection 集合类</a></li>
+            
+                <li><a href="../classes/BaseDetail - 详细页面.html">BaseDetail - 详细页面</a></li>
+            
+                <li><a href="../classes/BaseError - 错误信息.html">BaseError - 错误信息</a></li>
+            
+                <li><a href="../classes/BaseItem - 单视图.html">BaseItem - 单视图</a></li>
+            
+                <li><a href="../classes/BaseList - 列表视图.html">BaseList - 列表视图</a></li>
+            
+                <li><a href="../classes/BaseModel - 模型类.html">BaseModel - 模型类</a></li>
+            
+                <li><a href="../classes/BaseService - 数据请求.html">BaseService - 数据请求</a></li>
+            
+                <li><a href="../classes/BaseUtils - 底层工具类.html">BaseUtils - 底层工具类</a></li>
+            
+                <li><a href="../classes/BaseView - 普通视图.html">BaseView - 普通视图</a></li>
+            
+                <li><a href="../classes/Est - 工具类库.html">Est - 工具类库</a></li>
+            
+                <li><a href="../classes/HandlebarsHelper - 标签库.html">HandlebarsHelper - 标签库</a></li>
+            
+                <li><a href="../classes/SuperView - 所有BaseXxx模块的超类.html">SuperView - 所有BaseXxx模块的超类</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>BaseList - 列表视图 Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>列表视图</p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _addAll">[private] - _addAll</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _addOne">[private] - _addOne</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _afterLoad">[private] - _afterLoad</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _beforeLoad">[private] - _beforeLoad</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _check">[private] - _check</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _exchangeOrder">[private] - _exchangeOrder</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _filter">[private] - _filter</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _filterCollection">[private] - _filterCollection</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _filterItems">[private] - _filterItems</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _filterRoot">[private] - _filterRoot</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _finally">[private] - _finally</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _getTemplate">[private] - _getTemplate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _init">[private] - _init</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initBind">[private] - _initBind</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initCollection">[private] - _initCollection</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initDataModel">[private] - _initDataModel</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initEnterEvent">[private] - _initEnterEvent</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initItems">[private] - _initItems</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initItemView">[private] - _initItemView</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initList">[private] - _initList</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initModel">[private] - _initModel</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initOptions">[private] - _initOptions</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initPagination">[private] - _initPagination</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _initTemplate ( 待优化， 模板缓存 )">[private] - _initTemplate ( 待优化， 模板缓存 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _renderListByPagination">[private] - _renderListByPagination</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _resetDx">[private] - _resetDx</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - _setTemplate">[private] - _setTemplate</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[private] - constructor">[private] - constructor</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[保存] - _saveSort ( 保存sort值 )">[保存] - _saveSort ( 保存sort值 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[初始化] - _initialize ( 初始化 )">[初始化] - _initialize ( 初始化 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[批量] - _batch ( 批量删除 )">[批量] - _batch ( 批量删除 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[批量] - _batchDel ( 批量删除 )">[批量] - _batchDel ( 批量删除 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[搜索] - _search ( 搜索 )">[搜索] - _search ( 搜索 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[渲染] - _load ( 获取集合数据 )">[渲染] - _load ( 获取集合数据 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[渲染] - _reload ( 刷新列表 )">[渲染] - _reload ( 刷新列表 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[渲染] - _render ( 渲染视图 )">[渲染] - _render ( 渲染视图 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[渲染] - _stop ( 停止遍历 )">[渲染] - _stop ( 停止遍历 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[移动] - _insertOrder">[移动] - _insertOrder</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[移动] - _moveDown ( 下移 )">[移动] - _moveDown ( 下移 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[移动] - _moveUp ( 上移 )">[移动] - _moveUp ( 上移 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[详细] - _detail ( 查看详细 )">[详细] - _detail ( 查看详细 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[选取] - _clearChecked ( 所有选取设置为未选择状态 )">[选取] - _clearChecked ( 所有选取设置为未选择状态 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[选取] - _getCheckboxIds ( 获取checkbox选中项所有ID值列表 )">[选取] - _getCheckboxIds ( 获取checkbox选中项所有ID值列表 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[选取] - _getCheckedItems ( 获取checkbox选中项 )">[选取] - _getCheckedItems ( 获取checkbox选中项 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[选取] - _toggleAllChecked ( 全选checkbox选择框 )">[选取] - _toggleAllChecked ( 全选checkbox选择框 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[集合] - _add ( 向集合末尾添加元素 )">[集合] - _add ( 向集合末尾添加元素 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[集合] - _clear ( 清空DOM列表 )">[集合] - _clear ( 清空DOM列表 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_[集合] - _empty ( 清空列表 )">[集合] - _empty ( 清空列表 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[集合] - _findIndex ( 索引值 )">[集合] - _findIndex ( 索引值 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[集合] - _getItems ( 获取所有列表项 )">[集合] - _getItems ( 获取所有列表项 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[集合] - _push ( 向列表中添加数据 )">[集合] - _push ( 向列表中添加数据 )</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[集合] - getItem ( 获取集合中某个元素 )">[集合] - getItem ( 获取集合中某个元素 )</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_[private] - _addAll" class="method item private">
+    <h3 class="name"><code>[private] - _addAll</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l780"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:780</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>添加所有元素， 相当于刷新视图</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _addOne" class="method item private">
+    <h3 class="name"><code>[private] - _addOne</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l583"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:583</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>向视图添加元素</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _afterLoad" class="method item private">
+    <h3 class="name"><code>[private] - _afterLoad</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l416"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:416</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>列表载入后执行</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _beforeLoad" class="method item private">
+    <h3 class="name"><code>[private] - _beforeLoad</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l405"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:405</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>列表载入前执行</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _check" class="method item private">
+    <h3 class="name"><code>[private] - _check</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l482"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:482</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>检查是否停止遍历</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Boolean</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _exchangeOrder" class="method item private">
+    <h3 class="name"><code>[private] - _exchangeOrder</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>original_index</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>new_index</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">BaseList</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1075"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1075</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>交换位置</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">original_index</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">new_index</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">BaseList</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _filter" class="method item private">
+    <h3 class="name"><code>[private] - _filter</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>array</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l831"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:831</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>过滤collection</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">array</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _filterCollection" class="method item private">
+    <h3 class="name"><code>[private] - _filterCollection</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l690"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:690</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>过滤集合</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _filterItems" class="method item private">
+    <h3 class="name"><code>[private] - _filterItems</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>array</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l883"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:883</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>过滤items</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">array</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _filterRoot" class="method item private">
+    <h3 class="name"><code>[private] - _filterRoot</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l510"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:510</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>过滤父级元素</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _finally" class="method item private">
+    <h3 class="name"><code>[private] - _finally</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l393"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:393</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化完成后执行</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _getTemplate" class="method item private">
+    <h3 class="name"><code>[private] - _getTemplate</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l461"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:461</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>获取编译模板</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _init" class="method item private">
+    <h3 class="name"><code>[private] - _init</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>collection</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l84"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:84</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化集合类</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">collection</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>对应的collection集合类， 如ProductCollection</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[beforeLoad: 加载数据前执行] [item: 集合单个视图] [model: 模型类]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initBind" class="method item private">
+    <h3 class="name"><code>[private] - _initBind</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l245"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:245</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>绑定事件， 如添加事件， 重置事件</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initCollection" class="method item private">
+    <h3 class="name"><code>[private] - _initCollection</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>collection</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l203"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:203</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化collection集合</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">collection</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initDataModel" class="method item private">
+    <h3 class="name"><code>[private] - _initDataModel</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l123"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:123</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化模型类, 设置index索引</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initEnterEvent" class="method item private">
+    <h3 class="name"><code>[private] - _initEnterEvent</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l165"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:165</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>回车事件</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initItems" class="method item private">
+    <h3 class="name"><code>[private] - _initItems</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l426"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:426</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化items</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initItemView" class="method item private">
+    <h3 class="name"><code>[private] - _initItemView</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>itemView</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l223"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:223</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化单个枚举视图</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">itemView</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initList" class="method item private">
+    <h3 class="name"><code>[private] - _initList</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l181"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:181</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化列表视图容器</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initModel" class="method item private">
+    <h3 class="name"><code>[private] - _initModel</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l234"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:234</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化模型类, 设置index索引</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initOptions" class="method item private">
+    <h3 class="name"><code>[private] - _initOptions</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l110"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:110</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化参数</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initPagination" class="method item private">
+    <h3 class="name"><code>[private] - _initPagination</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l257"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:257</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化分页</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _initTemplate ( 待优化， 模板缓存 )" class="method item private">
+    <h3 class="name"><code>[private] - _initTemplate ( 待优化， 模板缓存 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l134"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:134</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化模板， 若传递一个Template模板字符中进来， 则渲染页面</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _renderListByPagination" class="method item private">
+    <h3 class="name"><code>[private] - _renderListByPagination</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l701"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:701</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>静态分页</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _resetDx" class="method item private">
+    <h3 class="name"><code>[private] - _resetDx</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l664"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:664</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>重新排序dx列表</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - _setTemplate" class="method item private">
+    <h3 class="name"><code>[private] - _setTemplate</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l451"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:451</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>缓存编译模板</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[private] - constructor" class="method item private">
+    <h3 class="name"><code>[private] - constructor</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l9"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:9</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>传递options进来</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[保存] - _saveSort ( 保存sort值 )" class="method item">
+    <h3 class="name"><code>[保存] - _saveSort ( 保存sort值 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1045"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1045</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>保存sort值</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[初始化] - _initialize ( 初始化 )" class="method item">
+    <h3 class="name"><code>[初始化] - _initialize ( 初始化 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l21"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:21</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>初始化</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> this._initialize({
+   model: ProductModel, // 模型类,
+   collection:  ProductCollection,// 集合,
+   item: ProductItem, // 单视图
+   // 以下为可选
+   template: listTemp, 字符串模板,
+   render: &#39;.product-list&#39;, 插入列表的容器选择符, 若为空则默认插入到$el中
+   items: [], // 数据不是以url的形式获取时 (可选), items可为function形式传递;
+   data: {}, // 附加的数据 BaseList、BaseView[js: this._options.data &amp; template: {{name}}] ;
+                BaseItem中为[this._options.data &amp;{{_options._data.name}}] BaseCollecton为this._options.data BaseModel为this.get(&#39;_data&#39;)
+   append: false, // 是否是追加内容， 默认为替换
+   checkAppend: false, // 鼠标点击checkbox， checkbox是否追加  需在BaseItem事件中添加 &#39;click .toggle&#39;: &#39;_toggleChecked&#39;,
+   enterRender: (可选) 执行回车后的按钮点击的元素选择符 如 #submit .btn-search
+   pagination: true, // 是否显示分页 view视图中相应加入&lt;div id=&quot;pagination-container&quot;&gt;&lt;/div&gt;
+   page: parseInt(Est.cookie(&#39;orderList_page&#39;)) || 1, //设置起始页 所有的分页数据都会保存到cookie中， 以viewId + &#39;_page&#39;格式存储， 注意cookie取的是字符串， 要转化成int
+   pageSize: parseInt(Est.cookie(&#39;orderList_pageSize&#39;)) || 16, // 设置每页显示个数
+   max: 5, // 限制显示个数
+   sortField: &#39;sort&#39;, // 上移下移字段名称， 默认为sort
+   itemId: &#39;Category_00000000000123&#39;, // 当需要根据某个ID查找列表时， 启用此参数， 方便
+   filter: [ {key: &#39;name&#39;, value: this.searchKey }] // 过滤结果
+   toolTip: true, // 是否显示title提示框   html代码： &lt;div class=&quot;tool-tip&quot; title=&quot;提示内容&quot;&gt;内容&lt;/div&gt;
+   clearDialog: true, // 清除所有的对话框， 默认为true
+   beforeLoad: function(collection){ // collection载入列表前执行
+       this.setCategoryId(options.categoryId); // collection载入后执行
+     },
+   afterLoad: function(){ // collection载入之后
+       if (this.collection.models.length === 0 ||
+                 !this.options._isAdd){
+                 this.addOne();
+               }
+   },
+   beforeRender: function(thisOpts){}, // 渲染前回调
+   afterRender: function(thisOpts){ // 渲染后回调， 包括items渲染完成
+     if (this.collection.models.length === 0 ||
+                 !this.options._isAdd){
+                 this.addOne();
+               }
+   },
+   cache: true, // 数据缓存到内存中
+   session: true, // 数据缓存到浏览器中，下次打开浏览器，请求的数据直接从浏览器缓存中读取
+   // 以下为树型列表时 需要的参数
+   subRender: &#39;.node-tree&#39;, // 下级分类的容器选择符
+   collapse: &#39;.node-collapse&#39; 展开/收缩元素选择符
+   parentId: &#39;belongId&#39;, // 分类 的父类ID
+   categoryId: &#39;categoryId&#39;, // 分类 的当前ID
+   rootId: &#39;isroot&#39;, // 一级分类字段名称
+   rootValue: &#39;00&#39; // 一级分类字段值  可为数组[null, &#39;Syscode_&#39;]   数组里的选项可为方法， 返回true与false
+   extend: true // false收缩 true为展开
+  });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[批量] - _batch ( 批量删除 )" class="method item">
+    <h3 class="name"><code>[批量] - _batch ( 批量删除 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1278"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1278</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>批量删除， 隐藏等基础接口</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[url: 批量请求地址] [tip: 操作成功后的消息提示]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   this._batch({
+           url: ctx.collection.batchDel,
+           tip: &#39;删除成功&#39;
+         });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[批量] - _batchDel ( 批量删除 )" class="method item">
+    <h3 class="name"><code>[批量] - _batchDel ( 批量删除 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1313"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1313</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>批量删除</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> this._batchDel({
+   url: CONST.API + &#39;/message/batch/del&#39;
+ });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[搜索] - _search ( 搜索 )" class="method item">
+    <h3 class="name"><code>[搜索] - _search ( 搜索 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l792"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:792</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>搜索</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[onBeforeAdd: 自定义过滤]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> this._search({
+   filter: [
+    {key: &#39;name&#39;, value: this.searchKey },
+    {key: &#39;prodtype&#39;, value: this.searchProdtype} ,
+    {key: &#39;category&#39;, value: this.searchCategory},
+    {key: &#39;loginView&#39;, value: this.searchLoginView},
+    {key: &#39;ads&#39;, value: this.searchAds}
+    ],
+   onBeforeAdd: function(item){
+     // 自定义过滤， 即通过上面的filter后还需要经过这一层过滤
+     // 若通过返回true
+     return item.attributes[obj.key].indexOf(obj.value) !== -1;
+  }});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[渲染] - _load ( 获取集合数据 )" class="method item">
+    <h3 class="name"><code>[渲染] - _load ( 获取集合数据 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l276"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:276</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>获取集合数据 当append为true时，只追加数据。
+类似有个_reload  这个方法无论append是否为true， 都会清空列表重新加载</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[beforeLoad: 载入前方法][page: 当前页][pageSize: 每页显示条数]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>分页模型类 或为全查必填</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   baseListCtx._load({
+     page: 1,
+     pageSize: 16,
+     beforeLoad: function () {
+       this.collection.setCategoryId(options.categoryId);
+     },
+     afterLoad: function(){
+
+     }
+   }).then(function () {
+     ctx.after();
+   });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[渲染] - _reload ( 刷新列表 )" class="method item">
+    <h3 class="name"><code>[渲染] - _reload ( 刷新列表 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l378"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:378</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>刷新列表 会清空已存在的数据</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   this._reload();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[渲染] - _render ( 渲染视图 )" class="method item">
+    <h3 class="name"><code>[渲染] - _render ( 渲染视图 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l497"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:497</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>渲染视图</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[渲染] - _stop ( 停止遍历 )" class="method item">
+    <h3 class="name"><code>[渲染] - _stop ( 停止遍历 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l471"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:471</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>停止遍历</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   this._stop();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[移动] - _insertOrder" class="method item">
+    <h3 class="name"><code>[移动] - _insertOrder</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>begin</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>end</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1057"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1057</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>插序 常用于sortable</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">begin</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">end</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   this._insertOrder(1, 6);</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[移动] - _moveDown ( 下移 )" class="method item">
+    <h3 class="name"><code>[移动] - _moveDown ( 下移 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1171"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1171</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>下移</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[移动] - _moveUp ( 上移 )" class="method item">
+    <h3 class="name"><code>[移动] - _moveUp ( 上移 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1122"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1122</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>上移, 默认以sort为字段进行上移操作， 如果字段不为sort， 则需重载并设置options</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> app.getView(&#39;attributesList&#39;)._setOption({
+   sortField: &#39;orderList&#39;
+ })._moveUp(this.model);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[详细] - _detail ( 查看详细 )" class="method item">
+    <h3 class="name"><code>[详细] - _detail ( 查看详细 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l935"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:935</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>弹出查看详细信息对话框</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>[title: 标题][width: 宽度][height: 高度][padding: 内补丁]
+               [url: 地址][hideSaveBtn: 隐藏保存按钮][hideResetBtn: 隐藏重置按钮]
+               [oniframeload: 页面载入后回调， 参数为window对象]</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> this._detail({
+   title: &#39;产品添加&#39;,
+   url: CONST.HOST + &#39;/modules/product/product_detail.html?time=&#39; + new Date().getTime(),
+   hideSaveBtn: true,
+   hideResetBtn: true,
+   end: &#39;&#39;, // url 后附加内容 如： &#39;$attId=&#39; + attId
+   load: function(win){
+   }
+ });</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[选取] - _clearChecked ( 所有选取设置为未选择状态 )" class="method item">
+    <h3 class="name"><code>[选取] - _clearChecked ( 所有选取设置为未选择状态 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1340"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1340</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>使所有的checkbox初始化为未选择状态</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> this._clearChecked();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[选取] - _getCheckboxIds ( 获取checkbox选中项所有ID值列表 )" class="method item">
+    <h3 class="name"><code>[选取] - _getCheckboxIds ( 获取checkbox选中项所有ID值列表 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1216"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1216</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>获取checkbox选中项所有ID值列表</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>this._getCheckboxIds(); =&gt; [&#39;id1&#39;, &#39;id2&#39;, &#39;id3&#39;, ...]</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[选取] - _getCheckedItems ( 获取checkbox选中项 )" class="method item">
+    <h3 class="name"><code>[选取] - _getCheckedItems ( 获取checkbox选中项 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1228"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1228</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>获取checkbox选中项</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>this._getCheckedItems(); =&gt; [{}, {}, {}, ...]</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[选取] - _toggleAllChecked ( 全选checkbox选择框 )" class="method item">
+    <h3 class="name"><code>[选取] - _toggleAllChecked ( 全选checkbox选择框 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1032"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1032</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>全选checkbox选择框, 只能全选中， 不能全不选中</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_[集合] - _add ( 向集合末尾添加元素 )" class="method item">
+    <h3 class="name"><code>[集合] - _add ( 向集合末尾添加元素 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1267"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1267</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>向集合末尾添加元素</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> app.getView(&#39;productList&#39;)._add(new model());</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[集合] - _clear ( 清空DOM列表 )" class="method item private">
+    <h3 class="name"><code>[集合] - _clear ( 清空DOM列表 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l765"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:765</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>清空DOM列表</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   this._clear();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[集合] - _empty ( 清空列表 )" class="method item private">
+    <h3 class="name"><code>[集合] - _empty ( 清空列表 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l724"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:724</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>清空列表， 并移除所有绑定的事件</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> this._empty();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[集合] - _findIndex ( 索引值 )" class="method item">
+    <h3 class="name"><code>[集合] - _findIndex ( 索引值 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l678"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:678</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>获取当前模型类在集合类中的索引值</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> this._findIndex(this.curModel); ==&gt; 1</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[集合] - _getItems ( 获取所有列表项 )" class="method item">
+    <h3 class="name"><code>[集合] - _getItems ( 获取所有列表项 )</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1242"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1242</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>转换成[{key: &#39;&#39;, value: &#39;&#39;}, ... ] 数组格式 并返回</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> app.getView(&#39;productList&#39;).getItems();</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[集合] - _push ( 向列表中添加数据 )" class="method item">
+    <h3 class="name"><code>[集合] - _push ( 向列表中添加数据 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>model</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>opts</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l636"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:636</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>向列表中添加数据</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">model</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">opts</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   this._push(new model());
+   this._push(new model(), 0); // 表示在第一个元素后面添加新元素
+   this._push(new pictureModel(model), this._findIndex(curModel) + 1);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[集合] - getItem ( 获取集合中某个元素 )" class="method item">
+    <h3 class="name"><code>[集合] - getItem ( 获取集合中某个元素 )</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>index</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_backbone_BaseList.js.html#l1253"><code>c:\software\WorkProjects\Build\app\backbone\BaseList.js:1253</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>获取集合中某个元素</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">index</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

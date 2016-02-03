@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HandlebarsHelper - 标签库</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title=""></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Application - 用户后台.html">Application - 用户后台</a></li>
+            
+                <li><a href="../classes/BaseCollection 集合类.html">BaseCollection 集合类</a></li>
+            
+                <li><a href="../classes/BaseDetail - 详细页面.html">BaseDetail - 详细页面</a></li>
+            
+                <li><a href="../classes/BaseError - 错误信息.html">BaseError - 错误信息</a></li>
+            
+                <li><a href="../classes/BaseItem - 单视图.html">BaseItem - 单视图</a></li>
+            
+                <li><a href="../classes/BaseList - 列表视图.html">BaseList - 列表视图</a></li>
+            
+                <li><a href="../classes/BaseModel - 模型类.html">BaseModel - 模型类</a></li>
+            
+                <li><a href="../classes/BaseService - 数据请求.html">BaseService - 数据请求</a></li>
+            
+                <li><a href="../classes/BaseUtils - 底层工具类.html">BaseUtils - 底层工具类</a></li>
+            
+                <li><a href="../classes/BaseView - 普通视图.html">BaseView - 普通视图</a></li>
+            
+                <li><a href="../classes/Est - 工具类库.html">Est - 工具类库</a></li>
+            
+                <li><a href="../classes/HandlebarsHelper - 标签库.html">HandlebarsHelper - 标签库</a></li>
+            
+                <li><a href="../classes/SuperView - 所有BaseXxx模块的超类.html">SuperView - 所有BaseXxx模块的超类</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1>HandlebarsHelper - 标签库 Class</h1>
+<div class="box meta">
+    
+
+    
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l1"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:1</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>HandlebarsHelper模板引擎帮助类</p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_[JSON] - json">[JSON] - json</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[url] - encodeURLComponent">[url] - encodeURLComponent</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[分页] - pagination">[分页] - pagination</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[判断] - compare">[判断] - compare</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[判断] - contains">[判断] - contains</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[判断] - isEmpty">[判断] - isEmpty</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[判断] - xif">[判断] - xif</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[判断] - xif">[判断] - xif</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[图片] - picUrl">[图片] - picUrl</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[字符串] - cutByte">[字符串] - cutByte</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[常量] - CONST">[常量] - CONST</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[常量] - PIC">[常量] - PIC</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[数字] - parseInt">[数字] - parseInt</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[时间] - dateFormat">[时间] - dateFormat</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[标签] - stripScripts">[标签] - stripScripts</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[样式] - BackgroundImage">[样式] - BackgroundImage</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[模板] - template">[模板] - template</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[版本] - version">[版本] - version</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - checkbox">[表单] - checkbox</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - checked">[表单] - checked</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - disabled">[表单] - disabled</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - radio">[表单] - radio</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[表单] - select">[表单] - select</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[运算] - minus">[运算] - minus</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_[运算] - plus">[运算] - plus</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getValue">getValue</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_id2">id2</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_show">show</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_[JSON] - json" class="method item">
+    <h3 class="name"><code>[JSON] - json</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l439"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:439</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>解析JSON字符串</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{json &#39;invite.title&#39;}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[url] - encodeURLComponent" class="method item">
+    <h3 class="name"><code>[url] - encodeURLComponent</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l408"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:408</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>编译url</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{encodeURIComponent url}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[分页] - pagination" class="method item">
+    <h3 class="name"><code>[分页] - pagination</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l11"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:11</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>分页</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   {{#pagination page totalPage}}</code></pre>
+<p><li class="bui-bar-item bui-button-number bui-inline-block {{#compare ../page this operator='!=='}}danaiPageNum
+{{else}}active{{/compare}}" data-page="{{this}}" aria-disabled="false" id="{{this}}" aria-pressed="false">
+<a href="javascript:;">{{this}}</a></li>
+{{/pagination}}</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[判断] - compare" class="method item">
+    <h3 class="name"><code>[判断] - compare</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l60"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:60</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>比较</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{#compare ../page &#39;!==&#39; this}}danaiPageNum{{else}}active{{/compare}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[判断] - contains" class="method item">
+    <h3 class="name"><code>[判断] - contains</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l124"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:124</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>判断字符串是否包含</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{#contains ../element this}}checked=&quot;checked&quot;{{/contains}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[判断] - isEmpty" class="method item">
+    <h3 class="name"><code>[判断] - isEmpty</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l283"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:283</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>判断是否为空</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{#isEmpty image}}&lt;img src=&#39;...&#39;&gt;&lt;/img&gt;{{/isEmpty}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[判断] - xif" class="method item">
+    <h3 class="name"><code>[判断] - xif</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l193"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:193</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>xif条件表达式</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   {{#xif &quot;this.orderStatus != &#39;completed&#39; &amp;&amp; this.orderStatus != &#39;invalid&#39; &amp;&amp; this.paymentStatus == &#39;unpaid&#39; &amp;&amp;
+             this.shippingStatus == &#39;unshipped&#39;&quot;}}disabled{{/xif}}</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[判断] - xif" class="method item">
+    <h3 class="name"><code>[判断] - xif</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l168"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:168</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>复杂条件</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>  return Handlebars.helpers[&quot;x&quot;].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[图片] - picUrl" class="method item">
+    <h3 class="name"><code>[图片] - picUrl</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l295"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:295</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>图片尺寸 （返回不带图片域名的地址）</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> &lt;img src=&quot;{{CONST &#39;PIC_URL&#39;}}/{{picUrl picPath 6}}&quot; width=&quot;52&quot; height=&quot;52&quot;&gt;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[字符串] - cutByte" class="method item">
+    <h3 class="name"><code>[字符串] - cutByte</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l157"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:157</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>字符串截取</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{cutByte name 5 end=&#39;...&#39;}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[常量] - CONST" class="method item">
+    <h3 class="name"><code>[常量] - CONST</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l225"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:225</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>返回全局常量</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   {{CONST &#39;HOST&#39;}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[常量] - PIC" class="method item">
+    <h3 class="name"><code>[常量] - PIC</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l236"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:236</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>返回图片地址常量（返回添加图片域名的图片地址, 推荐使用）</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   {{PIC pic}}   ==&gt; http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic.jpg?v=2015-12-20_12:30
+   {{PIC pic 5}} ==&gt; http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic_5.jpg?v=2015-12-20_12:30</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[数字] - parseInt" class="method item">
+    <h3 class="name"><code>[数字] - parseInt</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l205"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:205</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>返回整数</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{parseInt 01}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[时间] - dateFormat" class="method item">
+    <h3 class="name"><code>[时间] - dateFormat</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l113"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:113</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>时间格式化</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{dateFormat $.detail_news.add_time $.lan.news.format}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[标签] - stripScripts" class="method item">
+    <h3 class="name"><code>[标签] - stripScripts</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l458"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:458</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>移除script标签</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>   {{stripScripts &#39;<scripts></scripts>&#39;}}</p>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[样式] - BackgroundImage" class="method item">
+    <h3 class="name"><code>[样式] - BackgroundImage</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>number</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>options</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l264"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:264</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>返回background-image: url();</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>图片地址</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">number</code>
+                        <span class="type">Int</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>压缩尺寸</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>=&gt; background-image: url(<a href="http://img.jihui88.com/upload/u/u2/.......png">http://img.jihui88.com/upload/u/u2/.......png</a>);</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_[模板] - template" class="method item">
+    <h3 class="name"><code>[模板] - template</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l419"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:419</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>请求模板</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{template redding}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[版本] - version" class="method item">
+    <h3 class="name"><code>[版本] - version</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l448"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:448</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>打版本号</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> http://www.jihui88.com?v={{version}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - checkbox" class="method item">
+    <h3 class="name"><code>[表单] - checkbox</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l331"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:331</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>checkbox标签</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{{checkbox label=&#39;&#39; name=&#39;isDefault&#39; value=isDefault trueVal=&#39;1&#39; falseVal=&#39;0&#39; }}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - checked" class="method item">
+    <h3 class="name"><code>[表单] - checked</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l397"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:397</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>判断checkbox是否选中</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   &lt;input type=&quot;checked&quot;  {{checked &#39;this.isChecked&#39;}} /&gt;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - disabled" class="method item">
+    <h3 class="name"><code>[表单] - disabled</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l385"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:385</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>表单元素不可编辑</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> &lt;input type=&quot;text&quot; {{disabled &#39;this.isDisabled&#39;}} /&gt;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - radio" class="method item">
+    <h3 class="name"><code>[表单] - radio</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l313"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:313</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>radio标签</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   {{{radio name=&#39;isBest&#39; value=isBest option=&#39;{&quot;是&quot;: &quot;01&quot;, &quot;否&quot;: &quot;00&quot;}&#39; }}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[表单] - select" class="method item">
+    <h3 class="name"><code>[表单] - select</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l355"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:355</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>select标签</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{{select name=&#39;paymentConfit&#39; value=curConfitPanment key=&#39;paymentId&#39; text=&#39;name&#39; list=paymentConfigList  style=&quot;height: 40px;&quot;}}}</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[运算] - minus" class="method item">
+    <h3 class="name"><code>[运算] - minus</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l146"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:146</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>两数相减</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>   {{minus 10 5}} =&gt; 5</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_[运算] - plus" class="method item">
+    <h3 class="name"><code>[运算] - plus</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l136"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:136</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>两数相加</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> {{plus 1 2}} =&gt; 3</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_getValue" class="method item">
+    <h3 class="name"><code>getValue</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l35"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>根据path获取值</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> Handlebars.helpers[&quot;getValue&quot;].apply(this, date)</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_id2" class="method item">
+    <h3 class="name"><code>id2</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l216"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:216</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>缩略ID值</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_show" class="method item">
+    <h3 class="name"><code>show</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/c:_software_WorkProjects_Build_app_handlebars_HandlebarsHelper.js.html#l374"><code>c:\software\WorkProjects\Build\app\handlebars\HandlebarsHelper.js:374</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>显示隐藏</p>
+
+    </div>
+
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code> &lt;h3 {{{show &quot;this.photos.display===&#39;01&#39;&quot;}}}&gt;&lt;/h3&gt;</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
