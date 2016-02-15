@@ -1,0 +1,285 @@
+/*宽度 1000*/
+.w1000 .theme-black .top_bar,
+.w1000 .theme-black .header,
+.w1000 .wdm_cat_outer,
+.w1000 .theme-black .wdm_list,
+.w1000 .theme-black .wrap-load-more,
+.w1000 .theme-black .login_banner,
+.w1000 .theme-black .login_flow,
+.w1000 .theme-black .wdm_login,
+.w1000 .theme-black .wdm_out .wdm{
+    width: 1000px;
+}
+.w1000 .theme-black .manage-home-cont .wdm_out .wdm{
+    width: 970px;
+}
+.w1000 .theme-black .db,.w1000 .theme-black .bottom  {
+    width: 920px;
+}
+.w1000 .theme-black .login_flow .tab-ul-text .tab-li {
+    width: 222px;
+}
+.w1000 .theme-black .square-scene li {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.w1000 .theme-black .wdm_item {
+    margin: 0 20px 28px 20px;
+}
+.w1000 .theme-black .login_flow dl.item-active dt,.w1000 .theme-black .login_flow dl dt{
+    border-left: 108px solid transparent;
+    border-right: 108px solid transparent;
+}
+.w1000 #mobile-main .mobile-main-inner{
+    width: 920px;
+}
+.w1000 #mobile-main .mobile-main-inner.promotion-content{
+    width: 1000px;
+}
+.w1000 .promo-panel textarea{width:896px;}
+.w1000 .theme-black .bottom ul{
+    margin-right: 70px;
+}
+/*banner*/
+.theme-black .login_banner {
+    margin: 0 auto;
+    height: 85px;
+    position: relative;
+    top: 24px;
+}
+.theme-black .mask {
+    z-index: 99;
+}
+.theme-black .slide {
+    overflow: hidden;
+}
+.theme-black .wdm_search{
+    z-index: 90;
+}
+.theme-black #bgstylea_nei a {
+    background: url(img/banner/banner001.jpg) no-repeat center center;
+}
+.theme-black #bgstyleb_nei a {
+    background: url(img/banner/banner002.jpg) no-repeat center center;
+}
+.theme-black #bgstylec_nei a {
+    background: url(img/banner/banner003.jpg) no-repeat center center;
+}
+
+/*众包/最新*/
+.theme-black #case-render .wdm_cat{
+    display: none;
+}
+.theme-black #case-render .wdm_out{
+    padding-top: 11px;
+}
+.theme-black .wrap-load-more{
+    max-width: 1200px;margin:0 auto 50px auto
+}
+ .wdm_cat_outer{
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+/*列表*/
+
+.theme-black .wdm_item_img .qr-code {
+    -webkit-transition: all 0.3s 0.15s;
+    -moz-transition: all 0.3s 0.15s;
+    -o-transition: all 0.3s 0.15s;
+    transition: all 0.3s 0.15s;
+    -webkit-transform: scale(0) rotateZ(180deg);
+    -moz-transform: scale(0) rotateZ(180deg);
+    -ms-transform: scale(0) rotateZ(180deg);
+    -o-transform: scale(0) rotateZ(180deg);
+    transform: scale(0) rotateZ(180deg);
+    width: 210px;
+}
+
+
+
+.theme-black .wdm_item_time {
+    width: 70px;
+}
+.theme-black .wdm_list{
+    background-color: #EEEEEE;    padding: 28px 0 15px 0;
+    overflow: hidden;
+}
+.theme-black .wdm_item_title{
+    font-family: "Microsoft YaHei";  padding-right: 12px;
+}
+.theme-black .wdm_item_data {
+    height: 46px;
+}
+.theme-black .wdm_item_data .iconfont{
+    font-size: 12px;    padding-left: 2px;
+}
+.theme-black .wdm_item_data .icon-xianshi{
+    padding-left: 0;
+}
+.theme-black .wdm_pro{
+    width: 1200px;margin:auto;    overflow: hidden;
+}
+.theme-black .nav a.active{
+    color: #ca3932;
+}
+/*列表宽度210*/
+.theme-black #case-render .qr-code {
+    width: 210px;
+}
+.theme-black .wdm_item {
+    width: 210px;
+    height: 291px;
+    margin: 0 15px 28px;
+}
+.theme-black .wdm_item img {
+    width: 210px;
+    height: 210px;
+}
+.theme-black .wdm_item_mask {
+    width: 210px;
+    height: 210px;
+}
+
+/*分类*/
+.category-root{
+    border-bottom: 1px dotted #ddd;
+}
+.category-sub{
+    border-bottom: 1px dotted #ddd;
+}
+.category-sub .tab-li:first-child{
+    position: absolute;
+    left: 0;
+}
+.category-sub .tab-ul-text .tab-li {
+    padding-bottom: 5px;
+}
+.category-sub .tab-ul{
+    position: relative;
+    padding: 8px 0 3px 62px;
+    height: auto;
+}
+.theme-black .wdm_serial {
+    padding: 8px 0 0 0;
+}
+
+.theme-black .tab-ul-text .tab-li a{
+    color: #5e5e5e;
+}
+.theme-black .tab-ul-text .tab-li a:hover{
+    color: #ff4942;
+}
+
+.theme-black .wdm_out .tab-ul-text .tab-li{
+    height: 22px;
+    line-height: 22px;
+    display: inline-block;
+}
+.theme-black .wdm_out .tab-ul-text .tab-li a{
+    height: 22px;
+    line-height: 22px;
+    padding: 0 10px;
+    margin: 0 5px;
+    display: block;
+    float: left;
+}
+.theme-black .wdm_out .category-root a:hover,.theme-black .wdm_out .category-root li.item-active a{
+    color: #fff;
+    background: #ff4942;
+}
+
+/*IE8*/
+/*IE8 --我的传单begin*/
+.ie8 .theme-black .square-scene li .overlay{
+    filter:alpha(opacity=0);
+}
+.ie8 .theme-black .square-scene li .overlay .edit{
+    filter:alpha(opacity=80);  background-color: #000;    height: 160px;
+}
+.ie8 .theme-black .square-scene li:hover .overlay{
+    filter:alpha(opacity=100);
+}
+.ie8 .theme-black .square-scene li:hover .project-info {
+    margin-top: -50px;
+}
+.ie8 .theme-black .square-scene li .project-info .buttons{bottom: -25px;}
+.ie8 .theme-black .square-scene li:hover .project-info .buttons{bottom: -35px;}
+/*IE8 --我的传单end*/
+/*IE8 --众包列表begin*/
+.ie8 .theme-black .wdm_item_mask{
+    filter:alpha(opacity=70);  background-color: #000;
+}
+.ie8 .theme-black .wdm_item_mark a{
+    color: #fff;filter:alpha(opacity=50);
+}
+.ie8 .theme-black .wdm_item_mask .preview, .theme-black .wdm_item_mask .cloneAdd{ color: #fff;}
+/*IE8 --众包列表end*/
+.ie8 .wdm_cont2_txt p {
+    color: #fff;
+}
+.ie8 .theme-black .side-bar a {
+    background-color: rgb(68, 68, 68);
+}
+.ie8 .theme-black .next,.theme-black .prev {
+    filter:alpha(opacity=50);
+}
+
+/*客户管理*/
+
+.theme-black .customer-nav {
+  background: #fff;
+}
+.theme-black .customer-nav .tab-ul {
+    height: 68px;
+    line-height: 68px;
+    border-bottom: 1px dotted #ddd;
+    padding: 0 10px;
+}
+
+
+/*分页*/
+.page-size #pagination-container{padding-top: 10px; }
+.page-size #pagination-container .page-per-page{ display: none;}
+.page-size #pagination-container .per_page_show{    width: 73px;}
+.page-size #pagination-container .input-pageTo{    padding: 4px !important;width: 29px;}
+.page-size #pagination-container .pagination{height: auto;margin: 0;}
+
+/*other*/
+#model-searchkey{
+    height: 24px;
+}
+.theme-black .form_login_in input {
+    line-height: 40px;
+}
+.theme-black .wcd-collect-header{margin-top: 20px}
+#manage-home .theme-black .wcd-collect-header{margin-top: 0}
+.theme-black .form_login_in input#expire {
+    padding:0
+}
+.theme-black .form_close{
+    width: auto;text-decoration: none;
+}
+.theme-black .user img i.iconfont{
+    position: absolute;
+    display: block;
+    left: 22px;
+    top: 21px;
+    font-size: 32px;
+    padding: 0;
+    line-height: 31px;
+}
+.theme-black .side-bar .icon {
+    width: 64px;
+    background: none;
+}
+.theme-black .side-bar a{
+    text-decoration: none;
+}
+.theme-black .side-bar .iconfont {
+    font-size: 24px;
+    height: 64px;
+    line-height: 45px;
+    display: block;
+    text-align: center;width:64px;
+}

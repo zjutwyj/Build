@@ -1,0 +1,26 @@
+[
+	{ "keys": ["ctrl+shift+f"], "command": "js_format"},
+  { "keys": ["ctrl+shift+f"], "command": "htmlprettify"},
+  { "keys": ["ctrl+shift+s"], "command": "save_all" },
+  { "keys": ["ctrl+h"], "command": "show_panel", "args": {"panel": "find_in_files"} },
+  { "keys": ["ctrl+f"], "command": "show_panel", "args": {"panel": "replace", "reverse": false} },
+  { "keys": ["alt+up"], "command": "swap_line_up" },
+  { "keys": ["alt+down"], "command": "swap_line_down" },
+  { "keys": ["ctrl+shift+j"], "command": "join_lines" },
+  { "keys": ["ctrl+alt+down"], "command": "duplicate_line" },
+  { "keys": ["ctrl+d"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Line.sublime-macro"} },
+
+  { "keys": ["alt+/"], "command": "auto_complete" },
+  { "keys": ["ctrl+i"], "command": "reindent" },
+  { "keys": ["ctrl+l"], "command": "show_overlay", "args": {"overlay": "goto", "text": ":"} },
+  { "keys": ["shift+enter"], "command": "run_macro_file", "args": {"file": "Packages/Default/Add Line.sublime-macro"} },
+  { "keys": ["ctrl+o"], "command": "show_overlay", "args": {"overlay": "goto", "text": "@"} },
+  { "keys": ["alt+shift+right"], "command": "expand_region" },
+  { "keys": ["ctrl+alt+="], "command": "alignment" },
+  { "keys": ["ctrl+up"], "command": "scroll_lines", "args": {"amount": 1.0 } },
+  { "keys": ["ctrl+down"], "command": "scroll_lines", "args": {"amount": -1.0 } },
+  { "keys": ["alt+left"], "command": "jump_back" },
+  { "keys": ["alt+right"], "command": "jump_forward" },
+  { "keys": ["alt+shift+left"], "command": "expand_region", "args": {"undo": true}, "context": [{ "key": "expand_region_soft_undo" }] },
+  { "keys": ["ctrl+shift+d"], "command": "add_current_time" }
+]

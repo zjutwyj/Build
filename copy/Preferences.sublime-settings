@@ -1,0 +1,90 @@
+{
+	"bold_folder_labels": true,
+	"class": "tabset_control",
+	"color_scheme": "Packages/User/SublimeLinter/Oceanic Next (SL).tmTheme",
+	"preview_on_click": false, // 双击打开文件
+	"csslint_options":
+	{
+		"adjoining-classes": "warning",
+		"box-model": true,
+		"box-sizing": "warning",
+		"compatible-vendor-prefixes": "warning",
+		"display-property-grouping": true,
+		"duplicate-background-images": "warning",
+		"duplicate-properties": true,
+		"empty-rules": true,
+		"errors": true,
+		"fallback-colors": "warning",
+		"floats": "warning",
+		"font-faces": "warning",
+		"font-sizes": "warning",
+		"gradients": "warning",
+		"ids": "warning",
+		"import": "warning",
+		"important": "warning",
+		"known-properties": true,
+		"outline-none": "warning",
+		"overqualified-elements": "warning",
+		"qualified-headings": "warning",
+		"regex-selectors": "warning",
+		"rules-count": "warning",
+		"shorthand": "warning",
+		"star-property-hack": "warning",
+		"text-indent": "warning",
+		"underscore-property-hack": "warning",
+		"unique-headings": "warning",
+		"universal-selector": "warning",
+		"vendor-prefix": true,
+		"zero-units": "warning"
+	},
+	"dictionary": "Packages/Language - English/en_US.dic",
+	"font_size": 14,
+	"highlight_line": false,
+	"ignored_packages":
+	[
+		"Better Completion",
+		"BracketHighlighter",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"Vintage"
+	],
+	"jshint_options":
+	{
+		"browser": true,
+		"curly": true,
+		"devel": true,
+		"eqeqeq": true,
+		"evil": true,
+		"forin": true,
+		"jquery": true,
+		"noarg": true,
+		"noempty": true,
+		"strict": true,
+		"undef": true,
+		"wsh": true
+	},
+	"oceanicnext_sidebar_font_xlarge": true,
+	"oceanicnext_tabs_font_large": true,
+	"oceanicnext_tabs_xlarge": true,
+	"rulers":
+	[
+		100
+	],
+	"save_on_focus_lost": true,
+	"show_encoding": true,
+	"show_line_endings": true,
+	"spell_check": false,
+	"sublimelinter": "save-only",
+	"sublimelinter_executable_map":
+	{
+		"css": "C:/Program Files/nodejs/node.exe",
+		"javascript": "C:/Program Files/nodejs/node.exe"
+	},
+	"tab_height": 42,
+	"tab_min_width": 40,
+	"tab_size": 2,
+	"tab_width": 160,
+	"theme": "Oceanic Next.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"trim_trailing_white_space_on_save": true
+}

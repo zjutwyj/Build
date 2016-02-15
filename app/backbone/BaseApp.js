@@ -1,29 +1,48 @@
 /**
  * @description 应用程序管理器 - 中介者模式， 用于注册视图、模块、路由、模板等。
  * 注册视图、注册模块等以抽象工厂模式实现
- * @class Application - 用户后台
+ * @class BaseApp - 用户后台
  * @author yongjin<zjut_wyj@163.com> 2014/12/28
  */
-var Application = function (options) {
+var BaseApp = function(options) {
   this.options = options;
   Est.extend(this, options);
   this.initialize.apply(this, arguments);
 };
-Est.extend(Application.prototype, {
-  initialize: function () {
-    this.data = { itemActiveList: [], sessionId: ''};
+Est.extend(BaseApp.prototype, {
+  initialize: function() {
+    this.data = {
+      itemActiveList: [],
+      sessionId: ''
+    };
+    // 实例对象
     this.instance = {};
+    // 所有模块
     this.modules = {};
+    // 路由
     this.routes = {};
+    // 静态模板
     this.templates = {};
+    // 面板
     this.panels = {};
+    // 对话框
     this.dialog = [];
-    this.dialogs = {}; // 带身份标识的dialog
+    // 带身份标识的dialog
+    this.dialogs = {};
+    // 状态
     this.status = {};
+    // 会话
     this.cookies = [];
+    // 实体对象
     this.models = [];
+    // 编译模版
     this.compileTemps = {};
-    this.filters = { navigator: [], form: [] };
+    // 过滤器
+    this.filters = {
+      navigator: [],
+      form: []
+    };
+    // 缓存
     this.cache = {};
   },
   /**
@@ -33,7 +52,7 @@ Est.extend(Application.prototype, {
    * @return {string}
    * @author wyj 15.5.20
    */
-  getAppType: function () {
+  getAppType: function() {
     return 'backbone';
   },
   /**
@@ -50,7 +69,7 @@ Est.extend(Application.prototype, {
    *        args: args
    *      });
    */
-  addRegion: function (name, instance, options) {
+  addRegion: function(name, instance, options) {
     var panel = Est.nextUid('region');
 
     if (!options.__panelId) {
@@ -63,7 +82,7 @@ Est.extend(Application.prototype, {
     if (!options.viewId) {
       options.viewId = name;
     }
-    if (options.viewId in this['instance']) {
+    if (options.viewId in this.instance) {
       this.removeView(options.viewId);
     }
 
@@ -75,7 +94,7 @@ Est.extend(Application.prototype, {
    * @method [面板] - addPanel ( 添加面板 )
    * @param name
    * @param options
-   * @return {Application}
+   * @return {BaseApp}
    * @example
    *        app.addPanel('product', new Panel());
    *        app.addPanel('product', {
@@ -86,7 +105,7 @@ Est.extend(Application.prototype, {
    *          viewId: 'alipayView'
    *        }));
    */
-  addPanel: function (name, panel, options) {
+  addPanel: function(name, panel, options) {
     var isObject = Est.typeOf(panel.cid) === 'string' ? false : true;
     if (isObject) {
       this.removePanel(name, panel);
@@ -107,19 +126,18 @@ Est.extend(Application.prototype, {
    * @param name
    * @author wyj 14.12.29
    */
-  removePanel: function (name, panel) {
+  removePanel: function(name, panel) {
     try {
       if ($.fn.off) {
-        $('.__panel_' + name, $(panel['el'])).off().remove();
+        $('.__panel_' + name, $(panel.el)).off().remove();
       } else {
-        seajs.use(['jquery'], function ($) {
+        seajs.use(['jquery'], function($) {
           window.$ = $;
-          $('.__panel_' + name, $(panel['el'])).off().remove();
+          $('.__panel_' + name, $(panel.el)).off().remove();
         });
       }
       delete this.panels[name];
-    } catch (e) {
-    }
+    } catch (e) {}
   },
   /**
    * 视图添加
@@ -131,11 +149,11 @@ Est.extend(Application.prototype, {
    * @example
    *      app.addView('productList', new ProductList());
    */
-  addView: function (name, instance) {
-    if (name in this['instance']) this.removeView(name);
-    this['instance'][name] = instance;
+  addView: function(name, instance) {
+    if (name in this.instance) this.removeView(name);
+    this.instance[name] = instance;
     this.setCurrentView(name);
-    return this['instance'][name];
+    return this.instance[name];
   },
   /**
    * 视图移除， 移除视图绑定的事件及所有itemView的绑定事件,
@@ -143,26 +161,24 @@ Est.extend(Application.prototype, {
    *
    * @method [视图] - removeView ( 移除视图 )
    * @param name
-   * @return {Application}
+   * @return {BaseApp}
    * @example
    *        app.removeView('productList');
    */
-  removeView: function (name) {
+  removeView: function(name) {
     try {
       if (this.getView(name)) {
-        this.getView(name).destroy && this.getView(name).destroy();
+        if (this.getView(name).destroy) this.getView(name).destroy();
         this.getView(name)._empty();
         this.getView(name).stopListening();
         this.getView(name).$el.off().remove();
       }
-      delete this['instance'][name];
-    } catch (e) {
-    }
+      delete this.instance[name];
+    } catch (e) {}
     return this;
   },
 
-
-  panel: function (name, panel) {
+  panel: function(name, panel) {
     return this.addPanel(name, panel);
   },
   /**
@@ -172,7 +188,7 @@ Est.extend(Application.prototype, {
    * @param view
    * @author wyj 14.12.29
    */
-  show: function (view) {
+  show: function(view) {
     this.addView(this.currentView, view);
   },
 
@@ -186,11 +202,11 @@ Est.extend(Application.prototype, {
    * @example
    *      app.getPanelf('panel');
    */
-  getPanel: function (name) {
+  getPanel: function(name) {
     return this.panels[name];
   },
 
-  add: function (name, instance) {
+  add: function(name, instance) {
     return this.addView(name, instance);
   },
 
@@ -201,18 +217,18 @@ Est.extend(Application.prototype, {
    * @example
    *      app.setCurrentView('list', new List());
    */
-  setCurrentView: function (name) {
+  setCurrentView: function(name) {
     this.currentView = name;
   },
   /**
    * 获取当前视图
    * @method [视图] - getCurrentView ( 获取当前视图 )
-   * @return {*|Application.currentView}
+   * @return {*|BaseApp.currentView}
    * @author wyj 15.1.9
    * @example
    *        app.getCurrentView('list');
    */
-  getCurrentView: function () {
+  getCurrentView: function() {
     return this.currentView;
   },
   /**
@@ -225,8 +241,8 @@ Est.extend(Application.prototype, {
    * @example
    *        app.getView('productList');
    */
-  getView: function (name) {
-    return this['instance'][name];
+  getView: function(name) {
+    return this.instance[name];
   },
   /**
    * 添加对话框
@@ -237,7 +253,7 @@ Est.extend(Application.prototype, {
    * @example
    *      app.addDialog('productDialog', dialog);
    */
-  addDialog: function (dialog, id) {
+  addDialog: function(dialog, id) {
     this.dialog.push(dialog);
     if (id) {
       app.addData('_curDialog', id);
@@ -251,8 +267,8 @@ Est.extend(Application.prototype, {
    * @return {*}
    * @author wyj 15.1.23
    */
-  getDialogs: function () {
-    return this['dialog'];
+  getDialogs: function() {
+    return this.dialog;
   },
   /**
    * 获取指定对话框
@@ -260,7 +276,7 @@ Est.extend(Application.prototype, {
    * @author wyj 15.03.20
    *
    */
-  getDialog: function (id) {
+  getDialog: function(id) {
     if (Est.isEmpty(id)) return this.dialogs;
     return this.dialogs[id];
   },
@@ -270,7 +286,7 @@ Est.extend(Application.prototype, {
    * @return {*}
    * @author wyj 15.10.25
    */
-  getCurrentDialog: function () {
+  getCurrentDialog: function() {
     if (app.getData('_curDialog')) {
       return this.dialogs[app.getData('_curDialog')];
     }
@@ -281,7 +297,7 @@ Est.extend(Application.prototype, {
    * @method [模型] - addModel ( 添加模型类 )
    * @author wyj 15.1.23
    */
-  addModel: function (model) {
+  addModel: function(model) {
     this.models.push(model);
     return model;
   },
@@ -290,8 +306,8 @@ Est.extend(Application.prototype, {
    * @method [模型] - getModels ( 获取所有模型类 )
    * @author wyj 15.1.23
    */
-  getModels: function () {
-    return this['models'];
+  getModels: function() {
+    return this.models;
   },
   /**
    * 清空所有对话框, 当切换页面时移除所有对话框
@@ -301,8 +317,8 @@ Est.extend(Application.prototype, {
    * @example
    *      app.emptyDialog();
    */
-  emptyDialog: function () {
-    Est.each(this.dialog, function (item) {
+  emptyDialog: function() {
+    Est.each(this.dialog, function(item) {
       if (item && item.close) {
         item.close().remove();
       }
@@ -318,11 +334,11 @@ Est.extend(Application.prototype, {
    * @example
    *      app.addData('productList', productList);
    */
-  addData: function (name, data) {
-    if (name in this['data']) {
-      debug('reset data ' + name);
+  addData: function(name, data) {
+    if (name in this.data) {
+      debug('reset data ' + name); //debug__
     }
-    this['data'][name] = data;
+    this.data[name] = data;
   },
   /**
    * 获取数据
@@ -334,8 +350,8 @@ Est.extend(Application.prototype, {
    * @example
    *        app.getData('productList');
    */
-  getData: function (name) {
-    return this['data'][name];
+  getData: function(name) {
+    return this.data[name];
   },
   /**
    * 添加模块 分拆seajs配置文件，
@@ -348,11 +364,11 @@ Est.extend(Application.prototype, {
    * @example
    *        app.addModule('ProductList', '/modules/product/controllers/ProductList.js');
    */
-  addModule: function (name, val) {
-    if (name in this['modules']) {
-      debug('Error10 module=' + name);
+  addModule: function(name, val) {
+    if (name in this.modules) {
+      debug('Error10 module=' + name); //debug__
     }
-    this['modules'][name] = val;
+    this.modules[name] = val;
   },
   /**
    * 获取所有模块
@@ -363,8 +379,8 @@ Est.extend(Application.prototype, {
    * @example
    *
    */
-  getModules: function () {
-    return this['modules'];
+  getModules: function() {
+    return this.modules;
   },
   /**
    * 添加路由
@@ -379,11 +395,11 @@ Est.extend(Application.prototype, {
    *          });
    *      });
    */
-  addRoute: function (name, fn) {
-    if (name in this['routes']) {
-      debug('Error13 ' + name);
+  addRoute: function(name, fn) {
+    if (name in this.routes) {
+      debug('Error13 ' + name); //debug__
     }
-    this['routes'][name] = fn;
+    this.routes[name] = fn;
   },
   /**
    * 获取所有路由
@@ -393,8 +409,8 @@ Est.extend(Application.prototype, {
    * @author wyj 14.12.28
    *
    */
-  getRoutes: function () {
-    return this['routes'];
+  getRoutes: function() {
+    return this.routes;
   },
   /**
    * 添加模板, 目前无法解决seajs的实时获取问题
@@ -408,11 +424,23 @@ Est.extend(Application.prototype, {
               module.exports = require('modules/album/views/photo_item.html');
             });
    */
-  addTemplate: function (name, fn) {
+  addTemplate: function(name, fn) {
     if (name in this['templates']) {
       debug('Error11 template name:' + name);
     }
     this['templates'][name] = fn;
+  },
+  /**
+   * 获取所有模板
+   *
+   * @method [模板] - getTemplates ( 获取所有模板 )
+   * @return {*}
+   * @author wyj 14.12.28
+   * @example
+   *        app.getTemplates();
+   */
+  getTemplates: function() {
+    return this.templates;
   },
   /**
    * 添加session会话   登录成功后会添加__USER__ 用户信息会话， 获取：App.getSession('__USER__');
@@ -426,12 +454,12 @@ Est.extend(Application.prototype, {
    * @example
    *      App.addSession('__USER__', {username: 'ggggfj'});
    */
-  addSession: function (name, value, isSession) {
+  addSession: function(name, value, isSession) {
     try {
       var sessionId = Est.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
       localStorage['___JHW_BACKBONE__' + Est.hash(sessionId + name)] = value;
     } catch (e) {
-      debug('Error9 ' + e);
+      debug('Error9 ' + e); //debug__
     }
     return value;
   },
@@ -444,21 +472,9 @@ Est.extend(Application.prototype, {
    * @example
    *      App.getSession('__USER__'); => {username: 'ggggfj'}
    */
-  getSession: function (name, isSession) {
+  getSession: function(name, isSession) {
     var sessionId = Est.typeOf(isSession) === 'undefined' ? '' : isSession ? this.data.sessionId : '';
     return localStorage['___JHW_BACKBONE__' + Est.hash(sessionId + name)];
-  },
-  /**
-   * 获取所有模板
-   *
-   * @method [模板] - getTemplates ( 获取所有模板 )
-   * @return {*}
-   * @author wyj 14.12.28
-   * @example
-   *        app.getTemplates();
-   */
-  getTemplates: function () {
-    return this['templates'];
   },
   /**
    * 添加编译模板
@@ -466,8 +482,8 @@ Est.extend(Application.prototype, {
    * @param name
    * @param compile
    */
-  addCompileTemp: function (name, compile) {
-    this['compileTemps'][name] = compile;
+  addCompileTemp: function(name, compile) {
+    this.compileTemps[name] = compile;
   },
   /**
    * 获取编译模板
@@ -475,8 +491,8 @@ Est.extend(Application.prototype, {
    * @param name
    * @return {*}
    */
-  getCompileTemp: function (name) {
-    return this['compileTemps'][name];
+  getCompileTemp: function(name) {
+    return this.compileTemps[name];
   },
   /**
    * 添加状态数据
@@ -486,8 +502,8 @@ Est.extend(Application.prototype, {
    * @param value
    * @author wyj 15.1.7
    */
-  addStatus: function (name, value) {
-    this['status'][name] = value;
+  addStatus: function(name, value) {
+    this.status[name] = value;
   },
   /**
    * 获取状态数据
@@ -497,8 +513,8 @@ Est.extend(Application.prototype, {
    * @param value
    * @author wyj 15.1.7
    */
-  getStatus: function (name) {
-    return this['status'][name];
+  getStatus: function(name) {
+    return this.status[name];
   },
   /**
    * 添加参数配置对象
@@ -506,8 +522,8 @@ Est.extend(Application.prototype, {
    * @method [配置] - addOption ( 添加配置对象 )
    * @author wyj 15.9.19
    */
-  addOption: function (name, value) {
-    this['options'][name] = value;
+  addOption: function(name, value) {
+    this.options[name] = value;
   },
   /**
    * 获取参数配置对象
@@ -517,17 +533,17 @@ Est.extend(Application.prototype, {
    * @return {*}
    * @author wyj 15.9.19
    */
-  getOption: function (name) {
-    return Est.cloneDeep(this['options'][name]);
+  getOption: function(name) {
+    return Est.cloneDeep(this.options[name]);
   },
   /**
    * 获取所有状态数据
    *
    * @method [状态] - getAllStatus ( 获取所有状态数据 )
-   * @return {{}|*|Application.status}
+   * @return {{}|*|BaseApp.status}
    * @author wyj 15.1.9
    */
-  getAllStatus: function () {
+  getAllStatus: function() {
     return this.status;
   },
   /**
@@ -540,7 +556,7 @@ Est.extend(Application.prototype, {
    * @example
    *
    */
-  addFilter: function (name, fn) {
+  addFilter: function(name, fn) {
     this.filters[name].push(fn);
   },
   /**
@@ -553,7 +569,7 @@ Est.extend(Application.prototype, {
    * @example
    *      App.getFilters('navigator');
    */
-  getFilters: function (name) {
+  getFilters: function(name) {
     return this.filters[name];
   },
   /**
@@ -563,7 +579,7 @@ Est.extend(Application.prototype, {
    * @param options
    * @author wyj 15.10.25
    */
-  getParamsHash: function (options) {
+  getParamsHash: function(options) {
     var params = '',
       cacheId = '';
 
@@ -580,7 +596,7 @@ Est.extend(Application.prototype, {
    * @param options
    * @author wyj 15.10.25
    */
-  addCache: function (options, result) {
+  addCache: function(options, result) {
     try {
       var cacheId = '';
 
@@ -593,7 +609,7 @@ Est.extend(Application.prototype, {
         this.cache[cacheId] = result;
       }
     } catch (e) {
-      debug('Error12' + e);
+      debug('Error12' + e); //debug__
     }
   },
   /**
@@ -604,7 +620,7 @@ Est.extend(Application.prototype, {
    * @author wyj 15.10.25
    * @return {*}
    */
-  getCache: function (options) {
+  getCache: function(options) {
     var result = null;
     var cacheId = this.getParamsHash(options);
     // localStorage缓存
@@ -627,7 +643,7 @@ Est.extend(Application.prototype, {
    *      app.removeCache();
    *      app.removeCache(options);
    */
-  removeCache: function (options) {
+  removeCache: function(options) {
     var cacheId = null;
     if (options) {
       cacheId = this.getParamsHash(options);
@@ -635,5 +651,25 @@ Est.extend(Application.prototype, {
       return;
     }
     this.cache = {};
+  },
+  /**
+   * 添加cookie
+   * @method [cookie] - addCookie ( 添加cookie )
+   * @author wyj 15.1.13
+   */
+  addCookie: function(name) {
+    if (Est.findIndex(this.cookies, name) !== -1) {
+      return;
+    }
+    this.cookies.push(name);
+  },
+  /**
+   * 获取所有保存的cookie
+   * @method [cookie] - getCookies ( 获取所有保存的cookie )
+   * @return {Array}
+   * @author wyj 15.1.13
+   */
+  getCookies: function() {
+    return this.cookies;
   }
 });

@@ -15,12 +15,3 @@ app.addOption('dialog_min', {
   hideSaveBtn: true,
   hideCloseBtn: true
 });
-app.addOption('baseLayout', {
-  style: 'background-color: #ffffff;',
-  backgroundColor: { backgroundColor: '#ffffff' },
-  fontFamily: {fontFamily: 'font-family:宋体,SimSun'},
-  backgroundImage: {backgroundImage: 'about:blank', backgroundRepeat: 'repeat'},
-  loading: {src: '/leaflet/styles/default/img/loading/puff.svg'},
-  music: '',
-  plugins: []
-});

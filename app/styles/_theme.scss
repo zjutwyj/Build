@@ -1,0 +1,1151 @@
+.theme-black {
+  font-size: 12px;
+  font-family: "Microsoft YaHei", "Helvetica", Helvetica, arial;
+  background: #eeeeee;
+}
+
+.theme-black {
+  .fr {
+    float: right;
+  }
+  .fl {
+    float: left;
+  }
+  .clr {
+    clear: both;
+  }
+  .red {
+    color: #ff4942;
+  }
+  .blur {
+    -webkit-filter: blur(3px);
+  }
+  .iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .icon {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    text-decoration: none;
+  }
+  .animate {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+  }
+  .line {
+    display: block;
+    position: absolute;
+    transition: 0.4s ease;
+    -webkit-transition: 0.4s ease;
+    -o-transition: 0.4s ease;
+    -moz-transition: 0.4s ease;
+    -ms-transition: 0.4s ease;
+  }
+  a:hover .line-right {
+    height: 100%;
+    right: 0;
+    top: 0;
+  }
+  a:hover .line-left {
+    height: 100%;
+    bottom: 0;
+    left: 0;
+  }
+  a:hover .line-bottom {
+    width: 100%;
+    right: 0;
+    bottom: 0;
+  }
+  a:hover .line-top {
+    width: 100%;
+    left: 0;
+    top: 0;
+  }
+  a:hover .line {
+    background: #ff4942;
+  }
+  .line-top {
+    width: 0;
+    height: 1px;
+    left: -110%;
+    top: 0;
+  }
+  .line-bottom {
+    width: 0;
+    height: 1px;
+    right: -110%;
+    bottom: 0;
+  }
+  .line-left {
+    width: 1px;
+    height: 0;
+    bottom: -110%;
+    left: 0;
+  }
+  .line-right {
+    width: 1px;
+    height: 0;
+    right: 0;
+    top: -110%;
+  }
+  img {
+    border: 0 none;
+  }
+  /*bar*/
+  .top_bar_out {
+    height: 25px;
+    line-height: 25px;
+    background: #242424;
+  }
+  .top_bar {
+    width: 1200px;
+    margin: 0 auto;
+    color: #7b7b7b;
+  }
+  .top_bar a {
+    color: #7b7b7b;
+  }
+  .top_bar a:hover {
+    color: #ff4942;
+  }
+  .small .top_bar {
+    width: 1000px;
+  }
+  .top_bar_left {
+    float: left;
+  }
+  .top_bar_left a {
+    display: block;
+    float: left;
+    line-height: 25px;
+  }
+  .top_bar_right {
+    float: right;
+  }
+  .top_bar_left .bar_ico {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/23/ce497f55-0471-40fc-92ca-fdd220e3dabf.png) no-repeat center center;
+    width: 12px;
+    height: 25px;
+    margin: 0 5px;
+    line-height: 25px;
+    font-size: 11px;
+    display: block;
+    float: left;
+    text-align: center;
+  }
+  .top_bar_right a {
+    padding: 0 5px;
+  }
+  /*bar end*/
+  /*header*/
+  .header_out {
+    background: #000;
+    height: 74px;
+  }
+  .header {
+    margin: 0 auto;
+    width: 1200px;
+    position: relative;
+  }
+  .small .header {
+    width: 1000px;
+  }
+  .logo img {
+    display: block;
+  }
+  .logo {
+    float: left;
+    width: 302px;
+  }
+  .nav {
+    width: 535px;
+    float: right;
+  }
+  .nav a {
+    color: #d3d3d3;
+    display: block;
+    padding: 0 15px;
+    line-height: 74px;
+    font-size: 14px;
+    float: left;
+  }
+  .nav a:hover {
+    color: #ca3932;
+  }
+  .nav .login {
+    padding: 0;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    display: block;
+    float: left;
+    width: 91px;
+    position: absolute;
+    background: #ff4942;
+    right: 5px;
+    top: 19px;
+    color: rgba(255, 255, 255, .8);
+  }
+  .nav .login:hover {
+    color: rgba(255, 255, 255, .8);
+  }
+  /*header end*/
+  /*banner*/
+  #bgstylea a {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/28/94f41f68-9934-456b-90a8-9247f3fecf17.jpg) no-repeat center center;
+  }
+  #bgstylea_nei a {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/25/1d399880-ea6d-43ef-aea4-98a7cc2857ac.jpg) no-repeat center center;
+  }
+  #bgstyleb a {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/28/94f41f68-9934-456b-90a8-9247f3fecf17.jpg) no-repeat center center;
+  }
+  #bgstyleb_nei a {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/25/1d399880-ea6d-43ef-aea4-98a7cc2857ac.jpg) no-repeat center center;
+  }
+  .slide {
+    height: 409px;
+    display: none;
+  }
+  .slide-nei .slide {
+    height: 270px;
+  }
+  .slide-box:hover .next,
+  .slide-box:hover .prev {
+    opacity: 0.6;
+    -moz-opacity: 0.6;
+    filter: alpha(opacity=60);
+  }
+  .next {
+    width: 30px;
+    height: 60px;
+    right: 20px;
+    display: block;
+    background: #ffffff;
+    position: absolute;
+    cursor: pointer;
+    text-indent: -9999px;
+    -webkit-transition: all .3s ease;
+    z-index: 10;
+    opacity: 0;
+    font-size: 0;
+    top: 160px;
+  }
+  .slide-nei .prev,
+  .slide-nei .next {
+    top: 100px;
+  }
+  .prev {
+    width: 30px;
+    height: 60px;
+    left: 20px;
+    display: block;
+    background: #ffffff;
+    position: absolute;
+    cursor: pointer;
+    text-indent: -9999px;
+    -webkit-transition: all .3s ease;
+    z-index: 10;
+    opacity: 0;
+    font-size: 0;
+    top: 160px;
+  }
+  .next:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 30px solid #000000;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+  }
+  .next:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 30px solid #ffffff;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+  }
+  .prev:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-right: 30px solid #000000;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+  }
+  .prev:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-right: 30px solid #ffffff;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+  }
+  .slide-main img {
+    display: block;
+  }
+  .slide-main {
+    width: 100%;
+    position: relative;
+  }
+  .small .slide-main {}
+  .slide-box {
+    width: 100%;
+  }
+  .obj-a {
+    position: absolute;
+    left: 150px;
+    top: 133px;
+  }
+  .obj-b {
+    position: absolute;
+    right: 90px;
+    top: 133px;
+  }
+  .slide-nei .slide a {
+    height: 270px;
+  }
+  .slide a {
+    display: block;
+    height: 409px;
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    left: 50%;
+    margin-left: -600px;
+  }
+  .slide-btn {
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .small .slide-btn {
+    width: 1000px;
+  }
+  .banAnimate * {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+  }
+  .banAnimate .obj-a {
+    -webkit-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+  }
+  .banAnimate .obj-b {
+    -webkit-animation-name: fadeInRight;
+    animation-name: fadeInRight;
+  }
+  .item {
+    width: 100px;
+    position: absolute;
+    bottom: 20px;
+    height: 14px;
+    left: 50%;
+    margin-left: -50px;
+  }
+  .item a {
+    display: block;
+    height: 14px;
+    width: 14px;
+    float: left;
+    opacity: .5;
+    filter: alpha(opacity=50);
+    border-radius: 100%;
+    background: #fff;
+    margin: 0 5px;
+  }
+  .item a.cur {
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+  /*banner end*/
+  /*bottom*/
+  .bottom_out {
+    background: #222222;
+  }
+  .bottom {
+    width: 1120px;
+    margin: 0 auto;
+    padding: 36px 10px 30px 10px;
+    position: relative;
+  }
+  .small .bottom {
+    width: 920px;
+  }
+  .bottom .list_first {
+    font-size: 14px;
+    color: #d2d2d2;
+    margin-bottom: 10px;
+  }
+  .bottom .list_first a {
+    color: #d2d2d2;
+  }
+  .bottom ul {
+    float: left;
+    margin-right: 90px;
+  }
+  .small .bottom ul {
+    margin-right: 70px;
+  }
+  .bottom ul li {
+    color: #9c9c9c;
+    line-height: 22px;
+  }
+  .bottom ul li a {
+    color: #9c9c9c;
+  }
+  .bottom ul li a:hover {
+    color: #ff4942;
+  }
+  .bottom_qrode {
+    position: absolute;
+    right: 13px;
+    top: 41px;
+    border: 1px solid #4e4e4e;
+  }
+  .bottom_qrode img {
+    display: block;
+  }
+  .db_out {
+    background: #2e2e2e;
+    height: 38px;
+    line-height: 38px;
+  }
+  .db {
+    margin: 0 auto;
+    width: 1120px;
+    color: #9c9c9c;
+  }
+  .small .db {
+    width: 920px;
+  }
+  /*bottom end*/
+  /*wcd*/
+  .wdm_out {
+    background: #fff;
+  }
+  .wdm {
+    width: 1124px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .small .wdm {
+    width: 924px;
+  }
+  .small .wdm_cat a {
+    padding: 0 12px;
+  }
+  .small .wdm_tag a {
+    padding: 0 12px;
+  }
+  .wdm_cat {
+    padding: 11px 0 9px 0;
+    border-bottom: 1px dotted #ddd;
+    position: relative;
+    padding-left: 56px;
+  }
+  .wdm_cat a {
+    color: #5e5e5e;
+    display: block;
+    float: left;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 16px;
+  }
+  .wdm_cat_all {
+    position: absolute;
+    left: 0px;
+  }
+  .wdm_cat a.active {
+    color: rgba(255, 255, 255, .9);
+    background: #ff4942;
+  }
+  .wdm_tag {
+    border-bottom: 1px dotted #ddd;
+  }
+  .wdm_tag a {
+    color: #5e5e5e;
+    display: block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 16px;
+  }
+  .wdm_tag {
+    position: relative;
+    padding-left: 56px;
+  }
+  .wdm_tag_all {
+    position: absolute;
+    left: 0px;
+  }
+  .wdm_tag .active {
+    color: #ff4942;
+  }
+  .wdm_serial a {
+    color: #5e5e5e;
+    display: block;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 16px;
+  }
+  .wdm_serial a.active {
+    color: #ff4942;
+  }
+  .wdm_search {
+    position: absolute;
+    width: 150px;
+    right: 0;
+    top: 5px;
+    height: 28px;
+    line-height: 28px;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+  }
+  .wdm_input {
+    border: 0 none;
+    line-height: 27px;
+    width: 120px;
+  }
+  .wdm_search form {
+    margin-left: 15px;
+  }
+  .wdm_btn {
+    border: 0 none;
+    background: none;
+    height: 28px;
+    width: 28px;
+    position: absolute;
+    right: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  /*wcd end*/
+  /*wdm_list*/
+  .wdm_list {
+    width: 1200px;
+    margin: 0 auto;
+    padding: 28px 0 28px 0;
+  }
+  .small .wdm_list {
+    width: 1000px;
+  }
+  .small .wdm_item {
+    margin: 0 25px 28px 25px;
+  }
+  .wdm_item {
+    width: 200px;
+    height: 281px;
+    float: left;
+    position: relative;
+    margin: 0 20px 28px 20px;
+    overflow: hidden;
+  }
+  .wdm_item img {
+    width: 200px;
+    height: 200px;
+  }
+  .wdm_item_img img {
+    display: block;
+  }
+  .wdm_item_mask {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 0;
+    display: none;
+    left: 0;
+    background: rgba(0, 0, 0, .7);
+  }
+  .show .wdm_item_mask {
+    display: block;
+  }
+  .wdm_item_mark {
+    color: rgba(255, 255, 255, .5);
+    padding-left: 10px;
+    line-height: 38px;
+    margin-bottom: 14px;
+  }
+  .like .icon-dianzan {
+    color: #ff4942;
+  }
+  .wdm_item_mark a {
+    color: rgba(255, 255, 255, .5);
+  }
+  .wdm_item_mark .icon-dianzan {
+    font-size: 14px;
+    padding: 0 4px;
+  }
+  .wdm_item_mask .preview,
+  .wdm_item_mask .cloneAdd {
+    display: block;
+    width: 102px;
+    margin: 0 auto;
+    font-size: 14px;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    color: rgba(255, 255, 255, .9);
+    background: #ff4942;
+    position: relative;
+    margin-bottom: 29px;
+  }
+  .wdm_item_data {
+    padding: 0 10px 10px 10px;
+    color: #a8a8a8;
+    background: #fff;
+    font-family: "arial";
+    border-bottom: 1px solid #eee;
+  }
+  .wdm_item_title {
+    line-height: 32px;
+    height: 32px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #606060;
+    font-weight: normal;
+    font-size: 14px;
+    display: block;
+  }
+  .wdm_item_title:hover {
+    color: #ff4942;
+  }
+  .wdm_item_num {
+    padding-right: 8px;
+    font-family: "arial";
+    padding-left: 2px;
+    border-right: 1px solid #eee;
+  }
+  .last_num {
+    border: 0 none !important;
+    padding-left: 3px;
+  }
+  .wdm_item_data .icon-liuyan {}
+  .wdm_item_txt {
+    position: absolute;
+    top: 12px;
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/28/53831482-cc9e-4acd-8c2e-852f826f6948.png) no-repeat;
+    padding: 8px 0 0 0;
+    height: 20px;
+    text-align: center;
+    width: 45px;
+    line-height: 20px;
+    color: #fff;
+    left: 3px;
+    display: none;
+  }
+  .wdm_item_data .icon-xianshi,
+  .wdm_item_data .icon-fenxiang,
+  .wdm_item_data .icon-liuyan {
+    position: relative;
+  }
+  .wdm_item_from {
+    background: #fff;
+    padding: 0 10px 0 10px;
+    line-height: 24px;
+    height: 24px;
+    color: #c9c7c7;
+  }
+  .wdm_item_name {
+    width: 8em;
+    float: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .wdm_item_time {
+    float: right;
+  }
+  .animate.wdm_item_mask {
+    display: block;
+  }
+  .animate .preview {
+    -webkit-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+  }
+  .animate .cloneAdd {
+    -webkit-animation-name: fadeInRight;
+    animation-name: fadeInRight;
+    -webkit-animation-duration: .5s;
+    animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+  }
+  /*wdm_list end*/
+  /*login*/
+  .form_login {
+    width: 520px;
+    height: 480px;
+    position: fixed;
+    left: 50%;
+    margin-left: -260px;
+    top: 50%;
+    background: #fff;
+    display: none;
+    margin-top: -240px;
+  }
+  .form_login_in {
+    width: 303px;
+    margin: 60px auto 0 auto;
+  }
+  .form_login_in input {
+    width: 100%;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+  }
+  #model-username {
+    border-bottom: 0 none;
+  }
+  .form_login_check {
+    line-height: 32px;
+  }
+  #expire {
+    width: auto;
+    display: inline;
+    height: auto;
+  }
+  .ui-dialog-autofocus {
+    width: 100%;
+    background: #ff4942;
+    height: 42px;
+    font-size: 14px;
+    color: #fff;
+    line-height: 42px;
+    text-align: center;
+    border: 0 none;
+    cursor: pointer;
+  }
+  .login_reg a {
+    color: #ff4942;
+  }
+  .login_reg {
+    text-align: right;
+    color: #565656;
+    padding: 12px 0 40px 0;
+  }
+  .login_who {
+    font-size: 14px;
+    text-align: center;
+    color: #cccccc;
+  }
+  .login_who a {
+    color: #000;
+    padding: 0 4px;
+  }
+  .login_tips {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    line-height: 45px;
+    background: #eee;
+    color: #8d8d8d;
+    text-align: center;
+    width: 100%;
+  }
+  .mask {
+    background: rgba(0, 0, 0, .7);
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    display: none;
+    top: 0;
+  }
+  .animate.form_login {
+    display: block;
+    z-index: 222;
+  }
+  .form_close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #989898;
+    font-size: 30px;
+  }
+  /*login end*/
+  /*已登录 index*/
+  .login_banner {
+    width: 1200px;
+    margin: 24px auto 0 auto;
+    height: 61px;
+    position: relative;
+  }
+  .banner_1 {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/28/583bbd24-c77e-4974-a218-2e729a9a5ffd.jpg) no-repeat center center;
+    height: 61px;
+    display: block;
+  }
+  .small .login_banner {
+    width: 1000px;
+  }
+  .login_banner .close_banner {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/28/0fda1bca-1ded-4416-a326-0ec3eaa1b0d5.png) no-repeat;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 26px;
+    height: 25px;
+    display: block;
+  }
+  .login_flow {
+    width: 1200px;
+    margin: 24px auto 0 auto;
+  }
+  .login_flow ul {
+    margin-left: -3%;
+    overflow: hidden;
+  }
+  .login_flow dl {
+    height: 95px;
+    background: #fff;
+    float: left;
+    margin: 0 0 0 3%;
+    width: 22%;
+    border-top: 3px solid #ff4942;
+    cursor: pointer;
+    position: relative;
+  }
+  .small .login_flow {
+    width: 1000px;
+  }
+  .small .login_flow dl.current dt {
+    border-left: 113px solid transparent;
+    border-right: 113px solid transparent;
+  }
+  .small .login_flow dl:hover dt {
+    border-left: 113px solid transparent;
+    border-right: 113px solid transparent;
+  }
+  .login_flow dl.current dt {
+    border-left: 136px solid transparent;
+    border-right: 136px solid transparent;
+    border-top: 17px solid #ff4942;
+    -webkit-animation-name: flow;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  .login_flow dl:hover dt {
+    border-left: 136px solid transparent;
+    border-right: 136px solid transparent;
+    border-top: 17px solid #ff4942;
+    -webkit-animation-name: flow;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  .login_flow dd {
+    display: inline-block;
+    width: 45px;
+    border-radius: 100%;
+    background: #e6e6e6;
+    height: 45px;
+    line-height: 45px;
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+    font-family: "arial";
+    position: absolute;
+    top: 26px;
+    left: 18px;
+  }
+  .login_flow dl.current dd {
+    background: #ff4942;
+  }
+  .login_flow dl:hover dd {
+    background: #ff4942;
+  }
+  .login_flow dl.current span {
+    color: #000;
+  }
+  .login_flow dl:hover span {
+    color: #000;
+  }
+  .login_flow span {
+    font-size: 24px;
+    color: rgba(0, 0, 0, .6);
+    position: absolute;
+    top: 30px;
+    left: 76px;
+  }
+  .user a {
+    color: #fff;
+    display: block;
+    width: 75px;
+    height: 60px;
+    padding: 0;
+  }
+  .user:hover {
+    background: #222222;
+  }
+  .user:hover .user_content {
+    display: block;
+  }
+  .user {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 75px;
+    z-index: 99;
+  }
+  .user img {
+    position: absolute;
+    display: block;
+    left: 22px;
+    top: 21px;
+  }
+  .user_content {
+    display: none;
+  }
+  .user_content a {
+    display: block;
+    height: 33px;
+    line-height: 33px;
+    font-size: 14px;
+    color: #aaaaaa;
+    text-align: center;
+  }
+  .nav .icon-xiaoxi {
+    margin-left: 0px;
+    color: #fff;
+  }
+  .wdm_login {
+    width: 1180px;
+    background: #fff;
+    padding: 0 10px;
+    margin-top: 24px;
+  }
+  .small .wdm_login {
+    width: 980px;
+  }
+  .wdm_login_tag {
+    font-size: 18px;
+    height: 68px;
+    line-height: 68px;
+    border-bottom: 1px dotted #ddd;
+  }
+  .wdm_login_tag a {
+    color: #000;
+  }
+  .wdm_login_tag li {
+    float: left;
+    margin-left: 15px;
+    margin-right: 10px;
+  }
+  .wdm_login_tag .cur a {
+    color: #ff4942;
+  }
+  .wdm_login_tag span:before {
+    content: "\e60a";
+    color: #ff4942;
+  }
+  .wdm_login_tag .cur span:before {
+    content: "\e60b";
+    font-size: 22px;
+  }
+  .wdm_login_tag .wdm_add {
+    display: block;
+    width: 151px;
+    height: 43px;
+    line-height: 43px;
+    background: #ff4942;
+    color: #fff;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    top: 13px;
+  }
+  /*已登录 end*/
+  .side-pannel {
+    position: fixed;
+    right: 10px;
+    z-index: 99
+  }
+  .side-bar {
+    border-bottom: none;
+    bottom: 100px;
+  }
+  .side-bar a {
+    display: block;
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+    position: relative;
+    color: #fff;
+    background-color: rgba(68, 68, 68, 0.8);
+    text-align: center;
+  }
+  .side-bar .gotop,
+  .side-bar .qr {
+    margin-bottom: 1px;
+  }
+  .side-bar a:hover {
+    background-color: rgba(68, 68, 68, 1);
+  }
+  .side-bar .icon {
+    font-size: 24px;
+    height: 64px;
+    line-height: 45px;
+    display: block;
+  }
+  .gotop {
+    display: none;
+  }
+  .side-bar .gotop .icon {
+    line-height: 55px;
+  }
+  .side-bar-txt {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    left: 0;
+  }
+  .side-qr {
+    position: absolute;
+    left: -150px;
+    top: -35px;
+    display: none;
+  }
+  @-webkit-keyframes theme-black-flow {
+    0% {
+      border-top: 1px solid #ff5952;
+    }
+    100% {
+      border-top: 17px solid #ff5952;
+    }
+  }
+  /*wdmcont*/
+  .wdm_cont1 {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/29/c088068c-f2f9-4b6c-a5f5-8e21f8240e50.jpg) no-repeat center 0;
+    height: 319px;
+  }
+  .wdm_cont_in {
+    width: 1000px;
+    margin: 0 auto;
+  }
+  .wdm_cont1_txt {
+    padding-left: 544px;
+    padding-top: 50px;
+    width: 314px;
+  }
+  .wdm_cont1_txt h2 {
+    font-size: 24px;
+    color: #ff4942;
+    font-weight: normal;
+    line-height: 2;
+  }
+  .wdm_cont1_txt p {
+    color: rgba(0, 0, 0, .5);
+    line-height: 24px;
+    font-size: 14px;
+  }
+  .blank {
+    color: #000000;
+  }
+  .font14 {
+    font-size: 14px;
+  }
+  .wdm_cont_in span {
+    margin-left: 5px;
+  }
+  .wdm_cont2 {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/29/3ae02671-95b4-4295-8a89-4e867c2a4f1a.jpg) no-repeat center 0;
+    height: 319px;
+  }
+  .wdm_cont2_txt {
+    padding-left: 88px;
+    padding-top: 27px;
+    width: 448px;
+    line-height: 24px;
+  }
+  .wdm_cont2_txt h2 {
+    font-size: 24px;
+    color: #ff4942;
+    font-weight: normal;
+    line-height: 2;
+  }
+  .wdm_cont2_txt p {
+    color: rgba(255, 255, 255, .5);
+    line-height: 24px;
+    font-size: 14px;
+  }
+  .white {
+    color: #fff;
+  }
+  .wdm_cont3 {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/29/ed07f677-8385-4d64-a373-625be12e24ec.jpg) no-repeat center 0;
+    height: 319px;
+  }
+  .wdm_cont3_txt {
+    padding-left: 544px;
+    padding-top: 76px;
+    width: 390px;
+  }
+  .wdm_cont3_txt h2 {
+    font-size: 24px;
+    color: #ff4942;
+    font-weight: normal;
+    line-height: 2;
+  }
+  .wdm_cont3_txt p {
+    color: rgba(0, 0, 0, .5);
+    line-height: 24px;
+    width: 343px;
+    font-size: 14px;
+  }
+  .wdm_cont4 {
+    background: url(http://img.easthardware.com/upload/j/j2/jihui/picture/2015/12/29/34501ff7-8552-4427-94c3-5dc1f8c14e16.jpg) no-repeat center 0;
+    height: 319px;
+  }
+  .wdm_cont4_txt {
+    padding-left: 544px;
+    padding-top: 55px;
+    width: 454px;
+  }
+  .wdm_cont4_txt h2 {
+    font-size: 24px;
+    color: #ff4942;
+    font-weight: normal;
+    line-height: 2;
+  }
+  .wdm_cont4_txt p {
+    color: rgba(0, 0, 0, .5);
+    line-height: 24px;
+    width: 399px;
+    font-size: 14px;
+  }
+  /*wdmcont end*/
+}

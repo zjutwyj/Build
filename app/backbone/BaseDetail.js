@@ -79,7 +79,7 @@ var BaseDetail = SuperView.extend({
       if (!ctx.list || ctx.list.size() === 0) {
         return 'Error15 viewId=' + ctx.options.viewId + (ctx._options.render ? ctx._options.render : ctx.el);
       }
-    }, {type: 'error'});
+    }, {type: 'error'});//debug__
     return this.list;
   },
   /**
@@ -120,7 +120,7 @@ var BaseDetail = SuperView.extend({
 
     debug(function () {
       if (!model) return 'Error16';
-    }, {type: 'error'});
+    }, {type: 'error'});//debug__
 
     ctx.passId = this.options.id || Est.getUrlParam('id', window.location.href);
 
@@ -204,7 +204,7 @@ var BaseDetail = SuperView.extend({
             if (!ctx.formValidate.getField(field)) {
               return 'Error17';
             }
-          }, {type: 'error'});
+          }, {type: 'error'});//debug__
           app.getData(field).set('remote', {
             url: options.url,
             dataType: 'json',
@@ -280,7 +280,7 @@ var BaseDetail = SuperView.extend({
                 }
                 Est.setValue(ctx.model.attributes, modelKey, val);
               } catch (e) {
-                debug('Error18 ' + e);
+                debug('Error18 ' + e);//debug__
               }
               //ctx.model.set(modelList[0], modelObj[modelList[0]]);
             } else {
@@ -340,10 +340,10 @@ var BaseDetail = SuperView.extend({
    * @author wyj 14.11.15
    */
   _saveItem: function (callback, error) {
-    debug('- BaseDetail._saveItem');
-    if (Est.typeOf(this.model.url) === 'string') debug('Error29', {type: 'error'});
+    debug('- BaseDetail._saveItem');//debug__
+    if (Est.typeOf(this.model.url) === 'string') debug('Error29', {type: 'error'});//debug__
     if (Est.isEmpty(this.model.url())) {
-      debug('Error19', {type: 'error'});
+      debug('Error19', {type: 'error'});//debug__
       return;
     }
     if (this.model.attributes._response) {
@@ -352,7 +352,7 @@ var BaseDetail = SuperView.extend({
     this.model.save(null, {
       wait: true,
       success: function (response) {
-        debug('- BaseDetail._saveSuccess');
+        debug('- BaseDetail._saveSuccess');//debug__
         app.addModel(Est.cloneDeep(response.attributes));
         if (top) {
           top.model = response.attributes;
@@ -394,7 +394,7 @@ var BaseDetail = SuperView.extend({
    * @author wyj 14.11.16
    */
   _close: function () {
-    debug('- BaseDetail.close');
+    debug('- BaseDetail.close');//debug__
     this.undelegateEvents();
     this.stopListening();
     this.off();

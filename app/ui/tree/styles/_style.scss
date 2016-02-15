@@ -1,0 +1,181 @@
+.tree-cate-ul {
+  li {
+    padding-top: 4px;
+  }
+  .cate-grid-row {
+    position: relative;
+    padding-left: 8px;
+    padding-bottom: 4px;
+    border-radius: 5px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .item-active {
+    background-color: #E3F3FF;
+  }
+  .x-grid-caret {
+    padding-top: 8px;
+  }
+  .pointer,
+  .ui-dialog-close,
+  label {
+    cursor: pointer;
+  }
+  .tree-sub {
+    padding-left: 15px;
+  }
+  .icon,
+  .icon-caret,
+  .iconfont,
+  .x-caret,
+  .x-caret-middle,
+  .x-icon,
+  [class*=" icon-"],
+  [class^=icon-] {
+    display: inline-block;
+  }
+  .x-caret,
+  .x-caret-middle {
+    height: 0;
+    width: 0;
+    line-height: 0;
+  }
+  .x-caret-middle {
+    border: 6px solid transparent;
+  }
+  .x-caret-left-middle {
+    border-left: 6px solid #333;
+    border-right: 0;
+    margin-top: -1px;
+    vertical-align: middle;
+  }
+  .x-caret-left-gray {
+    border-left-color: #CBCBCB;
+  }
+  .x-caret-down {
+    border: 6px solid transparent;
+    border-top: 6px solid #333;
+    transform: translateX(-2px) translateY(3px);
+  }
+}
+
+.tree-list-ul {
+  .bui-grid-row-even {
+    background-color: #FAFAFA;
+  }
+  .cate-grid {
+    float: left;
+  }
+  .gird-checkbox {
+    width: 32px;
+  }
+  .grid-td-tree {
+    width: 270px;
+    float: left;
+  }
+  .cate-grid-cell-inner {
+    padding: 10px 5px;
+    position: relative;
+    overflow: hidden;
+    height: 28px;
+    line-height: 28px;
+  }
+  .bui-grid-checkBox-container {
+    text-align: center;
+  }
+  .x-grid-checkbox {
+    width: 13px;
+    height: 20px;
+    display: inline-block;
+  }
+  input[type=checkbox] {
+    box-sizing: border-box;
+    padding: 0;
+    vertical-align: middle;
+  }
+  .gird-1 {
+    width: 30px;
+  }
+  .x-grid-caret {
+    padding-top: 3px;
+    vertical-align: middle;
+  }
+  .x-caret,
+  .x-caret-middle {
+    display: inline-block;
+    height: 0;
+    width: 0;
+    line-height: 0;
+  }
+  .x-caret-middle {
+    border: 6px solid transparent;
+  }
+  .x-caret-left-middle {
+    border-left: 6px solid #000;
+    border-right: 0;
+  }
+  .x-caret-left-gray {
+    border-left-color: #CBCBCB;
+  }
+  .grid-td-cate-name {
+    width: 200px;
+  }
+  input[type=password],
+  input[type=text],
+  select,
+  textarea {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    padding: 4px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+  .category-div-1 input.input-middle.pro-cate-name {
+    width: 168px;
+  }
+  .x-caret-down {
+    border: 6px solid transparent;
+    border-top: 6px solid #000;
+  }
+  .gird-2 {
+    width: 32px;
+    height: 28px;
+  }
+  .tree-arrow {
+    width: 24px;
+    margin-left: -5px;
+    display: inline-block;
+  }
+  .gird-3 {
+    width: 60px;
+  }
+  .node-tree .category-div-3 {
+    width: auto;
+  }
+  .x-caret-sub {
+    border: none;
+    width: 24px;
+    height: 40px;
+    background: url("http://www.jihui88.com/member/styles/default/img/cate-sub.jpg")-1px -6px no-repeat;
+  }
+  .node-tree .category-div-3 input.input-middle.pro-cate-name {
+    width: 112px;
+    float: right;
+  }
+  .x-caret-sub {
+    border: none;
+    width: 24px;
+    height: 40px;
+    background: url("http://www.jihui88.com/member/styles/default/img/cate-sub.jpg")-1px -6px no-repeat;
+  }
+  .pro-cate-name {
+    float: right;
+  }
+}

@@ -36,7 +36,7 @@ var BaseModel = Backbone.Model.extend({
     _url = base + (base.charAt(base.length - 1) == '/' ? '' : '/') + this.id + sep + this.params;
     debug(function () {
       return ('[Query]' + _url);
-    });
+    });//debug__
     return _url;
   },
   /**
@@ -49,7 +49,7 @@ var BaseModel = Backbone.Model.extend({
    */
   _initialize: function (options) {
     this.validateMsg = null;
-    debug('9.BaseModel._initialize ' + this.baseId);
+    debug('9.BaseModel._initialize ' + this.baseId);//debug__
   },
   /**
    * 过滤结果, 并提示信息对话框, 若不想提示信息可以设置hideTip为true
@@ -81,15 +81,15 @@ var BaseModel = Backbone.Model.extend({
   parse: function (response, options) {
     var ctx = this, buttons = [],
       _isNew = false;
-    if ('msg' in response) Utils.removeLoading();
+    if ('msg' in response) BaseUtils.removeLoading();
     if (Est.isEmpty(response)) {
       var url = Est.typeOf(this.url) === 'function' ? this.url() : this.url;
-      debug('Error25 url' + url);
-      BaseUtils.initTooltip(CONST.LANG.REQUIRE_FAILED);
+      debug('Error25 url' + url);//debug__
+      BaseUtils.tip(CONST.LANG.REQUIRE_FAILED);
       return false;
     }
     if (response && response.msg && response.msg === CONST.LANG.AUTH_FAILED){
-      Utils.tip(CONST.LANG.AUTH_LIMIT, {time: 2000});
+      BaseUtils.tip(CONST.LANG.AUTH_LIMIT, {time: 2000});
     }
     if (response.msg === CONST.LANG.NOT_LOGIN) {
       Est.trigger('checkLogin');
@@ -129,7 +129,7 @@ var BaseModel = Backbone.Model.extend({
         }, autofocus: true });
       }
       this.hideOkBtn && Est.trigger('_dialog_submit_callback');
-      var dialog_msg = BaseUtils.initDialog({
+      var dialog_msg = BaseUtils.dialog({
         id: 'dialog_msg',
         title: CONST.LANG.TIP,
         content: '<div style="padding: 20px;">' + response.msg + '</div>',
@@ -197,7 +197,7 @@ var BaseModel = Backbone.Model.extend({
     newModel.set('editField', true);
     debug(function () {
       if (!newModel.baseUrl) return 'Error27';
-    }, {type: 'console'});
+    }, {type: 'console'});//debug__
     if (newModel.baseUrl) {
       newModel.save(null, {
         success: function (model, result) {
@@ -222,7 +222,7 @@ var BaseModel = Backbone.Model.extend({
    * @author wyj 14.12.18
    */
   _getChildren: function (collection) {
-    return _.map(this.get('children'), function (ref) {
+    return Est.map(this.get('children'), function (ref) {
       // Lookup by ID in parent collection if string/num
       if (typeof(ref) == 'string' || typeof(ref) == 'number')
         return collection.get(ref);

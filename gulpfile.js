@@ -9,6 +9,7 @@ var imagemin = require('gulp-imagemin');
 var rev = require('gulp-rev');
 var yuidoc = require("gulp-yuidoc");
 var cdn = require('gulp-cdn-replace');
+var replace = require('gulp-replace');
 var del = require('del');
 
 var SRCDIR = './app',
@@ -198,6 +199,12 @@ gulp.task('clean', function() {
   });
 });
 
+// 替换
+gulp.task('replace', function() {
+  return gulp.src(['app/scripts/core/base.js'])
+    .pipe(replace(/debug\((.|\n|\s)*?\);\/\/debug__/mg, '')).pipe(gulp.dest('app/scripts/core'));
+});
+
 // 移动文件
 gulp.task('move', function() {
   return gulp.src(src.all).pipe(gulp.dest(DISTDIR));
@@ -320,7 +327,19 @@ gulp.task('ueditor', [], function() {
       name: 'ueditor.all.min.js',
       dist: './app/vendor/ueditor'
     }
-  }, true);
+  }, false);
+});
+
+gulp.task('dialog', [], function() {
+  baseTask({
+    scripts: {
+      source: [
+        'app/vendor/artDialog_v6/dialog-plus.js'
+      ],
+      name: 'dialog-plus.min.js',
+      dist: './app/vendor/artDialog_v6'
+    }
+  }, false);
 });
 
 gulp.task('base', [], function() {
@@ -329,11 +348,12 @@ gulp.task('base', [], function() {
       source: [
         'app/vendor/seajs/sea-debug.js',
         'app/vendor/seajs/seajs-text-debug.js',
-        'app/vendor/jquery/jquery-1.10.2.js',
+        'app/vendor/jquery/jquery-1.12.0.js',
         'app/Est/Est.source.js',
         'app/vendor/underscore/underscore.js',
-        'app/vendor/backbone/backbone-debug.js',
+        'app/vendor/backbone/backbone-debug-est.js',
         'app/vendor/handlebars/handlebars-debug.js',
+
         'app/handlebars/HandlebarsHelper.js',
         'app/backbone/BaseApp.js',
         'app/backbone/BaseUtils.js',

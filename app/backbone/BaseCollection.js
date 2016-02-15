@@ -11,9 +11,13 @@
  */
 
 var PaginationModel = Backbone.Model.extend({
-  defaults: { page: 1, pageSize: 16, count: 0 },
-  initialize: function () {
-    debug('3.PaginationModel.initialize');
+  defaults: {
+    page: 1,
+    pageSize: 16,
+    count: 0
+  },
+  initialize: function() {
+    debug('3.PaginationModel.initialize'); //debug__
   }
 });
 
@@ -27,7 +31,7 @@ var BaseCollection = Backbone.Collection.extend({
    * @param options
    * @author wyj 14.12.16
    */
-  constructor: function (options) {
+  constructor: function(options) {
     this.options = options || {};
     Backbone.Collection.apply(this, [null, arguments]);
   },
@@ -41,8 +45,8 @@ var BaseCollection = Backbone.Collection.extend({
                 this._initialize();
               }
    */
-  _initialize: function () {
-    debug('2.BaseCollection._initialize');
+  _initialize: function() {
+    debug('2.BaseCollection._initialize'); //debug__
     this._baseUrl = this.url;
     if (!this.paginationModel) {
       this.paginationModel = new PaginationModel({
@@ -51,7 +55,7 @@ var BaseCollection = Backbone.Collection.extend({
       });
     }
   },
-  initialize: function () {
+  initialize: function() {
     this._initialize();
   },
   /**
@@ -64,13 +68,15 @@ var BaseCollection = Backbone.Collection.extend({
    * @return {attributes.data|*}
    * @author wyj 14.11.16
    */
-  parse: function (resp, xhr) {
+  parse: function(resp, xhr) {
     var ctx = this;
     if (Est.isEmpty(resp)) {
-      debug(function () {
+      debug(function() {
         var url = Est.typeOf(ctx.url) === 'function' ? ctx.url() : ctx.url;
         return 'Error:14 ' + url;
-      }, {type: 'error'});
+      }, {
+        type: 'error'
+      }); //debug__
       return [];
     }
     this._parsePagination(resp);
@@ -89,9 +95,10 @@ var BaseCollection = Backbone.Collection.extend({
    * @param model
    * @author wyj 14.11.16
    */
-  _parseUrl: function (model) {
-    debug('- BaseCollection._parseUrl');
-    var page = 1, pageSize = 16;
+  _parseUrl: function(model) {
+    debug('- BaseCollection._parseUrl'); //debug__
+    var page = 1,
+      pageSize = 16;
     if (model && model.get('pageSize')) {
       pageSize = model.get('pageSize');
       page = model.get('page');
@@ -114,10 +121,13 @@ var BaseCollection = Backbone.Collection.extend({
    * @param resp
    * @author wyj 14.11.16
    */
-  _parsePagination: function (resp) {
-    debug('6.BaseCollection._parsePagination');
-    resp.attributes = resp.attributes ||
-    { page: 1, per_page: 10, count: 10 };
+  _parsePagination: function(resp) {
+    debug('6.BaseCollection._parsePagination'); //debug__
+    resp.attributes = resp.attributes || {
+      page: 1,
+      per_page: 10,
+      count: 10
+    };
     if (this.paginationModel) {
       this.paginationModel.set('page', resp.attributes.page);
       this.paginationModel.set('pageSize', resp.attributes.per_page);
@@ -131,12 +141,18 @@ var BaseCollection = Backbone.Collection.extend({
    * @private
    * @author wyj 14.11.16
    */
-  _paginationRender: function () {
-    seajs.use(['Pagination'], Est.proxy(function (Pagination) {
+  _paginationRender: function() {
+    seajs.use(['Pagination'], Est.proxy(function(Pagination) {
       if (!this.pagination) {
         var $el = $(this.options.el);
+        var isStr = Est.typeOf(this.options.pagination) === 'string';
+        var _$el = $(!isStr ? "#pagination-container" :
+          this.options.pagination, $el.size() > 0 ? $el : $('body'));
+        if (isStr) {
+          this.paginationModel.set('numLength', parseInt(_$el.attr('data-numLength') || 7, 10));
+        }
         this.pagination = new Pagination({
-          el: $("#pagination-container", $el.size() > 0 ? $el : $('body')),
+          el: _$el,
           model: this.paginationModel
         });
       } else {
@@ -155,21 +171,25 @@ var BaseCollection = Backbone.Collection.extend({
    * @author wyj 14.11.15
    * @example
    *      if (this.collection.url){
-       *             this.collection._load(this.collection, this, model)
-       *                 .then(function(result){
-       *                     resolve(result);
-       *                 });
-       *         }
+   *             this.collection._load(this.collection, this, model)
+   *                 .then(function(result){
+   *                     resolve(result);
+   *                 });
+   *         }
    */
-  _load: function (instance, context, model) {
-    debug('4.BaseCollection._load');
+  _load: function(instance, context, model) {
+    debug('4.BaseCollection._load'); //debug__
     //if (!Est.isEmpty(this.itemId)) this.url = this.url + '/' + this.itemId;
     this._parseUrl(model);
-    return instance.fetch({success: function () {
-      //resolve(instance);
-      debug('5.collection reset');
-      context._empty();
-    }, cacheData: this.options.cache, session: this.options.session});
+    return instance.fetch({
+      success: function() {
+        //resolve(instance);
+        debug('5.collection reset'); //debug__
+        context._empty();
+      },
+      cacheData: this.options.cache,
+      session: this.options.session
+    });
     /* var $q = Est.promise;
      return new $q(function (resolve) {
 
@@ -184,9 +204,9 @@ var BaseCollection = Backbone.Collection.extend({
    * @example
    *        this._setItemId('Category00000000000000000032');
    */
-  _setItemId: function (itemId) {
+  _setItemId: function(itemId) {
     this._itemId = itemId;
-    debug('- get list by itemId ' + this._itemId);
+    debug('- get list by itemId ' + this._itemId); //debug__
   },
   /**
    * 清空列表
@@ -194,8 +214,8 @@ var BaseCollection = Backbone.Collection.extend({
    * @method [集合] - _empty ( 清空列表 )
    * @author wyj 14.11.15
    */
-  _empty: function () {
-    debug('BaseCollection._empty');
+  _empty: function() {
+    debug('BaseCollection._empty'); //debug__
     if (this.collection) {
       var len = this.collection.length;
       while (len > -1) {

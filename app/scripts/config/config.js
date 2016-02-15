@@ -29,21 +29,18 @@ seajs.config({
 
   // 映射配置
   map: [
-    [/lib\/(.*).js/, CONST.LIB_FORDER + '/$1.js'], //['.js', '-min.js'] ,
-    [ /^(.*\.(?:css|js|html))(.*)$/i, '$1?' + CONST.APP_VERSION]
+    [/^(.*\.(?:css|js|html))(.*)$/i, '$1?' + CONST.APP_VERSION]
   ],
 
   // 调试模式
-  debug: Est.typeOf(CONST.DEBUG_SEAJS) === 'undefined' ? false :
-    CONST.DEBUG_SEAJS,
+  debug: Est.typeOf(CONST.DEBUG_SEAJS) === 'undefined' ? false : CONST.DEBUG_SEAJS,
 
   // 文件编码
   charset: 'utf-8'
 });
-
 /**
  * 注册模板
  * */
-Est.each(app.getTemplates(), function (value, key) {
+Est.each(app.getTemplates(), function(value, key) {
   define(key, value);
 });

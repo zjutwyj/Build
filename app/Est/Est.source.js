@@ -699,7 +699,7 @@
       }
       result = isArr ? Array(value.length) : {};
     } else {
-      result = isArr ? arraySlice(value, 0, value.length) : extend({}, value);
+      result = isArr ? arraySlice(value, 0, value.length) : Est.extend({}, value);
     }
     if (isArr) {
       if (hasOwnProperty.call(value, 'index')) {
@@ -1798,7 +1798,7 @@
   Est.sortBy = sortBy;
   /**
    * @description 截取数组
-   * @method [数组] - take ( 截取数组 )
+   * @method [数组] - take/arraySlice ( 截取数组 )
    * @param {Array} array 数据
    * @param {Number} start 起始
    * @param {Number} end 若未设置值， 则取索引为start的一个值
@@ -1905,22 +1905,20 @@
    *          name : 'name'
    *      });
    */
-  function bulidSelectNode(rootlist, zoom, opts) {
+  function bulidSelectNode(rootlist, zoom, opts, top) {
     var z = zoom;
     opts.top = typeof opts.top === 'undefined' ? true : opts.top;
     for (var i = 0, len = rootlist.length; i < len; i++) {
       var space = '';
-      if (!opts.top) {
+      if (Est.typeOf(top) !== 'undefined' && !top) {
         space = Est.pad(space, z - 1, '　');
       }
       space = space + "|-";
       rootlist[i][opts.name] = space + rootlist[i][opts.name];
       if (rootlist[i].hasChild) {
-        opts.top = false;
-        bulidSelectNode(rootlist[i].cates, zoom = z + 1, opts);
+        bulidSelectNode(rootlist[i].cates, zoom = z + 1, opts, false);
       }
     }
-    opts.top = true;
     return rootlist;
   }
 
@@ -2180,7 +2178,7 @@
   function center(clientWidth, clientHeight, width, height) {
     if (!this.validation([clientWidth, clientHeight, width, height], 'number'))
       return {left: 0, top: 0};
-    return { left: (parseInt(clientWidth, 10) - parseInt(width, 10)) / 2, top: (parseInt(clientHeight, 10) - parseInt(height, 10)) / 2}
+    return { left: (parseInt(clientWidth, 10) - parseInt(width, 10)) / 2, top: (parseInt(clientHeight, 10) - parseInt(height, 10)) / 2};
   }
 
   Est.center = center;

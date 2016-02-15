@@ -1,0 +1,69 @@
+<div class="theme-black">
+  <div class="wdm_cat_outer" style="padding-left: 0;">
+    <div class="wdm_cat manage-list-nav">
+    </div>
+    <div class="clr"></div>
+      <div class="wdm_search manage-list-search">
+          <form action="">
+              <input id="model-searchkey" type="text" class="wdm_input tool-tip" data-title="请输入搜索关键词" placeholder="关键词搜索">
+              <i  class="wdm_btn iconfont icon-sousuo search-submit"></i>
+          </form>
+      </div>
+  </div>
+    <div class="wdm_out">
+        <div class="wdm" style="min-height: 75px">
+
+            <!--一级分类-->
+            <div class="category-root">
+
+            </div>
+            <div class="clr"></div>
+            <!--二级分类-->
+            <div class="category-sub" style="display: none">
+
+            </div>
+            <div class="clr"></div>
+            <div class="wdm_serial">
+                <div class="clr"></div>
+            </div>
+
+        </div>
+    </div>
+  <div class="wdm_list">
+
+      <div class="wdm_item_img">
+          <img src="{{sharepic}}"  class="sharepic"/>
+          <div class="wdm_item_mask">
+              <div class="wdm_item_mark">
+                  <a href="javascript:;"><span class="icon icon-dianzan"></span>收藏</a>
+              </div>
+              <a class="preview" href="javascript:;">
+                  <span class="line line-top"></span><span class="line line-right"></span>
+                  <span class="line line-bottom"></span><span class="line line-left"></span>
+                  预览
+              </a>
+              <a class="cloneAdd" href="javascript:;">
+                  <span class="line line-top"></span><span class="line line-right"></span>
+                  <span class="line line-bottom"></span><span class="line line-left"></span>
+                  安装
+              </a>
+          </div>
+          <div class="qr-code" style="opacity: 0;"></div>
+      </div>
+      <div class="wdm_item_data">
+          <a href="javascript:;" class="wdm_item_title">{{seoTitle}}</a>
+          <em class="iconfont icon-xianshi"><span class="wdm_item_txt">浏览量</span><span class="wdm_item_num">{{views}}</span></em>
+          <em class="iconfont icon-fenxiang"><span class="wdm_item_txt">转发量</span><span class="wdm_item_num">{{rviews}}</span></em>
+          <em class="iconfont icon-liuyan"><span class="wdm_item_txt">反馈量</span><span class="wdm_item_num last_num">{{mviews}}</span></em>
+          <div class="iconfont icon-erweima">&nbsp;</div>
+      </div>
+      <div class="wdm_item_from">
+          <p class="wdm_item_name" title="{{entName}}">{{entName}}</p>
+          <p class="wdm_item_time">{{addTime}}</p>
+      </div>
+
+  </div>
+  <div class="wrap-load-more">
+        <a>查看更多...</a>
+  </div>
+</div>

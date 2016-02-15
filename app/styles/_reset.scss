@@ -138,7 +138,7 @@ html:after {
 .pointer {
   cursor: pointer;
   color: nth($linkColor, 1);
-  &:hover{
+  &:hover {
     color: nth($linkColor, 2);
     text-decoration: underline;
   }
@@ -172,9 +172,9 @@ ol,
 ul {
   margin: 0;
   padding: 0;
-  list-style: inherit;
+  list-style: none;
 }
 
 li {
-  list-style: inherit;
+  list-style: none;
 }

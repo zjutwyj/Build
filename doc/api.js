@@ -1,7 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "Application - 用户后台",
+        "BaseApp - 用户后台",
         "BaseCollection 集合类",
         "BaseDetail - 详细页面",
         "BaseError - 错误信息",

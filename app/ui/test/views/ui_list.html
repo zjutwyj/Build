@@ -1,0 +1,32 @@
+<style type="text/css">
+.list-render {
+  list-style: none;
+}
+
+.list-render .hover .test-item-name,
+.list-render .item-active .test-item-name {
+  background-color: #ff4942;
+  color: #fff;
+}
+
+.test-item-name,
+.test-item-btns {
+  float: left;
+}
+</style>
+<div id="list-test" style="background: #fff;padding: 20px;">
+<a href="javascript:;" class="addOne">添加</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="javascript:;" class="insertOne">往第一个元素后面插入一条</a>
+  <ul class="list-render clearfix">
+    <div class="test-item-name toggle" style="cursor: pointer;">{{plus dx 1}}. {{text}}</div>
+    <div class="test-item-btns">
+      <a href="javascript:;" class="btn-display">{{#compare isdisplay '==' '1'}}已显示{{else}}已隐藏{{/compare}}</a>
+      <a href="javascript:;" class="btn-edit">编辑</a>
+      <a href="javascript:;" class="btn-move-up">上移</a>
+      <a href="javascript:;" class="btn-move-down">下移</a>
+      <a href="javascript:;" class="btn-delete">删除</a>
+    </div>
+  </ul>
+  <div id="pagination-container1" data-numLength="7" class="clearfix"></div>
+  <div id="list-test-result"></div>
+</div>

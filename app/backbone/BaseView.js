@@ -42,6 +42,7 @@ var BaseView = SuperView.extend({
     this._initTemplate(this._options);
     this._initModel(Backbone.Model.extend({}));
     this._initBind(this._options);
+    this.render();
     return this;
   },
   /**
@@ -129,6 +130,6 @@ var BaseView = SuperView.extend({
    * @author wyj 14.11.16
    */
   _empty: function () {
-    debug('BaseView._empty');
+    debug('BaseView._empty');//debug__
   }
 });

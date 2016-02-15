@@ -1,0 +1,1 @@
+app.addModule('Tree', 'ui/tree/controllers/Tree.js');

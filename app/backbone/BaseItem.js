@@ -43,7 +43,7 @@ var BaseItem = SuperView.extend({
        *            enterRender: '#submit' // 执行回车后的按钮点击的元素选择符
        *        });
    */
-  _initialize: function (options) {
+  _initialize: function(options) {
     this._initOptions(options);
     this._initCollapse(this.model.get('_options'));
     this._initTemplate(this._options);
@@ -59,7 +59,7 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initOptions: function (options) {
+  _initOptions: function(options) {
     this._options = Est.extend(this.options, options || {});
     this._options.speed = this._options.speed || 9;
   },
@@ -71,7 +71,7 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 15.2.14
    */
-  _initCollapse: function (options) {
+  _initCollapse: function(options) {
     if (options._speed > 1) {
       this.model.stopCollapse = false;
       this.collapsed = options ? options._extend : false;
@@ -84,7 +84,7 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initTemplate: function (options) {
+  _initTemplate: function(options) {
     options.template = options.template || options.itemTemp;
     if (options.template) {
       this.$template = '<div>' + options.template + '</div>';
@@ -103,7 +103,7 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 14.11.16
    */
-  _initBind: function (options) {
+  _initBind: function(options) {
     if (options.speed > 1) {
       this.model.bind('reset', this.render, this);
       this.model.bind('change', this.render, this);
@@ -118,7 +118,7 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 15.2.14
    */
-  _initView: function (options) {
+  _initView: function(options) {
     if (options.speed > 1) {
       if (this.model.view) this.model.view.remove();
       this.model.view = this;
@@ -131,14 +131,14 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 15.2.14
    */
-  _initStyle: function (options) {
+  _initStyle: function(options) {
     if (options.speed > 1) {
       var item_id = this.model.get('id') ? (this.model.get('id') + '') : (this.model.get('dx') + 1 + '');
       if (this.model.get('dx') % 2 === 0) this.$el.addClass('bui-grid-row-even');
       this.$el.addClass('_item_el_' + (this._options.viewId || '') + '_' + item_id.replace(/^[^1-9]+/, ""));
-      this.$el.hover(function () {
+      this.$el.hover(function() {
         $(this).addClass('hover');
-      }, function () {
+      }, function() {
         $(this).removeClass('hover');
       });
     }
@@ -150,8 +150,8 @@ var BaseItem = SuperView.extend({
    * @return {BaseCollection}
    * @author wyj 14.11.18
    */
-  _render: function () {
-    debug('10.BaseItem._render');
+  _render: function() {
+    debug('10.BaseItem._render'); //debug__
     this._onBeforeRender();
     if (this._options && this._options.filter)
       this._options.filter.call(this, this.model);
@@ -173,17 +173,19 @@ var BaseItem = SuperView.extend({
       var tree = this.$(modelOptions._subRender + ':first');
       this._setupEvents(modelOptions);
 
-      _.each(this.model._getChildren(modelOptions._collection), function (newmodel) {
+      Est.each(this.model._getChildren(modelOptions._collection), function(newmodel) {
         var childView = null;
 
-        if (modelOptions._items) {
+        /*if (modelOptions._items) {
           newmodel = new modelOptions._model(newmodel);
-        }
-        debug(function () {
+        }*/
+        debug(function() {
           if (Est.isEmpty(newmodel)) {
             return 'Error20';
           }
-        }, {type: 'error'});
+        }, {
+          type: 'error'
+        }); //debug__
         newmodel.set('_options', modelOptions);
         newmodel.set('level', level + 1);
 
@@ -220,7 +222,7 @@ var BaseItem = SuperView.extend({
    * @param name
    * @author wyj 14.12.20
    */
-  _setViewId: function (name) {
+  _setViewId: function(name) {
     if (this._options) this._options.viewId = name;
   },
   /**
@@ -231,7 +233,7 @@ var BaseItem = SuperView.extend({
    * @param model
    * @author wyj 14.11.20
    */
-  _setInitModel: function (model) {
+  _setInitModel: function(model) {
     this.initModel = model;
   },
   /**
@@ -241,11 +243,11 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 14.12.9
    */
-  _setupEvents: function (opts) {
+  _setupEvents: function(opts) {
     // Hack to get around event delegation not supporting ">" selector
     var that = this;
     that._toggleCollapse.call(this, opts);
-    this.$(opts._collapse + ':first').click(function () {
+    this.$(opts._collapse + ':first').click(function() {
       that._toggleCollapse.call(that, opts);
     });
   },
@@ -256,7 +258,7 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 14.12.9
    */
-  _toggleCollapse: function (opts) {
+  _toggleCollapse: function(opts) {
     var ctx = this;
     if (this.model.stopCollapse) {
       this.$(opts._subRender + ':first').addClass('hide');
@@ -267,8 +269,7 @@ var BaseItem = SuperView.extend({
     if (ctx.collapsed) {
       this.$(opts._collapse + ':first').removeClass('x-caret-down');
       this.$(opts._subRender + ':first').slideUp(CONST.COLLAPSE_SPEED).addClass('hide');
-    }
-    else {
+    } else {
       this.$(opts._collapse + ':first').addClass('x-caret-down');
       this.$(opts._subRender + ':first').slideDown(CONST.COLLAPSE_SPEED).removeClass('hide');
     }
@@ -280,8 +281,8 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 14.12.3
    */
-  _onBeforeRender: function () {
-    this._options.beforeRender && this._options.beforeRender.call(this, this.model);
+  _onBeforeRender: function() {
+    if (this._options.beforeRender) this._options.beforeRender.call(this, this.model);
   },
   /**
    * 渲染后事件
@@ -290,9 +291,9 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 14.12.3
    */
-  _onAfterRender: function () {
+  _onAfterRender: function() {
     if (this._options.toolTip) this._initToolTip();
-    this._options.afterRender && this._options.afterRender.call(this, this.model);
+    if (this._options.afterRender) this._options.afterRender.call(this, this.model);
   },
   /**
    * 移除监听
@@ -301,8 +302,8 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 14.11.16
    */
-  _close: function () {
-    debug('BaseItem._close');
+  _close: function() {
+    debug('BaseItem._close'); //debug__
     this.stopListening();
   },
   /**
@@ -312,8 +313,8 @@ var BaseItem = SuperView.extend({
    * @private
    * @author wyj 14.11.16
    */
-  _clear: function () {
-    debug('ProductItem._clear');
+  _clear: function() {
+    debug('ProductItem._clear'); //debug__
     this.model.destroy();
   },
   /**
@@ -323,35 +324,39 @@ var BaseItem = SuperView.extend({
    * @author wyj 14.11.16
    * @example
    *      itemClick: function(e){
-       *        e.stopImmediatePropagation();
-       *        this.loadPhoto();
-       *        this._toggleChecked(e);
-       *      }
+   *        e.stopImmediatePropagation();
+   *        this.loadPhoto();
+   *        this._toggleChecked(e);
+   *      }
    */
-  _toggleChecked: function (e) {
+  _toggleChecked: function(e) {
     var checked = this.model.get('checked');
     this._checkAppend = typeof this.model.get('_options')._checkAppend === 'undefined' ? true :
       this.model.get('_options')._checkAppend;
     if (!this._checkAppend) {
       if (this._options.viewId) {
-        app.getView(this._options.viewId) && app.getView(this._options.viewId)._clearChecked();
+        if (app.getView(this._options.viewId))
+          app.getView(this._options.viewId)._clearChecked();
       } else {
-        debug('Error21', {type: 'error'});
+        debug('Error21', {
+          type: 'error'
+        }); //debug__
       }
     }
-    this.model.attributes['checked'] = !checked;
+    this.model.attributes.checked = !checked;
     if (this.model.get('checked')) {
       this._itemActive({
         add: this._checkAppend
       });
-    } else {
-      //this.$el.removeClass('item-active');
+    } else if (this.model.get('_options')._checkToggle) {
+      this.$el.removeClass('item-active');
+      this.model.set('checked', false);
     }
     //TODO shift + 多选
     if (e && e.shiftKey) {
       var beginDx = app.getData('curChecked');
       var endDx = this.model.collection.indexOf(this.model);
-      Est.each(this.model.collection.models, function (model) {
+      Est.each(this.model.collection.models, function(model) {
         if (model.get('dx') > beginDx && model.get('dx') < endDx) {
           model.set('checked', true);
           model.view.$el.addClass('item-active');
@@ -360,7 +365,8 @@ var BaseItem = SuperView.extend({
     } else {
       app.addData('curChecked', this.model.collection.indexOf(this.model));
     }
-    e && e.stopImmediatePropagation();
+    if (e)
+      e.stopImmediatePropagation();
   },
   /**
    * 添加当前ITEM的CLASS为item-active
@@ -373,14 +379,14 @@ var BaseItem = SuperView.extend({
    *          add: true         //是否为添加模式
    *        });
    */
-  _itemActive: function (options) {
+  _itemActive: function(options) {
     options = options || {};
     if (!app.getData('itemActiveList' + this._options.viewId))
       app.addData('itemActiveList' + this._options.viewId, []);
     var list = app.getData('itemActiveList' + this._options.viewId);
     if (!options.add) {
-      debug('BaseItem._itemActive');
-      Est.each(list, Est.proxy(function (selecter) {
+      debug('BaseItem._itemActive'); //debug__
+      Est.each(list, Est.proxy(function(selecter) {
         var node = $('.' + selecter, app.getView(this._options.viewId) ?
           app.getView(this._options.viewId).$el : $("body"));
         //TODO 当为单选时
@@ -401,12 +407,14 @@ var BaseItem = SuperView.extend({
    * @param e
    * @author wyj 14.12.14
    */
-  _moveUp: function (e) {
+  _moveUp: function(e) {
     e.stopImmediatePropagation();
     this._itemActive();
     this.collapsed = true;
     if (!this._options.viewId) {
-      debug('Error22', { type: 'error' });
+      debug('Error22', {
+        type: 'error'
+      }); //debug__
       return false;
     }
     app.getView(this._options.viewId)._moveUp(this.model);
@@ -418,14 +426,14 @@ var BaseItem = SuperView.extend({
    * @param e
    * @author wyj 14.12.14
    */
-  _moveDown: function (e) {
+  _moveDown: function(e) {
     e.stopImmediatePropagation();
     this._itemActive();
     this.collapsed = true;
     if (!this._options.viewId) {
       debug('Error23', {
         type: 'error'
-      });
+      }); //debug__
       return false;
     }
     app.getView(this._options.viewId)._moveDown(this.model);
@@ -436,13 +444,17 @@ var BaseItem = SuperView.extend({
    * @method [保存] - _saveSort ( 保存sort排序 )
    * @author wyj 14.12.14
    */
-  _saveSort: function () {
+  _saveSort: function() {
     var ctx = this;
     var sort = this.$('.input-sort').val();
-    this.model._saveField({ id: this.model.get('id'), sort: sort
-    }, ctx, { success: function () {
-      ctx.model.set('sort', sort);
-    }, hideTip: true
+    this.model._saveField({
+      id: this.model.get('id'),
+      sort: sort
+    }, ctx, {
+      success: function() {
+        ctx.model.set('sort', sort);
+      },
+      hideTip: true
     });
   },
   /**
@@ -453,46 +465,10 @@ var BaseItem = SuperView.extend({
    * @author wyj 14.12.31
    *
    */
-  _getPage: function () {
+  _getPage: function() {
     var paginationModel = this.model.collection.paginationModel;
     if (!paginationModel) return 1;
     return paginationModel.get('page');
-  },
-  /**
-   * 显示更多按钮
-   *
-   * @method [渲染] _more ( 显示更多按钮 )
-   * @param e
-   * @author wyj 15.1.16
-   */
-  _more: function (e) {
-    e.stopImmediatePropagation();
-    this.$more = e.target ? $(e.target) : $(e.currentTarget);
-    if (!this.$more.hasClass('btn-more')) this.$more = this.$more.parents('.btn-more:first');
-    this.$moreOption = this.$more.parent().find('.moreOption');
-    this.$icon = this.$more.find('i');
-    if (this.$icon.hasClass('icon-chevron-left')) {
-      this.$icon.removeClass('icon-chevron-left');
-      this.$icon.addClass('icon-chevron-down');
-      this.$moreOption.hide();
-    } else {
-      this.$icon.removeClass('icon-chevron-down');
-      this.$icon.addClass('icon-chevron-left');
-      this.$moreOption.show().css({
-        top: this.$more.position().top,
-        right: 37,
-        position: 'absolute',
-        background: '#fff',
-        width: '100%',
-        textAlign: 'right',
-        "padding-bottom": 2
-      });
-    }
-    $(window).one('click', function () {
-      $('.moreOption').hide();
-      $('.btn-more').find('i').removeClass('icon-chevron-left');
-      $('.btn-more').find('i').addClass('icon-chevron-down');
-    });
   },
   /**
    * 单个字段保存
@@ -503,41 +479,41 @@ var BaseItem = SuperView.extend({
    * @author wyj 14.11.16
    * @example
    *        this._editField({
-       *          title: '修改相册名称',
-       *          field: 'name',
-       *          target: '.album-name'
-       *        });
+   *          title: '修改相册名称',
+   *          field: 'name',
+   *          target: '.album-name'
+   *        });
    */
-  _editField: function (options) {
+  _editField: function(options) {
     var ctx = this;
     var $q = Est.promise;
-    app.getData('editFieldDialog') && app.getData('editFieldDialog').close();
-    return new $q(function (resolve, reject) {
+    if (app.getData('editFieldDialog'))
+      app.getData('editFieldDialog').close();
+    return new $q(function(resolve, reject) {
       //context.model.fetch();
-      seajs.use(['dialog-plus'], function (dialog) {
+      seajs.use(['dialog-plus'], function(dialog) {
         var oldName = ctx.model.attributes[options.field];
         var d = dialog({
           title: options.title || CONST.LANG.EDIT,
           content: '<div style="padding: 20px;"><input id="property-returnValue-demo" type="text" class="text" value="' + (oldName || '') + '" /></div>',
-          button: [
-            {
-              value: CONST.LANG.CONFIRM,
-              autofocus: true,
-              callback: function () {
-                var value = $('#property-returnValue-demo').val();
-                this.close(value);
-                this.remove();
-              }}
-          ]
+          button: [{
+            value: CONST.LANG.CONFIRM,
+            autofocus: true,
+            callback: function() {
+              var value = $('#property-returnValue-demo').val();
+              this.close(value);
+              this.remove();
+            }
+          }]
         });
-        d.addEventListener('close', function () {
+        d.addEventListener('close', function() {
           var obj = {};
           var val = ctx.model.previous(options.field);
           if (this.returnValue.length >= 1 && this.returnValue !== val) {
             obj.id = ctx.model.get('id');
             obj[options.field] = this.returnValue;
             ctx.model._saveField(obj, ctx, {
-              success: function (keyValue, result) {
+              success: function(keyValue, result) {
                 ctx.model.set(keyValue);
               }
             });
@@ -546,7 +522,7 @@ var BaseItem = SuperView.extend({
         });
         d.show(ctx.$(options.target || 'div').get(0));
         app.addData('editFieldDialog', d);
-      })
+      });
     });
   },
   /**
@@ -555,36 +531,49 @@ var BaseItem = SuperView.extend({
    *  @method [删除] - _del ( 删除模型类 )
    *  @author wyj 14.11.16
    */
-  _del: function (e, callback) {
-    e && e.stopImmediatePropagation();
-    debug('1.BaseItem._del');
+  _del: function(e, callback) {
+    if (e)
+      e.stopImmediatePropagation();
+    debug('1.BaseItem._del'); //debug__
     var context = this;
-    app.getData('delItemDialog') && app.getData('delItemDialog').close();
+    if (app.getData('delItemDialog')) app.getData('delItemDialog').close();
     if (context.model.get('children').length > 0) {
-      BaseUtils.initConfirm({
+      BaseUtils.confirm({
         title: CONST.LANG.TIP,
         width: 300,
         content: CONST.LANG.DEL_TIP
       });
       return;
     }
-    app.addData('delItemDialog', BaseUtils.initConfirm({
+    app.addData('delItemDialog', BaseUtils.confirm({
       title: CONST.LANG.WARM_TIP,
-      content: '<div class="item-delete-confirm">'+CONST.LANG.DEL_CONFIRM+'</div>',
+      content: '<div class="item-delete-confirm">' + CONST.LANG.DEL_CONFIRM + '</div>',
       target: e && this._getTarget(e).get(0),
-      success: function (resp) {
+      success: function(resp) {
+        if (Est.isEmpty(context.model.url())){
+          context.model.attributes.id = null;
+        }
         context.model.destroy({
           wait: true,
-          error: function (model, resp) {
+          error: function(model, resp) {
             var buttons = [];
-            buttons.push({ value: CONST.LANG.CONFIRM, callback: function () {
-              this.close();
-            }, autofocus: true });
-            BaseUtils.initDialog({ title: CONST.LANG.TIP + '：', content: resp.msg, width: 250, button: buttons });
+            buttons.push({
+              value: CONST.LANG.CONFIRM,
+              callback: function() {
+                this.close();
+              },
+              autofocus: true
+            });
+            BaseUtils.dialog({
+              title: CONST.LANG.TIP + '：',
+              content: resp.msg,
+              width: 250,
+              button: buttons
+            });
           },
-          success: function () {
+          success: function() {
             context._removeFromItems(context.model.get('dx'));
-            callback && callback.call(context);
+            if (callback) callback.call(context);
           }
         });
       }
@@ -598,11 +587,11 @@ var BaseItem = SuperView.extend({
    * @example
    *      this._removeFromItems(context.model.get('dx'));
    */
-  _removeFromItems: function (dx) {
+  _removeFromItems: function(dx) {
+    if (Est.typeOf(dx) === 'undefined') return;
     if (app.getView(this._options.viewId)) {
-      if (app.getView(this._options.viewId)._options.items) {
-        Est.removeAt(app.getView(this._options.viewId)._options.items, dx);
-      }
+      if (app.getView(this._options.viewId)._options.items)
+        app.getView(this._options.viewId)._options.items.splice(dx, 1);
       app.getView(this._options.viewId)._resetDx();
     }
   },
@@ -615,14 +604,13 @@ var BaseItem = SuperView.extend({
    *                [hideSaveBtn: 隐藏保存按钮][hideResetBtn: 隐藏重置按钮][oniframeload: 页面载入后回调]
    * @author wyj 14.11.16
    */
-  _edit: function (options) {
-    debug('1.BaseItem._edit');
+  _edit: function(options) {
+    debug('1.BaseItem._edit'); //debug__
     this._itemActive();
     options = Est.extend({}, options);
     options.detail = this._options.detail || options.detail;
     try {
-      if (!this.model.get('_isSearch') && Est.typeOf(options.detail) === 'string'
-        && options.detail.indexOf('#/') !== -1) {
+      if (!this.model.get('_isSearch') && Est.typeOf(options.detail) === 'string' && options.detail.indexOf('#/') !== -1) {
         this._navigate(options.detail + '/' + (this._options.encodeUrl ? Est.encodeId(this.model.get('id')) : this.model.get('id')), true);
       } else if (this.model.get('_isSearch') && options.detail.indexOf('#/') !== -1) {
         // 如果是搜索结果列表时， 新建一个窗口
@@ -636,14 +624,12 @@ var BaseItem = SuperView.extend({
           width: 1000, // 对话框宽度
           height: 'auto', // 对话框高度
           skin: 'form-horizontal', // className
-          onShow: function () {
-          }, // 对话框弹出后调用
-          onClose: function () {
-          }
+          onShow: function() {}, // 对话框弹出后调用
+          onClose: function() {}
         }, this);
       }
     } catch (e) {
-      debug('Error24' + e);
+      debug('Error24' + e); //debug__
     }
   }
 });

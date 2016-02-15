@@ -140,7 +140,7 @@ var SuperView = Backbone.View.extend({
         app.getDialogs().pop();
       }
     });
-    BaseUtils.initDialog(options);
+    BaseUtils.dialog(options);
   },
   /**
    * 单个模型字段绑定
@@ -235,7 +235,7 @@ var SuperView = Backbone.View.extend({
    *      this._viewReplace('#model-name', this.model);
    */
   _viewReplace: function (selector, model, callback) {
-    debug('_viewReplace selector: ' + selector);
+    debug('_viewReplace selector: ' + selector);//debug__
     var result = callback && callback.call(this, model);
     if (Est.typeOf(result) !== 'undefined' && !result) return;
     Est.each(selector.split(','), Est.proxy(function (item) {
@@ -272,7 +272,7 @@ var SuperView = Backbone.View.extend({
       if (!_self._options.modelBind) _self._modelBind(item);
       if (modelId in temp_obj) return;
       _self.model.on('change:' + (temp_obj[modelId] = modelId.split('.')[0]), function () {
-        if (item === '#' + window._singleBindId)
+        if (Est.typeOf(window._singleBindId) === 'undefined' || item === '#' + window._singleBindId)
           _self._viewReplace(selector, _self.model, callback);
       });
     });
@@ -464,7 +464,7 @@ var SuperView = Backbone.View.extend({
         else  callback && callback.call(this);
       }
     } catch (e) {
-      debug('SuperView._one ' + JSON.stringify(name), {type: 'alert'});
+      debug('SuperView._one ' + JSON.stringify(name), {type: 'alert'});//debug__
     }
   },
   /**
@@ -512,7 +512,7 @@ var SuperView = Backbone.View.extend({
       var title = $(this).attr('data-title') || $(this).attr('title');
       var offset = $(this).attr('data-offset') || 0;
       if (Est.isEmpty(title))return;
-      BaseUtils.initDialog({
+      BaseUtils.dialog({
         id: Est.hash(title || 'error:446'),
         title: null,
         width: 'auto',

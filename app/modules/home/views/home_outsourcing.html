@@ -1,0 +1,832 @@
+<style>
+    .home-area-box{
+        position: absolute;
+        background-color: #fff;
+        cursor: default;
+        width: 460px;
+        top: 35px;
+        border:1px solid #cacaca;
+        border-radius: 0;
+        box-shadow: none;}
+    .area-province-div{float:left}
+
+    .home-area-box li {
+        list-style: inherit;
+        border-top: solid 1px #f1f1f1;
+        padding: 10px 0 10px 5px;clear:both
+    }
+    .home-area-box li  a{ color: #888;color: #888;
+        float: left;
+        display: inline;
+        height: 30px;
+        width: 70px;
+        padding: 0 10px 0 10px;}
+    .home-area-box li  a:hover{color: #7ec1eb;}
+
+
+    .sm-filter-area-citys{
+        position: absolute;
+        overflow: hidden;
+        -webkit-transition: all .3s ease 0s;
+        -moz-transition: all .3s ease 0s;
+        -o-transition: all .3s ease 0s;
+        transition: all .3s ease 0s;
+        background: #f5f5f5;
+        border: solid 1px #e8e8e8;
+        padding: 9px 0 9px 5px;
+        box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        z-index: 5;
+        left: 89px;
+        top: 116px;
+        width: 183px;
+    }
+    .area-province-city2 .sm-filter-area-citys{
+        left: 183px;
+    }
+    .area-province-city3 .sm-filter-area-citys{
+        left: 270px;
+    }
+    .area-province-city4 .sm-filter-area-citys{
+        left: 89px;
+    }
+    .area-province-city5 .sm-filter-area-citys{
+        left: 183px;
+    }
+    .post-city1  .sm-filter-area-citys{top: 142px;width: 89px;}
+    .post-city2  .sm-filter-area-citys{top: 142px;}
+    .post-city3  .sm-filter-area-citys{top: 171px;}
+    .post-city4  .sm-filter-area-citys{left: 180px;top: 202px;width: 89px;}
+    .post-city5  .sm-filter-area-citys{left: 264px;top: 232px;width: 89px;}
+
+    .lately{float:left;    font-size: 14px;
+        padding: 0 0 0 28px;}
+    .title-h2 {
+        font-family: "Microsoft YaHei";
+        font-size: 20px;
+        color: #666;
+        font-weight: normal;
+        padding: 30px 0 20px 0;
+        text-align: center;
+    }
+    .mobile-main-inner {
+    margin: 20px auto;
+    height: auto;
+    width: 1120px;
+    background: #fff;
+    min-height: 800px;
+    padding: 10px 40px;
+    overflow: hidden;
+}
+.float-left {
+    float: left;
+}
+</style>
+
+<div class="mobile-main-inner">
+  <h2 class="title-h2">设计外包商</h2>
+  <section class="section home-select" style="overflow: visible;z-index: 2;line-height: 32px">
+        <div style="display: none">
+            <a href="javascript:;" class="section-select active">综合排序</a>
+            <a href="javascript:;" class="section-select posit">成交量</a>
+            <a href="javascript:;" class="section-select posits">价格</a>
+            <a href="javascript:;" class="section-select posits">最新</a>
+            <a href="javascript:;" class="section-select posit">评价数</a>
+            <div class="float-left"  style="width: 240px;">
+                ￥ <input type="text" class=""> 至
+                <select class="">
+                    <option value="">20</option>
+                    <option value="">50</option>
+                    <option value="">100</option>
+                    <option value="">500</option>
+                    <option value="">1000</option>
+                    <option value="">10000</option>
+                </select>
+                <div style="position: absolute"></div>
+            </div>
+        </div>
+        <a href="#address-info" class="lately">离我最近的服务商</a>
+        <div class="float-left">
+            <div class="inp-a"><img src="styles/img/home/outsourcing-address.jpg">选择地区
+                <div style="display: none" class="home-area-box">
+                    <ul>
+                        <li class="area-province" style="border-top:none"><div><a href="#address-info">所有地区</a></div></li>
+                        <li class="area-province">
+                            <a class="area-province-mixlink " href="#address-info"  title="江苏,浙江,上海">江浙沪</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="山东,江苏,安徽,浙江,福建,上海">华东区</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="广东,广西,海南">华南区</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="湖北,湖南,河南,江西">华中区</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="北京,天津,河北,山西,内蒙古">华北区</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="海外">海外</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="北京">北京</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="上海">上海</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="天津">天津</a>
+                            <a class="area-province-mixlink " href="#address-info"  title="重庆">重庆</a>
+                        </li>
+                        <li class="area-province">
+                            <div class="area-province-div">
+                                <a class="area-province-link " href="#address-info" title="广东">广东</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="广东">广州</a>
+                                    <a class="area-city-link " href="#address-info"  title="深圳">深圳</a>
+                                    <a class="area-city-link " href="#address-info"  title="珠海">珠海</a>
+                                    <a class="area-city-link " href="#address-info"  title="潮州">潮州</a>
+                                    <a class="area-city-link " href="#address-info"  title="中山">中山</a>
+                                    <a class="area-city-link " href="#address-info"  title="东莞">东莞</a>
+                                    <a class="area-city-link " href="#address-info"  title="佛山">佛山</a>
+                                    <a class="area-city-link " href="#address-info"  title="惠州">惠州</a>
+                                    <a class="area-city-link " href="#address-info"  title="汕头">汕头</a>
+                                    <a class="area-city-link " href="#address-info"  title="汕尾">汕尾</a>
+                                    <a class="area-city-link " href="#address-info"  title="韶关">韶关</a>
+                                    <a class="area-city-link " href="#address-info"  title="湛江">湛江</a>
+                                    <a class="area-city-link " href="#address-info"  title="肇庆">肇庆</a>
+                                    <a class="area-city-link " href="#address-info"  title="河源">河源</a>
+                                    <a class="area-city-link " href="#address-info"  title="江门">江门</a>
+                                    <a class="area-city-link " href="#address-info"  title="揭阳">揭阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="茂名">茂名</a>
+                                    <a class="area-city-link " href="#address-info"  title="梅州">梅州</a>
+                                    <a class="area-city-link " href="#address-info"  title="清远">清远</a>
+                                    <a class="area-city-link " href="#address-info"  title="阳江">阳江</a>
+                                    <a class="area-city-link " href="#address-info"  title="云浮">云浮</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city2">
+                                <a class="area-province-link " href="#address-info" title="浙江">浙江</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="杭州">杭州</a>
+                                    <a class="area-city-link " href="#address-info"  title="宁波">宁波</a>
+                                    <a class="area-city-link " href="#address-info"  title="温州">温州</a>
+                                    <a class="area-city-link " href="#address-info"  title="绍兴">绍兴</a>
+                                    <a class="area-city-link " href="#address-info"  title="台州">台州</a>
+                                    <a class="area-city-link " href="#address-info"  title="嘉兴">嘉兴</a>
+                                    <a class="area-city-link " href="#address-info"  title="金华">金华</a>
+                                    <a class="area-city-link " href="#address-info"  title="丽水">丽水</a>
+                                    <a class="area-city-link " href="#address-info"  title="湖州">湖州</a>
+                                    <a class="area-city-link " href="#address-info"  title="衢州">衢州</a>
+                                    <a class="area-city-link " href="#address-info"  title="舟山">舟山</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city3">
+                                <a class="area-province-link " href="#address-info" title="江苏">江苏</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="南京">南京</a>
+                                    <a class="area-city-link " href="#address-info"  title="苏州">苏州</a>
+                                    <a class="area-city-link " href="#address-info"  title="无锡">无锡</a>
+                                    <a class="area-city-link " href="#address-info"  title="常州">常州</a>
+                                    <a class="area-city-link " href="#address-info"  title="淮安">淮安</a>
+                                    <a class="area-city-link " href="#address-info"  title="镇江">镇江</a>
+                                    <a class="area-city-link " href="#address-info"  title="扬州">扬州</a>
+                                    <a class="area-city-link " href="#address-info"  title="徐州">徐州</a>
+                                    <a class="area-city-link " href="#address-info"  title="连云港">连云港</a>
+                                    <a class="area-city-link " href="#address-info"  title="南通">南通</a>
+                                    <a class="area-city-link " href="#address-info"  title="宿迁">宿迁</a>
+                                    <a class="area-city-link " href="#address-info"  title="泰州">泰州</a>
+                                    <a class="area-city-link " href="#address-info"  title="盐城">盐城</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city4">
+                                <a class="area-province-link " href="#address-info" title="山东">山东</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="济南">济南</a>
+                                    <a class="area-city-link " href="#address-info"  title="青岛">青岛</a>
+                                    <a class="area-city-link " href="#address-info"  title="烟台">烟台</a>
+                                    <a class="area-city-link " href="#address-info"  title="济宁">济宁</a>
+                                    <a class="area-city-link " href="#address-info"  title="滨州">滨州</a>
+                                    <a class="area-city-link " href="#address-info"  title="莱芜">莱芜</a>
+                                    <a class="area-city-link " href="#address-info"  title="日照">日照</a>
+                                    <a class="area-city-link " href="#address-info"  title="潍坊">潍坊</a>
+                                    <a class="area-city-link " href="#address-info"  title="淄博">淄博</a>
+                                    <a class="area-city-link " href="#address-info"  title="德州">德州</a>
+                                    <a class="area-city-link " href="#address-info"  title="威海">威海</a>
+                                    <a class="area-city-link " href="#address-info"  title="东营">东营</a>
+                                    <a class="area-city-link " href="#address-info"  title="菏泽">菏泽</a>
+                                    <a class="area-city-link " href="#address-info"  title="聊城">聊城</a>
+                                    <a class="area-city-link " href="#address-info"  title="临沂">临沂</a>
+                                    <a class="area-city-link " href="#address-info"  title="泰安">泰安</a>
+                                    <a class="area-city-link " href="#address-info"  title="枣庄">枣庄</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city5">
+                                <a class="area-province-link " href="#address-info" title="河北">河北</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="石家庄">石家庄</a>
+                                    <a class="area-city-link " href="#address-info"  title="保定">保定</a>
+                                    <a class="area-city-link " href="#address-info"  title="沧州">沧州</a>
+                                    <a class="area-city-link " href="#address-info"  title="秦皇岛">秦皇岛</a>
+                                    <a class="area-city-link " href="#address-info"  title="承德">承德</a>
+                                    <a class="area-city-link " href="#address-info"  title="邯郸">邯郸</a>
+                                    <a class="area-city-link " href="#address-info"  title="唐山">唐山</a>
+                                    <a class="area-city-link " href="#address-info"  title="邢台">邢台</a>
+                                    <a class="area-city-link " href="#address-info"  title="廊坊">廊坊</a>
+                                    <a class="area-city-link " href="#address-info"  title="衡水">衡水</a>
+                                    <a class="area-city-link " href="#address-info"  title="张家口">张家口</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div">
+                                <a class="area-province-link " href="#address-info" title="河南">河南</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="郑州">郑州</a>
+                                    <a class="area-city-link " href="#address-info"  title="洛阳">洛阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="开封">开封</a>
+                                    <a class="area-city-link " href="#address-info"  title="焦作">焦作</a>
+                                    <a class="area-city-link " href="#address-info"  title="安阳">安阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="南阳">南阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="周口">周口</a>
+                                    <a class="area-city-link " href="#address-info"  title="商丘">商丘</a>
+                                    <a class="area-city-link " href="#address-info"  title="新乡">新乡</a>
+                                    <a class="area-city-link " href="#address-info"  title="鹤壁">鹤壁</a>
+                                    <a class="area-city-link " href="#address-info"  title="平顶山">平顶山</a>
+                                    <a class="area-city-link " href="#address-info"  title="三门峡">三门峡</a>
+                                    <a class="area-city-link " href="#address-info"  title="信阳">信阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="许昌">许昌</a>
+                                    <a class="area-city-link " href="#address-info"  title="驻马店">驻马店</a>
+                                    <a class="area-city-link " href="#address-info"  title="漯河">漯河</a>
+                                    <a class="area-city-link " href="#address-info"  title="濮阳">濮阳</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city2">
+                                <a class="area-province-link " href="#address-info" title="福建">福建</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="福州">福州</a>
+                                    <a class="area-city-link " href="#address-info"  title="厦门">厦门</a>
+                                    <a class="area-city-link " href="#address-info"  title="泉州">泉州</a>
+                                    <a class="area-city-link " href="#address-info"  title="漳州">漳州</a>
+                                    <a class="area-city-link " href="#address-info"  title="龙岩">龙岩</a>
+                                    <a class="area-city-link " href="#address-info"  title="南平">南平</a>
+                                    <a class="area-city-link " href="#address-info"  title="宁德">宁德</a>
+                                    <a class="area-city-link " href="#address-info"  title="莆田">莆田</a>
+                                    <a class="area-city-link " href="#address-info"  title="三明">三明</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city3">
+                                <a class="area-province-link " href="#address-info" title="辽宁">辽宁</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="沈阳">沈阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="大连">大连</a>
+                                    <a class="area-city-link " href="#address-info"  title="鞍山">鞍山</a>
+                                    <a class="area-city-link " href="#address-info"  title="丹东">丹东</a>
+                                    <a class="area-city-link " href="#address-info"  title="抚顺">抚顺</a>
+                                    <a class="area-city-link " href="#address-info"  title="本溪">本溪</a>
+                                    <a class="area-city-link " href="#address-info"  title="朝阳">朝阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="铁岭">铁岭</a>
+                                    <a class="area-city-link " href="#address-info"  title="锦州">锦州</a>
+                                    <a class="area-city-link " href="#address-info"  title="辽阳">辽阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="阜新">阜新</a>
+                                    <a class="area-city-link " href="#address-info"  title="葫芦岛">葫芦岛</a>
+                                    <a class="area-city-link " href="#address-info"  title="盘锦">盘锦</a>
+                                    <a class="area-city-link " href="#address-info"  title="营口">营口</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city4">
+                                <a class="area-province-link " href="#address-info" title="安徽">安徽</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="合肥">合肥</a>
+                                    <a class="area-city-link " href="#address-info"  title="芜湖">芜湖</a>
+                                    <a class="area-city-link " href="#address-info"  title="马鞍山">马鞍山</a>
+                                    <a class="area-city-link " href="#address-info"  title="淮南">淮南</a>
+                                    <a class="area-city-link " href="#address-info"  title="蚌埠">蚌埠</a>
+                                    <a class="area-city-link " href="#address-info"  title="黄山">黄山</a>
+                                    <a class="area-city-link " href="#address-info"  title="阜阳">阜阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="淮北">淮北</a>
+                                    <a class="area-city-link " href="#address-info"  title="铜陵">铜陵</a>
+                                    <a class="area-city-link " href="#address-info"  title="亳州">亳州</a>
+                                    <a class="area-city-link " href="#address-info"  title="宣城">宣城</a>
+                                    <a class="area-city-link " href="#address-info"  title="安庆">安庆</a>
+                                    <a class="area-city-link " href="#address-info"  title="巢湖">巢湖</a>
+                                    <a class="area-city-link " href="#address-info"  title="池州">池州</a>
+                                    <a class="area-city-link " href="#address-info"  title="六安">六安</a>
+                                    <a class="area-city-link " href="#address-info"  title="滁州">滁州</a>
+                                    <a class="area-city-link " href="#address-info"  title="宿州">宿州</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city5">
+                                <a class="area-province-link " href="#address-info" title="广西">广西</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="南宁">南宁</a>
+                                    <a class="area-city-link " href="#address-info"  title="桂林">桂林</a>
+                                    <a class="area-city-link " href="#address-info"  title="北海">北海</a>
+                                    <a class="area-city-link " href="#address-info"  title="柳州">柳州</a>
+                                    <a class="area-city-link " href="#address-info"  title="梧州">梧州</a>
+                                    <a class="area-city-link " href="#address-info"  title="玉林">玉林</a>
+                                    <a class="area-city-link " href="#address-info"  title="百色">百色</a>
+                                    <a class="area-city-link " href="#address-info"  title="崇左">崇左</a>
+                                    <a class="area-city-link " href="#address-info"  title="贵港">贵港</a>
+                                    <a class="area-city-link " href="#address-info"  title="河池">河池</a>
+                                    <a class="area-city-link " href="#address-info"  title="贺州">贺州</a>
+                                    <a class="area-city-link " href="#address-info"  title="来宾">来宾</a>
+                                    <a class="area-city-link " href="#address-info"  title="防城港">防城港</a>
+                                    <a class="area-city-link " href="#address-info"  title="钦州">钦州</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div">
+                                <a class="area-province-link " href="#address-info" title="山西">山西</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="太原">太原</a>
+                                    <a class="area-city-link " href="#address-info"  title="大同">大同</a>
+                                    <a class="area-city-link " href="#address-info"  title="晋城">晋城</a>
+                                    <a class="area-city-link " href="#address-info"  title="晋中">晋中</a>
+                                    <a class="area-city-link " href="#address-info"  title="临汾">临汾</a>
+                                    <a class="area-city-link " href="#address-info"  title="吕梁">吕梁</a>
+                                    <a class="area-city-link " href="#address-info"  title="朔州">朔州</a>
+                                    <a class="area-city-link " href="#address-info"  title="长治">长治</a>
+                                    <a class="area-city-link " href="#address-info"  title="忻州">忻州</a>
+                                    <a class="area-city-link " href="#address-info"  title="阳泉">阳泉</a>
+                                    <a class="area-city-link " href="#address-info"  title="运城">运城</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city2">
+                                <a class="area-province-link " href="#address-info" title="海南">海南</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="海口">海口</a>
+                                    <a class="area-city-link " href="#address-info"  title="三亚">三亚</a>
+                                    <a class="area-city-link " href="#address-info"  title="琼海">琼海</a>
+                                    <a class="area-city-link " href="#address-info"  title="东方">东方</a>
+                                    <a class="area-city-link " href="#address-info"  title="儋州">儋州</a>
+                                    <a class="area-city-link " href="#address-info"  title="万宁">万宁</a>
+                                    <a class="area-city-link " href="#address-info"  title="文昌">文昌</a>
+                                    <a class="area-city-link " href="#address-info"  title="定安县">定安县</a>
+                                    <a class="area-city-link " href="#address-info"  title="五指山">五指山</a>
+                                    <a class="area-city-link " href="#address-info"  title="屯昌县">屯昌县</a>
+                                    <a class="area-city-link " href="#address-info"  title="澄迈县">澄迈县</a>
+                                    <a class="area-city-link " href="#address-info"  title="临高县">临高县</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city3">
+                                <a class="area-province-link " href="#address-info" title="内蒙古">内蒙古</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="呼和浩特">呼和浩特</a>
+                                    <a class="area-city-link " href="#address-info"  title="包头">包头</a>
+                                    <a class="area-city-link " href="#address-info"  title="赤峰">赤峰</a>
+                                    <a class="area-city-link " href="#address-info"  title="鄂尔多斯">鄂尔多斯</a>
+                                    <a class="area-city-link " href="#address-info"  title="呼伦贝尔">呼伦贝尔</a>
+                                    <a class="area-city-link " href="#address-info"  title="阿拉善盟">阿拉善盟</a>
+                                    <a class="area-city-link " href="#address-info"  title="通辽">通辽</a>
+                                    <a class="area-city-link " href="#address-info"  title="乌海">乌海</a>
+                                    <a class="area-city-link " href="#address-info"  title="兴安盟">兴安盟</a>
+                                    <a class="area-city-link " href="#address-info"  title="乌兰察布">乌兰察布</a>
+                                    <a class="area-city-link " href="#address-info"  title="锡林郭勒">锡林郭勒</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city4">
+                                <a class="area-province-link " href="#address-info" title="吉林">吉林</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="长春">长春</a>
+                                    <a class="area-city-link " href="#address-info"  title="吉林">吉林</a>
+                                    <a class="area-city-link " href="#address-info"  title="四平">四平</a>
+                                    <a class="area-city-link " href="#address-info"  title="通化">通化</a>
+                                    <a class="area-city-link " href="#address-info"  title="白城">白城</a>
+                                    <a class="area-city-link " href="#address-info"  title="白山">白山</a>
+                                    <a class="area-city-link " href="#address-info"  title="辽源">辽源</a>
+                                    <a class="area-city-link " href="#address-info"  title="松原">松原</a>
+                                    <a class="area-city-link " href="#address-info"  title="延边朝鲜">延边朝鲜</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city5">
+                                <a class="area-province-link " href="#address-info" title="黑龙江">黑龙江</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="哈尔滨">哈尔滨</a>
+                                    <a class="area-city-link " href="#address-info"  title="大庆">大庆</a>
+                                    <a class="area-city-link " href="#address-info"  title="佳木斯">佳木斯</a>
+                                    <a class="area-city-link " href="#address-info"  title="鹤岗">鹤岗</a>
+                                    <a class="area-city-link " href="#address-info"  title="牡丹江">牡丹江</a>
+                                    <a class="area-city-link " href="#address-info"  title="黑河">黑河</a>
+                                    <a class="area-city-link " href="#address-info"  title="鸡西">鸡西</a>
+                                    <a class="area-city-link " href="#address-info"  title="七台河">七台河</a>
+                                    <a class="area-city-link " href="#address-info"  title="齐齐哈尔">齐齐哈尔</a>
+                                    <a class="area-city-link " href="#address-info"  title="双鸭山">双鸭山</a>
+                                    <a class="area-city-link " href="#address-info"  title="绥化">绥化</a>
+                                    <a class="area-city-link " href="#address-info"  title="伊春">伊春</a>
+                                    <a class="area-city-link " href="#address-info"  title="大兴安岭">大兴安岭</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div">
+                                <a class="area-province-link " href="#address-info" title="湖北">湖北</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="武汉">武汉</a>
+                                    <a class="area-city-link " href="#address-info"  title="黄冈">黄冈</a>
+                                    <a class="area-city-link " href="#address-info"  title="黄石">黄石</a>
+                                    <a class="area-city-link " href="#address-info"  title="荆门">荆门</a>
+                                    <a class="area-city-link " href="#address-info"  title="荆州">荆州</a>
+                                    <a class="area-city-link " href="#address-info"  title="潜江">潜江</a>
+                                    <a class="area-city-link " href="#address-info"  title="宜昌">宜昌</a>
+                                    <a class="area-city-link " href="#address-info"  title="鄂州">鄂州</a>
+                                    <a class="area-city-link " href="#address-info"  title="十堰">十堰</a>
+                                    <a class="area-city-link " href="#address-info"  title="随州">随州</a>
+                                    <a class="area-city-link " href="#address-info"  title="天门">天门</a>
+                                    <a class="area-city-link " href="#address-info"  title="仙桃">仙桃</a>
+                                    <a class="area-city-link " href="#address-info"  title="咸宁">咸宁</a>
+                                    <a class="area-city-link " href="#address-info"  title="襄樊">襄樊</a>
+                                    <a class="area-city-link " href="#address-info"  title="孝感">孝感</a>
+                                    <a class="area-city-link " href="#address-info"  title="神农架林">神农架林</a>
+                                    <a class="area-city-link " href="#address-info"  title="恩施土家">恩施土家</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city2">
+                                <a class="area-province-link " href="#address-info" title="湖南">湖南</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="长沙">长沙</a>
+                                    <a class="area-city-link " href="#address-info"  title="常德">常德</a>
+                                    <a class="area-city-link " href="#address-info"  title="株洲">株洲</a>
+                                    <a class="area-city-link " href="#address-info"  title="岳阳">岳阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="郴州">郴州</a>
+                                    <a class="area-city-link " href="#address-info"  title="怀化">怀化</a>
+                                    <a class="area-city-link " href="#address-info"  title="湘潭">湘潭</a>
+                                    <a class="area-city-link " href="#address-info"  title="张家界">张家界</a>
+                                    <a class="area-city-link " href="#address-info"  title="衡阳">衡阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="娄底">娄底</a>
+                                    <a class="area-city-link " href="#address-info"  title="邵阳">邵阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="益阳">益阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="永州">永州</a>
+                                    <a class="area-city-link " href="#address-info"  title="湘西土家">湘西土家</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city3">
+                                <a class="area-province-link " href="#address-info" title="江西">江西</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="南昌">南昌</a>
+                                    <a class="area-city-link " href="#address-info"  title="上饶">上饶</a>
+                                    <a class="area-city-link " href="#address-info"  title="抚州">抚州</a>
+                                    <a class="area-city-link " href="#address-info"  title="赣州">赣州</a>
+                                    <a class="area-city-link " href="#address-info"  title="九江">九江</a>
+                                    <a class="area-city-link " href="#address-info"  title="鹰潭">鹰潭</a>
+                                    <a class="area-city-link " href="#address-info"  title="吉安">吉安</a>
+                                    <a class="area-city-link " href="#address-info"  title="景德镇">景德镇</a>
+                                    <a class="area-city-link " href="#address-info"  title="萍乡">萍乡</a>
+                                    <a class="area-city-link " href="#address-info"  title="新余">新余</a>
+                                    <a class="area-city-link " href="#address-info"  title="宜春">宜春</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city4">
+                                <a class="area-province-link " href="#address-info" title="宁夏">宁夏</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="银川">银川</a>
+                                    <a class="area-city-link " href="#address-info"  title="固原">固原</a>
+                                    <a class="area-city-link " href="#address-info"  title="石嘴山">石嘴山</a>
+                                    <a class="area-city-link " href="#address-info"  title="吴忠">吴忠</a>
+                                    <a class="area-city-link " href="#address-info"  title="中卫">中卫</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city5">
+                                <a class="area-province-link " href="#address-info" title="新疆">新疆</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="乌鲁木齐">乌鲁木齐</a>
+                                    <a class="area-city-link " href="#address-info"  title="哈密">哈密</a>
+                                    <a class="area-city-link " href="#address-info"  title="和田">和田</a>
+                                    <a class="area-city-link " href="#address-info"  title="喀什">喀什</a>
+                                    <a class="area-city-link " href="#address-info"  title="吐鲁番">吐鲁番</a>
+                                    <a class="area-city-link " href="#address-info"  title="阿克苏">阿克苏</a>
+                                    <a class="area-city-link " href="#address-info"  title="阿拉尔">阿拉尔</a>
+                                    <a class="area-city-link " href="#address-info"  title="石河子">石河子</a>
+                                    <a class="area-city-link " href="#address-info"  title="五家渠">五家渠</a>
+                                    <a class="area-city-link " href="#address-info"  title="克拉玛依">克拉玛依</a>
+                                    <a class="area-city-link " href="#address-info"  title="克拉玛依">克拉玛依</a>
+                                    <a class="area-city-link " href="#address-info"  title="图木舒克">图木舒克</a>
+                                    <a class="area-city-link " href="#address-info"  title="昌吉回族">昌吉回族</a>
+                                    <a class="area-city-link " href="#address-info"  title="伊犁哈萨">伊犁哈萨</a>
+                                    <a class="area-city-link " href="#address-info"  title="巴音郭楞">巴音郭楞</a>
+                                    <a class="area-city-link " href="#address-info"  title="博尔塔拉">博尔塔拉</a>
+                                    <a class="area-city-link " href="#address-info"  title="克孜勒苏">克孜勒苏</a>
+                                    <a class="area-city-link " href="#address-info"  title="塔城地区">塔城地区</a>
+                                    <a class="area-city-link " href="#address-info"  title="阿勒泰地">阿勒泰地</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div post-city1">
+                                <a class="area-province-link " href="#address-info" title="青海">青海</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="西宁">西宁</a>
+                                    <a class="area-city-link " href="#address-info"  title="海东">海东</a>
+                                    <a class="area-city-link " href="#address-info"  title="果洛藏族">藏族</a>
+                                    <a class="area-city-link " href="#address-info"  title="海北藏族">海西蒙古</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city2">
+                                <a class="area-province-link " href="#address-info" title="陕西">陕西</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="西安">西安</a>
+                                    <a class="area-city-link " href="#address-info"  title="咸阳">咸阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="汉中">汉中</a>
+                                    <a class="area-city-link " href="#address-info"  title="安康">安康</a>
+                                    <a class="area-city-link " href="#address-info"  title="宝鸡">宝鸡</a>
+                                    <a class="area-city-link " href="#address-info"  title="商洛">商洛</a>
+                                    <a class="area-city-link " href="#address-info"  title="铜川">铜川</a>
+                                    <a class="area-city-link " href="#address-info"  title="渭南">渭南</a>
+                                    <a class="area-city-link " href="#address-info"  title="延安">延安</a>
+                                    <a class="area-city-link " href="#address-info"  title="榆林">榆林</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city3">
+                                <a class="area-province-link " href="#address-info" title="甘肃">甘肃</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="兰州">兰州</a>
+                                    <a class="area-city-link " href="#address-info"  title="白银">白银</a>
+                                    <a class="area-city-link " href="#address-info"  title="酒泉">酒泉</a>
+                                    <a class="area-city-link " href="#address-info"  title="定西">定西</a>
+                                    <a class="area-city-link " href="#address-info"  title="嘉峪关">嘉峪关</a>
+                                    <a class="area-city-link " href="#address-info"  title="金昌">金昌</a>
+                                    <a class="area-city-link " href="#address-info"  title="庆阳">庆阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="陇南">陇南</a>
+                                    <a class="area-city-link " href="#address-info"  title="平凉">平凉</a>
+                                    <a class="area-city-link " href="#address-info"  title="天水">天水</a>
+                                    <a class="area-city-link " href="#address-info"  title="武威">武威</a>
+                                    <a class="area-city-link " href="#address-info"  title="张掖">张掖</a>
+                                    <a class="area-city-link " href="#address-info"  title="甘南藏族">甘南藏族</a>
+                                    <a class="area-city-link " href="#address-info"  title="临夏回族">临夏回族</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city4">
+                                <a class="area-province-link " href="#address-info" title="四川">四川</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="成都">成都</a>
+                                    <a class="area-city-link " href="#address-info"  title="宜宾">宜宾</a>
+                                    <a class="area-city-link " href="#address-info"  title="绵阳">绵阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="巴中">巴中</a>
+                                    <a class="area-city-link " href="#address-info"  title="攀枝花">攀枝花</a>
+                                    <a class="area-city-link " href="#address-info"  title="达州">达州</a>
+                                    <a class="area-city-link " href="#address-info"  title="德阳">德阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="遂宁">遂宁</a>
+                                    <a class="area-city-link " href="#address-info"  title="广安">广安</a>
+                                    <a class="area-city-link " href="#address-info"  title="广元">广元</a>
+                                    <a class="area-city-link " href="#address-info"  title="乐山">乐山</a>
+                                    <a class="area-city-link " href="#address-info"  title="泸州">泸州</a>
+                                    <a class="area-city-link " href="#address-info"  title="眉山">眉山</a>
+                                    <a class="area-city-link " href="#address-info"  title="南充">南充</a>
+                                    <a class="area-city-link " href="#address-info"  title="内江">内江</a>
+                                    <a class="area-city-link " href="#address-info"  title="雅安">雅安</a>
+                                    <a class="area-city-link " href="#address-info"  title="资阳">资阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="自贡">自贡</a>
+                                    <a class="area-city-link " href="#address-info"  title="甘孜藏族">甘孜藏族</a>
+                                    <a class="area-city-link " href="#address-info"  title="凉山彝族">凉山彝族</a>
+                                    <a class="area-city-link " href="#address-info"  title="阿坝藏族">阿坝藏族</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city5">
+                                <a class="area-province-link " href="#address-info" title="云南">云南</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="昆明">昆明</a>
+                                    <a class="area-city-link " href="#address-info"  title="保山">保山</a>
+                                    <a class="area-city-link " href="#address-info"  title="丽江">丽江</a>
+                                    <a class="area-city-link " href="#address-info"  title="玉溪">玉溪</a>
+                                    <a class="area-city-link " href="#address-info"  title="昭通">昭通</a>
+                                    <a class="area-city-link " href="#address-info"  title="临沧">临沧</a>
+                                    <a class="area-city-link " href="#address-info"  title="曲靖">曲靖</a>
+                                    <a class="area-city-link " href="#address-info"  title="普洱">普洱</a>
+                                    <a class="area-city-link " href="#address-info"  title="楚雄彝族">楚雄彝族</a>
+                                    <a class="area-city-link " href="#address-info"  title="大理白族">大理白族</a>
+                                    <a class="area-city-link " href="#address-info"  title="迪庆藏族">迪庆藏族</a>
+                                    <a class="area-city-link " href="#address-info"  title="怒江傈傈">怒江傈傈</a>
+                                    <a class="area-city-link " href="#address-info"  title="文山壮族">文山壮族</a>
+                                    <a class="area-city-link " href="#address-info"  title="西双版纳">西双版纳</a>
+                                    <a class="area-city-link " href="#address-info"  title="德宏傣族">德宏傣族</a>
+                                    <a class="area-city-link " href="#address-info"  title="红河哈尼">红河哈尼</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div post-city2">
+                                <a class="area-province-link " href="#address-info" title="贵州">贵州</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="贵阳">贵阳</a>
+                                    <a class="area-city-link " href="#address-info"  title="安顺">安顺</a>
+                                    <a class="area-city-link " href="#address-info"  title="毕节">毕节</a>
+                                    <a class="area-city-link " href="#address-info"  title="铜仁">铜仁</a>
+                                    <a class="area-city-link " href="#address-info"  title="遵义">遵义</a>
+                                    <a class="area-city-link " href="#address-info"  title="六盘水">六盘水</a>
+                                    <a class="area-city-link " href="#address-info"  title="黔东南苗">黔东南苗</a>
+                                    <a class="area-city-link " href="#address-info"  title="黔南布依">黔南布依</a>
+                                    <a class="area-city-link " href="#address-info"  title="黔西南布">黔西南布</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city2 post-city3">
+                                <a class="area-province-link " href="#address-info" title="西藏">西藏</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="拉萨">拉萨</a>
+                                    <a class="area-city-link " href="#address-info"  title="阿里">阿里</a>
+                                    <a class="area-city-link " href="#address-info"  title="昌都">昌都</a>
+                                    <a class="area-city-link " href="#address-info"  title="林芝">林芝</a>
+                                    <a class="area-city-link " href="#address-info"  title="那曲">那曲</a>
+                                    <a class="area-city-link " href="#address-info"  title="日喀则">日喀则</a>
+                                    <a class="area-city-link " href="#address-info"  title="山南">山南</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city3">
+                                <a class="area-province-link " href="#address-info" title="台湾">台湾</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="台北县">台北县</a>
+                                    <a class="area-city-link " href="#address-info"  title="宜兰县">宜兰县</a>
+                                    <a class="area-city-link " href="#address-info"  title="桃园县">桃园县</a>
+                                    <a class="area-city-link " href="#address-info"  title="新竹县">新竹县</a>
+                                    <a class="area-city-link " href="#address-info"  title="苗栗县">苗栗县</a>
+                                    <a class="area-city-link " href="#address-info"  title="台中县">台中县</a>
+                                    <a class="area-city-link " href="#address-info"  title="彰化县">彰化县</a>
+                                    <a class="area-city-link " href="#address-info"  title="南投县">南投县</a>
+                                    <a class="area-city-link " href="#address-info"  title="云林县">云林县</a>
+                                    <a class="area-city-link " href="#address-info"  title="嘉义县">嘉义县</a>
+                                    <a class="area-city-link " href="#address-info"  title="台南县">台南县</a>
+                                    <a class="area-city-link " href="#address-info"  title="高雄县">高雄县</a>
+                                    <a class="area-city-link " href="#address-info"  title="屏东县">屏东县</a>
+                                    <a class="area-city-link " href="#address-info"  title="台东县">台东县</a>
+                                    <a class="area-city-link " href="#address-info"  title="花莲县">花莲县</a>
+                                    <a class="area-city-link " href="#address-info"  title="澎湖县">澎湖县</a>
+                                    <a class="area-city-link " href="#address-info"  title="基隆市">基隆市</a>
+                                    <a class="area-city-link " href="#address-info"  title="新竹市">新竹市</a>
+                                    <a class="area-city-link " href="#address-info"  title="台中市">台中市</a>
+                                    <a class="area-city-link " href="#address-info"  title="台北市">台北市</a>
+                                    <a class="area-city-link " href="#address-info"  title="高雄市">高雄市</a>
+                                    <a class="area-city-link " href="#address-info"  title="金门县">金门县</a>
+                                    <a class="area-city-link " href="#address-info"  title="连江县">连江县</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city4 post-city4">
+                                <a class="area-province-link " href="#address-info" title="香港">香港</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="香港岛">香港岛</a>
+                                    <a class="area-city-link " href="#address-info"  title="九龙">九龙</a>
+                                    <a class="area-city-link " href="#address-info"  title="新界">新界</a>
+                                </div>
+                            </div>
+                            <div class="area-province-div area-province-city5 post-city5">
+                                <a class="area-province-link " href="#address-info" title="澳门">澳门</a>
+                                <div class="sm-filter-area-citys" style="display: none;">
+                                    <a class="area-city-link " href="#address-info"  title="澳门半岛">澳门半岛</a>
+                                    <a class="area-city-link " href="#address-info"  title="澳门离岛">澳门离岛</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!--<div class="bui-bar-item">
+            <input type="text" class="control-text search-query search-text" placeholder="请输入关键字">
+            <span class="btn-search"></span>
+        </div>-->
+    </section>
+    <section class="section clear" id="address-info">
+        <div class="outsource-address">
+            <p>
+                <span class="outsource-address-title">机汇网（全网营销O2O系统提供商）</span><br>
+                地址：浙江省杭州市文三路中小企业大厦1402室<br>
+                电话：0571-89988034<br>
+                QQ：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=455107814&site=qq&menu=yes">455107814</a>
+            </p>
+            <p>
+                <span class="outsource-address-title">机汇网广州分公司</span><br>
+                地址：广州市白云区鹤联街8立方创意产业园A2栋222-223<br>
+                电话：020-29170871<br>
+                QQ：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1153509586&site=qq&menu=yes">1153509586</a>
+            </p>
+            <p>
+                <span class="outsource-address-title">机汇网义乌分公司</span><br>
+                地址：义乌财富大厦B座1008／1009/1002<br>
+                电话：0579-89922008<br>
+                传真：0579-89922018<br>
+                手机：18257007013<br>
+                QQ：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=976953374&site=qq&menu=yes">976953374</a>
+            </p>
+            <p>
+                <span class="outsource-address-title">机汇网宁波分公司</span><br>
+                地址：宁波市江东区中山东路455号东海曙光大厦18A3<br>
+                手机：13056756888<br>
+                邮箱：yujie5909400@126.com<br>
+                QQ：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=345040079&site=qq&menu=yes">345040079</a>
+            </p>
+            <p>
+                <span class="outsource-address-title">机汇网丽水分公司</span><br>
+                地址：地址：丽水市水阁电子商务创业园5楼5B4<br>
+                手机：15606788899<br>
+                电话：0578-2022858<br>
+            </p>
+            <p>
+                <span class="outsource-address-title">东方五金网（专业营销型网站、微官网、微传单制作）</span><br>
+                地址：浙江永康市总部中心金山大厦21楼<br>
+                电话：0579-88026858<br>
+                QQ：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2961844869&site=qq&menu=yes">2961844869</a>
+            <p>
+                <span class="outsource-address-title">上门网（中国门行业领先垂直门户）</span><br>
+                地址：浙江省永康市总部中心<br>
+                电话：0579-88050958<br>
+                QQ：<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=1045546563&site=qq&menu=yes">1045546563</a>
+            </p>
+            <p>
+                <span class="outsource-address-title">菁睿信息（中国国际商会商业行业新媒体营销人才培养项目办公室）</span><br>
+                地址：上海市浦东新区惠南镇观海路505号， 上海工商外国语学院中校区4号楼<br>
+                电话：021-54651448<br>
+                手机（杨）：13801645122
+            </p>
+        </div>
+
+
+
+        <!--<div class="listItem">
+            <div class="listItemTop" data-id="{{wcdId}}">
+                <a class="modelView model" target="_blank" style="display: none;" href="#/home_outsourcing_detail" ></a>
+                <img src="{{#compare pic '==' undefined}}http://192.168.1.109:8111/upload/g/g2/ggggfj/picture/2015/08/13/d49c2707-8aaa-4881-8f59-79344ed0b51e.png{{else}}http://www.jihui88.com/wcd/html/{{pic}}{{/compare}}"></div>
+            <div class="outsource-top">
+                <span class="top-left">￥480</span>
+                <span class="top-right">成交数量：2010</span>
+            </div>
+            <div class="outsource-center">
+                [满赠]标志设计|Logo设计|原创设计|满意为止
+            </div>
+            <div class="outsource-bottom">
+                <span class="bottom-left">琳琅品牌设计</span>
+                <a class="bottom-right" target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2594969476&site=qq&menu=yes">联系我</a>
+            </div>
+        </div>-->
+    </section>
+    <div id="mk4">
+        <div class="title">
+            <span class="fl">因微传单需求量巨大，机汇网特向社会征集<span>设计外包商！</span></span>
+        </div>
+        <div class="cont">
+            <ul>
+                <li class="mk4_left">
+                    <div class="mk4_title">设计外包商：赚钱的机汇</div>
+                    <p>1、未来是移动互联网营销的时代，每个企业、商家都需要微传单</p>
+                    <p>2、每制作一个微传单可获得平均2000元收入</p>
+                    <p>3、优秀外包商可获得更多的机汇网资源倾斜</p>
+                    <p>4、可在机汇网显示外包商联系方式</p>
+                    <p class="more"><a href="#address-info">查看现有设计外包商&gt;&gt;</a></p>
+                </li>
+                <li class="mk4_right">
+                    <div class="mk4_title">如何成为设计外包商</div>
+                    <p>1、广告公司、设计公司、网站制作公司等已有设计成果的公司</p>
+                    <p>2、有简单的图片设计能力</p>
+                    <p>3、每个市、县仅招2家外包商</p>
+                    <p class="more"><a href="http://www.jihui88.com/member/modules/register/register.html" >我要成为设计外包商&gt;&gt;</a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<style>
+    /*下面*/
+    #mk4 {padding:10px 0 56px 0;font: 12px Tahoma,Arial,Microsoft YaHei,'微软雅黑',宋体,sans-serif;}
+    #mk4 .title {height:58px;margin:0 auto;border-bottom:1px dashed #cfcfcf;line-height:58px;}
+    #mk4 .title .fl {float:left;color:#555;font-size:20px;font-weight:bold;margin:0 10px 0 0;}
+    #mk4 .title .fl span {color:#ff6600;}
+    #mk4 .cont {overflow:hidden;padding:29px 0 0 0;}
+    #mk4 .cont ul {width:873px;margin:0 auto;overflow:hidden;}
+    #mk4 .cont ul li {width:357px;float:left;}
+    #mk4 .cont ul li.mk4_right {float:right;}
+    #mk4 .cont ul li .mk4_title {height:59px;line-height:59px;font-size:25px;text-align:center;background:#ff6600;color:#fff;
+        -moz-border-radius: 2px;
+        -khtml-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -moz-border-radius-bottomleft: 2px;
+        -moz-border-radius-bottomright: 2px;
+        -khtml-border-radius: 2px;
+        -webkit-border-bottom-left-radius: 2px;
+        -webkit-border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        margin:0 0 15px 0;
+    }
+    #mk4 .cont ul li p {color:#666;font-size:15px;line-height:25px;    padding-left: 30px;
+        text-indent: -24px;
+        margin: 0 10px 10px 10px;}
+    #mk4 .cont ul li p.more {text-align:center;
+        padding-left: 0;
+        text-indent: -24px;
+        float: none;}
+    #mk4 .cont ul li p.more a {color:#ff6600;}
+    #mk4 .cont ul li p.more a:hover {color:#ff4800;}
+
+    .listItem{    width: 214px;float:left;    margin: 0 15px 24px 0;}
+    .listItemTop{border: 1px solid #e6e8e7;padding: 2px 5px;margin:0;    height: 208px;}
+    .listItemTop img {width: 204px;}
+
+    .outsource-top{    height: 30px;
+        line-height: 30px;
+        padding-top: 10px;}
+    .outsource-top .top-left{color:#f74b73;float:left;font-size:22px;    padding-left: 2px;}
+    .outsource-top .top-right{color:#666;float:right;    padding-right: 5px;}
+    .outsource-center{    color: #0074be;
+        clear: both;
+        padding: 0 10px;
+        height: 40px;
+        line-height: 20px;
+        overflow: hidden;}
+    .outsource-bottom{    height: 30px;
+        line-height: 30px;
+        padding: 2px 7px;}
+    .outsource-bottom .bottom-left{color:#666;float:left}
+    .outsource-bottom .bottom-right{color:#666;float:right;border-bottom:1px solid #d1d1d1;background:#ececec;display:block;padding:0 9px;
+        height: 24px;cursor: pointer;
+        line-height: 24px;
+        margin-top: 3px;}
+    .outsource-bottom .bottom-right:hover{text-decoration: underline}
+
+
+    .home-select a.section-select{float:left}
+    .home-select .section-select{padding:0 29px 0 0;margin-top: 5px;}
+    .home-select .float-left input{width:28px;border:1px solid #ccc;padding:2px 12px;border-radius:1px}
+    .home-select .float-left select{width:70px;padding:2px 12px;border:1px solid #ccc;border-radius:1px;    height: 26px;}
+    .home-select .inp-a{margin-left:5px;padding-left:7px;color:#666;    float: right;
+        cursor: pointer;}
+    .home-select .inp-a img{padding-right:3px}
+
+
+    .outsource-address{padding: 20px 30px;}
+    .outsource-address-title{    color: #666;}
+    .outsource-address p{line-height: 2em; color: #999;padding-bottom: 10px}
+</style>

@@ -519,7 +519,7 @@
     }
   });
   // Underscore methods that we want to implement on the Model.
-  var modelMethods = [ "keys", "values", "pairs", "invert", "pick", "omit" ];
+  var modelMethods = [ "keys", "values",  "invert", "pick"];
   // Mix in each Underscore method as a proxy to `Model#attributes`.
   _.each(modelMethods, function(method) {
     Model.prototype[method] = function() {
@@ -870,7 +870,8 @@
   // Underscore methods that we want to implement on the Collection.
   // 90% of the core usefulness of Backbone Collections is actually implemented
   // right here:
-  var methods = [ "forEach", "each", "map", "collect", "reduce", "foldl", "inject", "reduceRight", "foldr", "find", "detect", "filter", "select", "reject", "every", "all", "some", "any", "include", "contains", "invoke", "max", "min", "toArray", "size", "first", "head", "take", "initial", "rest", "tail", "drop", "last", "without", "difference", "indexOf", "shuffle", "lastIndexOf", "isEmpty", "chain", "sample" ];
+  var methods = [ "forEach", "each", "map", "collect",  "find", "detect", "filter",  "all",
+  "some", "any", "invoke", "rest", "tail", "drop", "indexOf",  "isEmpty", "chain"];
   // Mix in each Underscore method as a proxy to `Collection#models`.
   _.each(methods, function(method) {
     Collection.prototype[method] = function() {
@@ -880,7 +881,7 @@
     };
   });
   // Underscore methods that take a property name as an argument.
-  var attributeMethods = [ "groupBy", "countBy", "sortBy", "indexBy" ];
+  var attributeMethods = [ "sortBy"];
   // Use attributes instead of properties.
   _.each(attributeMethods, function(method) {
     Collection.prototype[method] = function(value, context) {

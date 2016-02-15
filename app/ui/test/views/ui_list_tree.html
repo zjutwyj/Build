@@ -1,0 +1,50 @@
+<div style="background-color: #fff;padding: 20px;">
+  <div id="category-widget" class="jhw-product-category jhw-category-product">
+    <ul class="tree-list-ul category-ul">
+      <div class="cate-grid gird-checkbox" style="margin-right:20px;">
+        <div class="cate-grid-cell-inner">
+          <div class="bui-grid-checkBox-container">
+            <span class="x-grid-checkbox">
+            {{#if checked}}
+              <input class="toggle" type="checkbox" checked>
+            {{else}}
+              <input class="toggle" type="checkbox">
+            {{/if}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="grid-td-tree">
+        <div class="cate-grid gird-{{level}} ">
+          <div class="cate-grid-cell-inner">
+            {{#compare isroot '===' '01'}}
+            <div class="x-grid-caret">
+              <span class="x-caret x-caret-middle x-caret-left x-caret-left-middle pointer node-collapse {{#compare children.length '===' 0}}x-caret-left-gray{{/compare}}"></span>
+            </div>
+            {{/compare}}
+          </div>
+        </div>
+        <div class="cate-grid grid-td-cate-name jhw-category category-div-{{level}}">
+          <div class="cate-grid-cell-inner">
+            {{#compare isroot '!==' '01'}} {{#compare children.length '!==' 0}}&nbsp;
+            <div class="tree-arrow"><span class="x-caret x-caret-middle x-caret-left x-caret-left-middle pointer node-collapse"></span></div>
+            {{/compare}} {{/compare}} {{#compare isroot '!==' '01'}} {{#compare ../children.length '===' 0}}
+            <span class="x-caret x-caret-middle x-caret-sub cate-{{grade}} x-caret-left-middle pointer node-collapse "></span> {{/compare}} {{/compare}}
+            <input name="name" value="{{name}}" type="text" class="input-middle pro-cate-name">
+          </div>
+        </div>
+      </div>
+      <div class="cate-grid grid-td-move">
+        <div class="cate-grid-cell-inner">
+          <span class="x-icon x-icon-small x-icon-info move-up pointer">上移</span>&nbsp;
+          <span class="x-icon x-icon-small x-icon-info move-down pointer">下移</span>&nbsp;
+          <span class="x-icon x-icon-small x-icon-info btn-del pointer">删除</span>
+        </div>
+      </div>
+      <ul class="cate-{{grade}}-ul  node-tree" style="clear:both;"></ul>
+    </ul>
+  </div>
+  <div class="ui-list-tree-result">
+    {{uiListTreeResult}}
+  </div>
+</div>

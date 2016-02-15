@@ -3,11 +3,6 @@
  * @class HandlebarsHelper - 标签库
  * @author yongjin on 2014/11/11
  */
-window.ckToggleClass = function (selecter) {
-  var $target = $("#" + selecter);
-  if ($target.hasClass('icon-checkbox')) $target.removeClass('icon-checkbox').addClass('icon-checkboxno');
-  else $target.removeClass('icon-checkboxno').addClass('icon-checkbox');
-}
 /**
  * 分页
  * @method [分页] - pagination
@@ -334,10 +329,10 @@ Handlebars.registerHelper('radio', function (options) {
  * @method [表单] - checkbox
  * @author wyj 15.6.19
  * @example
- *      {{{checkbox label='' name='isDefault' value=isDefault trueVal='1' falseVal='0' }}}
+ *      {{{{checkbox label='默认' name='isChecked' value=isChecked trueVal='01' falseVal='00' }}}
  */
 Handlebars.registerHelper('checkbox', function (options) {
-  var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
+  var id = options.hash.id ? options.hash.id : (Est.nextUid('model- ')+ options.hash.name);
   var random = Est.nextUid('checkbox'); // 随机数
   var icon_style = "font-size: 32px;"; // 图标大小
   var value = Est.isEmpty(options.hash.value) ? options.hash.falseVal : options.hash.value; // 取值
@@ -345,10 +340,10 @@ Handlebars.registerHelper('checkbox', function (options) {
   var defaultClass = isChecked ? 'icon-checkbox' : 'icon-checkboxno';
   var args = ("'" + random + "'"); // 参数
 
-  var result = '<div> <label for="' + id + '" style="overflow:hidden;display:inline-block;"> ' +
-    '<input onclick="window.ckToggleClass(' + args + ');" type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden" style="display: none;">' +
-    '<i id="' + random + '" class="iconfont ' + defaultClass + '" style="' + icon_style + '"></i>' + options.hash.label +
-    '</label></div>';
+  var result = '<label for="' + id + '"> ' +
+    '<input type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden">' +
+    options.hash.label +
+    '</label>';
   return result;
 });
 
@@ -369,17 +364,6 @@ Handlebars.registerHelper('select', function (options) {
     str += '<option value="' + item[options.hash.key] + '" ' + selected + '>' + item[options.hash.text] + '</option>';
   });
   return str + '</select>';
-});
-
-/**
- * 显示隐藏
- * @method show
- * @author wyj 15.2.1
- * @example
- *      <h3 {{{show "this.photos.display==='01'"}}}></h3>
- */
-Handlebars.registerHelper('show', function (expression, options) {
-  return Handlebars.helpers["x"].apply(this, [expression, options]) ? " style='display:block;' " : " style='display:none;' ";
 });
 
 /**
@@ -414,26 +398,6 @@ Handlebars.registerHelper('checked', function (expression, options) {
  */
 Handlebars.registerHelper('encodeURIComponent', function (val, options) {
   return encodeURIComponent(val);
-});
-
-/**
- * 请求模板
- * @method [模板] - template
- * @author wyj 15.2.1
- * @example
- *      {{template redding}}
- */
-Handlebars.registerHelper('template', function (name, options) {
-  return (function (name, options, ctx) {
-    new Est.promise(function (resolve, reject) {
-      seajs.use([name], function (template) {
-        var tpl = Handlebars.compile(template);
-        resolve(tpl(this));
-      });
-    }).then(function (result) {
-        options.fn(ctx);
-      })
-  })(name, options, this);
 });
 
 /**
