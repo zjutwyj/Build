@@ -1,18 +1,10 @@
-/* 选择项*/
-
+//全局样式
 .item-check {
   float: left;
-  margin: 2px;
+  margin-right: 2px;
   cursor: pointer;
-  width: 30px;
   text-align: center;
-  line-height: 30px;
   position: relative;
-  border: 1px solid #C8C8C8;
-  height: 30px;
-  overflow: hidden;
-  padding: 2px;
-  border-radius: 0;
 }
 
 .item-check .check-icon {
@@ -23,7 +15,14 @@
   width: 14px;
   height: 14px;
   z-index: 1000;
+  color: #FF5241;
+  opacity: 0.8;
   border-radius: 0;
+}
+
+.item-check .icon-right {
+  font-size: 12px;
+  line-height: 12px;
 }
 
 .item-check.item-active .check-icon {
@@ -35,4 +34,71 @@
 .item-check .cd-r-cur-in-cnt {
   display: inline-block;
   width: 100%;
+}
+
+// 样式1
+.ui-item-check-btn {
+  .item-check {
+    padding: 2px;
+    border: 1px solid #B6BBC6;
+  }
+}
+
+// 单选项
+.ui-item-check-radio {
+  .item-check {
+    margin-right: 4px;
+  }
+  .item-check .toggle {
+    padding-left: 18px;
+  }
+  .item-check .check-icon {
+    left: 2px;
+    top: 2px;
+    border: 1px solid #9C9C9C;
+    border-radius: 50%;
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+  .item-check .check-icon .icon-right {
+    font-size: 26px;
+    margin-left: -7px;
+    margin-top: -3px;
+  }
+  .item-check .icon-right:before {
+    content: "";
+  }
+  .item-check.item-active .icon-right:before {
+    content: "\e60f";
+  }
+}
+
+// 多选项
+.ui-item-check-checkbox {
+  .item-check {
+    margin-right: 4px;
+  }
+  .item-check .toggle {
+    padding-left: 18px;
+  }
+  .item-check .check-icon {
+    left: 2px;
+    top: 2px;
+    border: 1px solid #9C9C9C;
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
+  .item-check .check-icon .icon-right {
+    font-size: 12px;
+    margin-left: -1px;
+    margin-top: 0px;
+  }
+  .item-check .icon-right:before {
+    content: "";
+  }
+  .item-check.item-active .icon-right:before {
+    content: "\e600";
+  }
 }

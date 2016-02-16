@@ -43,11 +43,11 @@ define('UiData', [], function(require, exports, module) {
     { text: '反馈量', moduleId: 'CaseList', sortType: 'rviews' }
   ];
   var item_check = [
-    { text: 'a', value: 'value_a' },
-    { text: 'b', value: 'value_b' },
-    { text: 'c', value: 'value_c' },
-    { text: 'd', value: 'value_d' },
-    { text: 'e', value: 'value_e' }
+    { text: '选项1', value: 'value_1' },
+    { text: '选项2', value: 'value_2' },
+    { text: '选项3', value: 'value_3' },
+    { text: '选项4', value: 'value_4' },
+    { text: '选项5', value: 'value_5' }
   ];
 
   var list = [

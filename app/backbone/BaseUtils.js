@@ -95,18 +95,15 @@ var BaseUtils = {
    *      });
    */
   tip: function(msg, options) {
-    options = options || {
+    options = Est.extend({
+      id: 'tip-dialog' + Est.nextUid(),
       time: 3000,
-      title: CONST.LANG.INFO_TIP
-    };
+      content: '<div style="padding: 10px;">' + msg + '</div>',
+      title: null
+    }, options);
     seajs.use(['dialog-plus'], function(dialog) {
       window.tipsDialog && window.tipsDialog.close().remove();
-      window.tipsDialog = app.addDialog(dialog({
-        id: 'tip-dialog' + Est.nextUid(),
-        title: options.title,
-        width: 200,
-        content: '<div style="padding: 10px;">' + msg + '</div>'
-      })).show();
+      window.tipsDialog = app.addDialog(dialog(options)).show(options.target);
       setTimeout(function() {
         window.tipsDialog.close().remove();
       }, options.time);
@@ -178,7 +175,7 @@ var BaseUtils = {
       window.$loading = $('<div class="loading"></div>');
       $('body').append(window.$loading);
     } catch (e) {
-      debug('Error28' + e);//debug__
+      debug('Error28' + e); //debug__
     }
     return window.$loading;
   },
@@ -206,7 +203,7 @@ var BaseUtils = {
    *      }, this);
    */
   execute: function(name) {
-    debug('- BaseUtils.execute ' + name);//debug__
+    debug('- BaseUtils.execute ' + name); //debug__
     return BaseUtils[name] && BaseUtils[name].apply(BaseUtils, [].slice.call(arguments, 1));
   }
 };

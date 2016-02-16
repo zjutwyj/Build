@@ -220,6 +220,7 @@ var BaseItem = SuperView.extend({
    *
    * @method [参数] - _setViewId ( 设置viewId )
    * @param name
+   * @private
    * @author wyj 14.12.20
    */
   _setViewId: function(name) {
@@ -550,7 +551,7 @@ var BaseItem = SuperView.extend({
       content: '<div class="item-delete-confirm">' + CONST.LANG.DEL_CONFIRM + '</div>',
       target: e && this._getTarget(e).get(0),
       success: function(resp) {
-        if (Est.isEmpty(context.model.url())){
+        if (Est.isEmpty(context.model.url())) {
           context.model.attributes.id = null;
         }
         context.model.destroy({
@@ -583,6 +584,7 @@ var BaseItem = SuperView.extend({
    * 从this._options.items中通过dx移除元素
    * @method [集合] - _removeFromItems
    * @param dx
+   * @private
    * @author wyj 15.6.10
    * @example
    *      this._removeFromItems(context.model.get('dx'));

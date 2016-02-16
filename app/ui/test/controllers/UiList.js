@@ -63,7 +63,11 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
   UiList = BaseList.extend({
     events: {
       'click .addOne': 'addOne',
-      'click .insertOne': 'insertOne'
+      'click .checkAll': 'checkAll',
+      'click .insertThree': 'insertThree',
+      'click .insertOne': 'insertOne',
+      'click .btn-batch-del': 'batchDel',
+      'click .insertFive': 'insertFive'
     },
     initialize: function() {
       this._initialize({
@@ -72,7 +76,8 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
         item: item,
         pagination: '#pagination-container1',
         pageSize: 5,
-        checkAppend: false,
+        checkAppend: true,
+        checkToggle: true,
         template: template,
         render: '.list-render',
         items: Est.cloneDeep(UiData.list),
@@ -81,6 +86,7 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
     },
     afterRender: function() {
       this.$result = this.$('#list-test-result');
+      this._index = 0;
     },
     showResult: function() {
       var ctx = this;
@@ -90,15 +96,43 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
         ctx.$result.append('<div>' + JSON.stringify(item) + '</div>');
       });
     },
+    checkAll: function(e) {
+      this._checkAll(e);
+      this.showResult();
+    },
     addOne: function() {
+      this._index++;
       this._push(new model({
-        text: '我是插入进来的'
+        text: '插入到列表末尾' + this._index
       }));
+      this.showResult();
     },
     insertOne: function() {
+      this._index++;
       this._push(new model({
-        text: '我是插入进来的'
+        text: '插入到第1个元素' + this._index
       }), 0);
+      this.showResult();
+    },
+    insertThree: function() {
+      this._index++;
+      this._push(new model({
+        text: '插入到第3个元素' + this._index
+      }), 2);
+      this.showResult();
+    },
+    insertFive: function() {
+      this._index++;
+      this._push(new model({
+        text: '插入到第5个元素' + this._index
+      }), 4);
+      this.showResult();
+    },
+    batchDel: function(e) {
+      this._batchDel(e, function() {
+        this.showResult();
+      });
+
     }
   });
 

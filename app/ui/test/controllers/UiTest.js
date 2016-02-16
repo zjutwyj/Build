@@ -18,14 +18,15 @@ define('UiTest', ['template/ui_test', 'Tab'], function(require, exports, module)
     },
     afterRender: function() {
       var items = [
-        { text: '普通列表', moduleId: 'UiList', oneRender: false },
-        { text: '树型列表', moduleId: 'UiListTree', oneRender: false },
-        { text: '树型组件', moduleId: 'UiTree', oneRender: false },
-        { text: '对话框组件', moduleId: 'UiDialog', oneRender: false },
-        { text: '下拉菜单', moduleId: 'UiSelect', oneRender: false },
-        { text: '下拉框', moduleId: 'UiDropDown', oneRender: false },
-        { text: '单选多选', moduleId: 'UiItemCheck', oneRender: false },
-        { text: '选项切换', moduleId: 'UiTab', oneRender: false }
+        { text: '分页列表', moduleId: 'UiList', oneRender: true },
+        { text: '更多列表', moduleId: 'ManageList', oneRender: true },
+        { text: '树型列表', moduleId: 'UiListTree', oneRender: true },
+        { text: '树型组件', moduleId: 'UiTree', oneRender: true },
+        { text: '对话框组件', moduleId: 'UiDialog', oneRender: true },
+        { text: '下拉菜单', moduleId: 'UiSelect', oneRender: true },
+        { text: '下拉框', moduleId: 'UiDropDown', oneRender: true },
+        { text: '单选多选', moduleId: 'UiItemCheck', oneRender: true },
+        { text: '选项切换', moduleId: 'UiTab', oneRender: true }
       ];
       app.addRegion('testNav', Tab, {
         tpl: '<a href="javascript:;" class="tool-tip" data-title="{{text}}">{{text}}</a>', // 模版

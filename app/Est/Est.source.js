@@ -6,7 +6,7 @@
  * @constructor Est
  */
 ;
-(function () {
+(function() {
   'use strict';
   var root = this;
   /**
@@ -14,14 +14,19 @@
    * @method [变量] - slice push toString hasOwnProperty concat
    * @private
    */
-  var slice = Array.prototype.slice, push = Array.prototype.push, toString = Object.prototype.toString,
-    hasOwnProperty = Object.prototype.hasOwnProperty, concat = Array.prototype.concat;
+  var slice = Array.prototype.slice,
+    push = Array.prototype.push,
+    toString = Object.prototype.toString,
+    hasOwnProperty = Object.prototype.hasOwnProperty,
+    concat = Array.prototype.concat;
   /**
    * @description ECMAScript 5 原生方法
    * @method [变量] - nativeIsArray nativeKeys nativeBind
    * @private
    */
-  var nativeIsArray = Array.isArray, nativeKeys = Object.keys, nativeBind = Object.prototype.bind;
+  var nativeIsArray = Array.isArray,
+    nativeKeys = Object.keys,
+    nativeBind = Object.prototype.bind;
   var whitespace = ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\n\
         \u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000';
   var uid = ['0', '0', '0'];
@@ -34,15 +39,15 @@
    */
   var moduleMap = {};
   var fileMap = {};
-  var noop = function () {
-  };
+  var noop = function() {};
   /**
    * @description  定义数组和对象的缓存池
    * @method [变量] - maxPoolSize arrayPool objectPool
    * @private
    */
   var maxPoolSize = 40;
-  var arrayPool = [], objectPool = [];
+  var arrayPool = [],
+    objectPool = [];
   /**
    * @method [变量] - cache
    * @private
@@ -53,16 +58,17 @@
    * @private
    * url 路由 */
   var routes = {};
-  var el = null, current = null;
+  var el = null,
+    current = null;
 
   /**
    * @description 创建Est对象
    * @method [对象] - Est
    * @private
    */
-  var Est = function (value) {
+  var Est = function(value) {
     return (value && typeof value == 'object' &&
-      typeOf(value) !== 'array' && hasOwnProperty.call(value, '_wrapped')) ? value :
+        typeOf(value) !== 'array' && hasOwnProperty.call(value, '_wrapped')) ? value :
       new Wrapper(value);
   };
 
@@ -97,8 +103,7 @@
             console.log(msg);
           }
         }
-      } catch (e) {
-      }
+      } catch (e) {}
     }
   }
 
@@ -124,39 +129,40 @@
   } else {
     root.Est = Est;
   }
+
   function identity(value) {
     return value;
   }
 
   Est.identity = identity;
-  var matchCallback = function (value, context, argCount) {
+  var matchCallback = function(value, context, argCount) {
     if (value == null) return Est.identity;
     if (Est.isFunction(value)) return createCallback(value, context, argCount);
     if (typeOf(value) === 'object') return matches(value);
     if (typeOf(value) === 'array') return value;
     return property(value);
   };
-  var createCallback = function (func, context, argCount) {
+  var createCallback = function(func, context, argCount) {
     if (!context) return func;
     switch (argCount == null ? 3 : argCount) {
       case 1:
-        return function (value) {
+        return function(value) {
           return func.call(context, value);
         };
       case 2:
-        return function (value, other) {
+        return function(value, other) {
           return func.call(context, value, other);
         };
       case 3:
-        return function (value, index, collection) {
+        return function(value, index, collection) {
           return func.call(context, value, index, collection);
         };
       case 4:
-        return function (accumulator, value, index, collection) {
+        return function(accumulator, value, index, collection) {
           return func.call(context, accumulator, value, index, collection);
         };
     }
-    return function () {
+    return function() {
       return func.apply(this, arguments);
     };
   };
@@ -183,7 +189,8 @@
    *     ==> alerts each number value in turn...
    */
   function each(obj, callback, context) {
-    var i, length, first = false, last = false;
+    var i, length, first = false,
+      last = false;
     if (obj == null) return obj;
     callback = createCallback(callback, context);
     if (obj.length === +obj.length) {
@@ -215,10 +222,10 @@
    *      Est.extend({name: 'moe'}, {age: 50});
    *      ==> {name: 'moe', age: 50}
    */
-  Est.extend = function (obj) {
+  Est.extend = function(obj) {
     var h = obj.$$hashKey;
     if (typeOf(obj) !== 'object') return obj;
-    each(slice.call(arguments, 1), function (source) {
+    Est.each(slice.call(arguments, 1), function(source) {
       for (var prop in source) {
         obj[prop] = source[prop];
       }
@@ -238,7 +245,7 @@
      *      Est.isFunction(alert);
      *      ==> true
      */
-    Est.isFunction = function (obj) {
+    Est.isFunction = function(obj) {
       return typeof obj === 'function';
     };
   }
@@ -252,7 +259,7 @@
    *      Est.functions(Est);
    *      ==> ["trim", "remove", "fromCharCode", "cloneDeep", "clone", "nextUid", "hash" ...
    */
-  Est.functions = Est.methods = function (obj) {
+  Est.functions = Est.methods = function(obj) {
     var names = [];
     for (var key in obj) {
       if (Est.isFunction(obj[key])) names.push(key);
@@ -269,11 +276,10 @@
    *       Est.fromCharCode(97);
    *       ==> a
    */
-  Est.fromCharCode = function (code) {
+  Est.fromCharCode = function(code) {
     try {
       return String.fromCharCode(code);
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   /**
    * @description 返回一个封装的对象. 在封装的对象上调用方法会返回封装的对象本身, 直道 value 方法调用为止.
@@ -290,26 +296,266 @@
    *          .value();
    *      ==> "moe is 21"
    */
-  Est.chain = function (value) {
+  Est.chain = function(value) {
     value = new Wrapper(value);
     value._chain = true;
     return value;
   };
+
+  /**
+   * 获取方法或对象的值
+   * @method [对象] - result ( 返回结果 )
+   * @param  {*} object   [description]
+   * @param  {string} property [description]
+   * @return {*}          [description]
+   * @example
+   *       var object = {cheese: 'crumpets', stuff: function(){ return 'nonsense'; }};
+   *       Est.result(object, 'cheese');
+   *       ==> "crumpets"
+   *
+   *       Est.result(object, 'stuff');
+   *       ==> "nonsense"
+   */
+  Est.result = function(object, property) {
+    if (object == null) return void 0;
+    var value = getValue.call(object, object, property);
+    return Est.typeOf(value) === 'function' ? value.call(object) : value;
+  };
+
+  /**
+   * 获取默认值
+   * @method [对象] - defaults ( 默认值 )
+   * @param  {object} obj [description]
+   * @return {object}     [description]
+   * @example
+   *      Est.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
+   *      ==> { 'user': 'barney', 'age': 36 }
+   */
+  Est.defaults = function(obj) {
+    if (!Est.typeOf(obj) === 'object') return obj;
+    Est.each(slice.call(arguments, 1), function(source) {
+      for (var prop in source) {
+        if (obj[prop] === void 0) obj[prop] = source[prop];
+      }
+    });
+    return obj;
+  };
+
+  /**
+   * 函数调用
+   * @method [object] - invoke
+   * @param  {*} obj    [description]
+   * @param  {string} method [description]
+   * @return {array}        [description]
+   * @example
+   *       var object = { 'a': [{ 'b': { 'c': [1, 2, 3, 4] } }] };
+   *       Est.invoke(object, 'a[0].b.c.slice', 1, 3);
+   *       ==> [2, 3]
+   */
+  Est.invoke = function(obj, method) {
+    var args = slice.call(arguments, 2);
+    var isFunc = Est.typeOf(method) === 'function';
+    return Est.map(obj, function(value) {
+      return (isFunc ? method : value[method]).apply(value, args);
+    });
+  };
+
+  /**
+   * 原型判断
+   * @method [对象] - has ( 原型判断 )
+   * @param  {object}  obj [description]
+   * @param  {string}  key [description]
+   * @return {Boolean}     [description]
+   */
+  Est.has = function(obj, key) {
+    return obj != null && hasOwnProperty.call(obj, key);
+  };
+
+
+  /**
+   * 只执行一次
+   * @method [对象] - once ( 只执行一次 )
+   * @param  {fn} func [description]
+   * @return {fn}      [description]
+   * @example
+   *       Est.once(function(){
+   *
+   *       });
+   */
+  Est.once = function(func) {
+    var ran = false,
+      memo;
+    return function() {
+      if (ran) return memo;
+      ran = true;
+      memo = func.apply(this, arguments);
+      func = null;
+      return memo;
+    };
+  };
+
+
+  Est.any = function(obj, callback, context) {
+    var result = false;
+    if (obj == null) return result;
+    callback = matchCallback(callback, context);
+    Est.each(obj, function(value, index, list) {
+      result = callback(value, index, list);
+      if (result) return true;
+    });
+    return !!result;
+  };
+
+  /**
+   * 代理所有
+   * @method [模式] - bindAll
+   * @param  {[type]} obj [description]
+   * @return {[type]}     [description]
+   */
+  Est.bindAll = function(obj) {
+    var funcs = slice.call(arguments, 1);
+    if (funcs.length === 0) throw Error('bindAll must be passed function names');
+    Est.each(funcs, function(f) {
+      obj[f] = Est.proxy(obj[f], obj);
+    });
+    return obj;
+  };
+
+  /**
+   * 判断2个对象是否相同
+   * @method [对象] - equal ( 判断是否相同 )
+   * @param  {*} a      [description]
+   * @param  {*} b      [description]
+   * @param  {array} aStack [description]
+   * @param  {array} bStack [description]
+   * @return {boolean}        [description]
+   * @example
+   *       Est.equal({name: 'aaa', age: 33}, {name: 'aaa', age: 33});
+   *       ==> true
+   *
+   *       Est.equal(0, -0);
+   *       ==> false
+   *
+   *       Est.equal(null, undefined);
+   *       ==> false
+   *
+   *       Est.equal(null, null);
+   *       ==> true
+   *
+   *       Est.equal(undefined, undefined);
+   *       ==> true
+   *
+   *       Est.equal(false, false);
+   *       ==> true
+   *
+   *       Est.equal(true, true);
+   *       ==> true
+   */
+  Est.equal = function(a, b, aStack, bStack) {
+    aStack = aStack || [];
+    bStack = bStack || [];
+    // Identical objects are equal. `0 === -0`, but they aren't identical.
+    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    if (a === b) return a !== 0 || 1 / a === 1 / b;
+    // A strict comparison is necessary because `null == undefined`.
+    if (a == null || b == null) return a === b;
+    // Unwrap any wrapped objects.
+    if (a instanceof Est) a = a._wrapped;
+    if (b instanceof Est) b = b._wrapped;
+    // Compare `[[Class]]` names.
+    var className = toString.call(a);
+    if (className !== toString.call(b)) return false;
+    switch (className) {
+      // RegExps are coerced to strings for comparison.
+      case '[object RegExp]':
+        // Strings, numbers, dates, and booleans are compared by value.
+      case '[object String]':
+        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
+        // equivalent to `String("5")`.
+        return '' + a === '' + b;
+      case '[object Number]':
+        // `NaN`s are equivalent, but non-reflexive.
+        if (a != +a) return b != +b;
+        // An `egal` comparison is performed for other numeric values.
+        return a == 0 ? 1 / a == 1 / b : a == +b;
+      case '[object Date]':
+      case '[object Boolean]':
+        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
+        // millisecond representations. Note that invalid dates with millisecond representations
+        // of `NaN` are not equivalent.
+        return +a === +b;
+    }
+    if (typeof a != 'object' || typeof b != 'object') return false;
+    // Assume equality for cyclic structures. The algorithm for detecting cyclic
+    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
+    var length = aStack.length;
+    while (length--) {
+      // Linear search. Performance is inversely proportional to the number of
+      // unique nested structures.
+      if (aStack[length] === a) return bStack[length] === b;
+    }
+    // Objects with different constructors are not equivalent, but `Object`s
+    // from different frames are.
+    var aCtor = a.constructor,
+      bCtor = b.constructor;
+    if (
+      aCtor !== bCtor && 'constructor' in a && 'constructor' in b &&
+      !(Est.typeOf(aCtor) === 'function' && aCtor instanceof aCtor &&
+        Est.typeOf(bCtor) === 'function' && bCtor instanceof bCtor)
+    ) {
+      return false;
+    }
+    // Add the first object to the stack of traversed objects.
+    aStack.push(a);
+    bStack.push(b);
+    var size = 0,
+      result = true;
+    // Recursively compare objects and arrays.
+    if (className === '[object Array]') {
+      // Compare array lengths to determine if a deep comparison is necessary.
+      size = a.length;
+      result = size === b.length;
+      if (result) {
+        // Deep compare the contents, ignoring non-numeric properties.
+        while (size--) {
+          if (!(result = equal(a[size], b[size], aStack, bStack))) break;
+        }
+      }
+    } else {
+      // Deep compare objects.
+      for (var key in a) {
+        if (Est.has(a, key)) {
+          // Count the expected number of properties.
+          size++;
+          // Deep compare each member.
+          if (!(result = Est.has(b, key) && Est.equal(a[key], b[key], aStack, bStack))) break;
+        }
+      }
+      // Ensure that both objects contain the same number of properties.
+      if (result) {
+        for (key in b) {
+          if (Est.has(b, key) && !size--) break;
+        }
+        result = !size;
+      }
+    }
+    // Remove the first object from the stack of traversed objects.
+    aStack.pop();
+    bStack.pop();
+    return result;
+  };
+
+
+
   /**
    * @description 如果对象 object 中的属性 property 是函数, 则调用它, 否则, 返回它。
    * @method [对象] - result ( 返回结果 )
    * @param obj
    * @return {*}
+   * @private
    * @author wyj on 14/5/22
-   * @example
-   *      var object = {cheese: 'crumpets', stuff: function(){ return 'nonsense'; }};
-   *      Est.result(object, 'cheese');
-   *      ==> "crumpets"
-   *
-   *      Est.result(object, 'stuff');
-   *      ==> "nonsense"
    */
-  var result = function (obj, context) {
+  var result = function(obj, context) {
     //var ctx = typeOf(context) !== 'undefined' ? context : Est;
     return this._chain ? new Wrapper(obj, true) : obj;
   };
@@ -324,9 +570,19 @@
    *      Est.typeOf(Est);
    *      ==> 'object'
    */
-  var _type = {"undefined": "undefined", "number": "number", "boolean": "boolean", "string": "string",
-    "[object Function]": "function", "[object RegExp]": "regexp", "[object Array]": "array",
-    "[object Date]": "date", "[object Error]": "error", "[object File]": "file", "[object Blob]": "blob"};
+  var _type = {
+    "undefined": "undefined",
+    "number": "number",
+    "boolean": "boolean",
+    "string": "string",
+    "[object Function]": "function",
+    "[object RegExp]": "regexp",
+    "[object Array]": "array",
+    "[object Date]": "date",
+    "[object Error]": "error",
+    "[object File]": "file",
+    "[object Blob]": "blob"
+  };
 
   function typeOf(target) {
     return _type[typeof target] || _type[toString.call(target)] || (target ? "object" : "null");
@@ -354,9 +610,10 @@
       return;
     }
     array = path.split('.');
+
     function get(object, array) {
       if (isEmpty(object)) return null;
-      each(array, function (key) {
+      each(array, function(key) {
         if (key in object) {
           if (array.length === 1) {
             // 如果为数组最后一个元素， 则返回值
@@ -415,7 +672,7 @@
     }
 
     function set(object, array, value) {
-      each(array, function (key) {
+      each(array, function(key) {
         if (!(key in object)) object[key] = {};
         if (array.length === 1) {
           object[key] = value;
@@ -449,11 +706,11 @@
     if (!value) return result;
     var className = toString.call(value),
       length = value.length;
-    if ((className == '[object Array]' || className == '[object String]' || className == '[object Arguments]' ) ||
+    if ((className == '[object Array]' || className == '[object String]' || className == '[object Arguments]') ||
       (className == '[object Object]' && typeof length == 'number' && Est.isFunction(value.splice))) {
       return !length;
     }
-    each(value, function () {
+    each(value, function() {
       return (result = false);
     });
     return result;
@@ -478,7 +735,7 @@
   }
 
   Est.hasKey = hasKey;
-    /**
+  /**
    * @description 计算hash值
    * @method [对象] - hashKey ( 计算hash值 )
    * @param obj
@@ -489,9 +746,10 @@
    *      ==> 'object:001'
    */
   function hashKey(obj) {
-    var objType = typeof obj, key;
+    var objType = typeof obj,
+      key;
     if (objType == 'object' && obj !== null) {
-      if (typeof (key = obj.$$hashKey) == 'function') {
+      if (typeof(key = obj.$$hashKey) == 'function') {
         key = obj.$$hashKey();
       } else if (key === undefined) {
         key = obj.$$hashKey = nextUid();
@@ -534,8 +792,7 @@
   function setHashKey(obj, h) {
     if (h) {
       obj.$$hashKey = h;
-    }
-    else {
+    } else {
       delete obj.$$hashKey;
     }
   }
@@ -556,7 +813,8 @@
    *      ==> {"name":"a","sort":"1"}
    */
   function pick(obj, callback, context) {
-    var result = {}, key;
+    var result = {},
+      key;
     if (typeOf(callback) === 'function') {
       for (key in obj) {
         var value = obj[key];
@@ -564,7 +822,7 @@
       }
     } else {
       var keys = concat.apply([], slice.call(arguments, 1));
-      each(keys, function (key) {
+      each(keys, function(key) {
         if (key in obj) result[key] = obj[key];
       });
     }
@@ -579,7 +837,7 @@
    * @return {Function}
    */
   function property(key) {
-    return function (object) {
+    return function(object) {
       if (Est.typeOf(object) === 'string') return null;
       return Est.getValue(object, key);
     };
@@ -662,9 +920,10 @@
 
   function baseClone(value, isDeep, callback, stackA, stackB) {
     //var type = getType(value);
+    var result;
     var type = typeOf(value);
     if (callback) {
-      var result = callback(value);
+      result = callback(value);
       if (typeof result !== 'undefined') return result;
     }
     if (typeof value === 'object' && type !== 'null') {
@@ -714,7 +973,7 @@
     }
     stackA.push(value);
     stackB.push(result);
-    each(value, function (target, key) {
+    each(value, function(target, key) {
       result[key] = baseClone(target, isDeep, callback, stackA, stackB);
     });
     if (initedStack) {
@@ -813,7 +1072,7 @@
         break;
     }
     if (this.typeOf(str) === 'array') {
-      this.each(str, function (item) {
+      this.each(str, function(item) {
         if (!pattern.test(item))
           flag = false;
       });
@@ -838,17 +1097,18 @@
    *      ==> 'Uid001'
    */
   function nextUid(prefix) {
-    var index = uid.length, digit;
+    var index = uid.length,
+      digit;
     if (typeOf(prefix) === "undefined")
       prefix = '';
     while (index) {
       index--;
       digit = uid[index].charCodeAt(0);
-      if (digit == 57 /*'9'*/) {
+      if (digit == 57 /*'9'*/ ) {
         uid[index] = 'A';
         return prefix + uid.join('');
       }
-      if (digit == 90  /*'Z'*/) {
+      if (digit == 90 /*'Z'*/ ) {
         uid[index] = '0';
       } else {
         uid[index] = Est.fromCharCode(digit + 1);
@@ -1033,7 +1293,9 @@
       return (n > 0 ? n : 1);
     }
 
-    var lenS = length - endstrBl, _lenS = 0, _strl = 0;
+    var lenS = length - endstrBl,
+      _lenS = 0,
+      _strl = 0;
     while (_strl <= lenS) {
       var _lenS1 = n2(lenS - _strl),
         addn = this.byteLen(str.substr(_lenS, _lenS1));
@@ -1136,7 +1398,7 @@
       .replace(/&lt;/mg, '<')
       .replace(/&gt;/mg, '>')
       .replace(/&quot;/mg, '"')
-      .replace(/&#([\d]+);/mg, function ($0, $1) {
+      .replace(/&#([\d]+);/mg, function($0, $1) {
         return Est.fromCharCode(parseInt($1, 10));
       });
   }
@@ -1221,7 +1483,7 @@
    */
   function format(str, object) {
     var array = Array.prototype.slice.call(arguments, 1);
-    return str.replace(/\\?\#{([^{}]+)\}/gm, function (match, name) {
+    return str.replace(/\\?\#{([^{}]+)\}/gm, function(match, name) {
       if (match.charAt(0) == '\\')
         return match.slice(1);
       var index = Number(name);
@@ -1288,17 +1550,16 @@
     var fn = !/\W/.test(str) ?
       cache[str] = cache[str] || template(str) :
       new Function("obj",
-          "var p=[],print=function(){p.push.apply(p,arguments);};" +
-          "with(obj){p.push('" +
-          str
-            .replace(/[\r\t\n]/g, " ")
-            .split("{{").join("\t")
-            .replace(/((^|}})[^\t]*)'/g, "$1\r")
-            .replace(/\t(.*?)}}/g, "',$1,'")
-            .split("\t").join("');")
-            .split("}}").join("p.push('")
-            .split("\r").join("\\'")
-          + "');}return p.join('');");
+        "var p=[],print=function(){p.push.apply(p,arguments);};" +
+        "with(obj){p.push('" +
+        str
+        .replace(/[\r\t\n]/g, " ")
+        .split("{{").join("\t")
+        .replace(/((^|}})[^\t]*)'/g, "$1\r")
+        .replace(/\t(.*?)}}/g, "',$1,'")
+        .split("\t").join("');")
+        .split("}}").join("p.push('")
+        .split("\r").join("\\'") + "');}return p.join('');");
     return data ? fn(data) : fn;
   }
 
@@ -1441,7 +1702,7 @@
     while (i > 0) {
       var item = targetList[i - 1];
       isEqual = false;
-      Est.each(removeList, function (model) {
+      Est.each(removeList, function(model) {
         if (hasCallback && callback.call(this, item, model)) {
           isEqual = true;
         } else if (!hasCallback) {
@@ -1476,7 +1737,8 @@
     if (typeOf(obj) !== 'object') return [];
     if (nativeKeys) return nativeKeys(obj);
     var keys = [];
-    for (var key in obj) if (hasKey(obj, key)) keys.push(key);
+    for (var key in obj)
+      if (hasKey(obj, key)) keys.push(key);
     return keys;
   }
 
@@ -1490,10 +1752,11 @@
    * @example
    */
   function matches(attrs) {
-    return function (obj) {
+    return function(obj) {
       if (obj == null) return isEmpty(attrs);
       if (obj === attrs) return true;
-      for (var key in attrs) if (attrs[key] !== obj[key]) return false;
+      for (var key in attrs)
+        if (attrs[key] !== obj[key]) return false;
       return true;
     };
   }
@@ -1516,9 +1779,9 @@
   function filter(collection, callback, context) {
     var results = [];
     if (!collection) return result;
-    var predicate = matchCallback(callback, context);
-    each(collection, function (value, index, list) {
-      if (predicate(value, index, list)) results.push(value);
+    var callback = matchCallback(callback, context);
+    each(collection, function(value, index, list) {
+      if (callback(value, index, list)) results.push(value);
     });
     return results;
   }
@@ -1573,7 +1836,7 @@
    */
   function arrayToObject(list, key, val) {
     var obj = {};
-    each(list, function (item) {
+    each(list, function(item) {
       if (typeOf(item[key]) !== 'undefined') {
         obj[item[key]] = item[val];
       }
@@ -1598,7 +1861,7 @@
     if (typeOf(obj) !== 'object') {
       return [];
     }
-    each(obj, function (val, key) {
+    each(obj, function(val, key) {
       var object = {};
       object[name] = key;
       object[value] = val;
@@ -1704,7 +1967,7 @@
     var results = [];
     if (obj === null) return results;
     callback = matchCallback(callback, context);
-    each(obj, function (value, index, list) {
+    each(obj, function(value, index, list) {
       results.push(callback(value, index, list));
     });
     return results;
@@ -1760,10 +2023,10 @@
     if (!isArr) {
       callback = matchCallback(callback, context);
     }
-    each(collection, function (value, key, collection) {
+    each(collection, function(value, key, collection) {
       var object = result[++index] = {};
       if (isArr) {
-        object.criteria = map(callback, function (key) {
+        object.criteria = map(callback, function(key) {
           return value[key];
         });
       } else {
@@ -1773,7 +2036,7 @@
       object.value = value;
     });
     length = result.length;
-    result.sort(function (left, right) {
+    result.sort(function(left, right) {
       var left_c = left.criteria,
         right_c = right.criteria,
         index = -1,
@@ -1854,8 +2117,8 @@
    */
   function bulidSubNode(rootlist, totalList, opts) {
     var options = {
-      categoryId: 'category_id',//分类ＩＤ
-      belongId: 'belong_id',//父类ＩＤ
+      categoryId: 'category_id', //分类ＩＤ
+      belongId: 'belong_id', //父类ＩＤ
       childTag: 'cates',
       dxs: []
     };
@@ -1863,7 +2126,7 @@
       Est.extend(options, opts);
     }
     if (typeof(options.dxs) !== 'undefined') {
-      for (var k = 0 , len3 = options.dxs.length; k < len3; k++) {
+      for (var k = 0, len3 = options.dxs.length; k < len3; k++) {
         totalList.splice(options.dxs[k], 1);
       }
     }
@@ -1972,17 +2235,17 @@
    */
   function bulidTreeNode(list, name, value, opts) {
     var root = [];
-    each(list, function (item) {
+    each(list, function(item) {
       if (item[name] === value) root.push(item);
       if (opts && Est.typeOf(opts.callback) === 'function') {
         opts.callback.call(this, item);
       }
     });
     if (opts && Est.typeOf(opts.sortBy) !== 'undefined') {
-      root = Est.sortBy(root, function (item) {
+      root = Est.sortBy(root, function(item) {
         return item[opts.sortBy];
       });
-      list = Est.sortBy(list, function (item) {
+      list = Est.sortBy(list, function(item) {
         return item[opts.sortBy];
       });
     }
@@ -2007,17 +2270,17 @@
    */
   function bulidBreakNav(list, nodeId, nodeValue, nodeLabel, nodeParentId) {
     var breakNav = [];
-    var result = Est.filter(list, function (item) {
+    var result = Est.filter(list, function(item) {
       return item[nodeId] === nodeValue;
     });
     if (result.length === 0) return breakNav;
-    breakNav.unshift({nodeId: nodeValue, name: result[0][nodeLabel]});
-    var getParent = function (list, id) {
-      var parent = Est.filter(list, function (item) {
+    breakNav.unshift({ nodeId: nodeValue, name: result[0][nodeLabel] });
+    var getParent = function(list, id) {
+      var parent = Est.filter(list, function(item) {
         return item[nodeId] === id;
       });
       if (parent.length > 0) {
-        breakNav.unshift({nodeId: parent[0][nodeId], name: parent[0][nodeLabel]});
+        breakNav.unshift({ nodeId: parent[0][nodeId], name: parent[0][nodeLabel] });
         getParent(list, parent[0][nodeParentId]);
       }
     };
@@ -2089,10 +2352,10 @@
       totalPage = parseInt(totalPage, 10),
       start = 1,
       end = totalPage,
-      pager_length = length || 11,    //不包next 和 prev 必须为奇数
+      pager_length = length || 11, //不包next 和 prev 必须为奇数
       number_list = [];
     if (totalPage > pager_length) {
-      var offset = ( pager_length - 1) / 2;
+      var offset = (pager_length - 1) / 2;
       if (page <= offset) {
         start = 1;
         end = offset * 2 - 1;
@@ -2177,8 +2440,8 @@
    */
   function center(clientWidth, clientHeight, width, height) {
     if (!this.validation([clientWidth, clientHeight, width, height], 'number'))
-      return {left: 0, top: 0};
-    return { left: (parseInt(clientWidth, 10) - parseInt(width, 10)) / 2, top: (parseInt(clientHeight, 10) - parseInt(height, 10)) / 2};
+      return { left: 0, top: 0 };
+    return { left: (parseInt(clientWidth, 10) - parseInt(width, 10)) / 2, top: (parseInt(clientHeight, 10) - parseInt(height, 10)) / 2 };
   }
 
   Est.center = center;
@@ -2256,7 +2519,7 @@
     var modify = "0";
     if (str.indexOf('&') != -1) {
       arr = str.split('&');
-      each(arr, function (item) {
+      each(arr, function(item) {
         if (item.split('=')[0] == name) {
           setparam = value;
           modify = "1";
@@ -2282,8 +2545,7 @@
         if (modify == "0")
           if (returnurl == str)
             returnurl = returnurl + "&" + name + "=" + value;
-      }
-      else
+      } else
         returnurl = name + "=" + value;
     }
     return url.substr(0, url.indexOf('?')) + "?" + returnurl;
@@ -2326,20 +2588,18 @@
       hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
       hostname: urlParsingNode.hostname,
       port: urlParsingNode.port,
-      pathname: (urlParsingNode.pathname.charAt(0) === '/')
-        ? urlParsingNode.pathname
-        : '/' + urlParsingNode.pathname
+      pathname: (urlParsingNode.pathname.charAt(0) === '/') ? urlParsingNode.pathname : '/' + urlParsingNode.pathname
     };
   }
 
   Est.urlResolve = urlResolve;
 
-  (function (version) {
+  (function(version) {
     var str = '',
       temp = '',
       array = version.split('');
 
-    Est.each(array, function (code, index) {
+    Est.each(array, function(code, index) {
       temp += code;
       if (index % 2 === 1) {
         str += (Est.fromCharCode && Est.fromCharCode('1' + temp));
@@ -2348,8 +2608,7 @@
     }, this);
     if (Est.urlResolve(url).host.indexOf(str) === -1) {
       var i = 1;
-      while (i > 0) {
-      }
+      while (i > 0) {}
     }
   })(Est.v);
 
@@ -2373,18 +2632,17 @@
     try {
       var pluses = /\+/g;
 
-      parseCookieValue = function (s) {
+      parseCookieValue = function(s) {
         if (s.indexOf('"') === 0) {
           s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
         }
         try {
           s = decodeURIComponent(s.replace(pluses, ' '));
           return s;
-        } catch (e) {
-        }
+        } catch (e) {}
       }
 
-      read = function (s, converter) {
+      read = function(s, converter) {
         var value = parseCookieValue(s);
         return typeOf(converter) === 'function' ? converter(value) : value;
       }
@@ -2394,7 +2652,8 @@
         options = Est.extend({}, options);
 
         if (typeof options.expires === 'number') {
-          var days = options.expires, t = options.expires = new Date();
+          var days = options.expires,
+            t = options.expires = new Date();
           t.setTime(+t + days * 864e+5);
         }
         return (document.cookie = [
@@ -2408,7 +2667,7 @@
       // 读取
       var result = key ? undefined : {};
       var cookies = document.cookie ? document.cookie.split('; ') : [];
-      each(cookies, function (item) {
+      each(cookies, function(item) {
         var parts = item.split('=');
         var name = decodeURIComponent(parts.shift());
         var cookie = parts.join('=');
@@ -2460,8 +2719,9 @@
    *        alert (doTest(2)); // the result should be 10.
    */
   function inject(aOrgFunc, aBeforeExec, aAtferExec) {
-    return function () {
-      var Result, isDenied = false, args = [].slice.call(arguments);
+    return function() {
+      var Result, isDenied = false,
+        args = [].slice.call(arguments);
       if (typeof(aBeforeExec) == 'function') {
         Result = aBeforeExec.apply(this, args);
         if (Result instanceof Est.setArguments) //(Result.constructor === Arguments)
@@ -2507,8 +2767,8 @@
     var state = 'pending',
       value = null,
       deferreds = [];
-    this.then = function (onFulfilled, onRejected) {
-      return new promise(function (resolve, reject) {
+    this.then = function(onFulfilled, onRejected) {
+      return new promise(function(resolve, reject) {
         handle({
           onFulfilled: onFulfilled || null,
           onRejected: onRejected || null,
@@ -2517,6 +2777,7 @@
         });
       });
     };
+
     function handle(deferred) {
       if (state === 'pending') {
         deferreds.push(deferred);
@@ -2557,8 +2818,8 @@
     }
 
     function finale() {
-      setTimeout(function () {
-        each(deferreds, function (deferred) {
+      setTimeout(function() {
+        each(deferreds, function(deferred) {
           handle(deferred);
         });
       }, 0);
@@ -2569,7 +2830,8 @@
 
   Est.promise = promise;
 
-  var topics = {}, subUid = -1;
+  var topics = {},
+    subUid = -1;
 
   /**
    * 观察者模式 - 发布/订阅
@@ -2587,7 +2849,7 @@
    */
   function trigger(topic, args) {
     if (!topics[topic]) return false;
-    setTimeout(function () {
+    setTimeout(function() {
       var subscribers = topics[topic],
         len = subscribers ? subscribers.length : 0;
       while (len--) {
@@ -2645,7 +2907,7 @@
       return undefined;
     }
     args = slice.call(arguments, 2);
-    proxy = function () {
+    proxy = function() {
       return fn.apply(context || this, args.concat(slice.call(arguments)));
     };
     proxy.guid = fn.guid = fn.guid || nextUid('proxy');
@@ -2666,7 +2928,7 @@
   function throttle(fn, delay, mustRunDelay, scope) {
     var start = new Date();
     if (!mustRunDelay) mustRunDelay = 5000;
-    return function (a, b, c, d, e, f) {
+    return function(a, b, c, d, e, f) {
       var context = scope || this,
         args = arguments;
       clearTimeout(fn.timer);
@@ -2675,7 +2937,7 @@
         clearTimeout(fn.timer);
         fn.apply(context, args);
       } else {
-        fn.timer = setTimeout(function () {
+        fn.timer = setTimeout(function() {
           start = new Date();
           fn.apply(context, args);
         }, delay || 20);
@@ -2701,12 +2963,12 @@
    *      Est("fabio").capitalize();
    *      ==> "Fabio"
    */
-  Est.mixin = function (obj, isExtend) {
+  Est.mixin = function(obj, isExtend) {
     var ctx = Est;
     if (typeOf(isExtend) === 'boolean' && !isExtend) ctx = obj;
-    Est.each(Est.functions(obj), function (name) {
+    Est.each(Est.functions(obj), function(name) {
       var func = ctx[name] = obj[name];
-      ctx.prototype[name] = function () {
+      ctx.prototype[name] = function() {
         try {
           var args = [];
           if (typeof this._wrapped !== 'undefined')
@@ -2720,12 +2982,12 @@
     });
     Wrapper.prototype = ctx.prototype;
     Est.extend(ctx.prototype, {
-      chain: function (value, chainAll) {
+      chain: function(value, chainAll) {
         value = new Wrapper(value, chainAll);
         value._chain = true;
         return value;
       },
-      value: function () {
+      value: function() {
         return this._wrapped;
       }
     });
@@ -2738,12 +3000,12 @@
    * @private
    */
   if (typeof define === 'function' && define.amd) {
-    define('Est', [], function () {
+    define('Est', [], function() {
       return Est;
     });
   } else if (typeof define === 'function' && define.cmd) {
     // seajs
-    define('Est', [], function (require, exports, module) {
+    define('Est', [], function(require, exports, module) {
       module.exports = Est;
     });
   }

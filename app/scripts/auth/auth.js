@@ -203,12 +203,12 @@ Service.initUser().done(function(result) {
   Est.off('login').on('login', function(flag, response) {
     Est.trigger('accountRender', response);
     setTimeout(function() {
-      app.getView('accountRender').login();
+      app.getView('navigateAccount').login();
     }, 500);
   });
 
   Est.off('checkLogin').on('checkLogin', function() {
-    Service.initUser(UserModel).done(function(response) {
+    Service.initUser().done(function(response) {
       if (!CONST.USER.username) {
         Est.trigger('accountRender', response);
         Est.trigger('login', response);

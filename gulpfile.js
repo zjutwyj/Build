@@ -350,7 +350,6 @@ gulp.task('base', [], function() {
         'app/vendor/seajs/seajs-text-debug.js',
         'app/vendor/jquery/jquery-1.12.0.js',
         'app/Est/Est.source.js',
-        'app/vendor/underscore/underscore.js',
         'app/vendor/backbone/backbone-debug-est.js',
         'app/vendor/handlebars/handlebars-debug.js',
 

@@ -637,7 +637,7 @@ var BaseList = SuperView.extend({
       //TODO 优先级 new对象里的viewId > _options > getCurrentView()
       itemView._setViewId(this._options.viewId || app.getCurrentView());
 
-      if (arg2 && arg2.at < this.collection.models.length - 1 &&
+      if (arg2 && arg2.at < this.dx - 1 &&
         this.collection.models.length > 1) {
         this.collection.models[arg2.at === 0 ? 0 :
           arg2.at - 1].view.$el.after(itemView._render().el);
@@ -663,10 +663,10 @@ var BaseList = SuperView.extend({
     // 判断第二个参数是否是数字， 否-> 取当前列表的最后一个元素的索引值
     // 判断index是否大于列表长度
     // 若存在items， 则相应插入元素
-    var obj, _index = Est.typeOf(index) === 'number' ? index + 1 : this.collection.models.length === 0 ? 0 : this.collection.models.length + 1;
+    var obj, index = Est.typeOf(index) === 'number' ? index + 1 : this.collection.models.length === 0 ? 0 : this.collection.models.length;
     var opts = {
-      at: _index > this.collection.models.length ?
-        this.collection.models.length + 2 : _index
+      at: index > this.collection.models.length + 1 ?
+        this.collection.models.length : index
     };
     if (this._options.items) {
       obj = Est.typeOf(model) === 'array' ? Est.pluck(model, function(item) {
@@ -675,9 +675,6 @@ var BaseList = SuperView.extend({
       this._options.items.splice(opts.at - 1, 0, obj);
     }
     this.collection.push(model, opts);
-    if (!Est.isEmpty(index)) {
-      this._exchangeOrder(_index - 1, _index, {});
-    }
     this._resetDx();
   },
   /**
@@ -1320,37 +1317,26 @@ var BaseList = SuperView.extend({
     options = Est.extend({
       tip: CONST.LANG.SUCCESS + '！'
     }, options);
-    this.checkboxIds = this._getCheckboxIds(options.field || 'id');
+    this.checkboxIds = this._getCheckboxIds();
     if (this.checkboxIds.length === 0) {
       BaseUtils.tip(CONST.LANG.SELECT_ONE + '！');
       return;
     }
-    if (options.url) {
-      $.ajax({
-        type: 'POST',
-        async: false,
-        url: options.url,
-        data: {
-          ids: ctx.checkboxIds.join(',')
-        },
-        success: function(result) {
-          if (!result.success) {
-            BaseUtils.tip(result.msg);
-          } else
-            BaseUtils.tip(options.tip);
-          ctx._load();
-          if (options.callback)
-            options.callback.call(ctx, result);
-        }
-      });
-    } else {
-      Est.each(this._getCheckedItems(), function(item) {
-        item.destroy();
-      });
-      if (options.callback)
-        options.callback.call(ctx);
-    }
-
+    $.ajax({
+      type: 'POST',
+      async: false,
+      url: options.url,
+      data: {
+        ids: ctx.checkboxIds.join(',')
+      },
+      success: function(result) {
+        if (!result.success) {
+          BaseUtils.tip(result.msg);
+        } else
+          BaseUtils.tip(options.tip);
+        ctx._load();
+      }
+    });
   },
   /**
    * 批量删除
@@ -1360,25 +1346,12 @@ var BaseList = SuperView.extend({
    * @author wyj 14.12.14
    * @example
    *      this._batchDel({
-   *        url: CONST.API + '/message/batch/del',
-   *        field: 'id',
+   *        url: CONST.API + '/message/batch/del'
    *      });
    */
-  _batchDel: function(options, callback) {
+  _batchDel: function(options) {
     var ctx = this;
-    var url = null;
-    var field = 'id';
-    var $target = this._getEventTarget(options);
-    // options 为 event
-    if ($target.size() > 0) {
-      url = $target.attr('data-url');
-      field = $target.attr('data-field') || 'id';
-    } else {
-      url = options.url;
-      id = options.id || 'id';
-    }
-
-    this.checkboxIds = this._getCheckboxIds(field);
+    this.checkboxIds = this._getCheckboxIds();
     if (this.checkboxIds && this.checkboxIds.length === 0) {
       BaseUtils.tip(CONST.LANG.SELECT_ONE);
       return;
@@ -1386,10 +1359,8 @@ var BaseList = SuperView.extend({
     BaseUtils.confirm({
       success: function() {
         ctx._batch({
-          url: url,
-          field: field,
-          tip: CONST.LANG.DEL_SUCCESS,
-          callback: callback
+          url: ctx.collection.batchDel,
+          tip: CONST.LANG.DEL_SUCCESS
         });
       }
     });

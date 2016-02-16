@@ -14,8 +14,10 @@
  <a href="javascript:;">{{this}}</a></li>
  {{/pagination}}
  */
-Handlebars.registerHelper('pagination', function (page, totalPage, sum, block) {
-  var accum = '', block = block, sum = sum;
+Handlebars.registerHelper('pagination', function(page, totalPage, sum, block) {
+  var accum = '',
+    block = block,
+    sum = sum;
   if (arguments.length === 3) {
     block = sum;
     sum = 9;
@@ -34,7 +36,7 @@ Handlebars.registerHelper('pagination', function (page, totalPage, sum, block) {
  * @example
  *      Handlebars.helpers["getValue"].apply(this, date)
  */
-Handlebars.registerHelper('getValue', function (path, options) {
+Handlebars.registerHelper('getValue', function(path, options) {
   if (typeof path !== 'undefined' && Est.typeOf(path) === 'string') {
     var list = path.split('.');
     if (list[0] in this) {
@@ -59,7 +61,7 @@ Handlebars.registerHelper('getValue', function (path, options) {
  * @example
  *      {{#compare ../page '!==' this}}danaiPageNum{{else}}active{{/compare}}
  */
-Handlebars.registerHelper('compare', function (v1, operator, v2, options) {
+Handlebars.registerHelper('compare', function(v1, operator, v2, options) {
   if (arguments.length < 3)
     throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
   try {
@@ -112,7 +114,7 @@ Handlebars.registerHelper('compare', function (v1, operator, v2, options) {
  * @example
  *      {{dateFormat $.detail_news.add_time $.lan.news.format}}
  */
-Handlebars.registerHelper('dateFormat', function (date, fmt, options) {
+Handlebars.registerHelper('dateFormat', function(date, fmt, options) {
   return Est.dateFormat(date, fmt);
 });
 
@@ -123,7 +125,7 @@ Handlebars.registerHelper('dateFormat', function (date, fmt, options) {
  * @example
  *      {{#contains ../element this}}checked="checked"{{/contains}}
  */
-Handlebars.registerHelper('contains', function (target, thisVal, options) {
+Handlebars.registerHelper('contains', function(target, thisVal, options) {
   if (Est.isEmpty(target)) return;
   return Est.contains(target, thisVal) ? options.fn(this) : options.inverse(this);
 });
@@ -135,7 +137,7 @@ Handlebars.registerHelper('contains', function (target, thisVal, options) {
  * @example
  *      {{plus 1 2}} => 3
  */
-Handlebars.registerHelper('plus', function (num1, num2, opts) {
+Handlebars.registerHelper('plus', function(num1, num2, opts) {
   return parseInt(num1, 10) + parseInt(num2, 10);
 });
 /**
@@ -145,7 +147,7 @@ Handlebars.registerHelper('plus', function (num1, num2, opts) {
  * @example
  *        {{minus 10 5}} => 5
  */
-Handlebars.registerHelper('minus', function (num1, num2, opts) {
+Handlebars.registerHelper('minus', function(num1, num2, opts) {
   return parseInt(num1, 10) - parseInt(num2, 10);
 });
 
@@ -156,7 +158,7 @@ Handlebars.registerHelper('minus', function (num1, num2, opts) {
  * @example
  *      {{cutByte name 5 end='...'}}
  */
-Handlebars.registerHelper('cutByte', function (str, len, options) {
+Handlebars.registerHelper('cutByte', function(str, len, options) {
   return Est.cutByte(str, len, options.hash.end || '...');
 });
 
@@ -168,12 +170,11 @@ Handlebars.registerHelper('cutByte', function (str, len, options) {
  *       return Handlebars.helpers["x"].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);
  *
  */
-Handlebars.registerHelper("x", function (expression, options) {
-  var fn = function () {
-  }, result;
+Handlebars.registerHelper("x", function(expression, options) {
+  var fn = function() {},
+    result;
   try {
-    fn = Function.apply(this,
-      [ 'window', 'return ' + expression + ';' ]);
+    fn = Function.apply(this, ['window', 'return ' + expression + ';']);
   } catch (e) {
     console.warn('[warning] {{x ' + expression + '}} is invalid javascript', e);
   }
@@ -193,7 +194,7 @@ Handlebars.registerHelper("x", function (expression, options) {
  *    {{#xif "this.orderStatus != 'completed' && this.orderStatus != 'invalid' && this.paymentStatus == 'unpaid' &&
               this.shippingStatus == 'unshipped'"}}disabled{{/xif}}
  */
-Handlebars.registerHelper("xif", function (expression, options) {
+Handlebars.registerHelper("xif", function(expression, options) {
   return Handlebars.helpers["x"].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);
 });
 
@@ -204,7 +205,7 @@ Handlebars.registerHelper("xif", function (expression, options) {
  * @example
  *      {{parseInt 01}}
  */
-Handlebars.registerHelper('parseInt', function (result, options) {
+Handlebars.registerHelper('parseInt', function(result, options) {
   return parseInt(result, 10);
 });
 
@@ -213,7 +214,7 @@ Handlebars.registerHelper('parseInt', function (result, options) {
  * @method id2
  * @author wyj
  */
-Handlebars.registerHelper('id2', function (id) {
+Handlebars.registerHelper('id2', function(id) {
   return id == null ? "" : id.replace(/^[^1-9]+/, "")
 });
 
@@ -224,7 +225,7 @@ Handlebars.registerHelper('id2', function (id) {
  * @example
  *        {{CONST 'HOST'}}
  */
-Handlebars.registerHelper('CONST', function (name, options) {
+Handlebars.registerHelper('CONST', function(name, options) {
   return Est.getValue(CONST, name);
 });
 
@@ -236,7 +237,7 @@ Handlebars.registerHelper('CONST', function (name, options) {
  *        {{PIC pic}}   ==> http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic.jpg?v=2015-12-20_12:30
  *        {{PIC pic 5}} ==> http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic_5.jpg?v=2015-12-20_12:30
  */
-Handlebars.registerHelper('PIC', function (name, number, options) {
+Handlebars.registerHelper('PIC', function(name, number, options) {
   var version = '';
   if (name) {
     version += (name.indexOf('?') > -1 ? ('&v=' + CONST.APP_VERSION) : '?v=' + CONST.APP_VERSION);
@@ -245,11 +246,11 @@ Handlebars.registerHelper('PIC', function (name, number, options) {
     }
   }
   if (!name) return CONST.DOMAIN + CONST.PIC_NONE + version;
-  if (Est.startsWidth(name, 'http') && name.indexOf('upload') > -1){
-        name = name.substring(name.indexOf('upload'), name.length);
+  if (Est.startsWidth(name, 'http') && name.indexOf('upload') > -1) {
+    name = name.substring(name.indexOf('upload'), name.length);
   }
-  if (Est.startsWidth(name, 'upload')){
-     return arguments.length < 3 ? CONST.PIC_URL + '/' + name + version:
+  if (Est.startsWidth(name, 'upload')) {
+    return arguments.length < 3 ? CONST.PIC_URL + '/' + name + version :
       Handlebars.helpers['_picUrl'].apply(this, [name, number, options]) + version;
   }
 
@@ -265,7 +266,7 @@ Handlebars.registerHelper('PIC', function (name, number, options) {
  * @param  {object} options
  * @return {string}     => background-image: url(http://img.jihui88.com/upload/u/u2/.......png);
  */
-Handlebars.registerHelper('BackgroundImage', function (name, number, options) {
+Handlebars.registerHelper('BackgroundImage', function(name, number, options) {
   return ('background-image: url(' + Handlebars.helpers['PIC'].apply(this, Array.prototype.slice.call(arguments)) + ');');
 });
 
@@ -282,7 +283,7 @@ Handlebars.registerHelper('BackgroundImage', function (name, number, options) {
  * @example
  *      {{#isEmpty image}}<img src='...'></img>{{/isEmpty}}
  */
-Handlebars.registerHelper('isEmpty', function (value, options) {
+Handlebars.registerHelper('isEmpty', function(value, options) {
   return Est.isEmpty(value) ? options.fn(this) :
     options.inverse(this);
 });
@@ -294,7 +295,7 @@ Handlebars.registerHelper('isEmpty', function (value, options) {
  * @example
  *      <img src="{{CONST 'PIC_URL'}}/{{picUrl picPath 6}}" width="52" height="52">
  */
-Handlebars.registerHelper('picUrl', function (src, number, opts) {
+Handlebars.registerHelper('picUrl', function(src, number, opts) {
   var url = src;
   if (arguments.length < 3) return src || CONST.PIC_NONE;
   if (src == null || src.length == 0) return CONST.PIC_NONE;
@@ -302,7 +303,7 @@ Handlebars.registerHelper('picUrl', function (src, number, opts) {
   url = url.substring(0, url.lastIndexOf(".")) + "_" + number + "." + url2;
   return url ? url : '';
 });
-Handlebars.registerHelper('_picUrl', function (src, number, opts) {
+Handlebars.registerHelper('_picUrl', function(src, number, opts) {
   return CONST.PIC_URL + '/' + Handlebars.helpers['picUrl'].apply(this, [src, number, opts]);
 });
 /**
@@ -313,9 +314,10 @@ Handlebars.registerHelper('_picUrl', function (src, number, opts) {
  * @example
  *        {{{radio name='isBest' value=isBest option='{"是": "01", "否": "00"}' }}}
  */
-Handlebars.registerHelper('radio', function (options) {
-  var result = [], list = $.parseJSON ? $.parseJSON(options.hash.option) : JSON.parse(options.hash.options);
-  Est.each(list, function (val, key, list, index) {
+Handlebars.registerHelper('radio', function(options) {
+  var result = [],
+    list = $.parseJSON ? $.parseJSON(options.hash.option) : JSON.parse(options.hash.options);
+  Est.each(list, function(val, key, list, index) {
     var checked = options.hash.value === val ? 'checked' : '';
     result.push('<label><input id="model' + index + '-' + options.hash.name + '" type="radio" name="' + options.hash.name +
       '" value="' + val + '" ' + checked + '>&nbsp;' + key + '</label>&nbsp;&nbsp;');
@@ -331,18 +333,20 @@ Handlebars.registerHelper('radio', function (options) {
  * @example
  *      {{{{checkbox label='默认' name='isChecked' value=isChecked trueVal='01' falseVal='00' }}}
  */
-Handlebars.registerHelper('checkbox', function (options) {
-  var id = options.hash.id ? options.hash.id : (Est.nextUid('model- ')+ options.hash.name);
+Handlebars.registerHelper('checkbox', function(options) {
+  var id = options.hash.id ? options.hash.id : (Est.nextUid('model- ') + options.hash.name);
   var random = Est.nextUid('checkbox'); // 随机数
   var icon_style = "font-size: 32px;"; // 图标大小
   var value = Est.isEmpty(options.hash.value) ? options.hash.falseVal : options.hash.value; // 取值
-  var isChecked = value === options.hash.trueVal ? true : false; // 是否选中状态
+  var isChecked = Est.typeOf(value) === 'boolean' ? value : value === options.hash.trueVal ? true : false; // 是否选中状态
   var defaultClass = isChecked ? 'icon-checkbox' : 'icon-checkboxno';
   var args = ("'" + random + "'"); // 参数
 
   var result = '<label for="' + id + '"> ' +
-    '<input type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden">' +
-    options.hash.label +
+    '<input type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' +
+    value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal +
+    '" false-value="' + options.hash.falseVal + '"  class="rc-hidden '+(options.hash.className || '')+'"> ' +
+  options.hash.label +
     '</label>';
   return result;
 });
@@ -356,10 +360,10 @@ Handlebars.registerHelper('checkbox', function (options) {
  *      {{{select name='paymentConfit' value=curConfitPanment key='paymentId' text='name' list=paymentConfigList  style="height: 40px;"}}}
  *
  */
-Handlebars.registerHelper('select', function (options) {
+Handlebars.registerHelper('select', function(options) {
   var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
   var str = '<select name="' + options.hash.name + '" id="' + id + '"  class="' + (options.hash.className || '') + '" style="' + (options.hash.style || '') + '"> ';
-  Est.each(options.hash.list, function (item) {
+  Est.each(options.hash.list, function(item) {
     var selected = options.hash.value === item[options.hash.key] ? 'selected' : '';
     str += '<option value="' + item[options.hash.key] + '" ' + selected + '>' + item[options.hash.text] + '</option>';
   });
@@ -373,7 +377,7 @@ Handlebars.registerHelper('select', function (options) {
  * @example
  *      <input type="text" {{disabled 'this.isDisabled'}} />
  */
-Handlebars.registerHelper('disabled', function (expression, options) {
+Handlebars.registerHelper('disabled', function(expression, options) {
   return Handlebars.helpers['x'].apply(this, [expression, options]) ? ' disabled=disabled ' : '';
 });
 
@@ -385,7 +389,7 @@ Handlebars.registerHelper('disabled', function (expression, options) {
  * @example
  *        <input type="checked"  {{checked 'this.isChecked'}} />
  */
-Handlebars.registerHelper('checked', function (expression, options) {
+Handlebars.registerHelper('checked', function(expression, options) {
   return Handlebars.helpers['x'].apply(this, [expression, options]) ? 'checked' : '';
 });
 
@@ -396,7 +400,7 @@ Handlebars.registerHelper('checked', function (expression, options) {
  * @example
  *      {{encodeURIComponent url}}
  */
-Handlebars.registerHelper('encodeURIComponent', function (val, options) {
+Handlebars.registerHelper('encodeURIComponent', function(val, options) {
   return encodeURIComponent(val);
 });
 
@@ -406,7 +410,7 @@ Handlebars.registerHelper('encodeURIComponent', function (val, options) {
  * @example
  *      {{json 'invite.title'}}
  */
-Handlebars.registerHelper('json', function (path, options) {
+Handlebars.registerHelper('json', function(path, options) {
   return Handlebars.helpers["getValue"].call(this, path);
 });
 /**
@@ -415,7 +419,7 @@ Handlebars.registerHelper('json', function (path, options) {
  * @example
  *      http://www.jihui88.com?v={{version}}
  */
-Handlebars.registerHelper('version', function (options) {
+Handlebars.registerHelper('version', function(options) {
   return new Date().getTime();
 });
 
@@ -426,6 +430,6 @@ Handlebars.registerHelper('version', function (options) {
  * @example
  *    {{stripScripts '<scripts></scripts>'}}
  */
-Handlebars.registerHelper('stripScripts', function (str, options) {
+Handlebars.registerHelper('stripScripts', function(str, options) {
   return Est.stripScripts(str);
 });

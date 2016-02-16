@@ -19,9 +19,9 @@ define('UiItemCheck', ['template/ui_item_check', 'ItemCheck', 'UiData'], functio
     },
     afterRender: function() {
       app.addRegion('itemCheckNormal', ItemCheck, {
-        el: this.$('#ui-item_check'),
-        tpl: '<em>{{text}}</em>',
-        cur: 'value_b',
+        el: this.$('#ui-item-check-normal'),
+        tpl: '<span>{{text}}</span>',
+        cur: 'value_2',
         target: '#model-item_check',
         path: 'value',
         items: UiData.item_check,
@@ -38,13 +38,12 @@ define('UiItemCheck', ['template/ui_item_check', 'ItemCheck', 'UiData'], functio
           }
         },
         mouseEnter: function(model) {
-
         }
       });
       app.addRegion('itemCheckAppend', ItemCheck, {
-        el: this.$('#ui-item_check'),
-        tpl: '<em>{{text}}</em>',
-        cur: 'value_b',
+        el: this.$('#ui-item-check-append'),
+        tpl: '<span>{{text}}</span>',
+        cur: 'value_2',
         target: '#model-item_check',
         path: 'value',
         checkAppend: true,
@@ -54,17 +53,51 @@ define('UiItemCheck', ['template/ui_item_check', 'ItemCheck', 'UiData'], functio
           if (app.getView('itemCheckAppend')) {
             this.updateResult(app.getView('itemCheckAppend')._getCheckedItems());
           }
-        }, this),
-        compare: function(item) { // 自定义比较器
-          if (item.value === 'value_b') {
-            return true;
-          } else {
-            return false;
+        }, this)
+      });
+      app.addRegion('itemCheckBtn', ItemCheck, {
+        el: this.$('#ui-item-check-btn'),
+        tpl: '<span>{{text}}</span>',
+        cur: 'value_2',
+        target: '#model-item_check',
+        path: 'value',
+        theme: 'ui-item-check-btn',
+        items: UiData.item_check,
+        change: Est.proxy(function(item) {
+          if (app.getView('itemCheckBtn')) {
+            this.updateResult(app.getView('itemCheckBtn')._getCheckedItems());
           }
-        },
-        mouseEnter: function(model) {
-
-        }
+        }, this)
+      });
+      app.addRegion('itemCheckRadio', ItemCheck, {
+        el: this.$('#ui-item-check-radio'),
+        tpl: '<span>{{text}}</span>',
+        cur: 'value_2',
+        target: '#model-item_check',
+        path: 'value',
+        theme: 'ui-item-check-radio',
+        items: UiData.item_check,
+        change: Est.proxy(function(item) {
+          if (app.getView('itemCheckRadio')) {
+            this.updateResult(app.getView('itemCheckRadio')._getCheckedItems());
+          }
+        }, this)
+      });
+      app.addRegion('itemCheckCheckbox', ItemCheck, {
+        el: this.$('#ui-item-check-checkbox'),
+        tpl: '<span>{{text}}</span>',
+        cur: 'value_2',
+        target: '#model-item_check',
+        path: 'value',
+        theme: 'ui-item-check-checkbox',
+        checkAppend: true,
+        checkToggle: true,
+        items: UiData.item_check,
+        change: Est.proxy(function(item) {
+          if (app.getView('itemCheckCheckbox')) {
+            this.updateResult(app.getView('itemCheckCheckbox')._getCheckedItems());
+          }
+        }, this)
       });
       this._watch(['itemCheckResult'], '.ui-item-check-result');
     },

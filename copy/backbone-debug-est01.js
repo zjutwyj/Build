@@ -6,18 +6,18 @@
 (function(root, factory) {
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (typeof define === "function" && define.amd) {
-    define([ "Est", "jquery", "exports" ], function(Est, $, exports) {
+    define([ "underscore", "jquery", "exports" ], function(_, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
-      root.Backbone = factory(root, exports, Est, $);
+      root.Backbone = factory(root, exports, _, $);
     });
   } else if (typeof exports !== "undefined") {
-    var Est = require("Est");
-    factory(root, exports, Est, root.jQuery);
+    var _ = require("underscore");
+    factory(root, exports, _, root.jQuery);
   } else {
-    root.Backbone = factory(root, {}, root.Est, root.jQuery || root.Zepto || root.ender || root.$);
+    root.Backbone = factory(root, {}, root._, root.jQuery || root.Zepto || root.ender || root.$);
   }
-})(this, function(root, Backbone, Est, $) {
+})(this, function(root, Backbone, _, $) {
   // Initial Setup
   // -------------
   // Save the previous value of the `Backbone` variable, so that it can be
@@ -39,14 +39,6 @@
     root.Backbone = previousBackbone;
     return this;
   };
-
-  // custom fn
-  Backbone.result = function(object, property) {
-    if (object == null) return void 0;
-    var value = object[property];
-    return Est.typeOf(value) === 'function' ? object[property]() : value;
-  };
-
   // Turn on `emulateHTTP` to support legacy HTTP servers. Setting this option
   // will fake `"PATCH"`, `"PUT"` and `"DELETE"` requests via the `_method` parameter and
   // set a `X-Http-Method-Override` header.
@@ -64,7 +56,7 @@
   // succession.
   //
   //     var object = {};
-  //     Est.extend(object, Backbone.Events);
+  //     _.extend(object, Backbone.Events);
   //     object.on('expand', function(){ alert('expanded'); });
   //     object.trigger('expand');
   //
@@ -87,7 +79,7 @@
     once: function(name, callback, context) {
       if (!eventsApi(this, "once", name, [ callback, context ]) || !callback) return this;
       var self = this;
-      var once = Est.once(function() {
+      var once = _.once(function() {
         self.off(name, once);
         callback.apply(this, arguments);
       });
@@ -242,13 +234,13 @@
     this.attributes = {};
     if (options.collection) this.collection = options.collection;
     if (options.parse) attrs = this.parse(attrs, options) || {};
-    attrs = Est.defaults({}, attrs, Backbone.result(this, "defaults"));
+    attrs = _.defaults({}, attrs, _.result(this, "defaults"));
     this.set(attrs, options);
     this.changed = {};
     this.initialize.apply(this, arguments);
   };
   // Attach all inheritable methods to the Model prototype.
-  Est.extend(Model.prototype, Events, {
+  _.extend(Model.prototype, Events, {
     // A hash of attributes whose current and previous value differ.
     changed: null,
     // The value returned during the last failed validation.
@@ -274,7 +266,7 @@
     },
     // Get the HTML-escaped value of an attribute.
     escape: function(attr) {
-      return Est.escapeHTML(this.get(attr));
+      return _.escape(this.get(attr));
     },
     // Returns `true` if the attribute contains a value that is not null
     // or undefined.
@@ -313,8 +305,8 @@
       // For each `set` attribute, update or delete the current value.
       for (attr in attrs) {
         val = attrs[attr];
-        if (!Est.equal(current[attr], val)) changes.push(attr);
-        if (!Est.equal(prev[attr], val)) {
+        if (!_.isEqual(current[attr], val)) changes.push(attr);
+        if (!_.isEqual(prev[attr], val)) {
           this.changed[attr] = val;
         } else {
           delete this.changed[attr];
@@ -345,7 +337,7 @@
     // Remove an attribute from the model, firing `"change"`. `unset` is a noop
     // if the attribute doesn't exist.
     unset: function(attr, options) {
-      return this.set(attr, void 0, Est.extend({}, options, {
+      return this.set(attr, void 0, _.extend({}, options, {
         unset: true
       }));
     },
@@ -353,7 +345,7 @@
     clear: function(options) {
       var attrs = {};
       for (var key in this.attributes) attrs[key] = void 0;
-      return this.set(attrs, Est.extend({}, options, {
+      return this.set(attrs, _.extend({}, options, {
         unset: true
       }));
     },
@@ -361,7 +353,7 @@
     // If you specify an attribute name, determine if that attribute has changed.
     hasChanged: function(attr) {
       if (attr == null) return !Est.isEmpty(this.changed);
-      return Est.has(this.changed, attr);
+      return _.has(this.changed, attr);
     },
     // Return an object containing all the attributes that have changed, or
     // false if there are no changed attributes. Useful for determining what
@@ -374,7 +366,7 @@
       var val, changed = false;
       var old = this._changing ? this._previousAttributes : this.attributes;
       for (var attr in diff) {
-        if (Est.equal(old[attr], val = diff[attr])) continue;
+        if (_.isEqual(old[attr], val = diff[attr])) continue;
         (changed || (changed = {}))[attr] = val;
       }
       return changed;
@@ -419,7 +411,7 @@
       } else {
         (attrs = {})[key] = val;
       }
-      options = Est.extend({
+      options = _.extend({
         validate: true
       }, options);
       // If we're not waiting and attributes exist, save acts as
@@ -432,7 +424,7 @@
       }
       // Set temporary attributes if `{wait: true}`.
       if (attrs && options.wait) {
-        this.attributes = Est.extend({}, attributes, attrs);
+        this.attributes = _.extend({}, attributes, attrs);
       }
       // After a successful server-side save, the client is (optionally)
       // updated with the server-side state.
@@ -443,7 +435,7 @@
         // Ensure attributes are restored during synchronous saves.
         model.attributes = attributes;
         var serverAttrs = model.parse(resp, options);
-        if (options.wait) serverAttrs = Est.extend(attrs || {}, serverAttrs);
+        if (options.wait) serverAttrs = _.extend(attrs || {}, serverAttrs);
         if (Est.typeOf(serverAttrs) === 'object' && !model.set(serverAttrs, options)) {
           return false;
         }
@@ -490,7 +482,7 @@
     // using Backbone's restful methods, override this to change the endpoint
     // that will be called.
     url: function() {
-      var base = Backbone.result(this, "urlRoot") || Backbone.result(this.collection, "url") || urlError();
+      var base = _.result(this, "urlRoot") || _.result(this.collection, "url") || urlError();
       if (this.isNew()) return base;
       return base.replace(/([^\/])$/, "$1/") + encodeURIComponent(this.id);
     },
@@ -509,7 +501,7 @@
     },
     // Check if the model is currently in a valid state.
     isValid: function(options) {
-      return this._validate({}, Est.extend(options || {}, {
+      return this._validate({}, _.extend(options || {}, {
         validate: true
       }));
     },
@@ -517,10 +509,10 @@
     // returning `true` if all is well. Otherwise, fire an `"invalid"` event.
     _validate: function(attrs, options) {
       if (!options.validate || !this.validate) return true;
-      attrs = Est.extend({}, this.attributes, attrs);
+      attrs = _.extend({}, this.attributes, attrs);
       var error = this.validationError = this.validate(attrs, options) || null;
       if (!error) return true;
-      this.trigger("invalid", this, error, Est.extend(options, {
+      this.trigger("invalid", this, error, _.extend(options, {
         validationError: error
       }));
       return false;
@@ -533,7 +525,7 @@
     Model.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.attributes);
-      return Est[method].apply(Est, args);
+      return _[method].apply(_, args);
     };
   });
   // Backbone.Collection
@@ -553,7 +545,7 @@
     if (options.comparator !== void 0) this.comparator = options.comparator;
     this._reset();
     this.initialize.apply(this, arguments);
-    if (models) this.reset(models, Est.extend({
+    if (models) this.reset(models, _.extend({
       silent: true
     }, options));
   };
@@ -568,7 +560,7 @@
     remove: false
   };
   // Define the Collection's inheritable methods.
-  Est.extend(Collection.prototype, Events, {
+  _.extend(Collection.prototype, Events, {
     // The default model for a collection is just a **Backbone.Model**.
     // This should be overridden in most cases.
     model: Model,
@@ -588,7 +580,7 @@
     },
     // Add a model, or list of models to the set.
     add: function(models, options) {
-      return this.set(models, Est.extend({
+      return this.set(models, _.extend({
         merge: false
       }, options, addOptions));
     },
@@ -619,7 +611,7 @@
     // already exist in the collection, as necessary. Similar to **Model#set**,
     // the core operation for updating the data contained by the collection.
     set: function(models, options) {
-      options = Est.defaults({}, options, setOptions);
+      options = _.defaults({}, options, setOptions);
       if (options.parse) models = this.parse(models, options);
       var singular = !(Est.typeOf(models) === 'array');
       models = singular ? models ? [ models ] : [] : Est.cloneDeep(models);
@@ -710,7 +702,7 @@
       }
       options.previousModels = this.models;
       this._reset();
-      models = this.add(models, Est.extend({
+      models = this.add(models, _.extend({
         silent: true
       }, options));
       if (!options.silent) this.trigger("reset", this, options);
@@ -718,7 +710,7 @@
     },
     // Add a model to the end of the collection.
     push: function(model, options) {
-      return this.add(model, Est.extend({
+      return this.add(model, _.extend({
         at: this.length
       }, options));
     },
@@ -730,7 +722,7 @@
     },
     // Add a model to the beginning of the collection.
     unshift: function(model, options) {
-      return this.add(model, Est.extend({
+      return this.add(model, _.extend({
         at: 0
       }, options));
     },
@@ -786,7 +778,7 @@
     },
     // Pluck an attribute from each model in the collection.
     pluck: function(attr) {
-      return Est.invoke(this.models, "get", attr);
+      return _.invoke(this.models, "get", attr);
     },
     // Fetch the default set of models for this collection, resetting the
     // collection when they arrive. If `reset: true` is passed, the response
@@ -885,7 +877,7 @@
     Collection.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.models);
-      return Est[method].apply(Est, args);
+      return _[method].apply(_, args);
     };
   });
   // Underscore methods that take a property name as an argument.
@@ -913,7 +905,7 @@
   var View = Backbone.View = function(options) {
     this.cid = Est.nextUid("view");
     options || (options = {});
-    Est.extend(this, Est.pick(options, viewOptions));
+    _.extend(this, Est.pick(options, viewOptions));
     this._ensureElement();
     this.initialize.apply(this, arguments);
     this.delegateEvents();
@@ -923,7 +915,7 @@
   // List of views options to be merged as properties.
   var viewOptions = [ "model", "collection", "el", "id", "attributes", "className", "tagName", "events" ];
   // Set up all inheritable **Backbone.View** properties and methods.
-  Est.extend(View.prototype, Events, {
+  _.extend(View.prototype, Events, {
     // The default `tagName` of a View's element is `"div"`.
     tagName: "div",
     // jQuery delegate for element lookup, scoped to DOM elements within the
@@ -972,7 +964,7 @@
     // This only works for delegate-able events: not `focus`, `blur`, and
     // not `change`, `submit`, and `reset` in Internet Explorer.
     delegateEvents: function(events) {
-      if (!(events || (events = Backbone.result(this, "events")))) return this;
+      if (!(events || (events = _.result(this, "events")))) return this;
       this.undelegateEvents();
       for (var key in events) {
         var method = events[key];
@@ -1003,13 +995,13 @@
     // an element from the `id`, `className` and `tagName` properties.
     _ensureElement: function() {
       if (!this.el) {
-        var attrs = Est.extend({}, Backbone.result(this, "attributes"));
-        if (this.id) attrs.id = Backbone.result(this, "id");
-        if (this.className) attrs["class"] = Backbone.result(this, "className");
-        var $el = Backbone.$("<" + Backbone.result(this, "tagName") + ">").attr(attrs);
+        var attrs = _.extend({}, _.result(this, "attributes"));
+        if (this.id) attrs.id = _.result(this, "id");
+        if (this.className) attrs["class"] = _.result(this, "className");
+        var $el = Backbone.$("<" + _.result(this, "tagName") + ">").attr(attrs);
         this.setElement($el, false);
       } else {
-        this.setElement(Backbone.result(this, "el"), false);
+        this.setElement(_.result(this, "el"), false);
       }
     }
   });
@@ -1033,7 +1025,7 @@
   Backbone.sync = function(method, model, options) {
     var type = methodMap[method];
     // Default options, unless specified.
-    Est.defaults(options || (options = {}), {
+    _.defaults(options || (options = {}), {
       emulateHTTP: Backbone.emulateHTTP,
       emulateJSON: Backbone.emulateJSON
     });
@@ -1044,7 +1036,7 @@
     };
     // Ensure that we have a URL.
     if (!options.url) {
-      params.url = Backbone.result(model, "url") || urlError();
+      params.url = _.result(model, "url") || urlError();
     }
     // Ensure that we have the appropriate request data.
     if (options.data == null && model && (method === "create" || method === "update" || method === "patch")) {
@@ -1082,7 +1074,7 @@
       };
     }
     // Make the request, allowing the user to override any Ajax options.
-    var xhr = options.xhr = Backbone.ajax(Est.extend(params, options));
+    var xhr = options.xhr = Backbone.ajax(_.extend(params, options));
     model.trigger("request", model, xhr, options);
     return xhr;
   };
@@ -1141,7 +1133,7 @@
   var splatParam = /\*\w+/g;
   var escapeRegExp = /[\-{}\[\]+?.,\\\^$|#\s]/g;
   // Set up all inheritable **Backbone.Router** properties and methods.
-  Est.extend(Router.prototype, Events, {
+  _.extend(Router.prototype, Events, {
     // Initialize is an empty function by default. Override it with your own
     // initialization logic.
     initialize: function() {},
@@ -1183,7 +1175,7 @@
     // routes can be defined at the bottom of the route map.
     _bindRoutes: function() {
       if (!this.routes) return;
-      this.routes = Backbone.result(this, "routes");
+      this.routes = _.result(this, "routes");
       var route, routes = Est.keys(this.routes);
       while ((route = routes.pop()) != null) {
         this.route(route, this.routes[route]);
@@ -1218,7 +1210,7 @@
   // falls back to polling.
   var History = Backbone.History = function() {
     this.handlers = [];
-    Est.bindAll(this, "checkUrl");
+    _.bindAll(this, "checkUrl");
     // Ensure that `History` can be used outside of the browser.
     if (typeof window !== "undefined") {
       this.location = window.location;
@@ -1238,7 +1230,7 @@
   // Has the history handling already been started?
   History.started = false;
   // Set up all inheritable **Backbone.History** properties and methods.
-  Est.extend(History.prototype, Events, {
+  _.extend(History.prototype, Events, {
     // The default interval to poll for hash changes, if necessary, is
     // twenty times a second.
     interval: 50,
@@ -1273,7 +1265,7 @@
       History.started = true;
       // Figure out the initial configuration. Do we need an iframe?
       // Is pushState desired ... is it available?
-      this.options = Est.extend({
+      this.options = _.extend({
         root: "/"
       }, this.options, options);
       this.root = this.options.root;
@@ -1351,7 +1343,7 @@
     // returns `false`.
     loadUrl: function(fragment) {
       fragment = this.fragment = this.getFragment(fragment);
-      return Est.any(this.handlers, function(handler) {
+      return _.any(this.handlers, function(handler) {
         if (handler.route.test(fragment)) {
           handler.callback(fragment);
           return true;
@@ -1408,15 +1400,6 @@
   });
   // Create the default Backbone.history.
   Backbone.history = new History();
-   var bbextend = function(obj) {
-        if (!Est.typeOf(obj) === 'object') return obj;
-        Est.each(slice.call(arguments, 1), function(source) {
-            for (var prop in source) {
-                obj[prop] = source[prop];
-            }
-        });
-        return obj;
-    };
   // Helpers
   // -------
   // Helper function to correctly set up the prototype chain, for subclasses.
@@ -1428,7 +1411,7 @@
     // The constructor function for the new subclass is either defined by you
     // (the "constructor" property in your `extend` definition), or defaulted
     // by us to simply call the parent's constructor.
-    if (protoProps && Est.has(protoProps, "constructor")) {
+    if (protoProps && _.has(protoProps, "constructor")) {
       child = protoProps.constructor;
     } else {
       child = function() {
@@ -1436,7 +1419,7 @@
       };
     }
     // Add static properties to the constructor function, if supplied.
-    bbextend(child, parent, staticProps);
+    _.extend(child, parent, staticProps);
     // Set the prototype chain to inherit from `parent`, without calling
     // `parent`'s constructor function.
     var Surrogate = function() {
@@ -1446,7 +1429,7 @@
     child.prototype = new Surrogate();
     // Add prototype properties (instance properties) to the subclass,
     // if supplied.
-    if (protoProps) Est.extend(child.prototype, protoProps);
+    if (protoProps) _.extend(child.prototype, protoProps);
     // Set a convenience property in case the parent's prototype is needed
     // later.
     child.__super__ = parent.prototype;
@@ -1474,7 +1457,7 @@
   }
 
   Backbone.ModelBinder = function(){
-    Est.bindAll.apply(Est, [this].concat(Est.functions(this)));
+    _.bindAll.apply(_, [this].concat(Est.functions(this)));
   };
 
   // Static setter for class level options
@@ -1488,7 +1471,7 @@
   Backbone.ModelBinder.Constants.ModelToView = 'ModelToView';
   Backbone.ModelBinder.Constants.ViewToModel = 'ViewToModel';
 
-  Est.extend(Backbone.ModelBinder.prototype, {
+  _.extend(Backbone.ModelBinder.prototype, {
 
     bind:function (model, rootEl, attributeBindings, options) {
       this.unbind();
@@ -1531,7 +1514,7 @@
     },
 
     _setOptions: function(options){
-      this._options = Est.extend({
+      this._options = _.extend({
         boundAttribute: 'name'
       }, Backbone.ModelBinder.options, options);
 
@@ -1647,7 +1630,7 @@
       var attributeName, attributeBinding;
 
       for (attributeName in this._attributeBindings) {
-        if(attributesToCopy === undefined || Est.indexOf(attributesToCopy, attributeName) !== -1){
+        if(attributesToCopy === undefined || _.indexOf(attributesToCopy, attributeName) !== -1){
           attributeBinding = this._attributeBindings[attributeName];
           this._copyModelToView(attributeBinding);
         }
@@ -1951,10 +1934,10 @@
     if(!this._collection){
       throw 'Collection must be defined';
     }
-    Est.bindAll(this, 'convert');
+    _.bindAll(this, 'convert');
   };
 
-  Est.extend(Backbone.ModelBinder.CollectionConverter.prototype, {
+  _.extend(Backbone.ModelBinder.CollectionConverter.prototype, {
     convert: function(direction, value){
       if (direction === Backbone.ModelBinder.Constants.ModelToView) {
         return value ? value.id : undefined;

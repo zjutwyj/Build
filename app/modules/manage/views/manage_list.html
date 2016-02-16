@@ -1,0 +1,72 @@
+<div class="theme-black" style="background-color: #fff;">
+  <div class="wdm_cat_outer" style="padding-left: 0;">
+    <div class="wdm_cat manage-list-nav">
+    </div>
+    <div class="clr"></div>
+    <div class="wdm_search manage-list-search">
+      <form action="">
+        <input id="model-searchkey" type="text" class="wdm_input tool-tip" data-title="请输入搜索关键词" placeholder="关键词搜索">
+        <input type="button" class="wdm_btn icon search-submit" value="&#xe600;">
+      </form>
+    </div>
+  </div>
+
+  <div class="case-list square-scene">
+    <div class="image">
+      <div class="front face "
+           style='background-image: url("{{sharepic}}"); background-size: 100% 100%;'></div>
+      <div class="overlay">
+        <div class="edit">
+          <a class="edit-same" href="http://www.jihui88.com/wcd/html/{{wcdId}}.html" target="_blank">
+            <em class="iconfont icon-xianshi background-color-width-change" style="font-size:28px"></em>
+            <span>预览</span></a>
+          <a class="edit-same " href="#/design_center/{{wcdId}}">
+            <em class="iconfont icon-edit  background-color-width-change" style="font-size:28px"></em>
+            <span>编辑</span>
+          </a>
+          <a class="edit-same" href="#/promotion/{{wcdId}}">
+            <em class="iconfont icon-chart background-color-width-change" style="font-size:28px"></em>
+            <span>推广</span>
+          </a>
+          <div style="position: absolute;top: 8px;left: 8px;color: #fff;font-size: 20px;">传单编号：{{wcdId}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="project-info">
+      <p class="ellipsis">{{seoTitle}}</p>
+
+      <div class="show-count">
+        <a class="tool-tip data" data-title="浏览量" data-offset="10" href="javascript:;">
+          <em class="iconfont icon-xianshi" style="font-size: 20px;"></em><span class="show-count-span"><em
+            class="show-count-em">{{views}}</em></span>
+        </a>
+        <a class="tool-tip" data-title="转发量" data-offset="10" href="#/data_center">
+          <em class="iconfont icon-fenxiang" style="font-size: 20px;"></em><span class="show-count-span"><em
+            class="show-count-em">{{rviews}}</em></span>
+        </a>
+        <a class="tool-tip message" data-title="反馈数" data-offset="10" href="javascript:;">
+          <em class="iconfont icon-liuyan" style="font-size: 18px;"></em><span class="show-count-span"><em
+            class="show-count-em" style="border-right: none;">{{mviews}}</em></span>
+        </a>
+      </div>
+
+      <div class="buttons clearfix">
+        <div class="set">
+          <a class="delete background-color-width-change button"><em
+              class=" iconfont icon-delete"></em><span>删除</span></a>
+          <a
+              class="copy button background-color-width-change operation"><em
+              class="iconfont icon-copy"></em><span>复制</span></a>
+
+          <a class="send button background-color-width-change operation"><em
+              class=" iconfont icon-publish"></em><span>转送</span></a>
+
+        </div>
+        <a class="erweima button iconfont icon-erweima"><em
+            class="eqf-QRcode"></em></a></div>
+    </div>
+  </div>
+  <div class="wrap-load-more">
+    <a>查看更多...</a>
+  </div>
+</div>

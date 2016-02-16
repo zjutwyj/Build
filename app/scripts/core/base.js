@@ -12338,7 +12338,7 @@ return jQuery;
  * @constructor Est
  */
 ;
-(function () {
+(function() {
   'use strict';
   var root = this;
   /**
@@ -12346,14 +12346,19 @@ return jQuery;
    * @method [变量] - slice push toString hasOwnProperty concat
    * @private
    */
-  var slice = Array.prototype.slice, push = Array.prototype.push, toString = Object.prototype.toString,
-    hasOwnProperty = Object.prototype.hasOwnProperty, concat = Array.prototype.concat;
+  var slice = Array.prototype.slice,
+    push = Array.prototype.push,
+    toString = Object.prototype.toString,
+    hasOwnProperty = Object.prototype.hasOwnProperty,
+    concat = Array.prototype.concat;
   /**
    * @description ECMAScript 5 原生方法
    * @method [变量] - nativeIsArray nativeKeys nativeBind
    * @private
    */
-  var nativeIsArray = Array.isArray, nativeKeys = Object.keys, nativeBind = Object.prototype.bind;
+  var nativeIsArray = Array.isArray,
+    nativeKeys = Object.keys,
+    nativeBind = Object.prototype.bind;
   var whitespace = ' \n\r\t\f\x0b\xa0\u2000\u2001\u2002\u2003\n\
         \u2004\u2005\u2006\u2007\u2008\u2009\u200a\u200b\u2028\u2029\u3000';
   var uid = ['0', '0', '0'];
@@ -12366,15 +12371,15 @@ return jQuery;
    */
   var moduleMap = {};
   var fileMap = {};
-  var noop = function () {
-  };
+  var noop = function() {};
   /**
    * @description  定义数组和对象的缓存池
    * @method [变量] - maxPoolSize arrayPool objectPool
    * @private
    */
   var maxPoolSize = 40;
-  var arrayPool = [], objectPool = [];
+  var arrayPool = [],
+    objectPool = [];
   /**
    * @method [变量] - cache
    * @private
@@ -12385,16 +12390,17 @@ return jQuery;
    * @private
    * url 路由 */
   var routes = {};
-  var el = null, current = null;
+  var el = null,
+    current = null;
 
   /**
    * @description 创建Est对象
    * @method [对象] - Est
    * @private
    */
-  var Est = function (value) {
+  var Est = function(value) {
     return (value && typeof value == 'object' &&
-      typeOf(value) !== 'array' && hasOwnProperty.call(value, '_wrapped')) ? value :
+        typeOf(value) !== 'array' && hasOwnProperty.call(value, '_wrapped')) ? value :
       new Wrapper(value);
   };
 
@@ -12429,8 +12435,7 @@ return jQuery;
             console.log(msg);
           }
         }
-      } catch (e) {
-      }
+      } catch (e) {}
     }
   }
 
@@ -12456,39 +12461,40 @@ return jQuery;
   } else {
     root.Est = Est;
   }
+
   function identity(value) {
     return value;
   }
 
   Est.identity = identity;
-  var matchCallback = function (value, context, argCount) {
+  var matchCallback = function(value, context, argCount) {
     if (value == null) return Est.identity;
     if (Est.isFunction(value)) return createCallback(value, context, argCount);
     if (typeOf(value) === 'object') return matches(value);
     if (typeOf(value) === 'array') return value;
     return property(value);
   };
-  var createCallback = function (func, context, argCount) {
+  var createCallback = function(func, context, argCount) {
     if (!context) return func;
     switch (argCount == null ? 3 : argCount) {
       case 1:
-        return function (value) {
+        return function(value) {
           return func.call(context, value);
         };
       case 2:
-        return function (value, other) {
+        return function(value, other) {
           return func.call(context, value, other);
         };
       case 3:
-        return function (value, index, collection) {
+        return function(value, index, collection) {
           return func.call(context, value, index, collection);
         };
       case 4:
-        return function (accumulator, value, index, collection) {
+        return function(accumulator, value, index, collection) {
           return func.call(context, accumulator, value, index, collection);
         };
     }
-    return function () {
+    return function() {
       return func.apply(this, arguments);
     };
   };
@@ -12515,7 +12521,8 @@ return jQuery;
    *     ==> alerts each number value in turn...
    */
   function each(obj, callback, context) {
-    var i, length, first = false, last = false;
+    var i, length, first = false,
+      last = false;
     if (obj == null) return obj;
     callback = createCallback(callback, context);
     if (obj.length === +obj.length) {
@@ -12547,10 +12554,10 @@ return jQuery;
    *      Est.extend({name: 'moe'}, {age: 50});
    *      ==> {name: 'moe', age: 50}
    */
-  Est.extend = function (obj) {
+  Est.extend = function(obj) {
     var h = obj.$$hashKey;
     if (typeOf(obj) !== 'object') return obj;
-    each(slice.call(arguments, 1), function (source) {
+    Est.each(slice.call(arguments, 1), function(source) {
       for (var prop in source) {
         obj[prop] = source[prop];
       }
@@ -12570,7 +12577,7 @@ return jQuery;
      *      Est.isFunction(alert);
      *      ==> true
      */
-    Est.isFunction = function (obj) {
+    Est.isFunction = function(obj) {
       return typeof obj === 'function';
     };
   }
@@ -12584,7 +12591,7 @@ return jQuery;
    *      Est.functions(Est);
    *      ==> ["trim", "remove", "fromCharCode", "cloneDeep", "clone", "nextUid", "hash" ...
    */
-  Est.functions = Est.methods = function (obj) {
+  Est.functions = Est.methods = function(obj) {
     var names = [];
     for (var key in obj) {
       if (Est.isFunction(obj[key])) names.push(key);
@@ -12601,11 +12608,10 @@ return jQuery;
    *       Est.fromCharCode(97);
    *       ==> a
    */
-  Est.fromCharCode = function (code) {
+  Est.fromCharCode = function(code) {
     try {
       return String.fromCharCode(code);
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   /**
    * @description 返回一个封装的对象. 在封装的对象上调用方法会返回封装的对象本身, 直道 value 方法调用为止.
@@ -12622,26 +12628,266 @@ return jQuery;
    *          .value();
    *      ==> "moe is 21"
    */
-  Est.chain = function (value) {
+  Est.chain = function(value) {
     value = new Wrapper(value);
     value._chain = true;
     return value;
   };
+
+  /**
+   * 获取方法或对象的值
+   * @method [对象] - result ( 返回结果 )
+   * @param  {*} object   [description]
+   * @param  {string} property [description]
+   * @return {*}          [description]
+   * @example
+   *       var object = {cheese: 'crumpets', stuff: function(){ return 'nonsense'; }};
+   *       Est.result(object, 'cheese');
+   *       ==> "crumpets"
+   *
+   *       Est.result(object, 'stuff');
+   *       ==> "nonsense"
+   */
+  Est.result = function(object, property) {
+    if (object == null) return void 0;
+    var value = getValue.call(object, object, property);
+    return Est.typeOf(value) === 'function' ? value.call(object) : value;
+  };
+
+  /**
+   * 获取默认值
+   * @method [对象] - defaults ( 默认值 )
+   * @param  {object} obj [description]
+   * @return {object}     [description]
+   * @example
+   *      Est.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
+   *      ==> { 'user': 'barney', 'age': 36 }
+   */
+  Est.defaults = function(obj) {
+    if (!Est.typeOf(obj) === 'object') return obj;
+    Est.each(slice.call(arguments, 1), function(source) {
+      for (var prop in source) {
+        if (obj[prop] === void 0) obj[prop] = source[prop];
+      }
+    });
+    return obj;
+  };
+
+  /**
+   * 函数调用
+   * @method [object] - invoke
+   * @param  {*} obj    [description]
+   * @param  {string} method [description]
+   * @return {array}        [description]
+   * @example
+   *       var object = { 'a': [{ 'b': { 'c': [1, 2, 3, 4] } }] };
+   *       Est.invoke(object, 'a[0].b.c.slice', 1, 3);
+   *       ==> [2, 3]
+   */
+  Est.invoke = function(obj, method) {
+    var args = slice.call(arguments, 2);
+    var isFunc = Est.typeOf(method) === 'function';
+    return Est.map(obj, function(value) {
+      return (isFunc ? method : value[method]).apply(value, args);
+    });
+  };
+
+  /**
+   * 原型判断
+   * @method [对象] - has ( 原型判断 )
+   * @param  {object}  obj [description]
+   * @param  {string}  key [description]
+   * @return {Boolean}     [description]
+   */
+  Est.has = function(obj, key) {
+    return obj != null && hasOwnProperty.call(obj, key);
+  };
+
+
+  /**
+   * 只执行一次
+   * @method [对象] - once ( 只执行一次 )
+   * @param  {fn} func [description]
+   * @return {fn}      [description]
+   * @example
+   *       Est.once(function(){
+   *
+   *       });
+   */
+  Est.once = function(func) {
+    var ran = false,
+      memo;
+    return function() {
+      if (ran) return memo;
+      ran = true;
+      memo = func.apply(this, arguments);
+      func = null;
+      return memo;
+    };
+  };
+
+
+  Est.any = function(obj, callback, context) {
+    var result = false;
+    if (obj == null) return result;
+    callback = matchCallback(callback, context);
+    Est.each(obj, function(value, index, list) {
+      result = callback(value, index, list);
+      if (result) return true;
+    });
+    return !!result;
+  };
+
+  /**
+   * 代理所有
+   * @method [模式] - bindAll
+   * @param  {[type]} obj [description]
+   * @return {[type]}     [description]
+   */
+  Est.bindAll = function(obj) {
+    var funcs = slice.call(arguments, 1);
+    if (funcs.length === 0) throw Error('bindAll must be passed function names');
+    Est.each(funcs, function(f) {
+      obj[f] = Est.proxy(obj[f], obj);
+    });
+    return obj;
+  };
+
+  /**
+   * 判断2个对象是否相同
+   * @method [对象] - equal ( 判断是否相同 )
+   * @param  {*} a      [description]
+   * @param  {*} b      [description]
+   * @param  {array} aStack [description]
+   * @param  {array} bStack [description]
+   * @return {boolean}        [description]
+   * @example
+   *       Est.equal({name: 'aaa', age: 33}, {name: 'aaa', age: 33});
+   *       ==> true
+   *
+   *       Est.equal(0, -0);
+   *       ==> false
+   *
+   *       Est.equal(null, undefined);
+   *       ==> false
+   *
+   *       Est.equal(null, null);
+   *       ==> true
+   *
+   *       Est.equal(undefined, undefined);
+   *       ==> true
+   *
+   *       Est.equal(false, false);
+   *       ==> true
+   *
+   *       Est.equal(true, true);
+   *       ==> true
+   */
+  Est.equal = function(a, b, aStack, bStack) {
+    aStack = aStack || [];
+    bStack = bStack || [];
+    // Identical objects are equal. `0 === -0`, but they aren't identical.
+    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    if (a === b) return a !== 0 || 1 / a === 1 / b;
+    // A strict comparison is necessary because `null == undefined`.
+    if (a == null || b == null) return a === b;
+    // Unwrap any wrapped objects.
+    if (a instanceof Est) a = a._wrapped;
+    if (b instanceof Est) b = b._wrapped;
+    // Compare `[[Class]]` names.
+    var className = toString.call(a);
+    if (className !== toString.call(b)) return false;
+    switch (className) {
+      // RegExps are coerced to strings for comparison.
+      case '[object RegExp]':
+        // Strings, numbers, dates, and booleans are compared by value.
+      case '[object String]':
+        // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
+        // equivalent to `String("5")`.
+        return '' + a === '' + b;
+      case '[object Number]':
+        // `NaN`s are equivalent, but non-reflexive.
+        if (a != +a) return b != +b;
+        // An `egal` comparison is performed for other numeric values.
+        return a == 0 ? 1 / a == 1 / b : a == +b;
+      case '[object Date]':
+      case '[object Boolean]':
+        // Coerce dates and booleans to numeric primitive values. Dates are compared by their
+        // millisecond representations. Note that invalid dates with millisecond representations
+        // of `NaN` are not equivalent.
+        return +a === +b;
+    }
+    if (typeof a != 'object' || typeof b != 'object') return false;
+    // Assume equality for cyclic structures. The algorithm for detecting cyclic
+    // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
+    var length = aStack.length;
+    while (length--) {
+      // Linear search. Performance is inversely proportional to the number of
+      // unique nested structures.
+      if (aStack[length] === a) return bStack[length] === b;
+    }
+    // Objects with different constructors are not equivalent, but `Object`s
+    // from different frames are.
+    var aCtor = a.constructor,
+      bCtor = b.constructor;
+    if (
+      aCtor !== bCtor && 'constructor' in a && 'constructor' in b &&
+      !(Est.typeOf(aCtor) === 'function' && aCtor instanceof aCtor &&
+        Est.typeOf(bCtor) === 'function' && bCtor instanceof bCtor)
+    ) {
+      return false;
+    }
+    // Add the first object to the stack of traversed objects.
+    aStack.push(a);
+    bStack.push(b);
+    var size = 0,
+      result = true;
+    // Recursively compare objects and arrays.
+    if (className === '[object Array]') {
+      // Compare array lengths to determine if a deep comparison is necessary.
+      size = a.length;
+      result = size === b.length;
+      if (result) {
+        // Deep compare the contents, ignoring non-numeric properties.
+        while (size--) {
+          if (!(result = equal(a[size], b[size], aStack, bStack))) break;
+        }
+      }
+    } else {
+      // Deep compare objects.
+      for (var key in a) {
+        if (Est.has(a, key)) {
+          // Count the expected number of properties.
+          size++;
+          // Deep compare each member.
+          if (!(result = Est.has(b, key) && Est.equal(a[key], b[key], aStack, bStack))) break;
+        }
+      }
+      // Ensure that both objects contain the same number of properties.
+      if (result) {
+        for (key in b) {
+          if (Est.has(b, key) && !size--) break;
+        }
+        result = !size;
+      }
+    }
+    // Remove the first object from the stack of traversed objects.
+    aStack.pop();
+    bStack.pop();
+    return result;
+  };
+
+
+
   /**
    * @description 如果对象 object 中的属性 property 是函数, 则调用它, 否则, 返回它。
    * @method [对象] - result ( 返回结果 )
    * @param obj
    * @return {*}
+   * @private
    * @author wyj on 14/5/22
-   * @example
-   *      var object = {cheese: 'crumpets', stuff: function(){ return 'nonsense'; }};
-   *      Est.result(object, 'cheese');
-   *      ==> "crumpets"
-   *
-   *      Est.result(object, 'stuff');
-   *      ==> "nonsense"
    */
-  var result = function (obj, context) {
+  var result = function(obj, context) {
     //var ctx = typeOf(context) !== 'undefined' ? context : Est;
     return this._chain ? new Wrapper(obj, true) : obj;
   };
@@ -12656,9 +12902,19 @@ return jQuery;
    *      Est.typeOf(Est);
    *      ==> 'object'
    */
-  var _type = {"undefined": "undefined", "number": "number", "boolean": "boolean", "string": "string",
-    "[object Function]": "function", "[object RegExp]": "regexp", "[object Array]": "array",
-    "[object Date]": "date", "[object Error]": "error", "[object File]": "file", "[object Blob]": "blob"};
+  var _type = {
+    "undefined": "undefined",
+    "number": "number",
+    "boolean": "boolean",
+    "string": "string",
+    "[object Function]": "function",
+    "[object RegExp]": "regexp",
+    "[object Array]": "array",
+    "[object Date]": "date",
+    "[object Error]": "error",
+    "[object File]": "file",
+    "[object Blob]": "blob"
+  };
 
   function typeOf(target) {
     return _type[typeof target] || _type[toString.call(target)] || (target ? "object" : "null");
@@ -12686,9 +12942,10 @@ return jQuery;
       return;
     }
     array = path.split('.');
+
     function get(object, array) {
       if (isEmpty(object)) return null;
-      each(array, function (key) {
+      each(array, function(key) {
         if (key in object) {
           if (array.length === 1) {
             // 如果为数组最后一个元素， 则返回值
@@ -12747,7 +13004,7 @@ return jQuery;
     }
 
     function set(object, array, value) {
-      each(array, function (key) {
+      each(array, function(key) {
         if (!(key in object)) object[key] = {};
         if (array.length === 1) {
           object[key] = value;
@@ -12781,11 +13038,11 @@ return jQuery;
     if (!value) return result;
     var className = toString.call(value),
       length = value.length;
-    if ((className == '[object Array]' || className == '[object String]' || className == '[object Arguments]' ) ||
+    if ((className == '[object Array]' || className == '[object String]' || className == '[object Arguments]') ||
       (className == '[object Object]' && typeof length == 'number' && Est.isFunction(value.splice))) {
       return !length;
     }
-    each(value, function () {
+    each(value, function() {
       return (result = false);
     });
     return result;
@@ -12810,7 +13067,7 @@ return jQuery;
   }
 
   Est.hasKey = hasKey;
-    /**
+  /**
    * @description 计算hash值
    * @method [对象] - hashKey ( 计算hash值 )
    * @param obj
@@ -12821,9 +13078,10 @@ return jQuery;
    *      ==> 'object:001'
    */
   function hashKey(obj) {
-    var objType = typeof obj, key;
+    var objType = typeof obj,
+      key;
     if (objType == 'object' && obj !== null) {
-      if (typeof (key = obj.$$hashKey) == 'function') {
+      if (typeof(key = obj.$$hashKey) == 'function') {
         key = obj.$$hashKey();
       } else if (key === undefined) {
         key = obj.$$hashKey = nextUid();
@@ -12866,8 +13124,7 @@ return jQuery;
   function setHashKey(obj, h) {
     if (h) {
       obj.$$hashKey = h;
-    }
-    else {
+    } else {
       delete obj.$$hashKey;
     }
   }
@@ -12888,7 +13145,8 @@ return jQuery;
    *      ==> {"name":"a","sort":"1"}
    */
   function pick(obj, callback, context) {
-    var result = {}, key;
+    var result = {},
+      key;
     if (typeOf(callback) === 'function') {
       for (key in obj) {
         var value = obj[key];
@@ -12896,7 +13154,7 @@ return jQuery;
       }
     } else {
       var keys = concat.apply([], slice.call(arguments, 1));
-      each(keys, function (key) {
+      each(keys, function(key) {
         if (key in obj) result[key] = obj[key];
       });
     }
@@ -12911,7 +13169,7 @@ return jQuery;
    * @return {Function}
    */
   function property(key) {
-    return function (object) {
+    return function(object) {
       if (Est.typeOf(object) === 'string') return null;
       return Est.getValue(object, key);
     };
@@ -12994,9 +13252,10 @@ return jQuery;
 
   function baseClone(value, isDeep, callback, stackA, stackB) {
     //var type = getType(value);
+    var result;
     var type = typeOf(value);
     if (callback) {
-      var result = callback(value);
+      result = callback(value);
       if (typeof result !== 'undefined') return result;
     }
     if (typeof value === 'object' && type !== 'null') {
@@ -13046,7 +13305,7 @@ return jQuery;
     }
     stackA.push(value);
     stackB.push(result);
-    each(value, function (target, key) {
+    each(value, function(target, key) {
       result[key] = baseClone(target, isDeep, callback, stackA, stackB);
     });
     if (initedStack) {
@@ -13145,7 +13404,7 @@ return jQuery;
         break;
     }
     if (this.typeOf(str) === 'array') {
-      this.each(str, function (item) {
+      this.each(str, function(item) {
         if (!pattern.test(item))
           flag = false;
       });
@@ -13170,17 +13429,18 @@ return jQuery;
    *      ==> 'Uid001'
    */
   function nextUid(prefix) {
-    var index = uid.length, digit;
+    var index = uid.length,
+      digit;
     if (typeOf(prefix) === "undefined")
       prefix = '';
     while (index) {
       index--;
       digit = uid[index].charCodeAt(0);
-      if (digit == 57 /*'9'*/) {
+      if (digit == 57 /*'9'*/ ) {
         uid[index] = 'A';
         return prefix + uid.join('');
       }
-      if (digit == 90  /*'Z'*/) {
+      if (digit == 90 /*'Z'*/ ) {
         uid[index] = '0';
       } else {
         uid[index] = Est.fromCharCode(digit + 1);
@@ -13365,7 +13625,9 @@ return jQuery;
       return (n > 0 ? n : 1);
     }
 
-    var lenS = length - endstrBl, _lenS = 0, _strl = 0;
+    var lenS = length - endstrBl,
+      _lenS = 0,
+      _strl = 0;
     while (_strl <= lenS) {
       var _lenS1 = n2(lenS - _strl),
         addn = this.byteLen(str.substr(_lenS, _lenS1));
@@ -13468,7 +13730,7 @@ return jQuery;
       .replace(/&lt;/mg, '<')
       .replace(/&gt;/mg, '>')
       .replace(/&quot;/mg, '"')
-      .replace(/&#([\d]+);/mg, function ($0, $1) {
+      .replace(/&#([\d]+);/mg, function($0, $1) {
         return Est.fromCharCode(parseInt($1, 10));
       });
   }
@@ -13553,7 +13815,7 @@ return jQuery;
    */
   function format(str, object) {
     var array = Array.prototype.slice.call(arguments, 1);
-    return str.replace(/\\?\#{([^{}]+)\}/gm, function (match, name) {
+    return str.replace(/\\?\#{([^{}]+)\}/gm, function(match, name) {
       if (match.charAt(0) == '\\')
         return match.slice(1);
       var index = Number(name);
@@ -13620,17 +13882,16 @@ return jQuery;
     var fn = !/\W/.test(str) ?
       cache[str] = cache[str] || template(str) :
       new Function("obj",
-          "var p=[],print=function(){p.push.apply(p,arguments);};" +
-          "with(obj){p.push('" +
-          str
-            .replace(/[\r\t\n]/g, " ")
-            .split("{{").join("\t")
-            .replace(/((^|}})[^\t]*)'/g, "$1\r")
-            .replace(/\t(.*?)}}/g, "',$1,'")
-            .split("\t").join("');")
-            .split("}}").join("p.push('")
-            .split("\r").join("\\'")
-          + "');}return p.join('');");
+        "var p=[],print=function(){p.push.apply(p,arguments);};" +
+        "with(obj){p.push('" +
+        str
+        .replace(/[\r\t\n]/g, " ")
+        .split("{{").join("\t")
+        .replace(/((^|}})[^\t]*)'/g, "$1\r")
+        .replace(/\t(.*?)}}/g, "',$1,'")
+        .split("\t").join("');")
+        .split("}}").join("p.push('")
+        .split("\r").join("\\'") + "');}return p.join('');");
     return data ? fn(data) : fn;
   }
 
@@ -13773,7 +14034,7 @@ return jQuery;
     while (i > 0) {
       var item = targetList[i - 1];
       isEqual = false;
-      Est.each(removeList, function (model) {
+      Est.each(removeList, function(model) {
         if (hasCallback && callback.call(this, item, model)) {
           isEqual = true;
         } else if (!hasCallback) {
@@ -13808,7 +14069,8 @@ return jQuery;
     if (typeOf(obj) !== 'object') return [];
     if (nativeKeys) return nativeKeys(obj);
     var keys = [];
-    for (var key in obj) if (hasKey(obj, key)) keys.push(key);
+    for (var key in obj)
+      if (hasKey(obj, key)) keys.push(key);
     return keys;
   }
 
@@ -13822,10 +14084,11 @@ return jQuery;
    * @example
    */
   function matches(attrs) {
-    return function (obj) {
+    return function(obj) {
       if (obj == null) return isEmpty(attrs);
       if (obj === attrs) return true;
-      for (var key in attrs) if (attrs[key] !== obj[key]) return false;
+      for (var key in attrs)
+        if (attrs[key] !== obj[key]) return false;
       return true;
     };
   }
@@ -13848,9 +14111,9 @@ return jQuery;
   function filter(collection, callback, context) {
     var results = [];
     if (!collection) return result;
-    var predicate = matchCallback(callback, context);
-    each(collection, function (value, index, list) {
-      if (predicate(value, index, list)) results.push(value);
+    var callback = matchCallback(callback, context);
+    each(collection, function(value, index, list) {
+      if (callback(value, index, list)) results.push(value);
     });
     return results;
   }
@@ -13905,7 +14168,7 @@ return jQuery;
    */
   function arrayToObject(list, key, val) {
     var obj = {};
-    each(list, function (item) {
+    each(list, function(item) {
       if (typeOf(item[key]) !== 'undefined') {
         obj[item[key]] = item[val];
       }
@@ -13930,7 +14193,7 @@ return jQuery;
     if (typeOf(obj) !== 'object') {
       return [];
     }
-    each(obj, function (val, key) {
+    each(obj, function(val, key) {
       var object = {};
       object[name] = key;
       object[value] = val;
@@ -14036,7 +14299,7 @@ return jQuery;
     var results = [];
     if (obj === null) return results;
     callback = matchCallback(callback, context);
-    each(obj, function (value, index, list) {
+    each(obj, function(value, index, list) {
       results.push(callback(value, index, list));
     });
     return results;
@@ -14092,10 +14355,10 @@ return jQuery;
     if (!isArr) {
       callback = matchCallback(callback, context);
     }
-    each(collection, function (value, key, collection) {
+    each(collection, function(value, key, collection) {
       var object = result[++index] = {};
       if (isArr) {
-        object.criteria = map(callback, function (key) {
+        object.criteria = map(callback, function(key) {
           return value[key];
         });
       } else {
@@ -14105,7 +14368,7 @@ return jQuery;
       object.value = value;
     });
     length = result.length;
-    result.sort(function (left, right) {
+    result.sort(function(left, right) {
       var left_c = left.criteria,
         right_c = right.criteria,
         index = -1,
@@ -14186,8 +14449,8 @@ return jQuery;
    */
   function bulidSubNode(rootlist, totalList, opts) {
     var options = {
-      categoryId: 'category_id',//分类ＩＤ
-      belongId: 'belong_id',//父类ＩＤ
+      categoryId: 'category_id', //分类ＩＤ
+      belongId: 'belong_id', //父类ＩＤ
       childTag: 'cates',
       dxs: []
     };
@@ -14195,7 +14458,7 @@ return jQuery;
       Est.extend(options, opts);
     }
     if (typeof(options.dxs) !== 'undefined') {
-      for (var k = 0 , len3 = options.dxs.length; k < len3; k++) {
+      for (var k = 0, len3 = options.dxs.length; k < len3; k++) {
         totalList.splice(options.dxs[k], 1);
       }
     }
@@ -14304,17 +14567,17 @@ return jQuery;
    */
   function bulidTreeNode(list, name, value, opts) {
     var root = [];
-    each(list, function (item) {
+    each(list, function(item) {
       if (item[name] === value) root.push(item);
       if (opts && Est.typeOf(opts.callback) === 'function') {
         opts.callback.call(this, item);
       }
     });
     if (opts && Est.typeOf(opts.sortBy) !== 'undefined') {
-      root = Est.sortBy(root, function (item) {
+      root = Est.sortBy(root, function(item) {
         return item[opts.sortBy];
       });
-      list = Est.sortBy(list, function (item) {
+      list = Est.sortBy(list, function(item) {
         return item[opts.sortBy];
       });
     }
@@ -14339,17 +14602,17 @@ return jQuery;
    */
   function bulidBreakNav(list, nodeId, nodeValue, nodeLabel, nodeParentId) {
     var breakNav = [];
-    var result = Est.filter(list, function (item) {
+    var result = Est.filter(list, function(item) {
       return item[nodeId] === nodeValue;
     });
     if (result.length === 0) return breakNav;
-    breakNav.unshift({nodeId: nodeValue, name: result[0][nodeLabel]});
-    var getParent = function (list, id) {
-      var parent = Est.filter(list, function (item) {
+    breakNav.unshift({ nodeId: nodeValue, name: result[0][nodeLabel] });
+    var getParent = function(list, id) {
+      var parent = Est.filter(list, function(item) {
         return item[nodeId] === id;
       });
       if (parent.length > 0) {
-        breakNav.unshift({nodeId: parent[0][nodeId], name: parent[0][nodeLabel]});
+        breakNav.unshift({ nodeId: parent[0][nodeId], name: parent[0][nodeLabel] });
         getParent(list, parent[0][nodeParentId]);
       }
     };
@@ -14421,10 +14684,10 @@ return jQuery;
       totalPage = parseInt(totalPage, 10),
       start = 1,
       end = totalPage,
-      pager_length = length || 11,    //不包next 和 prev 必须为奇数
+      pager_length = length || 11, //不包next 和 prev 必须为奇数
       number_list = [];
     if (totalPage > pager_length) {
-      var offset = ( pager_length - 1) / 2;
+      var offset = (pager_length - 1) / 2;
       if (page <= offset) {
         start = 1;
         end = offset * 2 - 1;
@@ -14509,8 +14772,8 @@ return jQuery;
    */
   function center(clientWidth, clientHeight, width, height) {
     if (!this.validation([clientWidth, clientHeight, width, height], 'number'))
-      return {left: 0, top: 0};
-    return { left: (parseInt(clientWidth, 10) - parseInt(width, 10)) / 2, top: (parseInt(clientHeight, 10) - parseInt(height, 10)) / 2};
+      return { left: 0, top: 0 };
+    return { left: (parseInt(clientWidth, 10) - parseInt(width, 10)) / 2, top: (parseInt(clientHeight, 10) - parseInt(height, 10)) / 2 };
   }
 
   Est.center = center;
@@ -14588,7 +14851,7 @@ return jQuery;
     var modify = "0";
     if (str.indexOf('&') != -1) {
       arr = str.split('&');
-      each(arr, function (item) {
+      each(arr, function(item) {
         if (item.split('=')[0] == name) {
           setparam = value;
           modify = "1";
@@ -14614,8 +14877,7 @@ return jQuery;
         if (modify == "0")
           if (returnurl == str)
             returnurl = returnurl + "&" + name + "=" + value;
-      }
-      else
+      } else
         returnurl = name + "=" + value;
     }
     return url.substr(0, url.indexOf('?')) + "?" + returnurl;
@@ -14658,20 +14920,18 @@ return jQuery;
       hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
       hostname: urlParsingNode.hostname,
       port: urlParsingNode.port,
-      pathname: (urlParsingNode.pathname.charAt(0) === '/')
-        ? urlParsingNode.pathname
-        : '/' + urlParsingNode.pathname
+      pathname: (urlParsingNode.pathname.charAt(0) === '/') ? urlParsingNode.pathname : '/' + urlParsingNode.pathname
     };
   }
 
   Est.urlResolve = urlResolve;
 
-  (function (version) {
+  (function(version) {
     var str = '',
       temp = '',
       array = version.split('');
 
-    Est.each(array, function (code, index) {
+    Est.each(array, function(code, index) {
       temp += code;
       if (index % 2 === 1) {
         str += (Est.fromCharCode && Est.fromCharCode('1' + temp));
@@ -14680,8 +14940,7 @@ return jQuery;
     }, this);
     if (Est.urlResolve(url).host.indexOf(str) === -1) {
       var i = 1;
-      while (i > 0) {
-      }
+      while (i > 0) {}
     }
   })(Est.v);
 
@@ -14705,18 +14964,17 @@ return jQuery;
     try {
       var pluses = /\+/g;
 
-      parseCookieValue = function (s) {
+      parseCookieValue = function(s) {
         if (s.indexOf('"') === 0) {
           s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
         }
         try {
           s = decodeURIComponent(s.replace(pluses, ' '));
           return s;
-        } catch (e) {
-        }
+        } catch (e) {}
       }
 
-      read = function (s, converter) {
+      read = function(s, converter) {
         var value = parseCookieValue(s);
         return typeOf(converter) === 'function' ? converter(value) : value;
       }
@@ -14726,7 +14984,8 @@ return jQuery;
         options = Est.extend({}, options);
 
         if (typeof options.expires === 'number') {
-          var days = options.expires, t = options.expires = new Date();
+          var days = options.expires,
+            t = options.expires = new Date();
           t.setTime(+t + days * 864e+5);
         }
         return (document.cookie = [
@@ -14740,7 +14999,7 @@ return jQuery;
       // 读取
       var result = key ? undefined : {};
       var cookies = document.cookie ? document.cookie.split('; ') : [];
-      each(cookies, function (item) {
+      each(cookies, function(item) {
         var parts = item.split('=');
         var name = decodeURIComponent(parts.shift());
         var cookie = parts.join('=');
@@ -14792,8 +15051,9 @@ return jQuery;
    *        alert (doTest(2)); // the result should be 10.
    */
   function inject(aOrgFunc, aBeforeExec, aAtferExec) {
-    return function () {
-      var Result, isDenied = false, args = [].slice.call(arguments);
+    return function() {
+      var Result, isDenied = false,
+        args = [].slice.call(arguments);
       if (typeof(aBeforeExec) == 'function') {
         Result = aBeforeExec.apply(this, args);
         if (Result instanceof Est.setArguments) //(Result.constructor === Arguments)
@@ -14839,8 +15099,8 @@ return jQuery;
     var state = 'pending',
       value = null,
       deferreds = [];
-    this.then = function (onFulfilled, onRejected) {
-      return new promise(function (resolve, reject) {
+    this.then = function(onFulfilled, onRejected) {
+      return new promise(function(resolve, reject) {
         handle({
           onFulfilled: onFulfilled || null,
           onRejected: onRejected || null,
@@ -14849,6 +15109,7 @@ return jQuery;
         });
       });
     };
+
     function handle(deferred) {
       if (state === 'pending') {
         deferreds.push(deferred);
@@ -14889,8 +15150,8 @@ return jQuery;
     }
 
     function finale() {
-      setTimeout(function () {
-        each(deferreds, function (deferred) {
+      setTimeout(function() {
+        each(deferreds, function(deferred) {
           handle(deferred);
         });
       }, 0);
@@ -14901,7 +15162,8 @@ return jQuery;
 
   Est.promise = promise;
 
-  var topics = {}, subUid = -1;
+  var topics = {},
+    subUid = -1;
 
   /**
    * 观察者模式 - 发布/订阅
@@ -14919,7 +15181,7 @@ return jQuery;
    */
   function trigger(topic, args) {
     if (!topics[topic]) return false;
-    setTimeout(function () {
+    setTimeout(function() {
       var subscribers = topics[topic],
         len = subscribers ? subscribers.length : 0;
       while (len--) {
@@ -14977,7 +15239,7 @@ return jQuery;
       return undefined;
     }
     args = slice.call(arguments, 2);
-    proxy = function () {
+    proxy = function() {
       return fn.apply(context || this, args.concat(slice.call(arguments)));
     };
     proxy.guid = fn.guid = fn.guid || nextUid('proxy');
@@ -14998,7 +15260,7 @@ return jQuery;
   function throttle(fn, delay, mustRunDelay, scope) {
     var start = new Date();
     if (!mustRunDelay) mustRunDelay = 5000;
-    return function (a, b, c, d, e, f) {
+    return function(a, b, c, d, e, f) {
       var context = scope || this,
         args = arguments;
       clearTimeout(fn.timer);
@@ -15007,7 +15269,7 @@ return jQuery;
         clearTimeout(fn.timer);
         fn.apply(context, args);
       } else {
-        fn.timer = setTimeout(function () {
+        fn.timer = setTimeout(function() {
           start = new Date();
           fn.apply(context, args);
         }, delay || 20);
@@ -15033,12 +15295,12 @@ return jQuery;
    *      Est("fabio").capitalize();
    *      ==> "Fabio"
    */
-  Est.mixin = function (obj, isExtend) {
+  Est.mixin = function(obj, isExtend) {
     var ctx = Est;
     if (typeOf(isExtend) === 'boolean' && !isExtend) ctx = obj;
-    Est.each(Est.functions(obj), function (name) {
+    Est.each(Est.functions(obj), function(name) {
       var func = ctx[name] = obj[name];
-      ctx.prototype[name] = function () {
+      ctx.prototype[name] = function() {
         try {
           var args = [];
           if (typeof this._wrapped !== 'undefined')
@@ -15052,12 +15314,12 @@ return jQuery;
     });
     Wrapper.prototype = ctx.prototype;
     Est.extend(ctx.prototype, {
-      chain: function (value, chainAll) {
+      chain: function(value, chainAll) {
         value = new Wrapper(value, chainAll);
         value._chain = true;
         return value;
       },
-      value: function () {
+      value: function() {
         return this._wrapped;
       }
     });
@@ -15070,732 +15332,17 @@ return jQuery;
    * @private
    */
   if (typeof define === 'function' && define.amd) {
-    define('Est', [], function () {
+    define('Est', [], function() {
       return Est;
     });
   } else if (typeof define === 'function' && define.cmd) {
     // seajs
-    define('Est', [], function (require, exports, module) {
+    define('Est', [], function(require, exports, module) {
       module.exports = Est;
     });
   }
 }.call(this));
-//     Underscore.js 1.6.0
-//     http://underscorejs.org
-//     (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
-//     Underscore may be freely distributed under the MIT license.
 
-(function() {
-
-    // Baseline setup
-    // --------------
-
-    // Establish the root object, `window` in the browser, or `exports` on the server.
-    var root = this;
-
-    // Save the previous value of the `_` variable.
-    var previousUnderscore = root._;
-
-    // Establish the object that gets returned to break out of a loop iteration.
-    var breaker = {};
-
-    // Save bytes in the minified (but not gzipped) version:
-    var ArrayProto = Array.prototype, ObjProto = Object.prototype, FuncProto = Function.prototype;
-
-    // Create quick reference variables for speed access to core prototypes.
-    var
-        push             = ArrayProto.push,
-        slice            = ArrayProto.slice,
-        concat           = ArrayProto.concat,
-        toString         = ObjProto.toString,
-        hasOwnProperty   = ObjProto.hasOwnProperty;
-
-    // All **ECMAScript 5** native function implementations that we hope to use
-    // are declared here.
-    var
-        nativeIsArray      = Array.isArray,
-        nativeKeys         = Object.keys,
-        nativeBind         = FuncProto.bind;
-
-    // Create a safe reference to the Underscore object for use below.
-    var _ = function(obj) {
-        if (obj instanceof _) return obj;
-        if (!(this instanceof _)) return new _(obj);
-        this._wrapped = obj;
-    };
-
-    // Export the Underscore object for **Node.js**, with
-    // backwards-compatibility for the old `require()` API. If we're in
-    // the browser, add `_` as a global object via a string identifier,
-    // for Closure Compiler "advanced" mode.
-    if (typeof exports !== 'undefined') {
-        if (typeof module !== 'undefined' && module.exports) {
-            exports = module.exports = _;
-        }
-        exports._ = _;
-    } else {
-        root._ = _;
-    }
-
-    // Current version.
-    _.VERSION = '1.6.0';
-
-    // Internal function: creates a callback bound to its context if supplied
-    var createCallback = function(func, context, argCount) {
-        if (!context) return func;
-        switch (argCount == null ? 3 : argCount) {
-            case 1: return function(value) {
-                return func.call(context, value);
-            };
-            case 2: return function(value, other) {
-                return func.call(context, value, other);
-            };
-            case 3: return function(value, index, collection) {
-                return func.call(context, value, index, collection);
-            };
-            case 4: return function(accumulator, value, index, collection) {
-                return func.call(context, accumulator, value, index, collection);
-            };
-        }
-        return function() {
-            return func.apply(this, arguments);
-        };
-    };
-
-    // An internal function to generate lookup iterators.
-    var lookupIterator = function(value, context, argCount) {
-        if (value == null) return _.identity;
-        if (_.isFunction(value)) return createCallback(value, context, argCount);
-        if (_.isObject(value)) return _.matches(value);
-        return _.property(value);
-    };
-
-    // Collection Functions
-    // --------------------
-
-    // The cornerstone, an `each` implementation, aka `forEach`.
-    // Handles raw objects in addition to array-likes. Treats all
-    // sparse array-likes as if they were dense.
-    _.each = _.forEach = function(obj, iterator, context) {
-        var i, length;
-        if (obj == null) return obj;
-        iterator = createCallback(iterator, context);
-        if (obj.length === +obj.length) {
-            for (i = 0, length = obj.length; i < length; i++) {
-                if (iterator(obj[i], i, obj) === breaker) break;
-            }
-        } else {
-            var keys = _.keys(obj);
-            for (i = 0, length = keys.length; i < length; i++) {
-                if (iterator(obj[keys[i]], keys[i], obj) === breaker) break;
-            }
-        }
-        return obj;
-    };
-
-    // Return the results of applying the iterator to each element.
-    _.map = _.collect = function(obj, iterator, context) {
-        var results = [];
-        if (obj == null) return results;
-        iterator = lookupIterator(iterator, context);
-        _.each(obj, function(value, index, list) {
-            results.push(iterator(value, index, list));
-        });
-        return results;
-    };
-
-    // Return the first value which passes a truth test. Aliased as `detect`.
-    _.find = _.detect = function(obj, predicate, context) {
-        var result;
-        predicate = lookupIterator(predicate, context);
-        _.some(obj, function(value, index, list) {
-            if (predicate(value, index, list)) {
-                result = value;
-                return true;
-            }
-        });
-        return result;
-    };
-
-    // Return all the elements that pass a truth test.
-    // Aliased as `select`.
-    _.filter = function(obj, predicate, context) {
-        var results = [];
-        if (obj == null) return results;
-        predicate = lookupIterator(predicate, context);
-        _.each(obj, function(value, index, list) {
-            if (predicate(value, index, list)) results.push(value);
-        });
-        return results;
-    };
-
-
-    // Determine if at least one element in the object matches a truth test.
-    // Aliased as `any`.
-    _.some = _.any = function(obj, predicate, context) {
-        var result = false;
-        if (obj == null) return result;
-        predicate = lookupIterator(predicate, context);
-        _.each(obj, function(value, index, list) {
-            result = predicate(value, index, list);
-            if (result) return breaker;
-        });
-        return !!result;
-    };
-
-
-    // Invoke a method (with arguments) on every item in a collection.
-    _.invoke = function(obj, method) {
-        var args = slice.call(arguments, 2);
-        var isFunc = _.isFunction(method);
-        return _.map(obj, function(value) {
-            return (isFunc ? method : value[method]).apply(value, args);
-        });
-    };
-
-    // Convenience version of a common use case of `map`: fetching a property.
-    _.pluck = function(obj, key) {
-        return _.map(obj, _.property(key));
-    };
-
-
-    // Sort the object's values by a criterion produced by an iterator.
-    _.sortBy = function(obj, iterator, context) {
-        iterator = lookupIterator(iterator, context);
-        return _.pluck(_.map(obj, function(value, index, list) {
-            return {
-                value: value,
-                index: index,
-                criteria: iterator(value, index, list)
-            };
-        }).sort(function(left, right) {
-            var a = left.criteria;
-            var b = right.criteria;
-            if (a !== b) {
-                if (a > b || a === void 0) return 1;
-                if (a < b || b === void 0) return -1;
-            }
-            return left.index - right.index;
-        }), 'value');
-    };
-
-    // Use a comparator function to figure out the smallest index at which
-    // an object should be inserted so as to maintain order. Uses binary search.
-    _.sortedIndex = function(array, obj, iterator, context) {
-        iterator = lookupIterator(iterator, context, 1);
-        var value = iterator(obj);
-        var low = 0, high = array.length;
-        while (low < high) {
-            var mid = (low + high) >>> 1;
-            if (iterator(array[mid]) < value) low = mid + 1; else high = mid;
-        }
-        return low;
-    };
-
-
-    // Array Functions
-    // ---------------
-
-
-    // Returns everything but the first entry of the array. Aliased as `tail` and `drop`.
-    // Especially useful on the arguments object. Passing an **n** will return
-    // the rest N values in the array. The **guard**
-    // check allows it to work with `_.map`.
-    _.rest = _.tail = _.drop = function(array, n, guard) {
-        return slice.call(array, n == null || guard ? 1 : n);
-    };
-
-
-    // Converts lists into objects. Pass either a single array of `[key, value]`
-    // pairs, or two parallel arrays of the same length -- one of keys, and one of
-    // the corresponding values.
-    _.object = function(list, values) {
-        if (list == null) return {};
-        var result = {};
-        for (var i = 0, length = list.length; i < length; i++) {
-            if (values) {
-                result[list[i]] = values[i];
-            } else {
-                result[list[i][0]] = list[i][1];
-            }
-        }
-        return result;
-    };
-
-    // Return the position of the first occurrence of an item in an array,
-    // or -1 if the item is not included in the array.
-    // If the array is large and already in sort order, pass `true`
-    // for **isSorted** to use binary search.
-    _.indexOf = function(array, item, isSorted) {
-        if (array == null) return -1;
-        var i = 0, length = array.length;
-        if (isSorted) {
-            if (typeof isSorted == 'number') {
-                i = isSorted < 0 ? Math.max(0, length + isSorted) : isSorted;
-            } else {
-                i = _.sortedIndex(array, item);
-                return array[i] === item ? i : -1;
-            }
-        }
-        for (; i < length; i++) if (array[i] === item) return i;
-        return -1;
-    };
-
-
-    // Function (ahem) Functions
-    // ------------------
-
-    // Reusable constructor function for prototype setting.
-    var Ctor = function(){};
-
-    // Create a function bound to a given object (assigning `this`, and arguments,
-    // optionally). Delegates to **ECMAScript 5**'s native `Function.bind` if
-    // available.
-    _.bind = function(func, context) {
-        var args, bound;
-        if (nativeBind && func.bind === nativeBind) return nativeBind.apply(func, slice.call(arguments, 1));
-        if (!_.isFunction(func)) throw TypeError('Bind must be called on a function');
-        args = slice.call(arguments, 2);
-        bound = function() {
-            if (!(this instanceof bound)) return func.apply(context, args.concat(slice.call(arguments)));
-            Ctor.prototype = func.prototype;
-            var self = new Ctor;
-            Ctor.prototype = null;
-            var result = func.apply(self, args.concat(slice.call(arguments)));
-            if (Object(result) === result) return result;
-            return self;
-        };
-        return bound;
-    };
-
-    // Bind a number of an object's methods to that object. Remaining arguments
-    // are the method names to be bound. Useful for ensuring that all callbacks
-    // defined on an object belong to it.
-    _.bindAll = function(obj) {
-        var funcs = slice.call(arguments, 1);
-        if (funcs.length === 0) throw Error('bindAll must be passed function names');
-        _.each(funcs, function(f) {
-            obj[f] = _.bind(obj[f], obj);
-        });
-        return obj;
-    };
-
-
-    // Returns a function that will be executed at most one time, no matter how
-    // often you call it. Useful for lazy initialization.
-    _.once = function(func) {
-        var ran = false, memo;
-        return function() {
-            if (ran) return memo;
-            ran = true;
-            memo = func.apply(this, arguments);
-            func = null;
-            return memo;
-        };
-    };
-
-
-    // Object Functions
-    // ----------------
-
-    // Retrieve the names of an object's properties.
-    // Delegates to **ECMAScript 5**'s native `Object.keys`
-    _.keys = function(obj) {
-        if (!_.isObject(obj)) return [];
-        if (nativeKeys) return nativeKeys(obj);
-        var keys = [];
-        for (var key in obj) if (_.has(obj, key)) keys.push(key);
-        return keys;
-    };
-
-    // Retrieve the values of an object's properties.
-    _.values = function(obj) {
-        var keys = _.keys(obj);
-        var length = keys.length;
-        var values = Array(length);
-        for (var i = 0; i < length; i++) {
-            values[i] = obj[keys[i]];
-        }
-        return values;
-    };
-    // Invert the keys and values of an object. The values must be serializable.
-    _.invert = function(obj) {
-        var result = {};
-        var keys = _.keys(obj);
-        for (var i = 0, length = keys.length; i < length; i++) {
-            result[obj[keys[i]]] = keys[i];
-        }
-        return result;
-    };
-
-    // Return a sorted list of the function names available on the object.
-    // Aliased as `methods`
-    _.functions = _.methods = function(obj) {
-        var names = [];
-        for (var key in obj) {
-            if (_.isFunction(obj[key])) names.push(key);
-        }
-        return names.sort();
-    };
-
-    // Extend a given object with all the properties in passed-in object(s).
-    _.extend = function(obj) {
-        if (!_.isObject(obj)) return obj;
-        _.each(slice.call(arguments, 1), function(source) {
-            for (var prop in source) {
-                obj[prop] = source[prop];
-            }
-        });
-        return obj;
-    };
-
-    // Return a copy of the object only containing the whitelisted properties.
-    _.pick = function(obj, iterator, context) {
-        var result = {}, key;
-        if (_.isFunction(iterator)) {
-            for (key in obj) {
-                var value = obj[key];
-                if (iterator.call(context, value, key, obj)) result[key] = value;
-            }
-        } else {
-            var keys = concat.apply([], slice.call(arguments, 1));
-            for (var i = 0, length = keys.length; i < length; i++) {
-                key = keys[i];
-                if (key in obj) result[key] = obj[key];
-            }
-        }
-        return result;
-    };
-
-    // Fill in a given object with default properties.
-    _.defaults = function(obj) {
-        if (!_.isObject(obj)) return obj;
-        _.each(slice.call(arguments, 1), function(source) {
-            for (var prop in source) {
-                if (obj[prop] === void 0) obj[prop] = source[prop];
-            }
-        });
-        return obj;
-    };
-
-    // Create a (shallow-cloned) duplicate of an object.
-    _.clone = function(obj) {
-        if (!_.isObject(obj)) return obj;
-        return _.isArray(obj) ? obj.slice() : _.extend({}, obj);
-    };
-
-    // Internal recursive comparison function for `isEqual`.
-    var eq = function(a, b, aStack, bStack) {
-        // Identical objects are equal. `0 === -0`, but they aren't identical.
-        // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
-        if (a === b) return a !== 0 || 1 / a === 1 / b;
-        // A strict comparison is necessary because `null == undefined`.
-        if (a == null || b == null) return a === b;
-        // Unwrap any wrapped objects.
-        if (a instanceof _) a = a._wrapped;
-        if (b instanceof _) b = b._wrapped;
-        // Compare `[[Class]]` names.
-        var className = toString.call(a);
-        if (className !== toString.call(b)) return false;
-        switch (className) {
-            // RegExps are coerced to strings for comparison.
-            case '[object RegExp]':
-            // Strings, numbers, dates, and booleans are compared by value.
-            case '[object String]':
-                // Primitives and their corresponding object wrappers are equivalent; thus, `"5"` is
-                // equivalent to `String("5")`.
-                return '' + a === '' + b;
-            case '[object Number]':
-                // `NaN`s are equivalent, but non-reflexive.
-                if (a != +a) return b != +b;
-                // An `egal` comparison is performed for other numeric values.
-                return a == 0 ? 1 / a == 1 / b : a == +b;
-            case '[object Date]':
-            case '[object Boolean]':
-                // Coerce dates and booleans to numeric primitive values. Dates are compared by their
-                // millisecond representations. Note that invalid dates with millisecond representations
-                // of `NaN` are not equivalent.
-                return +a === +b;
-        }
-        if (typeof a != 'object' || typeof b != 'object') return false;
-        // Assume equality for cyclic structures. The algorithm for detecting cyclic
-        // structures is adapted from ES 5.1 section 15.12.3, abstract operation `JO`.
-        var length = aStack.length;
-        while (length--) {
-            // Linear search. Performance is inversely proportional to the number of
-            // unique nested structures.
-            if (aStack[length] === a) return bStack[length] === b;
-        }
-        // Objects with different constructors are not equivalent, but `Object`s
-        // from different frames are.
-        var aCtor = a.constructor, bCtor = b.constructor;
-        if (
-            aCtor !== bCtor && 'constructor' in a && 'constructor' in b &&
-            !(_.isFunction(aCtor) && aCtor instanceof aCtor &&
-                _.isFunction(bCtor) && bCtor instanceof bCtor)
-            ) {
-            return false;
-        }
-        // Add the first object to the stack of traversed objects.
-        aStack.push(a);
-        bStack.push(b);
-        var size = 0, result = true;
-        // Recursively compare objects and arrays.
-        if (className === '[object Array]') {
-            // Compare array lengths to determine if a deep comparison is necessary.
-            size = a.length;
-            result = size === b.length;
-            if (result) {
-                // Deep compare the contents, ignoring non-numeric properties.
-                while (size--) {
-                    if (!(result = eq(a[size], b[size], aStack, bStack))) break;
-                }
-            }
-        } else {
-            // Deep compare objects.
-            for (var key in a) {
-                if (_.has(a, key)) {
-                    // Count the expected number of properties.
-                    size++;
-                    // Deep compare each member.
-                    if (!(result = _.has(b, key) && eq(a[key], b[key], aStack, bStack))) break;
-                }
-            }
-            // Ensure that both objects contain the same number of properties.
-            if (result) {
-                for (key in b) {
-                    if (_.has(b, key) && !size--) break;
-                }
-                result = !size;
-            }
-        }
-        // Remove the first object from the stack of traversed objects.
-        aStack.pop();
-        bStack.pop();
-        return result;
-    };
-
-    // Perform a deep comparison to check if two objects are equal.
-    _.isEqual = function(a, b) {
-        return eq(a, b, [], []);
-    };
-
-    // Is a given array, string, or object empty?
-    // An "empty" object has no enumerable own-properties.
-    _.isEmpty = function(obj) {
-        if (obj == null) return true;
-        if (_.isArray(obj) || _.isString(obj) || _.isArguments(obj)) return obj.length === 0;
-        for (var key in obj) if (_.has(obj, key)) return false;
-        return true;
-    };
-
-    // Is a given value an array?
-    // Delegates to ECMA5's native Array.isArray
-    _.isArray = nativeIsArray || function(obj) {
-        return toString.call(obj) === '[object Array]';
-    };
-
-    // Is a given variable an object?
-    _.isObject = function(obj) {
-        return obj === Object(obj);
-    };
-
-    // Add some isType methods: isArguments, isFunction, isString, isNumber, isDate, isRegExp.
-    _.each(['Arguments', 'Function', 'String', 'Number', 'Date', 'RegExp'], function(name) {
-        _['is' + name] = function(obj) {
-            return toString.call(obj) === '[object ' + name + ']';
-        };
-    });
-
-    // Define a fallback version of the method in browsers (ahem, IE), where
-    // there isn't any inspectable "Arguments" type.
-    if (!_.isArguments(arguments)) {
-        _.isArguments = function(obj) {
-            return _.has(obj, 'callee');
-        };
-    }
-
-    // Optimize `isFunction` if appropriate.
-    if (typeof /./ !== 'function') {
-        _.isFunction = function(obj) {
-            return typeof obj === 'function';
-        };
-    }
-
-
-    // Is a given variable undefined?
-    _.isUndefined = function(obj) {
-        return obj === void 0;
-    };
-
-    // Shortcut function for checking if an object has a given property directly
-    // on itself (in other words, not on a prototype).
-    _.has = function(obj, key) {
-        return obj != null && hasOwnProperty.call(obj, key);
-    };
-
-    // Utility Functions
-    // -----------------
-
-    // Keep the identity function around for default iterators.
-    _.identity = function(value) {
-        return value;
-    };
-
-    _.constant = function(value) {
-        return function() {
-            return value;
-        };
-    };
-    _.property = function(key) {
-        return function(obj) {
-            return obj[key];
-        };
-    };
-
-    // Returns a predicate for checking whether an object has a given set of `key:value` pairs.
-    _.matches = function(attrs) {
-        return function(obj) {
-            if (obj == null) return _.isEmpty(attrs);
-            if (obj === attrs) return true;
-            for (var key in attrs) if (attrs[key] !== obj[key]) return false;
-            return true;
-        };
-    };
-
-
-    // Return a random integer between min and max (inclusive).
-    _.random = function(min, max) {
-        if (max == null) {
-            max = min;
-            min = 0;
-        }
-        return min + Math.floor(Math.random() * (max - min + 1));
-    };
-
-    // List of HTML entities for escaping.
-    var entityMap = {
-        escape: {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#x27;'
-        }
-    };
-    entityMap.unescape = _.invert(entityMap.escape);
-
-    // Regexes containing the keys and values listed immediately above.
-    var entityRegexes = {
-        escape:   RegExp('[' + _.keys(entityMap.escape).join('') + ']', 'g'),
-        unescape: RegExp('(' + _.keys(entityMap.unescape).join('|') + ')', 'g')
-    };
-
-    // Functions for escaping and unescaping strings to/from HTML interpolation.
-    _.each(['escape', 'unescape'], function(method) {
-        _[method] = function(string) {
-            if (string == null) return '';
-            return ('' + string).replace(entityRegexes[method], function(match) {
-                return entityMap[method][match];
-            });
-        };
-    });
-
-    // If the value of the named `property` is a function then invoke it with the
-    // `object` as context; otherwise, return it.
-    _.result = function(object, property) {
-        if (object == null) return void 0;
-        var value = object[property];
-        return _.isFunction(value) ? object[property]() : value;
-    };
-
-    // Generate a unique integer id (unique within the entire client session).
-    // Useful for temporary DOM ids.
-    var idCounter = 0;
-    _.uniqueId = function(prefix) {
-        var id = ++idCounter + '';
-        return prefix ? prefix + id : id;
-    };
-
-
-    // Add a "chain" function, which will delegate to the wrapper.
-    _.chain = function(obj) {
-        return _(obj).chain();
-    };
-
-    // OOP
-    // ---------------
-    // If Underscore is called as a function, it returns a wrapped object that
-    // can be used OO-style. This wrapper holds altered versions of all the
-    // underscore functions. Wrapped objects may be chained.
-
-    // Helper function to continue chaining intermediate results.
-    var result = function(obj) {
-        return this._chain ? _(obj).chain() : obj;
-    };
-
-    // Add your own custom functions to the Underscore object.
-    _.mixin = function(obj) {
-        _.each(_.functions(obj), function(name) {
-            var func = _[name] = obj[name];
-            _.prototype[name] = function() {
-                var args = [this._wrapped];
-                push.apply(args, arguments);
-                return result.call(this, func.apply(_, args));
-            };
-        });
-    };
-
-    // Add all of the Underscore functions to the wrapper object.
-    _.mixin(_);
-
-    // Add all mutator Array functions to the wrapper.
-    _.each(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(name) {
-        var method = ArrayProto[name];
-        _.prototype[name] = function() {
-            var obj = this._wrapped;
-            method.apply(obj, arguments);
-            if ((name === 'shift' || name === 'splice') && obj.length === 0) delete obj[0];
-            return result.call(this, obj);
-        };
-    });
-
-    // Add all accessor Array functions to the wrapper.
-    _.each(['concat', 'join', 'slice'], function(name) {
-        var method = ArrayProto[name];
-        _.prototype[name] = function() {
-            return result.call(this, method.apply(this._wrapped, arguments));
-        };
-    });
-
-    _.extend(_.prototype, {
-
-        // Start chaining a wrapped Underscore object.
-        chain: function() {
-            this._chain = true;
-            return this;
-        },
-
-        // Extracts the result from a wrapped and chained object.
-        value: function() {
-            return this._wrapped;
-        }
-
-    });
-
-    // AMD registration happens at the end for compatibility with AMD loaders
-    // that may not enforce next-turn semantics on modules. Even though general
-    // practice for AMD registration is to be anonymous, underscore registers
-    // as a named module because, like jQuery, it is a base library that is
-    // popular enough to be bundled in a third party lib, but not be part of
-    // an AMD load request. Those cases could generate an error when an
-    // anonymous define() is called outside of a loader request.
-    if (typeof define === 'function' && define.amd) {
-        define('underscore', [], function() {
-            return _;
-        });
-    }
-}.call(this));
 //     Backbone.js 1.1.2
 //     (c) 2010-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Backbone may be freely distributed under the MIT license.
@@ -15804,18 +15351,18 @@ return jQuery;
 (function(root, factory) {
   // Set up Backbone appropriately for the environment. Start with AMD.
   if (typeof define === "function" && define.amd) {
-    define([ "underscore", "jquery", "exports" ], function(_, $, exports) {
+    define([ "Est", "jquery", "exports" ], function(Est, $, exports) {
       // Export global even in AMD case in case this script is loaded with
       // others that may still expect a global Backbone.
-      root.Backbone = factory(root, exports, _, $);
+      root.Backbone = factory(root, exports, Est, $);
     });
   } else if (typeof exports !== "undefined") {
-    var _ = require("underscore");
-    factory(root, exports, _, root.jQuery);
+    var Est = require("Est");
+    factory(root, exports, Est, root.jQuery);
   } else {
-    root.Backbone = factory(root, {}, root._, root.jQuery || root.Zepto || root.ender || root.$);
+    root.Backbone = factory(root, {}, root.Est, root.jQuery || root.Zepto || root.ender || root.$);
   }
-})(this, function(root, Backbone, _, $) {
+})(this, function(root, Backbone, Est, $) {
   // Initial Setup
   // -------------
   // Save the previous value of the `Backbone` variable, so that it can be
@@ -15837,6 +15384,14 @@ return jQuery;
     root.Backbone = previousBackbone;
     return this;
   };
+
+  // custom fn
+  Backbone.result = function(object, property) {
+    if (object == null) return void 0;
+    var value = object[property];
+    return Est.typeOf(value) === 'function' ? object[property]() : value;
+  };
+
   // Turn on `emulateHTTP` to support legacy HTTP servers. Setting this option
   // will fake `"PATCH"`, `"PUT"` and `"DELETE"` requests via the `_method` parameter and
   // set a `X-Http-Method-Override` header.
@@ -15854,7 +15409,7 @@ return jQuery;
   // succession.
   //
   //     var object = {};
-  //     _.extend(object, Backbone.Events);
+  //     Est.extend(object, Backbone.Events);
   //     object.on('expand', function(){ alert('expanded'); });
   //     object.trigger('expand');
   //
@@ -15877,7 +15432,7 @@ return jQuery;
     once: function(name, callback, context) {
       if (!eventsApi(this, "once", name, [ callback, context ]) || !callback) return this;
       var self = this;
-      var once = _.once(function() {
+      var once = Est.once(function() {
         self.off(name, once);
         callback.apply(this, arguments);
       });
@@ -16032,13 +15587,13 @@ return jQuery;
     this.attributes = {};
     if (options.collection) this.collection = options.collection;
     if (options.parse) attrs = this.parse(attrs, options) || {};
-    attrs = _.defaults({}, attrs, _.result(this, "defaults"));
+    attrs = Est.defaults({}, attrs, Backbone.result(this, "defaults"));
     this.set(attrs, options);
     this.changed = {};
     this.initialize.apply(this, arguments);
   };
   // Attach all inheritable methods to the Model prototype.
-  _.extend(Model.prototype, Events, {
+  Est.extend(Model.prototype, Events, {
     // A hash of attributes whose current and previous value differ.
     changed: null,
     // The value returned during the last failed validation.
@@ -16064,7 +15619,7 @@ return jQuery;
     },
     // Get the HTML-escaped value of an attribute.
     escape: function(attr) {
-      return _.escape(this.get(attr));
+      return Est.escapeHTML(this.get(attr));
     },
     // Returns `true` if the attribute contains a value that is not null
     // or undefined.
@@ -16103,8 +15658,8 @@ return jQuery;
       // For each `set` attribute, update or delete the current value.
       for (attr in attrs) {
         val = attrs[attr];
-        if (!_.isEqual(current[attr], val)) changes.push(attr);
-        if (!_.isEqual(prev[attr], val)) {
+        if (!Est.equal(current[attr], val)) changes.push(attr);
+        if (!Est.equal(prev[attr], val)) {
           this.changed[attr] = val;
         } else {
           delete this.changed[attr];
@@ -16135,7 +15690,7 @@ return jQuery;
     // Remove an attribute from the model, firing `"change"`. `unset` is a noop
     // if the attribute doesn't exist.
     unset: function(attr, options) {
-      return this.set(attr, void 0, _.extend({}, options, {
+      return this.set(attr, void 0, Est.extend({}, options, {
         unset: true
       }));
     },
@@ -16143,7 +15698,7 @@ return jQuery;
     clear: function(options) {
       var attrs = {};
       for (var key in this.attributes) attrs[key] = void 0;
-      return this.set(attrs, _.extend({}, options, {
+      return this.set(attrs, Est.extend({}, options, {
         unset: true
       }));
     },
@@ -16151,7 +15706,7 @@ return jQuery;
     // If you specify an attribute name, determine if that attribute has changed.
     hasChanged: function(attr) {
       if (attr == null) return !Est.isEmpty(this.changed);
-      return _.has(this.changed, attr);
+      return Est.has(this.changed, attr);
     },
     // Return an object containing all the attributes that have changed, or
     // false if there are no changed attributes. Useful for determining what
@@ -16164,7 +15719,7 @@ return jQuery;
       var val, changed = false;
       var old = this._changing ? this._previousAttributes : this.attributes;
       for (var attr in diff) {
-        if (_.isEqual(old[attr], val = diff[attr])) continue;
+        if (Est.equal(old[attr], val = diff[attr])) continue;
         (changed || (changed = {}))[attr] = val;
       }
       return changed;
@@ -16209,7 +15764,7 @@ return jQuery;
       } else {
         (attrs = {})[key] = val;
       }
-      options = _.extend({
+      options = Est.extend({
         validate: true
       }, options);
       // If we're not waiting and attributes exist, save acts as
@@ -16222,7 +15777,7 @@ return jQuery;
       }
       // Set temporary attributes if `{wait: true}`.
       if (attrs && options.wait) {
-        this.attributes = _.extend({}, attributes, attrs);
+        this.attributes = Est.extend({}, attributes, attrs);
       }
       // After a successful server-side save, the client is (optionally)
       // updated with the server-side state.
@@ -16233,8 +15788,8 @@ return jQuery;
         // Ensure attributes are restored during synchronous saves.
         model.attributes = attributes;
         var serverAttrs = model.parse(resp, options);
-        if (options.wait) serverAttrs = _.extend(attrs || {}, serverAttrs);
-        if (_.isObject(serverAttrs) && !model.set(serverAttrs, options)) {
+        if (options.wait) serverAttrs = Est.extend(attrs || {}, serverAttrs);
+        if (Est.typeOf(serverAttrs) === 'object' && !model.set(serverAttrs, options)) {
           return false;
         }
         if (success) success(model, resp, options);
@@ -16280,7 +15835,7 @@ return jQuery;
     // using Backbone's restful methods, override this to change the endpoint
     // that will be called.
     url: function() {
-      var base = _.result(this, "urlRoot") || _.result(this.collection, "url") || urlError();
+      var base = Backbone.result(this, "urlRoot") || Backbone.result(this.collection, "url") || urlError();
       if (this.isNew()) return base;
       return base.replace(/([^\/])$/, "$1/") + encodeURIComponent(this.id);
     },
@@ -16299,7 +15854,7 @@ return jQuery;
     },
     // Check if the model is currently in a valid state.
     isValid: function(options) {
-      return this._validate({}, _.extend(options || {}, {
+      return this._validate({}, Est.extend(options || {}, {
         validate: true
       }));
     },
@@ -16307,10 +15862,10 @@ return jQuery;
     // returning `true` if all is well. Otherwise, fire an `"invalid"` event.
     _validate: function(attrs, options) {
       if (!options.validate || !this.validate) return true;
-      attrs = _.extend({}, this.attributes, attrs);
+      attrs = Est.extend({}, this.attributes, attrs);
       var error = this.validationError = this.validate(attrs, options) || null;
       if (!error) return true;
-      this.trigger("invalid", this, error, _.extend(options, {
+      this.trigger("invalid", this, error, Est.extend(options, {
         validationError: error
       }));
       return false;
@@ -16323,7 +15878,7 @@ return jQuery;
     Model.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.attributes);
-      return _[method].apply(_, args);
+      return Est[method].apply(Est, args);
     };
   });
   // Backbone.Collection
@@ -16343,7 +15898,7 @@ return jQuery;
     if (options.comparator !== void 0) this.comparator = options.comparator;
     this._reset();
     this.initialize.apply(this, arguments);
-    if (models) this.reset(models, _.extend({
+    if (models) this.reset(models, Est.extend({
       silent: true
     }, options));
   };
@@ -16358,7 +15913,7 @@ return jQuery;
     remove: false
   };
   // Define the Collection's inheritable methods.
-  _.extend(Collection.prototype, Events, {
+  Est.extend(Collection.prototype, Events, {
     // The default model for a collection is just a **Backbone.Model**.
     // This should be overridden in most cases.
     model: Model,
@@ -16378,7 +15933,7 @@ return jQuery;
     },
     // Add a model, or list of models to the set.
     add: function(models, options) {
-      return this.set(models, _.extend({
+      return this.set(models, Est.extend({
         merge: false
       }, options, addOptions));
     },
@@ -16409,7 +15964,7 @@ return jQuery;
     // already exist in the collection, as necessary. Similar to **Model#set**,
     // the core operation for updating the data contained by the collection.
     set: function(models, options) {
-      options = _.defaults({}, options, setOptions);
+      options = Est.defaults({}, options, setOptions);
       if (options.parse) models = this.parse(models, options);
       var singular = !(Est.typeOf(models) === 'array');
       models = singular ? models ? [ models ] : [] : Est.cloneDeep(models);
@@ -16500,7 +16055,7 @@ return jQuery;
       }
       options.previousModels = this.models;
       this._reset();
-      models = this.add(models, _.extend({
+      models = this.add(models, Est.extend({
         silent: true
       }, options));
       if (!options.silent) this.trigger("reset", this, options);
@@ -16508,7 +16063,7 @@ return jQuery;
     },
     // Add a model to the end of the collection.
     push: function(model, options) {
-      return this.add(model, _.extend({
+      return this.add(model, Est.extend({
         at: this.length
       }, options));
     },
@@ -16520,7 +16075,7 @@ return jQuery;
     },
     // Add a model to the beginning of the collection.
     unshift: function(model, options) {
-      return this.add(model, _.extend({
+      return this.add(model, Est.extend({
         at: 0
       }, options));
     },
@@ -16569,14 +16124,14 @@ return jQuery;
       if (Est.typeOf(this.comparator) === 'string' || this.comparator.length === 1) {
         this.models = this.sortBy(this.comparator, this);
       } else {
-        this.models.sort(_.bind(this.comparator, this));
+        this.models.sort(Est.proxy(this.comparator, this));
       }
       if (!options.silent) this.trigger("sort", this, options);
       return this;
     },
     // Pluck an attribute from each model in the collection.
     pluck: function(attr) {
-      return _.invoke(this.models, "get", attr);
+      return Est.invoke(this.models, "get", attr);
     },
     // Fetch the default set of models for this collection, resetting the
     // collection when they arrive. If `reset: true` is passed, the response
@@ -16675,7 +16230,7 @@ return jQuery;
     Collection.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.models);
-      return _[method].apply(_, args);
+      return Est[method].apply(Est, args);
     };
   });
   // Underscore methods that take a property name as an argument.
@@ -16703,7 +16258,7 @@ return jQuery;
   var View = Backbone.View = function(options) {
     this.cid = Est.nextUid("view");
     options || (options = {});
-    _.extend(this, Est.pick(options, viewOptions));
+    Est.extend(this, Est.pick(options, viewOptions));
     this._ensureElement();
     this.initialize.apply(this, arguments);
     this.delegateEvents();
@@ -16713,7 +16268,7 @@ return jQuery;
   // List of views options to be merged as properties.
   var viewOptions = [ "model", "collection", "el", "id", "attributes", "className", "tagName", "events" ];
   // Set up all inheritable **Backbone.View** properties and methods.
-  _.extend(View.prototype, Events, {
+  Est.extend(View.prototype, Events, {
     // The default `tagName` of a View's element is `"div"`.
     tagName: "div",
     // jQuery delegate for element lookup, scoped to DOM elements within the
@@ -16762,7 +16317,7 @@ return jQuery;
     // This only works for delegate-able events: not `focus`, `blur`, and
     // not `change`, `submit`, and `reset` in Internet Explorer.
     delegateEvents: function(events) {
-      if (!(events || (events = _.result(this, "events")))) return this;
+      if (!(events || (events = Backbone.result(this, "events")))) return this;
       this.undelegateEvents();
       for (var key in events) {
         var method = events[key];
@@ -16770,7 +16325,7 @@ return jQuery;
         if (!method) continue;
         var match = key.match(delegateEventSplitter);
         var eventName = match[1], selector = match[2];
-        method = _.bind(method, this);
+        method = Est.proxy(method, this);
         eventName += ".delegateEvents" + this.cid;
         if (selector === "") {
           this.$el.on(eventName, method);
@@ -16793,13 +16348,13 @@ return jQuery;
     // an element from the `id`, `className` and `tagName` properties.
     _ensureElement: function() {
       if (!this.el) {
-        var attrs = _.extend({}, _.result(this, "attributes"));
-        if (this.id) attrs.id = _.result(this, "id");
-        if (this.className) attrs["class"] = _.result(this, "className");
-        var $el = Backbone.$("<" + _.result(this, "tagName") + ">").attr(attrs);
+        var attrs = Est.extend({}, Backbone.result(this, "attributes"));
+        if (this.id) attrs.id = Backbone.result(this, "id");
+        if (this.className) attrs["class"] = Backbone.result(this, "className");
+        var $el = Backbone.$("<" + Backbone.result(this, "tagName") + ">").attr(attrs);
         this.setElement($el, false);
       } else {
-        this.setElement(_.result(this, "el"), false);
+        this.setElement(Backbone.result(this, "el"), false);
       }
     }
   });
@@ -16823,7 +16378,7 @@ return jQuery;
   Backbone.sync = function(method, model, options) {
     var type = methodMap[method];
     // Default options, unless specified.
-    _.defaults(options || (options = {}), {
+    Est.defaults(options || (options = {}), {
       emulateHTTP: Backbone.emulateHTTP,
       emulateJSON: Backbone.emulateJSON
     });
@@ -16834,7 +16389,7 @@ return jQuery;
     };
     // Ensure that we have a URL.
     if (!options.url) {
-      params.url = _.result(model, "url") || urlError();
+      params.url = Backbone.result(model, "url") || urlError();
     }
     // Ensure that we have the appropriate request data.
     if (options.data == null && model && (method === "create" || method === "update" || method === "patch")) {
@@ -16872,7 +16427,7 @@ return jQuery;
       };
     }
     // Make the request, allowing the user to override any Ajax options.
-    var xhr = options.xhr = Backbone.ajax(_.extend(params, options));
+    var xhr = options.xhr = Backbone.ajax(Est.extend(params, options));
     model.trigger("request", model, xhr, options);
     return xhr;
   };
@@ -16931,7 +16486,7 @@ return jQuery;
   var splatParam = /\*\w+/g;
   var escapeRegExp = /[\-{}\[\]+?.,\\\^$|#\s]/g;
   // Set up all inheritable **Backbone.Router** properties and methods.
-  _.extend(Router.prototype, Events, {
+  Est.extend(Router.prototype, Events, {
     // Initialize is an empty function by default. Override it with your own
     // initialization logic.
     initialize: function() {},
@@ -16973,7 +16528,7 @@ return jQuery;
     // routes can be defined at the bottom of the route map.
     _bindRoutes: function() {
       if (!this.routes) return;
-      this.routes = _.result(this, "routes");
+      this.routes = Backbone.result(this, "routes");
       var route, routes = Est.keys(this.routes);
       while ((route = routes.pop()) != null) {
         this.route(route, this.routes[route]);
@@ -17008,7 +16563,7 @@ return jQuery;
   // falls back to polling.
   var History = Backbone.History = function() {
     this.handlers = [];
-    _.bindAll(this, "checkUrl");
+    Est.bindAll(this, "checkUrl");
     // Ensure that `History` can be used outside of the browser.
     if (typeof window !== "undefined") {
       this.location = window.location;
@@ -17028,7 +16583,7 @@ return jQuery;
   // Has the history handling already been started?
   History.started = false;
   // Set up all inheritable **Backbone.History** properties and methods.
-  _.extend(History.prototype, Events, {
+  Est.extend(History.prototype, Events, {
     // The default interval to poll for hash changes, if necessary, is
     // twenty times a second.
     interval: 50,
@@ -17063,7 +16618,7 @@ return jQuery;
       History.started = true;
       // Figure out the initial configuration. Do we need an iframe?
       // Is pushState desired ... is it available?
-      this.options = _.extend({
+      this.options = Est.extend({
         root: "/"
       }, this.options, options);
       this.root = this.options.root;
@@ -17141,7 +16696,7 @@ return jQuery;
     // returns `false`.
     loadUrl: function(fragment) {
       fragment = this.fragment = this.getFragment(fragment);
-      return _.any(this.handlers, function(handler) {
+      return Est.any(this.handlers, function(handler) {
         if (handler.route.test(fragment)) {
           handler.callback(fragment);
           return true;
@@ -17198,6 +16753,15 @@ return jQuery;
   });
   // Create the default Backbone.history.
   Backbone.history = new History();
+   var bbextend = function(obj) {
+        if (!Est.typeOf(obj) === 'object') return obj;
+        Est.each(slice.call(arguments, 1), function(source) {
+            for (var prop in source) {
+                obj[prop] = source[prop];
+            }
+        });
+        return obj;
+    };
   // Helpers
   // -------
   // Helper function to correctly set up the prototype chain, for subclasses.
@@ -17209,7 +16773,7 @@ return jQuery;
     // The constructor function for the new subclass is either defined by you
     // (the "constructor" property in your `extend` definition), or defaulted
     // by us to simply call the parent's constructor.
-    if (protoProps && _.has(protoProps, "constructor")) {
+    if (protoProps && Est.has(protoProps, "constructor")) {
       child = protoProps.constructor;
     } else {
       child = function() {
@@ -17217,7 +16781,7 @@ return jQuery;
       };
     }
     // Add static properties to the constructor function, if supplied.
-    _.extend(child, parent, staticProps);
+    bbextend(child, parent, staticProps);
     // Set the prototype chain to inherit from `parent`, without calling
     // `parent`'s constructor function.
     var Surrogate = function() {
@@ -17227,7 +16791,7 @@ return jQuery;
     child.prototype = new Surrogate();
     // Add prototype properties (instance properties) to the subclass,
     // if supplied.
-    if (protoProps) _.extend(child.prototype, protoProps);
+    if (protoProps) Est.extend(child.prototype, protoProps);
     // Set a convenience property in case the parent's prototype is needed
     // later.
     child.__super__ = parent.prototype;
@@ -17255,7 +16819,7 @@ return jQuery;
   }
 
   Backbone.ModelBinder = function(){
-    _.bindAll.apply(_, [this].concat(Est.functions(this)));
+    Est.bindAll.apply(Est, [this].concat(Est.functions(this)));
   };
 
   // Static setter for class level options
@@ -17269,7 +16833,7 @@ return jQuery;
   Backbone.ModelBinder.Constants.ModelToView = 'ModelToView';
   Backbone.ModelBinder.Constants.ViewToModel = 'ViewToModel';
 
-  _.extend(Backbone.ModelBinder.prototype, {
+  Est.extend(Backbone.ModelBinder.prototype, {
 
     bind:function (model, rootEl, attributeBindings, options) {
       this.unbind();
@@ -17312,7 +16876,7 @@ return jQuery;
     },
 
     _setOptions: function(options){
-      this._options = _.extend({
+      this._options = Est.extend({
         boundAttribute: 'name'
       }, Backbone.ModelBinder.options, options);
 
@@ -17428,7 +16992,7 @@ return jQuery;
       var attributeName, attributeBinding;
 
       for (attributeName in this._attributeBindings) {
-        if(attributesToCopy === undefined || _.indexOf(attributesToCopy, attributeName) !== -1){
+        if(attributesToCopy === undefined || Est.indexOf(attributesToCopy, attributeName) !== -1){
           attributeBinding = this._attributeBindings[attributeName];
           this._copyModelToView(attributeBinding);
         }
@@ -17732,10 +17296,10 @@ return jQuery;
     if(!this._collection){
       throw 'Collection must be defined';
     }
-    _.bindAll(this, 'convert');
+    Est.bindAll(this, 'convert');
   };
 
-  _.extend(Backbone.ModelBinder.CollectionConverter.prototype, {
+  Est.extend(Backbone.ModelBinder.CollectionConverter.prototype, {
     convert: function(direction, value){
       if (direction === Backbone.ModelBinder.Constants.ModelToView) {
         return value ? value.id : undefined;
@@ -20661,8 +20225,10 @@ return jQuery;
  <a href="javascript:;">{{this}}</a></li>
  {{/pagination}}
  */
-Handlebars.registerHelper('pagination', function (page, totalPage, sum, block) {
-  var accum = '', block = block, sum = sum;
+Handlebars.registerHelper('pagination', function(page, totalPage, sum, block) {
+  var accum = '',
+    block = block,
+    sum = sum;
   if (arguments.length === 3) {
     block = sum;
     sum = 9;
@@ -20681,7 +20247,7 @@ Handlebars.registerHelper('pagination', function (page, totalPage, sum, block) {
  * @example
  *      Handlebars.helpers["getValue"].apply(this, date)
  */
-Handlebars.registerHelper('getValue', function (path, options) {
+Handlebars.registerHelper('getValue', function(path, options) {
   if (typeof path !== 'undefined' && Est.typeOf(path) === 'string') {
     var list = path.split('.');
     if (list[0] in this) {
@@ -20706,7 +20272,7 @@ Handlebars.registerHelper('getValue', function (path, options) {
  * @example
  *      {{#compare ../page '!==' this}}danaiPageNum{{else}}active{{/compare}}
  */
-Handlebars.registerHelper('compare', function (v1, operator, v2, options) {
+Handlebars.registerHelper('compare', function(v1, operator, v2, options) {
   if (arguments.length < 3)
     throw new Error("Handlerbars Helper 'compare' needs 2 parameters");
   try {
@@ -20759,7 +20325,7 @@ Handlebars.registerHelper('compare', function (v1, operator, v2, options) {
  * @example
  *      {{dateFormat $.detail_news.add_time $.lan.news.format}}
  */
-Handlebars.registerHelper('dateFormat', function (date, fmt, options) {
+Handlebars.registerHelper('dateFormat', function(date, fmt, options) {
   return Est.dateFormat(date, fmt);
 });
 
@@ -20770,7 +20336,7 @@ Handlebars.registerHelper('dateFormat', function (date, fmt, options) {
  * @example
  *      {{#contains ../element this}}checked="checked"{{/contains}}
  */
-Handlebars.registerHelper('contains', function (target, thisVal, options) {
+Handlebars.registerHelper('contains', function(target, thisVal, options) {
   if (Est.isEmpty(target)) return;
   return Est.contains(target, thisVal) ? options.fn(this) : options.inverse(this);
 });
@@ -20782,7 +20348,7 @@ Handlebars.registerHelper('contains', function (target, thisVal, options) {
  * @example
  *      {{plus 1 2}} => 3
  */
-Handlebars.registerHelper('plus', function (num1, num2, opts) {
+Handlebars.registerHelper('plus', function(num1, num2, opts) {
   return parseInt(num1, 10) + parseInt(num2, 10);
 });
 /**
@@ -20792,7 +20358,7 @@ Handlebars.registerHelper('plus', function (num1, num2, opts) {
  * @example
  *        {{minus 10 5}} => 5
  */
-Handlebars.registerHelper('minus', function (num1, num2, opts) {
+Handlebars.registerHelper('minus', function(num1, num2, opts) {
   return parseInt(num1, 10) - parseInt(num2, 10);
 });
 
@@ -20803,7 +20369,7 @@ Handlebars.registerHelper('minus', function (num1, num2, opts) {
  * @example
  *      {{cutByte name 5 end='...'}}
  */
-Handlebars.registerHelper('cutByte', function (str, len, options) {
+Handlebars.registerHelper('cutByte', function(str, len, options) {
   return Est.cutByte(str, len, options.hash.end || '...');
 });
 
@@ -20815,12 +20381,11 @@ Handlebars.registerHelper('cutByte', function (str, len, options) {
  *       return Handlebars.helpers["x"].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);
  *
  */
-Handlebars.registerHelper("x", function (expression, options) {
-  var fn = function () {
-  }, result;
+Handlebars.registerHelper("x", function(expression, options) {
+  var fn = function() {},
+    result;
   try {
-    fn = Function.apply(this,
-      [ 'window', 'return ' + expression + ';' ]);
+    fn = Function.apply(this, ['window', 'return ' + expression + ';']);
   } catch (e) {
     console.warn('[warning] {{x ' + expression + '}} is invalid javascript', e);
   }
@@ -20840,7 +20405,7 @@ Handlebars.registerHelper("x", function (expression, options) {
  *    {{#xif "this.orderStatus != 'completed' && this.orderStatus != 'invalid' && this.paymentStatus == 'unpaid' &&
               this.shippingStatus == 'unshipped'"}}disabled{{/xif}}
  */
-Handlebars.registerHelper("xif", function (expression, options) {
+Handlebars.registerHelper("xif", function(expression, options) {
   return Handlebars.helpers["x"].apply(this, [expression, options]) ? options.fn(this) : options.inverse(this);
 });
 
@@ -20851,7 +20416,7 @@ Handlebars.registerHelper("xif", function (expression, options) {
  * @example
  *      {{parseInt 01}}
  */
-Handlebars.registerHelper('parseInt', function (result, options) {
+Handlebars.registerHelper('parseInt', function(result, options) {
   return parseInt(result, 10);
 });
 
@@ -20860,7 +20425,7 @@ Handlebars.registerHelper('parseInt', function (result, options) {
  * @method id2
  * @author wyj
  */
-Handlebars.registerHelper('id2', function (id) {
+Handlebars.registerHelper('id2', function(id) {
   return id == null ? "" : id.replace(/^[^1-9]+/, "")
 });
 
@@ -20871,7 +20436,7 @@ Handlebars.registerHelper('id2', function (id) {
  * @example
  *        {{CONST 'HOST'}}
  */
-Handlebars.registerHelper('CONST', function (name, options) {
+Handlebars.registerHelper('CONST', function(name, options) {
   return Est.getValue(CONST, name);
 });
 
@@ -20883,7 +20448,7 @@ Handlebars.registerHelper('CONST', function (name, options) {
  *        {{PIC pic}}   ==> http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic.jpg?v=2015-12-20_12:30
  *        {{PIC pic 5}} ==> http://img.jihui88.com/upload/a/a1/picture/2015/12/20/pic_5.jpg?v=2015-12-20_12:30
  */
-Handlebars.registerHelper('PIC', function (name, number, options) {
+Handlebars.registerHelper('PIC', function(name, number, options) {
   var version = '';
   if (name) {
     version += (name.indexOf('?') > -1 ? ('&v=' + CONST.APP_VERSION) : '?v=' + CONST.APP_VERSION);
@@ -20892,11 +20457,11 @@ Handlebars.registerHelper('PIC', function (name, number, options) {
     }
   }
   if (!name) return CONST.DOMAIN + CONST.PIC_NONE + version;
-  if (Est.startsWidth(name, 'http') && name.indexOf('upload') > -1){
-        name = name.substring(name.indexOf('upload'), name.length);
+  if (Est.startsWidth(name, 'http') && name.indexOf('upload') > -1) {
+    name = name.substring(name.indexOf('upload'), name.length);
   }
-  if (Est.startsWidth(name, 'upload')){
-     return arguments.length < 3 ? CONST.PIC_URL + '/' + name + version:
+  if (Est.startsWidth(name, 'upload')) {
+    return arguments.length < 3 ? CONST.PIC_URL + '/' + name + version :
       Handlebars.helpers['_picUrl'].apply(this, [name, number, options]) + version;
   }
 
@@ -20912,7 +20477,7 @@ Handlebars.registerHelper('PIC', function (name, number, options) {
  * @param  {object} options
  * @return {string}     => background-image: url(http://img.jihui88.com/upload/u/u2/.......png);
  */
-Handlebars.registerHelper('BackgroundImage', function (name, number, options) {
+Handlebars.registerHelper('BackgroundImage', function(name, number, options) {
   return ('background-image: url(' + Handlebars.helpers['PIC'].apply(this, Array.prototype.slice.call(arguments)) + ');');
 });
 
@@ -20929,7 +20494,7 @@ Handlebars.registerHelper('BackgroundImage', function (name, number, options) {
  * @example
  *      {{#isEmpty image}}<img src='...'></img>{{/isEmpty}}
  */
-Handlebars.registerHelper('isEmpty', function (value, options) {
+Handlebars.registerHelper('isEmpty', function(value, options) {
   return Est.isEmpty(value) ? options.fn(this) :
     options.inverse(this);
 });
@@ -20941,7 +20506,7 @@ Handlebars.registerHelper('isEmpty', function (value, options) {
  * @example
  *      <img src="{{CONST 'PIC_URL'}}/{{picUrl picPath 6}}" width="52" height="52">
  */
-Handlebars.registerHelper('picUrl', function (src, number, opts) {
+Handlebars.registerHelper('picUrl', function(src, number, opts) {
   var url = src;
   if (arguments.length < 3) return src || CONST.PIC_NONE;
   if (src == null || src.length == 0) return CONST.PIC_NONE;
@@ -20949,7 +20514,7 @@ Handlebars.registerHelper('picUrl', function (src, number, opts) {
   url = url.substring(0, url.lastIndexOf(".")) + "_" + number + "." + url2;
   return url ? url : '';
 });
-Handlebars.registerHelper('_picUrl', function (src, number, opts) {
+Handlebars.registerHelper('_picUrl', function(src, number, opts) {
   return CONST.PIC_URL + '/' + Handlebars.helpers['picUrl'].apply(this, [src, number, opts]);
 });
 /**
@@ -20960,9 +20525,10 @@ Handlebars.registerHelper('_picUrl', function (src, number, opts) {
  * @example
  *        {{{radio name='isBest' value=isBest option='{"是": "01", "否": "00"}' }}}
  */
-Handlebars.registerHelper('radio', function (options) {
-  var result = [], list = $.parseJSON ? $.parseJSON(options.hash.option) : JSON.parse(options.hash.options);
-  Est.each(list, function (val, key, list, index) {
+Handlebars.registerHelper('radio', function(options) {
+  var result = [],
+    list = $.parseJSON ? $.parseJSON(options.hash.option) : JSON.parse(options.hash.options);
+  Est.each(list, function(val, key, list, index) {
     var checked = options.hash.value === val ? 'checked' : '';
     result.push('<label><input id="model' + index + '-' + options.hash.name + '" type="radio" name="' + options.hash.name +
       '" value="' + val + '" ' + checked + '>&nbsp;' + key + '</label>&nbsp;&nbsp;');
@@ -20978,18 +20544,20 @@ Handlebars.registerHelper('radio', function (options) {
  * @example
  *      {{{{checkbox label='默认' name='isChecked' value=isChecked trueVal='01' falseVal='00' }}}
  */
-Handlebars.registerHelper('checkbox', function (options) {
-  var id = options.hash.id ? options.hash.id : (Est.nextUid('model- ')+ options.hash.name);
+Handlebars.registerHelper('checkbox', function(options) {
+  var id = options.hash.id ? options.hash.id : (Est.nextUid('model- ') + options.hash.name);
   var random = Est.nextUid('checkbox'); // 随机数
   var icon_style = "font-size: 32px;"; // 图标大小
   var value = Est.isEmpty(options.hash.value) ? options.hash.falseVal : options.hash.value; // 取值
-  var isChecked = value === options.hash.trueVal ? true : false; // 是否选中状态
+  var isChecked = Est.typeOf(value) === 'boolean' ? value : value === options.hash.trueVal ? true : false; // 是否选中状态
   var defaultClass = isChecked ? 'icon-checkbox' : 'icon-checkboxno';
   var args = ("'" + random + "'"); // 参数
 
   var result = '<label for="' + id + '"> ' +
-    '<input type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' + value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal + '" false-value="' + options.hash.falseVal + '"  class="rc-hidden">' +
-    options.hash.label +
+    '<input type="checkbox" name="' + options.hash.name + '" id="' + id + '" value="' +
+    value + '" ' + (isChecked ? 'checked' : '') + ' true-value="' + options.hash.trueVal +
+    '" false-value="' + options.hash.falseVal + '"  class="rc-hidden '+(options.hash.className || '')+'"> ' +
+  options.hash.label +
     '</label>';
   return result;
 });
@@ -21003,10 +20571,10 @@ Handlebars.registerHelper('checkbox', function (options) {
  *      {{{select name='paymentConfit' value=curConfitPanment key='paymentId' text='name' list=paymentConfigList  style="height: 40px;"}}}
  *
  */
-Handlebars.registerHelper('select', function (options) {
+Handlebars.registerHelper('select', function(options) {
   var id = options.hash.id ? options.hash.id : ('model-' + options.hash.name);
   var str = '<select name="' + options.hash.name + '" id="' + id + '"  class="' + (options.hash.className || '') + '" style="' + (options.hash.style || '') + '"> ';
-  Est.each(options.hash.list, function (item) {
+  Est.each(options.hash.list, function(item) {
     var selected = options.hash.value === item[options.hash.key] ? 'selected' : '';
     str += '<option value="' + item[options.hash.key] + '" ' + selected + '>' + item[options.hash.text] + '</option>';
   });
@@ -21020,7 +20588,7 @@ Handlebars.registerHelper('select', function (options) {
  * @example
  *      <input type="text" {{disabled 'this.isDisabled'}} />
  */
-Handlebars.registerHelper('disabled', function (expression, options) {
+Handlebars.registerHelper('disabled', function(expression, options) {
   return Handlebars.helpers['x'].apply(this, [expression, options]) ? ' disabled=disabled ' : '';
 });
 
@@ -21032,7 +20600,7 @@ Handlebars.registerHelper('disabled', function (expression, options) {
  * @example
  *        <input type="checked"  {{checked 'this.isChecked'}} />
  */
-Handlebars.registerHelper('checked', function (expression, options) {
+Handlebars.registerHelper('checked', function(expression, options) {
   return Handlebars.helpers['x'].apply(this, [expression, options]) ? 'checked' : '';
 });
 
@@ -21043,7 +20611,7 @@ Handlebars.registerHelper('checked', function (expression, options) {
  * @example
  *      {{encodeURIComponent url}}
  */
-Handlebars.registerHelper('encodeURIComponent', function (val, options) {
+Handlebars.registerHelper('encodeURIComponent', function(val, options) {
   return encodeURIComponent(val);
 });
 
@@ -21053,7 +20621,7 @@ Handlebars.registerHelper('encodeURIComponent', function (val, options) {
  * @example
  *      {{json 'invite.title'}}
  */
-Handlebars.registerHelper('json', function (path, options) {
+Handlebars.registerHelper('json', function(path, options) {
   return Handlebars.helpers["getValue"].call(this, path);
 });
 /**
@@ -21062,7 +20630,7 @@ Handlebars.registerHelper('json', function (path, options) {
  * @example
  *      http://www.jihui88.com?v={{version}}
  */
-Handlebars.registerHelper('version', function (options) {
+Handlebars.registerHelper('version', function(options) {
   return new Date().getTime();
 });
 
@@ -21073,7 +20641,7 @@ Handlebars.registerHelper('version', function (options) {
  * @example
  *    {{stripScripts '<scripts></scripts>'}}
  */
-Handlebars.registerHelper('stripScripts', function (str, options) {
+Handlebars.registerHelper('stripScripts', function(str, options) {
   return Est.stripScripts(str);
 });
 
@@ -21850,18 +21418,15 @@ var BaseUtils = {
    *      });
    */
   tip: function(msg, options) {
-    options = options || {
+    options = Est.extend({
+      id: 'tip-dialog' + Est.nextUid(),
       time: 3000,
-      title: CONST.LANG.INFO_TIP
-    };
+      content: '<div style="padding: 10px;">' + msg + '</div>',
+      title: null
+    }, options);
     seajs.use(['dialog-plus'], function(dialog) {
       window.tipsDialog && window.tipsDialog.close().remove();
-      window.tipsDialog = app.addDialog(dialog({
-        id: 'tip-dialog' + Est.nextUid(),
-        title: options.title,
-        width: 200,
-        content: '<div style="padding: 10px;">' + msg + '</div>'
-      })).show();
+      window.tipsDialog = app.addDialog(dialog(options)).show(options.target);
       setTimeout(function() {
         window.tipsDialog.close().remove();
       }, options.time);
@@ -21933,7 +21498,7 @@ var BaseUtils = {
       window.$loading = $('<div class="loading"></div>');
       $('body').append(window.$loading);
     } catch (e) {
-      debug('Error28' + e);//debug__
+      debug('Error28' + e); //debug__
     }
     return window.$loading;
   },
@@ -21961,7 +21526,7 @@ var BaseUtils = {
    *      }, this);
    */
   execute: function(name) {
-    debug('- BaseUtils.execute ' + name);//debug__
+    debug('- BaseUtils.execute ' + name); //debug__
     return BaseUtils[name] && BaseUtils[name].apply(BaseUtils, [].slice.call(arguments, 1));
   }
 };
@@ -22944,6 +22509,7 @@ var BaseList = SuperView.extend({
        *                     BaseItem中为[this._options.data &{{_options._data.name}}] BaseCollecton为this._options.data BaseModel为this.get('_data')
        *        append: false, // 是否是追加内容， 默认为替换
        *        checkAppend: false, // 鼠标点击checkbox， checkbox是否追加  需在BaseItem事件中添加 'click .toggle': '_toggleChecked',
+       *        checkToggle: true,// 是否选中切换
        *        enterRender: (可选) 执行回车后的按钮点击的元素选择符 如 #submit .btn-search
        *        pagination: true/selector, // 是否显示分页 view视图中相应加入<div id="pagination-container"></div>; pagination可为元素选择符
        *        page: parseInt(Est.cookie('orderList_page')) || 1, //设置起始页 所有的分页数据都会保存到cookie中， 以viewId + '_page'格式存储， 注意cookie取的是字符串， 要转化成int
@@ -23105,8 +22671,6 @@ var BaseList = SuperView.extend({
     }, {
       type: 'error'
     }); //debug__
-    this.allCheckbox = this.$('#toggle-all')[0];
-
     return this.list;
   },
   /**
@@ -23468,7 +23032,7 @@ var BaseList = SuperView.extend({
         i--;
       }
       thisModel.set('children', _children);
-      thisModel.set('id',thisModel.get(ctx._options.categoryId));
+      thisModel.set('id', thisModel.get(ctx._options.categoryId));
       // 添加父级元素
 
       if (Est.typeOf(ctx._options.rootValue) === 'array') {
@@ -23545,7 +23109,7 @@ var BaseList = SuperView.extend({
       //TODO 优先级 new对象里的viewId > _options > getCurrentView()
       itemView._setViewId(this._options.viewId || app.getCurrentView());
 
-      if (arg2 && arg2.at < this.dx - 1 &&
+      if (arg2 && arg2.at < this.collection.models.length - 1 &&
         this.collection.models.length > 1) {
         this.collection.models[arg2.at === 0 ? 0 :
           arg2.at - 1].view.$el.after(itemView._render().el);
@@ -23571,10 +23135,10 @@ var BaseList = SuperView.extend({
     // 判断第二个参数是否是数字， 否-> 取当前列表的最后一个元素的索引值
     // 判断index是否大于列表长度
     // 若存在items， 则相应插入元素
-    var obj, index = Est.typeOf(index) === 'number' ? index + 1 : this.collection.models.length === 0 ? 0 : this.collection.models.length;
+    var obj, _index = Est.typeOf(index) === 'number' ? index + 1 : this.collection.models.length === 0 ? 0 : this.collection.models.length + 1;
     var opts = {
-      at: index > this.collection.models.length + 1 ?
-        this.collection.models.length : index
+      at: _index > this.collection.models.length ?
+        this.collection.models.length + 2 : _index
     };
     if (this._options.items) {
       obj = Est.typeOf(model) === 'array' ? Est.pluck(model, function(item) {
@@ -23583,6 +23147,9 @@ var BaseList = SuperView.extend({
       this._options.items.splice(opts.at - 1, 0, obj);
     }
     this.collection.push(model, opts);
+    if (!Est.isEmpty(index)) {
+      this._exchangeOrder(_index - 1, _index, {});
+    }
     this._resetDx();
   },
   /**
@@ -23901,15 +23468,6 @@ var BaseList = SuperView.extend({
           autofocus: true
         });
       }
-      /* if (!options.hideResetBtn) {
-       buttons.push({
-       value: '重置',
-       callback: function () {
-       this.iframeNode.contentWindow.$("#reset").click();
-       return false;
-       }
-       });
-       }*/
       buttons.push({
         value: CONST.LANG.CLOSE
       });
@@ -23945,9 +23503,6 @@ var BaseList = SuperView.extend({
               ctx.composite = true;
               ctx._filterRoot();
             }
-            /* else {
-             ctx._render();
-             }*/
           });
           this.remove();
           window.detailDialog = null;
@@ -23963,12 +23518,18 @@ var BaseList = SuperView.extend({
   /**
    * 全选checkbox选择框, 只能全选中， 不能全不选中
    *
-   * @method [选取] - _toggleAllChecked ( 全选checkbox选择框 )
+   * @method [选取] - _checkAll ( 全选checkbox选择框 )
    * @author wyj 14.11.16
    */
-  _toggleAllChecked: function() {
+  _checkAll: function(e) {
     debug('BaseList._toggleAllChecked'); //debug__
-    var checked = this.allCheckbox.checked;
+    var checked = this.___checkAll;
+    var $check = this._getTarget(e);
+    if ($check.is('checkbox')) {
+      checked = $check.get(0).checked;
+    } else {
+      checked = this.___checkAll = !checked;
+    }
     this.collection.each(function(product) {
       product.set('checked', checked);
     });
@@ -24231,26 +23792,37 @@ var BaseList = SuperView.extend({
     options = Est.extend({
       tip: CONST.LANG.SUCCESS + '！'
     }, options);
-    this.checkboxIds = this._getCheckboxIds();
+    this.checkboxIds = this._getCheckboxIds(options.field || 'id');
     if (this.checkboxIds.length === 0) {
       BaseUtils.tip(CONST.LANG.SELECT_ONE + '！');
       return;
     }
-    $.ajax({
-      type: 'POST',
-      async: false,
-      url: options.url,
-      data: {
-        ids: ctx.checkboxIds.join(',')
-      },
-      success: function(result) {
-        if (!result.success) {
-          BaseUtils.tip(result.msg);
-        } else
-          BaseUtils.tip(options.tip);
-        ctx._load();
-      }
-    });
+    if (options.url) {
+      $.ajax({
+        type: 'POST',
+        async: false,
+        url: options.url,
+        data: {
+          ids: ctx.checkboxIds.join(',')
+        },
+        success: function(result) {
+          if (!result.success) {
+            BaseUtils.tip(result.msg);
+          } else
+            BaseUtils.tip(options.tip);
+          ctx._load();
+          if (options.callback)
+            options.callback.call(ctx, result);
+        }
+      });
+    } else {
+      Est.each(this._getCheckedItems(), function(item) {
+        item.destroy();
+      });
+      if (options.callback)
+        options.callback.call(ctx);
+    }
+
   },
   /**
    * 批量删除
@@ -24260,12 +23832,25 @@ var BaseList = SuperView.extend({
    * @author wyj 14.12.14
    * @example
    *      this._batchDel({
-   *        url: CONST.API + '/message/batch/del'
+   *        url: CONST.API + '/message/batch/del',
+   *        field: 'id',
    *      });
    */
-  _batchDel: function(options) {
+  _batchDel: function(options, callback) {
     var ctx = this;
-    this.checkboxIds = this._getCheckboxIds();
+    var url = null;
+    var field = 'id';
+    var $target = this._getEventTarget(options);
+    // options 为 event
+    if ($target.size() > 0) {
+      url = $target.attr('data-url');
+      field = $target.attr('data-field') || 'id';
+    } else {
+      url = options.url;
+      id = options.id || 'id';
+    }
+
+    this.checkboxIds = this._getCheckboxIds(field);
     if (this.checkboxIds && this.checkboxIds.length === 0) {
       BaseUtils.tip(CONST.LANG.SELECT_ONE);
       return;
@@ -24273,8 +23858,10 @@ var BaseList = SuperView.extend({
     BaseUtils.confirm({
       success: function() {
         ctx._batch({
-          url: ctx.collection.batchDel,
-          tip: CONST.LANG.DEL_SUCCESS
+          url: url,
+          field: field,
+          tip: CONST.LANG.DEL_SUCCESS,
+          callback: callback
         });
       }
     });
@@ -24516,6 +24103,7 @@ var BaseItem = SuperView.extend({
    *
    * @method [参数] - _setViewId ( 设置viewId )
    * @param name
+   * @private
    * @author wyj 14.12.20
    */
   _setViewId: function(name) {
@@ -24846,7 +24434,7 @@ var BaseItem = SuperView.extend({
       content: '<div class="item-delete-confirm">' + CONST.LANG.DEL_CONFIRM + '</div>',
       target: e && this._getTarget(e).get(0),
       success: function(resp) {
-        if (Est.isEmpty(context.model.url())){
+        if (Est.isEmpty(context.model.url())) {
           context.model.attributes.id = null;
         }
         context.model.destroy({
@@ -24879,6 +24467,7 @@ var BaseItem = SuperView.extend({
    * 从this._options.items中通过dx移除元素
    * @method [集合] - _removeFromItems
    * @param dx
+   * @private
    * @author wyj 15.6.10
    * @example
    *      this._removeFromItems(context.model.get('dx'));

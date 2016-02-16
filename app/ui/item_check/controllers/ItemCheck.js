@@ -24,20 +24,18 @@ define('ItemCheck', [], function(require, exports, module) {
     },
     initialize: function() {
       this._initialize({
-        template: '<div class="toggle clearfix">' + this.options.data.template +
-          '<span class="check-icon x-icon x-icon-small x-icon-info"><i class="icon iconfont icon-right icon-white" style="font-size: 12px; line-height: 12px; display: block;"></i></span></div>',
-        afterRender:this.afterRender
+        afterRender: this.afterRender
       });
     },
-    afterRender: function  () {
+    afterRender: function() {
       if ((this.options.data.compare && this.options.data.compare.call(this, this.model.toJSON())) ||
-            (this.options.data.cur !== '-' && this.options.data.cur === this._getValue(this.options.data.path))) {
-            if (Est.typeOf(this.options.data.init) === 'boolean' && this.options.data.init) {
-              this._toggleChecked();
-            } else {
-              this.toggleChecked();
-            }
-          }
+        (this.options.data.cur !== '-' && this.options.data.cur === this._getValue(this.options.data.path))) {
+        if (Est.typeOf(this.options.data.init) === 'boolean' && this.options.data.init) {
+          this._toggleChecked();
+        } else {
+          this.toggleChecked();
+        }
+      }
     },
     mouseEnter: function(e) {
       if (this._options.data.mouseEnter) this._options.data.mouseEnter.call(this, this.model.toJSON());
@@ -98,10 +96,13 @@ define('ItemCheck', [], function(require, exports, module) {
         afterRender: this.options.afterRender
       });
       this._initialize({
+        template: '<div class="item-check-wrap '+(this.options.theme || 'ui-item-check-normal')+'"><div class="toggle clearfix">' + this.options.data.template +
+          '<span class="check-icon x-icon x-icon-small x-icon-info"><i class="icon iconfont icon-right icon-white" style="display: block;"></i></span></div></div>',
         model: model,
         collection: collection,
         item: item,
-        checkAppend: Est.typeOf(this.options.checkAppend) === 'boolean' ? this.options.checkAppend:false
+        render: '.item-check-wrap',
+        checkAppend: Est.typeOf(this.options.checkAppend) === 'boolean' ? this.options.checkAppend : false
       });
     }
   });
