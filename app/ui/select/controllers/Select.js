@@ -22,8 +22,10 @@ define('Select', [], function(require, exports, module) {
     },
     initialize: function() {
       this._initialize({});
-      this.model.set('text', this.model.get(this._options.data.text));
-      this.model.set('value', this.model.get(this._options.data.value));
+      /*this.model.set('text', this.model.get(this._options.data.text));
+      this.model.set('value', this.model.get(this._options.data.value));*/
+      this.model.attributes.text = this.model.get(this._options.data.text);
+      this.model.attributes.value = this.model.get(this._options.data.value);
       this.model.on('autoSelectNode', this.autoSelectNode, this);
       if (this._options.data.inputValue &&
         this._options.data.inputValue.indexOf(this.model.get('value')) !== -1) {
@@ -50,7 +52,7 @@ define('Select', [], function(require, exports, module) {
       app.getView(this._options.viewId).setInputValue(this.model.get('text'), this.model.toJSON(), false, hasCallback);
       app.getView(this._options.viewId).setCurrentSelect(this.$el);
       app.getView(this._options.viewId).setSubSelect(this.model);
-      app.getView(this._options.viewId).setValue();
+      app.getView(this._options.viewId).setVal();
     }
   });
 
@@ -136,11 +138,19 @@ define('Select', [], function(require, exports, module) {
         this.sub = null;
       }
     },
-    setValue: function() {
+    setVal: function() {
       if (this._options.input) {
         this._options.input.val(app.getView(this._options.originId).getValue());
-        this._options.input.change();
+        if (!this.dic) {
+          this._options.input.change();
+        }
       }
+    },
+    disableInputChange: function() {
+      this.dic = true;
+    },
+    enableInputChange: function() {
+      this.dic = false;
     },
     getValue: function() {
       if (this.sub) {
@@ -246,11 +256,11 @@ define('Select', [], function(require, exports, module) {
       this.selectNode.setInputNode(this.$('.bui-select-input'));
       this.$select = this.selectNode.getSelect();
     },
-    changeSelect: function(id) {
+    changeSelect: function(value) {
       if (!this.selectNode) {
         this.initSelect(this._options.items);
       }
-      this.selectNode.selectClick(id);
+      this.selectNode.selectClick(value);
     },
     /**
      * 设置input隐藏域值
@@ -319,10 +329,27 @@ define('Select', [], function(require, exports, module) {
       }
     },
     // 设置input值
-    setValue: function() {
+    setVal: function() {
       if (this._options.input) {
         this._options.input.val(this.getValue());
       }
+    },
+    setValue: function(value) {
+      var list = null;
+      if (!this.selectNode) this.initSelect(this._options.items);
+      list = Est.filter(this.selectNode.collection.models, function(item) {
+        return value.indexOf(item.attributes.value) > -1;
+      });
+      if (list.length > 0) {
+        this._options.inputValue = value;
+        this.selectNode.setInputValue(list[0].get('text'), list[0].toJSON(), false, true);
+        this.selectNode.disableInputChange();
+        if (this.selectNode) list[0].trigger('autoSelectNode');
+        setTimeout(Est.proxy(function() {
+          this.selectNode.enableInputChange();
+        }, this), 300)
+      }
+
     },
     afterRender: function() {
       //TODO  && Est.typeOf(this._options.target) === 'string'  如果去掉此条件， 则产品修改时点击下拉框， 会出问题

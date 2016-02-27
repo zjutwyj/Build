@@ -44,3 +44,11 @@ app.addModule('UiTree', 'ui/test/controllers/UiTree.js');
 app.addTemplate('template/ui_tree', function(require, exports, module) {
   module.exports = require('ui/test/views/ui_tree.html');
 });
+app.addModule('UiDatePicker', 'ui/test/controllers/UiDatePicker.js');
+app.addTemplate('template/ui_date_picker', function(require, exports, module) {
+  module.exports = require('ui/test/views/ui_date_picker.html');
+});
+app.addModule('UiColorPicker', 'ui/test/controllers/UiColorPicker.js');
+app.addTemplate('template/ui_color_picker', function(require, exports, module) {
+  module.exports = require('ui/test/views/ui_color_picker.html');
+});

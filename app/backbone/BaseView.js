@@ -26,18 +26,18 @@ var BaseView = SuperView.extend({
    * @author wyj 14.11.20
    * @example
    *      this._initialize({
-       *         viewId: 'productList'，
-       *         template: 字符串模板，
-       *         data: 对象数据
-       *         // 可选
-       *         enterRender: 执行回车后的按钮点击的元素选择符 如 #submit .btn-search
-       *         append: false // 视图是否是追加,
-       *         toolTip: true, // 是否显示title提示框   html代码： <div class="tool-tip" title="提示内容">内容</div>
-       *         beforeRender: function(){},
-       *         afterRender: function(){}
-       *      });
+   *         viewId: 'productList'，
+   *         template: 字符串模板，
+   *         data: 对象数据
+   *         // 可选
+   *         enterRender: 执行回车后的按钮点击的元素选择符 如 #submit .btn-search
+   *         append: false // 视图是否是追加,
+   *         toolTip: true, // 是否显示title提示框   html代码： <div class="tool-tip" title="提示内容">内容</div>
+   *         beforeRender: function(){},
+   *         afterRender: function(){}
+   *      });
    */
-  _initialize: function (options) {
+  _initialize: function(options) {
     this._initOptions(options);
     this._initTemplate(this._options);
     this._initModel(Backbone.Model.extend({}));
@@ -52,7 +52,7 @@ var BaseView = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initOptions: function (options) {
+  _initOptions: function(options) {
     this._options = Est.extend(this.options, options || {});
     this._options.data = this._options.data || {};
   },
@@ -63,10 +63,10 @@ var BaseView = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initTemplate: function (options) {
+  _initTemplate: function(options) {
     if (options.template) {
       this.template = Handlebars.compile(options.template);
-      this.$template = '<div>'+ options.template + '</div>';
+      this.$template = '<div>' + options.template + '</div>';
     }
   },
   /**
@@ -77,7 +77,9 @@ var BaseView = SuperView.extend({
    * @param model
    * @author wyj 14.11.20
    */
-  _initModel: function (model) {
+  _initModel: function(model) {
+    if (this._options.data)
+      this._options.data.CONST = CONST;
     this.model = new model(this._options.data);
   },
   /**
@@ -87,7 +89,7 @@ var BaseView = SuperView.extend({
    * @private
    * @author wyj 14.11.16
    */
-  _initBind: function (options) {
+  _initBind: function(options) {
     this.model.bind('reset', this.render, this);
   },
   /**
@@ -98,9 +100,9 @@ var BaseView = SuperView.extend({
    * @example
    *        this._render();
    */
-  _render: function () {
+  _render: function() {
     this.trigger('before', this);
-    if (this._options.beforeRender){
+    if (this._options.beforeRender) {
       this._options.beforeRender.call(this, this._options);
     }
     if (this._options.append)
@@ -118,7 +120,7 @@ var BaseView = SuperView.extend({
     }
     BaseUtils.removeLoading();
   },
-  render: function(){
+  render: function() {
     this._render();
   },
   /**
@@ -129,7 +131,7 @@ var BaseView = SuperView.extend({
    * @return {BaseView}
    * @author wyj 14.11.16
    */
-  _empty: function () {
-    debug('BaseView._empty');//debug__
+  _empty: function() {
+    debug('BaseView._empty'); //debug__
   }
 });

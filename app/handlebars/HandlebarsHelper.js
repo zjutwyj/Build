@@ -148,7 +148,7 @@ Handlebars.registerHelper('plus', function(num1, num2, opts) {
  *        {{minus 10 5}} => 5
  */
 Handlebars.registerHelper('minus', function(num1, num2, opts) {
-  return parseInt(num1, 10) - parseInt(num2, 10);
+  return (parseInt(num1, 10) - parseInt(num2, 10)) + '';
 });
 
 /**
@@ -331,7 +331,7 @@ Handlebars.registerHelper('radio', function(options) {
  * @method [表单] - checkbox
  * @author wyj 15.6.19
  * @example
- *      {{{{checkbox label='默认' name='isChecked' value=isChecked trueVal='01' falseVal='00' }}}
+ *      {{{checkbox label='默认' name='isChecked' value=isChecked trueVal='01' falseVal='00' }}}
  */
 Handlebars.registerHelper('checkbox', function(options) {
   var id = options.hash.id ? options.hash.id : (Est.nextUid('model- ') + options.hash.name);
@@ -400,7 +400,7 @@ Handlebars.registerHelper('checked', function(expression, options) {
  * @example
  *      {{encodeURIComponent url}}
  */
-Handlebars.registerHelper('encodeURIComponent', function(val, options) {
+Handlebars.registerHelper('encodeUrl', function(val, options) {
   return encodeURIComponent(val);
 });
 

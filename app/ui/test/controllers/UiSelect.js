@@ -3,12 +3,13 @@
  * @class ModuleName
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('UiSelect', ['template/ui_select', 'UiData', 'Select'], function(require, exports, module) {
-  var UiSelect, template, UiData, Select;
+define('UiSelect', ['template/ui_select', 'UiData', 'Select', 'ItemCheck'], function(require, exports, module) {
+  var UiSelect, template, UiData, Select, ItemCheck;
 
   template = require('template/ui_select');
   UiData = require('UiData');
   Select = require('Select');
+  ItemCheck = require('ItemCheck');
 
   UiSelect = BaseView.extend({
     initialize: function() {
@@ -24,18 +25,19 @@ define('UiSelect', ['template/ui_select', 'UiData', 'Select'], function(require,
       });
       app.addRegion('select1', Select, {
         el: this.$('#ui-select'),
-        target: '#model-categoryId',
+        target: '#model-categoryId1',
         text: 'name',
         value: 'categoryId',
         width: 300,
         items: list,
         change: Est.proxy(function(ev, init) {
+          if (init) return;
           this.model.set('selectResult', ev.value);
         }, this)
       });
       app.addRegion('select2', Select, {
         el: this.$('#ui-select-tree'),
-        target: '#model0-categoryId',
+        target: '#model-categoryId2',
         text: 'text',
         value: 'categoryId',
         width: 300,
@@ -59,7 +61,21 @@ define('UiSelect', ['template/ui_select', 'UiData', 'Select'], function(require,
           this.model.set('selectResult', ev.value);
         }, this)
       });
-
+      app.addRegion('itemcheck', ItemCheck, {
+        el: this.$('#item-check'),
+        path: 'value',
+        cur: 'Category_00000000000000000087666',
+        theme: 'ui-item-check-radio',
+        items: [
+          { text: '中包', value: 'Category_00000000000000000087666' },
+          { text: '休闲包', value: 'Category_00000000000000000087667' },
+          { text: '男式', value: 'Category_00000000000000000087662' }
+        ],
+        change: function(item, init) {
+          if (init) return;
+          app.getView('select1').setValue(item.value);
+        }
+      });
       this._watch(['selectResult'], '.ui-select-result');
     }
   });

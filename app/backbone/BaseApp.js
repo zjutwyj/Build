@@ -77,7 +77,7 @@ Est.extend(BaseApp.prototype, {
     }
     this.addPanel(name, {
       el: options.__panelId,
-      template: '<div class="' + panel + '"></div>'
+      template: '<div class="region ' + panel + '"></div>'
     }, options);
     if (!options.viewId) {
       options.viewId = name;
@@ -110,10 +110,9 @@ Est.extend(BaseApp.prototype, {
     if (isObject) {
       this.removePanel(name, panel);
       panel.$template = $(panel.template);
-      if (options) {
-        options.el = panel.$template;
-      }
+      if (options) options.el = panel.$template;
       panel.$template.addClass('__panel_' + name);
+      panel.$template.attr('data-view', name);
       $(panel.el).append(panel.$template);
     }
     this.panels[name] = panel;
@@ -128,14 +127,16 @@ Est.extend(BaseApp.prototype, {
    */
   removePanel: function(name, panel) {
     try {
-      if ($.fn.off) {
-        $('.__panel_' + name, $(panel.el)).off().remove();
-      } else {
-        seajs.use(['jquery'], function($) {
-          window.$ = $;
-          $('.__panel_' + name, $(panel.el)).off().remove();
-        });
-      }
+      var views = [];
+      $('.region', $(panel.el)).each(function() {
+        views.push($(this).attr('data-view'));
+      });
+      views.reverse();
+      Est.each(views, function(name) {
+        if (app.getView(name).destroy)
+          app.getView(name).destroy();
+      });
+      $('.__panel_' + name, $(panel.el)).off().remove();
       delete this.panels[name];
     } catch (e) {}
   },
@@ -425,10 +426,10 @@ Est.extend(BaseApp.prototype, {
             });
    */
   addTemplate: function(name, fn) {
-    if (name in this['templates']) {
+    if (name in this.templates) {
       debug('Error11 template name:' + name);
     }
-    this['templates'][name] = fn;
+    this.templates[name] = fn;
   },
   /**
    * 获取所有模板

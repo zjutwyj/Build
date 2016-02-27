@@ -130,6 +130,8 @@ var BaseList = SuperView.extend({
    * @author wyj 14.11.20
    */
   _initDataModel: function(model) {
+    if (this._options.data)
+      this._options.data.CONST = CONST;
     this.model = new model(this._options.data);
   },
   /**
@@ -604,7 +606,9 @@ var BaseList = SuperView.extend({
   _addOne: function(model, arg1, arg2) {
     var ctx = this;
     if (!this.filter && !this.composite && this.dx < this._options.max) {
-      model.set('dx', this.dx++);
+      model.set({
+        'dx': this.dx++
+      });
       switch (this._options.speed) {
         case 1:
           model.set('_options', {});
@@ -1089,12 +1093,17 @@ var BaseList = SuperView.extend({
    * @example
    *    this._insertOrder(1, 6);
    */
-  _insertOrder: function(begin, end) {
+  _insertOrder: function(begin, end, callback) {
     if (begin < end) {
       end++;
     }
     Est.arrayInsert(this.collection.models, begin, end, {
-      callback: function(list) {}
+      arrayExchange: Est.proxy(function(list, begin, end, opts) {
+        this._exchangeOrder(begin, end, opts);
+      }, this),
+      callback: function(list) {
+        if (callback) callback.call(this, list);
+      }
     });
     this._resetDx();
   },
@@ -1114,6 +1123,7 @@ var BaseList = SuperView.extend({
       nextObj = {};
     var temp = this.collection.at(original_index);
     var next = this.collection.at(new_index);
+
     // 互换dx
     if (temp.view && next.view) {
       var thisDx = temp.view.model.get('dx');
@@ -1140,6 +1150,13 @@ var BaseList = SuperView.extend({
       temp.view.$el.before(next.view.$el).removeClass('hover');
     } else {
       temp.view.$el.after(next.view.$el).removeClass('hover');
+    }
+    if (temp.view.$el.hasClass('bui-grid-row-even')) {
+      temp.view.$el.removeClass('bui-grid-row-even');
+      next.view.$el.addClass('bui-grid-row-even');
+    } else {
+      temp.view.$el.addClass('bui-grid-row-even');
+      next.view.$el.removeClass('bui-grid-row-even');
     }
     if (options.success) {
       options.success.call(this, temp, next);
@@ -1252,6 +1269,9 @@ var BaseList = SuperView.extend({
   _getCheckboxIds: function(field) {
     return Est.pluck(this._getCheckedItems(), Est.isEmpty(field) ? 'id' : ('attributes.' + field));
   },
+  __filter: function(item) {
+    return item.attributes.checked;
+  },
   /**
    *  获取checkbox选中项
    *
@@ -1259,12 +1279,12 @@ var BaseList = SuperView.extend({
    * @return {*}
    * @author wyj 14.12.8
    * @example
-   *      this._getCheckedItems(); => [{}, {}, {}, ...]
+   *      this._getCheckedItems(); => [{model}, {model}, {model}, ...]
+   *      this._getCheckedItems(true); => [{item}, {item}, {item}, ...]
    */
-  _getCheckedItems: function() {
-    return Est.filter(this.collection.models, function(item) {
-      return item.attributes.checked;
-    });
+  _getCheckedItems: function(pluck) {
+    return pluck ? Est.chain(this.collection.models).filter(this.__filter).pluck('attributes').value() :
+      Est.chain(this.collection.models).filter(this.__filter).value();
   },
   /**
    * 转换成[{key: '', value: ''}, ... ] 数组格式 并返回

@@ -23,10 +23,12 @@ define('UiTest', ['template/ui_test', 'Tab'], function(require, exports, module)
         { text: '树型列表', moduleId: 'UiListTree', oneRender: true },
         { text: '树型组件', moduleId: 'UiTree', oneRender: true },
         { text: '对话框组件', moduleId: 'UiDialog', oneRender: true },
-        { text: '下拉菜单', moduleId: 'UiSelect', oneRender: true },
         { text: '下拉框', moduleId: 'UiDropDown', oneRender: true },
+        { text: '下拉菜单', moduleId: 'UiSelect', oneRender: true },
         { text: '单选多选', moduleId: 'UiItemCheck', oneRender: true },
-        { text: '选项切换', moduleId: 'UiTab', oneRender: true }
+        { text: '选项切换', moduleId: 'UiTab', oneRender: true },
+        { text: '时间选择器', moduleId: 'UiDatePicker', oneRender: true },
+        { text: '颜色选择器', moduleId: 'UiColorPicker', oneRender: true }
       ];
       app.addRegion('testNav', Tab, {
         tpl: '<a href="javascript:;" class="tool-tip" data-title="{{text}}">{{text}}</a>', // 模版

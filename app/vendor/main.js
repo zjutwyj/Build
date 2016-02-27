@@ -1,0 +1,1 @@
+app.addModule('noUiSlider', 'vendor/slider/nouislider.min.js');

@@ -38,12 +38,12 @@
  *      Error: 27 ==> 当前模型类未找到baseUrl, 请检查XxxModel中的baseUrl
  *      Error: 28 ==> BaseUtils.addLoading
  *      Error: 29 ==> XxxModel模型类中的baseUrl未设置
- *      Error: 30 ==>
- *      Error: 31 ==>
- *      Error: 32 ==>
- *      Error: 33 ==>
- *      Error: 34 ==>
- *      Error: 35 ==>
+ *      Error: 30 ==> 参数不能少于2个， 且path为字符串
+ *      Error: 31 ==> bindAll must be passed function names
+ *      Error: 32 ==> targetList is not a array
+ *      Error: 33 ==> method exchange: thisdx or targetdx is invalid !
+ *      Error: 34 ==> error:595 the arguments of Est.hash must be string ==>
+ *      Error: 35 ==> _wrapped is not defined
  *      Error: 36 ==>
  *      Error: 37 ==>
  *      Error: 38 ==>

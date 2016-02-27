@@ -28,22 +28,24 @@ define('ItemCheck', [], function(require, exports, module) {
       });
     },
     afterRender: function() {
-      if ((this.options.data.compare && this.options.data.compare.call(this, this.model.toJSON())) ||
-        (this.options.data.cur !== '-' && this.options.data.cur === this._getValue(this.options.data.path))) {
-        if (Est.typeOf(this.options.data.init) === 'boolean' && this.options.data.init) {
-          this._toggleChecked();
-        } else {
-          this.toggleChecked();
-        }
+      if ((this.options.data.compare && this.options.data.compare.call(this, this.model.toJSON(), this.options.data.cur)) ||
+        (this.options.data.cur !== '-' && this.options.data.cur.indexOf(this._getValue(this.options.data.path)) > -1)) {
+        this.toggleChecked(undefined, true);
       }
     },
     mouseEnter: function(e) {
-      if (this._options.data.mouseEnter) this._options.data.mouseEnter.call(this, this.model.toJSON());
+      if (this._options.data.mouseEnter)
+        this._options.data.mouseEnter.call(this, this.model.toJSON());
     },
-    toggleChecked: function(e) {
+    toggleChecked: function(e, init) {
       this._toggleChecked(e);
-      $(this._options.data.target).val(this.model.get('value'));
-      this.result = this.options.data.change.call(this, this.model.attributes, true);
+      if (init || (this._checkAppend && !init)) {
+        $(this._options.data.target).val(this.options.data.cur);
+      } else {
+        $(this._options.data.target).val(this._checkAppend && app.getView(this._options.viewId) ?
+          app.getView(this._options.viewId).getAppendValue() : this.model.get('value'));
+      }
+      this.result = this.options.data.change.call(this, this.model.attributes, init);
       if (Est.typeOf(this.result) === 'boolean' && !this.result) return false;
     }
   });
@@ -91,19 +93,30 @@ define('ItemCheck', [], function(require, exports, module) {
         compare: this.options.compare,
         path: this.options.path || 'value',
         target: this.options.target,
-        init: this.options.init,
         mouseEnter: this.options.mouseEnter,
         afterRender: this.options.afterRender
       });
       this._initialize({
-        template: '<div class="item-check-wrap '+(this.options.theme || 'ui-item-check-normal')+'"><div class="toggle clearfix">' + this.options.data.template +
-          '<span class="check-icon x-icon x-icon-small x-icon-info"><i class="icon iconfont icon-right icon-white" style="display: block;"></i></span></div></div>',
+        template: '<div class="item-check-wrap ' + (this.options.theme || 'ui-item-check-normal') +
+          '"><div class="toggle clearfix">' + this.options.data.template +
+          '<span class="check-icon x-icon x-icon-small x-icon-info clearfix">' +
+          '<i class="icon iconfont icon-right icon-white"></i></span></div></div>',
         model: model,
         collection: collection,
         item: item,
         render: '.item-check-wrap',
-        checkAppend: Est.typeOf(this.options.checkAppend) === 'boolean' ? this.options.checkAppend : false
+        checkAppend: Est.typeOf(this.options.checkAppend) === 'boolean' ?
+          this.options.checkAppend : false,
+        afterRender: this.afterRender
       });
+    },
+    setValue: function(value) {
+      this.options.data.cur = value;
+      this._reload();
+    },
+    getAppendValue: function() {
+      return Est.chain(Est.cloneDeep(this._getCheckedItems(true)))
+        .pluck(this.options.path || 'value').value().join(',');
     }
   });
 

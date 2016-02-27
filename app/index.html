@@ -18,9 +18,10 @@
   <META HTTP-EQUIV="expires" CONTENT="Wed, 26 Feb 1997 08:21:57 GMT">
   <META HTTP-EQUIV="expires" CONTENT="0">
   <link rel="shortcut icon" href="images/favicon.ico">
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_1455009923_660123.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1456031462_6233191.css" />
   <!-- build:css styles/default/css.css -->
   <link rel="stylesheet" href="styles/base.css" />
+  <link rel="stylesheet" href="vendor/slider/nouislider.min.css"/>
   <!-- endbuild -->
 </head>
 <!--[if IE 6]>
@@ -32,7 +33,9 @@
 <script src="//cdn.bootcss.com/es5-shim/4.5.1/es5-shim.min.js"></script>
 <body class="ie7"><![endif]-->
 <!--[if IE 8]>
-<body class="ie8"><![endif]-->
+<body class="ie8">
+<style> .ie8 .ui-item-check-radio .item-check .check-icon{border-radius: 10px; behavior: url(styles/pie/PIE.htc); }</style>
+<![endif]-->
 <!--[if IE 9]>
 <body class="ie9"><![endif]-->
 <!--[if IE 10]>
@@ -208,12 +211,15 @@
   <script type="text/javascript" src="scripts/helper/HandlebarsHelper.js"></script>
   <script type="text/javascript" src="scripts/utils/Utils.js"></script>
   <script type="text/javascript" src="scripts/service/Service.js"></script>
+  <script type="text/javascript" src="vendor/main.js"></script>
   <script type="text/javascript" src="ui/drop_down/main.js"></script>
   <script type="text/javascript" src="ui/item_check/main.js"></script>
   <script type="text/javascript" src="ui/pagination/main.js"></script>
   <script type="text/javascript" src="ui/select/main.js"></script>
   <script type="text/javascript" src="ui/tab/main.js"></script>
   <script type="text/javascript" src="ui/tree/main.js"></script>
+  <script type="text/javascript" src="ui/date_picker/main.js"></script>
+  <script type="text/javascript" src="ui/color_picker/main.js"></script>
   <script type="text/javascript" src="ui/test/main.js"></script>
   <script type="text/javascript" src="modules/design/main.js"></script>
   <script type="text/javascript" src="modules/home/main.js"></script>

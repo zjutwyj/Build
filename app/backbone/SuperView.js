@@ -13,14 +13,14 @@ var SuperView = Backbone.View.extend({
    * @param options
    * @author wyj 14.12.16
    */
-  constructor: function (options) {
+  constructor: function(options) {
     this.options = options || {};
     this._modelBinder = Backbone.ModelBinder;
     if (this.init && Est.typeOf(this.init) !== 'function')
       this._initialize(this.init);
     Backbone.View.apply(this, arguments);
   },
-  initialize: function () {
+  initialize: function() {
     this._initialize();
   },
   /**
@@ -30,7 +30,7 @@ var SuperView = Backbone.View.extend({
    * @param name
    * @author wyj 15.1.13
    */
-  _navigate: function (name, options) {
+  _navigate: function(name, options) {
     options = options || true;
     Backbone.history.navigate(name, options);
   },
@@ -74,39 +74,37 @@ var SuperView = Backbone.View.extend({
    *                }
    *            }, this);
    */
-  _dialog: function (options, context) {
+  _dialog: function(options, context) {
     var ctx = context || this;
     var viewId = Est.typeOf(options.id) === 'string' ? options.id : options.moduleId;
 
-    options.width = options.width || 700;
-    options.cover = Est.typeOf(options.cover) === 'boolean' ? options.cover : true;
-    options.button = options.button || [];
-    options.quickClose = options.cover ? false : options.quickClose;
+    /*    options.width = options.width || 'auto';
+        options.title = options.title || null;
+        options.cover = Est.typeOf(options.cover) === 'boolean' ? options.cover : false;
+        options.autofocus = Est.typeOf(options.autofocus) === 'boolean' ? options.autofocus : false;
+        options.hideOkBtn = Est.typeOf(options.hideOkBtn) === 'boolean' ? options.hideOkBtn : true;
+        options.hideCloseBtn = Est.typeOf(options.hideCloseBtn) === 'boolean' ? options.hideCloseBtn : true;
+        options.button = options.button || [];
+        options.quickClose = options.cover ? false : (Est.typeOf(options.autofocus) === 'boolean' ? options.quickClose : false);
+        options.skin = options.skin || 'dialog_min';*/
 
-    if (typeof options.hideSaveBtn === 'undefined' ||
-      (Est.typeOf(options.hideSaveBtn) === 'boolean' && !options.hideSaveBtn)) {
-      options.button.push(
-        {value: CONST.LANG.COMMIT, callback: function () {
-          Utils.addLoading();
-          $('#' + viewId + ' #submit').click();
-          try {
-            if (options.autoClose) {
-              Est.on('_dialog_submit_callback', Est.proxy(function () {
-                this.close().remove();
-              }, this));
-            }
-          } catch (e) {
-            console.log(e);
-          }
-          return false;
-        }, autofocus: true});
-    }
+    options = Est.extend({
+      width: 'auto',
+      title: null,
+      cover: false,
+      autofocus: false,
+      hideOkBtn: true,
+      hideCloseBtn: true,
+      button: [],
+      quickClose: options.cover ? false : (Est.typeOf(options.autofocus) === 'boolean' ? options.quickClose : false),
+      skin: 'dialog_min'
+    }, options);
 
     options = Est.extend(options, {
       el: '#base_item_dialog' + viewId,
       content: options.content || '<div id="' + viewId + '"></div>',
       viewId: viewId,
-      onshow: function () {
+      onshow: function() {
         try {
           var result = options.onShow && options.onShow.call(this, options);
           if (typeof result !== 'undefined' && !result)
@@ -117,10 +115,10 @@ var SuperView = Backbone.View.extend({
               template: '<div id="base_item_dialog' + options.id + '"></div>'
             }).addView(options.id, new options.moduleId(options));
           } else if (Est.typeOf(options.moduleId) === 'string') {
-            seajs.use([options.moduleId], function (instance) {
+            seajs.use([options.moduleId], function(instance) {
               try {
                 if (!instance) {
-                  console.error('module is not defined')
+                  console.error('module is not defined');
                 }
                 app.addPanel(options.viewId, {
                   el: '#' + options.viewId,
@@ -135,8 +133,8 @@ var SuperView = Backbone.View.extend({
           console.log(e);
         }
       },
-      onclose: function () {
-        options.onClose && options.onClose.call(ctx, options);
+      onclose: function() {
+        if (options.onClose) options.onClose.call(ctx, options);
         app.getDialogs().pop();
       }
     });
@@ -154,16 +152,21 @@ var SuperView = Backbone.View.extend({
    * @example
    *    this._singleBind('#model-name', this.model);
    */
-  _singleBind: function (selector, model, changeFn) {
+  _singleBind: function(selector, model, changeFn) {
     var _self = this;
-    $(selector).each(function () {
+    $(selector).each(function() {
       var bindType = $(this).attr('data-bind-type');
       if (Est.isEmpty(bindType)) {
         bindType = 'change';
       }
-      $(this).on(bindType,function () {
-        var val, pass;
-        var modelId = window._singleBindId = $(this).attr('id');
+      $(this).on(bindType, function(e) {
+        var val, pass, modelId;
+
+        if (e.keyCode === 37 || e.keyCode === 39 ||
+          e.keyCode === 38 || e.keyCode === 40) {
+          return false;
+        }
+        modelId = window._singleBindId = $(this).attr('id');
         if (modelId && modelId.indexOf('model') !== -1) {
           switch (this.type) {
             case 'radio':
@@ -173,13 +176,13 @@ var SuperView = Backbone.View.extend({
               val = $(this).is(':checked') ? (Est.isEmpty($(this).attr('true-value')) ? true : $(this).attr('true-value')) :
                 (Est.isEmpty($(this).attr('false-value')) ? false : $(this).attr('false-value'));
               break;
-            default :
+            default:
               val = $(this).val();
               break;
           }
           if (!pass) {
             _self._setValue(modelId.replace(/^model\d?-(.+)$/g, "$1"), val);
-            changeFn && changeFn.call(this, model);
+            if (changeFn) changeFn.call(this, model);
           }
         }
       });
@@ -194,10 +197,10 @@ var SuperView = Backbone.View.extend({
    * @example
    *        this._modelBind();
    */
-  _modelBind: function (selector, changeFn) {
+  _modelBind: function(selector, changeFn) {
     var _self = this;
     if (selector) this._singleBind(selector, this.model, changeFn);
-    else this.$("input, textarea, select").each(function () {
+    else this.$("input, textarea, select").each(function() {
       _self._singleBind($(this), _self.model);
     });
   },
@@ -216,11 +219,11 @@ var SuperView = Backbone.View.extend({
    *        }
    *      ]);
    */
-  _viewBind: function (name, selector, callback) {
+  _viewBind: function(name, selector, callback) {
     if (!this.modelBinder) this.modelBinder = new this._modelBinder();
     var obj = {};
     obj[name] = [
-      {selector: selector, converter: callback}
+      { selector: selector, converter: callback }
     ];
     this.modelBinder.bind(this.model, this.el, obj);
   },
@@ -234,11 +237,11 @@ var SuperView = Backbone.View.extend({
    * @example
    *      this._viewReplace('#model-name', this.model);
    */
-  _viewReplace: function (selector, model, callback) {
-    debug('_viewReplace selector: ' + selector);//debug__
+  _viewReplace: function(selector, model, callback) {
+    debug('_viewReplace selector: ' + selector); //debug__
     var result = callback && callback.call(this, model);
     if (Est.typeOf(result) !== 'undefined' && !result) return;
-    Est.each(selector.split(','), Est.proxy(function (item) {
+    Est.each(selector.split(','), Est.proxy(function(item) {
       if (!Est.isEmpty(item)) {
         this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
           Handlebars.compile($(this.$template).find(selector).wrapAll('<div>').parent().html());
@@ -260,20 +263,21 @@ var SuperView = Backbone.View.extend({
    *
    *      });
    */
-  _watch: function (name, selector, callback) {
-    var _self = this, modelId,
+  _watch: function(name, selector, callback) {
+    var _self = this,
+      modelId,
       temp_obj = {},
       list = [];
 
     if (Est.typeOf(name) === 'array') list = name;
     else list.push(name);
-    Est.each(list, function (item) {
+    Est.each(list, function(item) {
       modelId = item.replace(/^#model\d?-(.+)$/g, "$1");
       if (!_self._options.modelBind) _self._modelBind(item);
       if (modelId in temp_obj) return;
-      _self.model.on('change:' + (temp_obj[modelId] = modelId.split('.')[0]), function () {
-        if (Est.typeOf(window._singleBindId) === 'undefined' || item === '#' + window._singleBindId)
-          _self._viewReplace(selector, _self.model, callback);
+      _self.model.on('change:' + (temp_obj[modelId] = modelId.split('.')[0]), function() {
+        //if (Est.typeOf(window._singleBindId) === 'undefined' || item === '#' + window._singleBindId)
+        _self._viewReplace(selector, _self.model, callback);
       });
     });
   },
@@ -286,10 +290,10 @@ var SuperView = Backbone.View.extend({
    * @example
    *      this._stringify(['invite', 'message']);
    */
-  _stringifyJSON: function (array) {
+  _stringifyJSON: function(array) {
     var keys, result;
     if (!JSON.stringify) alert(CONST.LANG.JSON_TIP);
-    Est.each(array, function (item) {
+    Est.each(array, function(item) {
       keys = item.split('.');
       if (keys.length > 1) {
         result = Est.getValue(this.model.toJSON(), item);
@@ -305,11 +309,11 @@ var SuperView = Backbone.View.extend({
    * @method [模型] - _parseJSON ( 反序列化字符串 )
    * @param array
    */
-  _parseJSON: function (array) {
+  _parseJSON: function(array) {
     var keys, result;
     var parse = JSON.parse || $.parseJSON;
     if (!parse) alert(CONST.LANG.JSON_TIP);
-    Est.each(array, function (item) {
+    Est.each(array, function(item) {
       keys = item.split('.');
       if (keys.length > 1) {
         result = Est.getValue(this.model.toJSON(), item);
@@ -335,7 +339,7 @@ var SuperView = Backbone.View.extend({
    *          sortField: 'orderList'
    *      })._moveUp(this.model);
    */
-  _setOption: function (obj) {
+  _setOption: function(obj) {
     Est.extend(this._options, obj);
     return this;
   },
@@ -346,9 +350,9 @@ var SuperView = Backbone.View.extend({
    * @private
    * @author wyj 14.12.10
    */
-  _initEnterEvent: function (options) {
+  _initEnterEvent: function(options) {
     if (options.speed > 1 && options.enterRender) {
-      this.$('input').keyup($.proxy(function (e) {
+      this.$('input').keyup($.proxy(function(e) {
         if (e.keyCode === CONST.ENTER_KEY) {
           this.$(options.enterRender).click();
         }
@@ -363,7 +367,7 @@ var SuperView = Backbone.View.extend({
    * @return {*}
    * @author wyj 15.1.29
    */
-  _getOption: function (name) {
+  _getOption: function(name) {
     return this._options[name];
   },
   /**
@@ -375,7 +379,7 @@ var SuperView = Backbone.View.extend({
    * @example
    *      this._getValue('tip.name');
    */
-  _getValue: function (path) {
+  _getValue: function(path) {
     return Est.getValue(this.model.attributes, path);
   },
   /**
@@ -388,7 +392,7 @@ var SuperView = Backbone.View.extend({
    * @example
    *      this._setValue('tip.name', 'aaa');
    */
-  _setValue: function (path, val) {
+  _setValue: function(path, val) {
     // just for trigger
     Est.setValue(this.model.attributes, path, val);
     this.model.trigger('change:' + path.split('.')[0]);
@@ -402,14 +406,14 @@ var SuperView = Backbone.View.extend({
    * @example
    *      this._bind('name', []);
    */
-  _bind: function (modelId, array) {
-    this.model.on('change:' + modelId, function () {
-      Est.each(array, function (item) {
+  _bind: function(modelId, array) {
+    this.model.on('change:' + modelId, function() {
+      Est.each(array, function(item) {
         var $parent = this.$(item).parent();
         var compile = Handlebars.compile($parent.html());
         $parent.html(compile(this));
       }, this);
-    })
+    });
   },
   /**
    * 获取点击事件源对象
@@ -419,7 +423,7 @@ var SuperView = Backbone.View.extend({
    *  @example
    *      this._getTarget(e);
    */
-  _getTarget: function (e) {
+  _getTarget: function(e) {
     return e.target ? $(e.target) : $(e.currentTarget);
   },
   /**
@@ -430,7 +434,7 @@ var SuperView = Backbone.View.extend({
    *  @example
    *      this._getEventTarget(e);
    */
-  _getEventTarget: function (e) {
+  _getEventTarget: function(e) {
     return e.currentTarget ? $(e.currentTarget) : $(e.target);
   },
   /**
@@ -449,22 +453,26 @@ var SuperView = Backbone.View.extend({
    *      }));
    *  });
    */
-  _one: function (name, callback) {
+  _one: function(name, callback) {
     try {
       var _name, isArray = Est.typeOf(name) === 'array';
       var _nameList = [];
+      var _one = null;
       _name = isArray ? name.join('_') : name;
-      if (this['_one_' + _name] = Est.typeOf(this['_one_' + _name]) === 'undefined' ? true : false) {
+      _one = '_one_' + _name;
+      this[_one] = Est.typeOf(this[_one]) === 'undefined' ? true : false;
+      if (this[_one]) {
         if (isArray) {
-          Est.each(name, function (item) {
-            _nameList.push(item.replace(/^(.+)-\d?$/g, "$1"));
+          Est.each(name, function(item) {
+            _nameList.push(item.replace(/^(.+)-(\d+)?$/g, "$1"));
           });
           this._require(_nameList, callback);
+        } else if (callback) {
+          callback.call(this);
         }
-        else  callback && callback.call(this);
       }
     } catch (e) {
-      debug('SuperView._one ' + JSON.stringify(name), {type: 'alert'});//debug__
+      debug('SuperView._one ' + JSON.stringify(name), { type: 'alert' }); //debug__
     }
   },
   /**
@@ -478,7 +486,7 @@ var SuperView = Backbone.View.extend({
    *            new Module();
    *        });
    */
-  _require: function (dependent, callback) {
+  _require: function(dependent, callback) {
     seajs.use(dependent, Est.proxy(callback, this));
   },
   /**
@@ -490,10 +498,10 @@ var SuperView = Backbone.View.extend({
    * @example
    *  this._delay(function(){}, 5000);
    */
-  _delay: function (fn, time) {
-    setTimeout(Est.proxy(function () {
-      setTimeout(Est.proxy(function () {
-        fn && fn.call(this);
+  _delay: function(fn, time) {
+    setTimeout(Est.proxy(function() {
+      setTimeout(Est.proxy(function() {
+        if (fn) fn.call(this);
       }, this), time);
     }, this), 0);
   },
@@ -505,19 +513,19 @@ var SuperView = Backbone.View.extend({
    *      <div class="tool-tip" title="提示内容">content</div>
    *      this._initToolTip();
    */
-  _initToolTip: function ($parent, className) {
-    var className = className || '.tool-tip';
-    var $tip = $parent ? $(className, $parent) : this.$(className);
-    $tip.hover(function (e) {
+  _initToolTip: function($parent, className) {
+    var _className = className || '.tool-tip';
+    var $tip = $parent ? $(_className, $parent) : this.$(_className);
+    $tip.hover(function(e) {
       var title = $(this).attr('data-title') || $(this).attr('title');
       var offset = $(this).attr('data-offset') || 0;
-      if (Est.isEmpty(title))return;
+      if (Est.isEmpty(title)) return;
       BaseUtils.dialog({
         id: Est.hash(title || 'error:446'),
         title: null,
         width: 'auto',
         offset: parseInt(offset, 10),
-        skin: 'tool-tip-dilog',
+        skin: 'tool-tip-dialog',
         align: $(this).attr('data-align') || 'top',
         content: '<div style="padding: 5px 6px;;font-size: 12px;">' + title + '</div>',
         hideCloseBtn: true,
@@ -527,20 +535,19 @@ var SuperView = Backbone.View.extend({
       if (!app.getData('toolTipList')) app.addData('toolTipList', []);
       app.getData('toolTipList').push(Est.hash(title));
 
-      $(window).one('click', Est.proxy(function () {
-        Est.each(app.getData('toolTipList'), function (item) {
+      $(window).one('click', Est.proxy(function() {
+        Est.each(app.getData('toolTipList'), function(item) {
           app.getDialog(item).close();
         });
         app.addData('toolTipList', []);
       }, this));
-    }, function () {
+    }, function() {
       try {
         app.getDialog(Est.hash($(this).attr('data-title') || $(this).attr('title'))).close();
-      } catch (e) {
-      }
+      } catch (e) {}
     });
   },
-  render: function () {
+  render: function() {
     this._render();
   }
 });

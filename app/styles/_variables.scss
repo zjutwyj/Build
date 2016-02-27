@@ -1,11 +1,15 @@
 // 命名空间
 $namespace: mobile-html;
 // 字体类型
-$fontFamily: 'Microsoft Yahei', Tahoma, Helvetica, Arial, sans-serif;
+$fontFamily: 'Microsoft Yahei',
+Tahoma,
+Helvetica,
+Arial,
+sans-serif;
 // 字体大小
 $fontSize: 12px;
 // 字体颜色
-$color: #999 #ff5241 !default;
+$fontColor: #999 #ff5241 !default;
 // 白色字体
 $colorWhite: #fff !default;
 $colorOragle: #FF5241 !default;
@@ -23,3 +27,7 @@ $bgOragle: #FF5241 !default;
 $borderWhite: #fff !default;
 $borderGray: #ddd !default;
 $borderOragle: #FF5241 !default;
+// 表单相关
+$formBorder: #BBBBBB;
+$formHeight: 22px;
+$formIconColor:#FF5241;

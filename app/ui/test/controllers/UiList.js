@@ -24,6 +24,7 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
       'click .toggle': 'toggleChecked',
       'click .btn-move-up': 'moveUp',
       'click .btn-move-down': 'moveDown',
+      'click .btn-play': 'toggleChecked',
       'click .btn-display': 'setDisplay',
       'click .btn-edit': 'edit',
       'click .btn-delete': 'del'
@@ -76,7 +77,6 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
         item: item,
         pagination: '#pagination-container1',
         pageSize: 5,
-        checkAppend: true,
         checkToggle: true,
         template: template,
         render: '.list-render',

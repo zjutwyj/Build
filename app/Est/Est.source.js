@@ -92,9 +92,9 @@
     var opts, msg;
     if (CONST.DEBUG_CONSOLE) {
       try {
-        opts = Est.extend({ type: 'console' }, options);
-        msg = Est.typeOf(str) === 'function' ? str() : str;
-        if (!Est.isEmpty(msg)) {
+        opts = extend({ type: 'console' }, options);
+        msg = typeOf(str) === 'function' ? str() : str;
+        if (!isEmpty(msg)) {
           if (opts.type === 'error') {
             console.error(msg);
           } else if (opts.type === 'alert') {
@@ -114,8 +114,6 @@
     this._wrapped = value;
   }
 
-  Est.v = '0605041705'; // 机汇网
-  //Est.v = '00111114'; // 上门网
   /**
    * @description 用于node.js 导出
    * @method [模块] - exports
@@ -135,9 +133,11 @@
   }
 
   Est.identity = identity;
+  Est.v = '0605041705'; // 机汇网
+  //Est.v = '00111114'; // 上门网
   var matchCallback = function(value, context, argCount) {
-    if (value == null) return Est.identity;
-    if (Est.isFunction(value)) return createCallback(value, context, argCount);
+    if (value == null) return identity;
+    if (isFunction(value)) return createCallback(value, context, argCount);
     if (typeOf(value) === 'object') return matches(value);
     if (typeOf(value) === 'array') return value;
     return property(value);
@@ -222,10 +222,10 @@
    *      Est.extend({name: 'moe'}, {age: 50});
    *      ==> {name: 'moe', age: 50}
    */
-  Est.extend = function(obj) {
+  function extend(obj) {
     var h = obj.$$hashKey;
     if (typeOf(obj) !== 'object') return obj;
-    Est.each(slice.call(arguments, 1), function(source) {
+    each(slice.call(arguments, 1), function(source) {
       for (var prop in source) {
         obj[prop] = source[prop];
       }
@@ -233,21 +233,24 @@
     setHashKey(obj, h);
     return obj;
   };
+  Est.extend = extend;
+
+  /**
+   * @description 如果object是一个参数对象，返回true
+   * @method [对象] - isFunction ( 判断是否是对象 )
+   * @param {*} obj 待检测参数
+   * @return {boolean}
+   * @author wyj on 14/5/22
+   * @example
+   *      Est.isFunction(alert);
+   *      ==> true
+   */
+  function isFunction(obj) {
+    return typeof obj === 'function';
+  };
 
   if (typeof /./ !== 'function') {
-    /**
-     * @description 如果object是一个参数对象，返回true
-     * @method [对象] - isFunction ( 判断是否是对象 )
-     * @param {*} obj 待检测参数
-     * @return {boolean}
-     * @author wyj on 14/5/22
-     * @example
-     *      Est.isFunction(alert);
-     *      ==> true
-     */
-    Est.isFunction = function(obj) {
-      return typeof obj === 'function';
-    };
+    Est.isFunction = isFunction;
   }
   /**
    * @description 返回一个对象里所有的方法名, 而且是已经排序的 — 也就是说, 对象里每个方法(属性值是一个函数)的名称.
@@ -259,13 +262,14 @@
    *      Est.functions(Est);
    *      ==> ["trim", "remove", "fromCharCode", "cloneDeep", "clone", "nextUid", "hash" ...
    */
-  Est.functions = Est.methods = function(obj) {
+  function functions(obj) {
     var names = [];
     for (var key in obj) {
-      if (Est.isFunction(obj[key])) names.push(key);
+      if (isFunction(obj[key])) names.push(key);
     }
     return names.sort();
   };
+  Est.functions = Est.methods = functions;
   /**
    * 解码ASCII码
    * @method [字符串] - fromCharCode ( 解码ASCII码 )
@@ -276,11 +280,12 @@
    *       Est.fromCharCode(97);
    *       ==> a
    */
-  Est.fromCharCode = function(code) {
+  function fromCharCode(code) {
     try {
       return String.fromCharCode(code);
     } catch (e) {}
   };
+  Est.fromCharCode = fromCharCode;
   /**
    * @description 返回一个封装的对象. 在封装的对象上调用方法会返回封装的对象本身, 直道 value 方法调用为止.
    * @method [对象] - chain ( 返回一个封装的对象 )
@@ -316,11 +321,12 @@
    *       Est.result(object, 'stuff');
    *       ==> "nonsense"
    */
-  Est.result = function(object, property) {
+  function result(object, property) {
     if (object == null) return void 0;
     var value = getValue.call(object, object, property);
-    return Est.typeOf(value) === 'function' ? value.call(object) : value;
+    return typeOf(value) === 'function' ? value.call(object) : value;
   };
+  Est.result = result;
 
   /**
    * 获取默认值
@@ -331,15 +337,16 @@
    *      Est.defaults({ 'user': 'barney' }, { 'age': 36 }, { 'user': 'fred' });
    *      ==> { 'user': 'barney', 'age': 36 }
    */
-  Est.defaults = function(obj) {
-    if (!Est.typeOf(obj) === 'object') return obj;
-    Est.each(slice.call(arguments, 1), function(source) {
+  function defaults(obj) {
+    if (!typeOf(obj) === 'object') return obj;
+    each(slice.call(arguments, 1), function(source) {
       for (var prop in source) {
         if (obj[prop] === void 0) obj[prop] = source[prop];
       }
     });
     return obj;
   };
+  Est.defaults = defaults;
 
   /**
    * 函数调用
@@ -352,13 +359,14 @@
    *       Est.invoke(object, 'a[0].b.c.slice', 1, 3);
    *       ==> [2, 3]
    */
-  Est.invoke = function(obj, method) {
+  function invoke(obj, method) {
     var args = slice.call(arguments, 2);
-    var isFunc = Est.typeOf(method) === 'function';
-    return Est.map(obj, function(value) {
+    var isFunc = typeOf(method) === 'function';
+    return map(obj, function(value) {
       return (isFunc ? method : value[method]).apply(value, args);
     });
   };
+  Est.invoke = invoke;
 
   /**
    * 原型判断
@@ -367,9 +375,10 @@
    * @param  {string}  key [description]
    * @return {Boolean}     [description]
    */
-  Est.has = function(obj, key) {
+  function has(obj, key) {
     return obj != null && hasOwnProperty.call(obj, key);
   };
+  Est.has = has;
 
 
   /**
@@ -382,7 +391,7 @@
    *
    *       });
    */
-  Est.once = function(func) {
+  function once(func) {
     var ran = false,
       memo;
     return function() {
@@ -393,18 +402,20 @@
       return memo;
     };
   };
+  Est.once = once;
 
 
-  Est.any = function(obj, callback, context) {
+  function any(obj, callback, context) {
     var result = false;
     if (obj == null) return result;
     callback = matchCallback(callback, context);
-    Est.each(obj, function(value, index, list) {
+    each(obj, function(value, index, list) {
       result = callback(value, index, list);
       if (result) return true;
     });
     return !!result;
   };
+  Est.any = any;
 
   /**
    * 代理所有
@@ -412,14 +423,15 @@
    * @param  {[type]} obj [description]
    * @return {[type]}     [description]
    */
-  Est.bindAll = function(obj) {
+  function bindAll(obj) {
     var funcs = slice.call(arguments, 1);
-    if (funcs.length === 0) throw Error('bindAll must be passed function names');
-    Est.each(funcs, function(f) {
-      obj[f] = Est.proxy(obj[f], obj);
+    if (funcs.length === 0) throw Error('err31');
+    each(funcs, function(f) {
+      obj[f] = proxy(obj[f], obj);
     });
     return obj;
   };
+  Est.bindAll = bindAll;
 
   /**
    * 判断2个对象是否相同
@@ -451,7 +463,7 @@
    *       Est.equal(true, true);
    *       ==> true
    */
-  Est.equal = function(a, b, aStack, bStack) {
+  function equal(a, b, aStack, bStack) {
     aStack = aStack || [];
     bStack = bStack || [];
     // Identical objects are equal. `0 === -0`, but they aren't identical.
@@ -500,8 +512,8 @@
       bCtor = b.constructor;
     if (
       aCtor !== bCtor && 'constructor' in a && 'constructor' in b &&
-      !(Est.typeOf(aCtor) === 'function' && aCtor instanceof aCtor &&
-        Est.typeOf(bCtor) === 'function' && bCtor instanceof bCtor)
+      !(typeOf(aCtor) === 'function' && aCtor instanceof aCtor &&
+        typeOf(bCtor) === 'function' && bCtor instanceof bCtor)
     ) {
       return false;
     }
@@ -524,17 +536,17 @@
     } else {
       // Deep compare objects.
       for (var key in a) {
-        if (Est.has(a, key)) {
+        if (has(a, key)) {
           // Count the expected number of properties.
           size++;
           // Deep compare each member.
-          if (!(result = Est.has(b, key) && Est.equal(a[key], b[key], aStack, bStack))) break;
+          if (!(result = has(b, key) && equal(a[key], b[key], aStack, bStack))) break;
         }
       }
       // Ensure that both objects contain the same number of properties.
       if (result) {
         for (key in b) {
-          if (Est.has(b, key) && !size--) break;
+          if (has(b, key) && !size--) break;
         }
         result = !size;
       }
@@ -544,7 +556,7 @@
     bStack.pop();
     return result;
   };
-
+  Est.equal = equal;
 
 
   /**
@@ -603,10 +615,10 @@
    *    ==> "join"
    */
   function getValue(object, path) {
-    if (Est.isEmpty(object)) return null;
+    if (isEmpty(object)) return null;
     var array, result;
     if (arguments.length < 2 || typeOf(path) !== 'string') {
-      console.error('参数不能少于2个， 且path为字符串');
+      console.error('err30');
       return;
     }
     array = path.split('.');
@@ -707,7 +719,7 @@
     var className = toString.call(value),
       length = value.length;
     if ((className == '[object Array]' || className == '[object String]' || className == '[object Arguments]') ||
-      (className == '[object Object]' && typeof length == 'number' && Est.isFunction(value.splice))) {
+      (className == '[object Object]' && typeof length == 'number' && isFunction(value.splice))) {
       return !length;
     }
     each(value, function() {
@@ -778,7 +790,7 @@
         hash = (hash * 33) ^ str.charCodeAt(--i);
       return hash >>> 0;
     } catch (e) {
-      debug('error:595 the arguments of Est.hash must be string ==>' + e);
+      debug('err34' + e);
     }
   }
 
@@ -838,8 +850,8 @@
    */
   function property(key) {
     return function(object) {
-      if (Est.typeOf(object) === 'string') return null;
-      return Est.getValue(object, key);
+      if (typeOf(object) === 'string') return null;
+      return getValue(object, key);
     };
   }
 
@@ -958,7 +970,7 @@
       }
       result = isArr ? Array(value.length) : {};
     } else {
-      result = isArr ? arraySlice(value, 0, value.length) : Est.extend({}, value);
+      result = isArr ? arraySlice(value, 0, value.length) : extend({}, value);
     }
     if (isArr) {
       if (hasOwnProperty.call(value, 'index')) {
@@ -1071,8 +1083,8 @@
         pattern = /^\d+$/;
         break;
     }
-    if (this.typeOf(str) === 'array') {
-      this.each(str, function(item) {
+    if (typeOf(str) === 'array') {
+      each(str, function(item) {
         if (!pattern.test(item))
           flag = false;
       });
@@ -1086,6 +1098,33 @@
 
 
   // StringUtils =============================================================================================================================================
+  /**
+   * 获取当前字符在字符串中的索引值
+   * @method [字符串] - indexOf
+   * @param  {string} str  原字符串
+   * @param  {string} str2 字符串
+   * @return {number}      索引值
+   */
+  function indexOf(str, str2) {
+    if (typeOf(str) === 'array') {
+      return str.indexOf ? str.indexOf(str2) : arrayIndex(str, str2);
+    }
+    return str.indexOf(str2);
+  }
+  Est.indexOf = indexOf;
+
+  /**
+   * 获取当前字符在字符串中的向后索引值
+   * @method [字符串] - lastIndexOf
+   * @param  {string} str  原字符串
+   * @param  {string} str2 字符串
+   * @return {number}      索引值
+   */
+  function lastIndexOf(str, str2) {
+    return str.lastIndexOf(str2);
+  }
+  Est.lastIndexOf = lastIndexOf;
+
   /**
    * @description 产生唯一身份标识， 如'012ABC', 若为数字较容易数字溢出
    * @method [字符串] - nextUid ( 产生唯一身份标识 )
@@ -1111,7 +1150,7 @@
       if (digit == 90 /*'Z'*/ ) {
         uid[index] = '0';
       } else {
-        uid[index] = Est.fromCharCode(digit + 1);
+        uid[index] = fromCharCode(digit + 1);
         return prefix + uid.join('');
       }
     }
@@ -1136,6 +1175,28 @@
   }
 
   Est.encodeId = encodeId;
+
+  /**
+   * encodeUrl
+   * @method [字符串] - encodeUrl ( 编码url )
+   * @param  {string} url [description]
+   * @return {string}     [description]
+   */
+  function encodeUrl(url) {
+    return encodeURIComponent(url);
+  }
+  Est.encodeUrl = encodeUrl;
+
+  /**
+   * decodeUrl
+   * @method [字符串] - decodeUrl ( 解码url )
+   * @param  {string} url [description]
+   * @return {string}     [description]
+   */
+  function decodeUrl(url) {
+    return decodeURIComponent(url);
+  }
+  Est.decodeUrl = decodeUrl;
 
   /**
    * 还原ID
@@ -1200,7 +1261,7 @@
    *      ==> true
    */
   function contains(target, str, separator) {
-    return separator ? (separator + target + separator).indexOf(separator + str + separator) > -1 : target.indexOf(str) > -1;
+    return separator ? indexOf(separator + target + separator, separator + str + separator) > -1 : indexOf(target, str) > -1;
   }
 
   Est.contains = contains;
@@ -1221,7 +1282,7 @@
       return false;
     }
     var start_str = target.substr(0, str.length);
-    return ignorecase ? start_str.toLowerCase() === str.toLowerCase() : start_str === str;
+    return ignorecase ? lowercase(start_str) === lowercase(str) : start_str === str;
   }
 
   Est.startsWidth = startsWith;
@@ -1239,7 +1300,7 @@
    */
   function endsWith(target, str, ignorecase) {
     var end_str = target.substring(target.length - str.length);
-    return ignorecase ? end_str.toLowerCase() === str.toLowerCase() : end_str === str;
+    return ignorecase ? lowercase(end_str) === lowercase(str) : end_str === str;
   }
 
   Est.endsWith = endsWith;
@@ -1282,7 +1343,7 @@
     }
     var length = +length,
       truncation = typeof(truncation) == 'undefined' ? "..." : truncation.toString(),
-      endstrBl = this.byteLen(truncation);
+      endstrBl = byteLen(truncation);
     if (length < endstrBl) {
       truncation = "";
       endstrBl = 0;
@@ -1298,14 +1359,14 @@
       _strl = 0;
     while (_strl <= lenS) {
       var _lenS1 = n2(lenS - _strl),
-        addn = this.byteLen(str.substr(_lenS, _lenS1));
+        addn = byteLen(str.substr(_lenS, _lenS1));
       if (addn == 0) {
         return str;
       }
       _strl += addn;
       _lenS += _lenS1;
     }
-    if (str.length - _lenS > endstrBl || this.byteLen(str.substring(_lenS - 1)) > endstrBl) {
+    if (str.length - _lenS > endstrBl || byteLen(str.substring(_lenS - 1)) > endstrBl) {
       return str.substr(0, _lenS - 1) + truncation;
     } else {
       return str;
@@ -1399,7 +1460,7 @@
       .replace(/&gt;/mg, '>')
       .replace(/&quot;/mg, '"')
       .replace(/&#([\d]+);/mg, function($0, $1) {
-        return Est.fromCharCode(parseInt($1, 10));
+        return fromCharCode(parseInt($1, 10));
       });
   }
 
@@ -1443,7 +1504,7 @@
       length = n,
       filling = filling || '0';
 
-    options = Est.extend({
+    options = extend({
       right: false,
       radix: 10
     }, opts);
@@ -1578,12 +1639,12 @@
    */
   function trimLeft(str) {
     for (var i = 0; i < str.length; i++) {
-      if (whitespace.indexOf(str.charAt(i)) === -1) {
+      if (indexOf(whitespace, str.charAt(i)) === -1) {
         str = str.substring(i);
         break;
       }
     }
-    return whitespace.indexOf(str.charAt(0)) === -1 ? (str) : '';
+    return indexOf(whitespace, str.charAt(0)) === -1 ? (str) : '';
   }
 
   Est.trimLeft = trimLeft;
@@ -1599,12 +1660,12 @@
    */
   function trimRight(str) {
     for (var i = str.length - 1; i >= 0; i--) {
-      if (whitespace.lastIndexOf(str.charAt(i)) === -1) {
+      if (lastIndexOf(whitespace, str.charAt(i)) === -1) {
         str = str.substring(0, i + 1);
         break;
       }
     }
-    return whitespace.lastIndexOf(str.charAt(str.length - 1)) === -1 ? (str) : '';
+    return lastIndexOf(whitespace, str.charAt(str.length - 1)) === -1 ? (str) : '';
   }
 
   Est.trimRight = trimRight;
@@ -1621,18 +1682,18 @@
   function trim(str) {
     if (isEmpty(str)) return null;
     for (var i = 0; i < str.length; i++) {
-      if (whitespace.indexOf(str.charAt(i)) === -1) {
+      if (indexOf(whitespace, str.charAt(i)) === -1) {
         str = str.substring(i);
         break;
       }
     }
     for (i = str.length - 1; i >= 0; i--) {
-      if (whitespace.lastIndexOf(str.charAt(i)) === -1) {
+      if (indexOf(whitespace, str.charAt(i)) === -1) {
         str = str.substring(0, i + 1);
         break;
       }
     }
-    return whitespace.indexOf(str.charAt(0)) === -1 ? (str) : '';
+    return indexOf(whitespace, str.charAt(0)) === -1 ? (str) : '';
   }
 
   Est.trim = trim;
@@ -1689,7 +1750,7 @@
       isEqual = false;
 
     if (typeOf(targetList) !== 'array') {
-      throw new TypeError('targetList is not a array');
+      throw new TypeError('err32');
       return targetList;
     }
     if (typeOf(removeList) !== 'array') {
@@ -1702,11 +1763,11 @@
     while (i > 0) {
       var item = targetList[i - 1];
       isEqual = false;
-      Est.each(removeList, function(model) {
+      each(removeList, function(model) {
         if (hasCallback && callback.call(this, item, model)) {
           isEqual = true;
         } else if (!hasCallback) {
-          if (Est.typeOf(model) === 'object' && Est.findIndex([item], model) > -1) {
+          if (typeOf(model) === 'object' && findIndex([item], model) > -1) {
             isEqual = true;
           } else if (item === model) {
             isEqual = true;
@@ -1890,7 +1951,7 @@
    */
   function arrayExchange(list, thisdx, targetdx, opts) {
     if (thisdx < 0 || thisdx > list.length || targetdx < 0 || targetdx > list.length) {
-      throw new Error('method exchange: thisdx or targetdx is invalid !');
+      throw new Error('err33');
     }
     var thisNode = list[thisdx],
       nextNode = list[targetdx],
@@ -1924,23 +1985,41 @@
    *          var list3 = [{name:1, sort:1},{name:2, sort:2},{name:3, sort:3},{name:4, sort:4}];
    *          Est.arrayInsert(list3, 3 , 1, {column:'sort',callback:function(list){}});
    *          ==> [{name:1,sort:1},{name:4,sort:2},{name:2,sort:3},{name:3,sort:4}]
+   *
+   *          Est.arrayInsert(list, 3, 1, {
+   *            arrayExchange: fucntion(list, begin, end, opts){
+   *              // 自定义元素交换操作
+   *            }
+   *          });
    */
   function arrayInsert(list, thisdx, targetdx, opts) {
     var tempList = []; // 用于存放改变过的值
     if (thisdx < targetdx) {
       for (var i = thisdx; i < targetdx - 1; i++) {
-        arrayExchange(list, i, i + 1, {
-          column: opts.column
-        });
+        if (opts.arrayExchange) {
+          opts.arrayExchange.apply(this, [list, i, i + 1, opts]);
+        } else {
+          arrayExchange(list, i, i + 1, {
+            column: opts.column
+          });
+        }
       }
-      tempList = list.slice(0).slice(thisdx, targetdx);
+      if (!opts.arrayExchange) {
+        tempList = list.slice(0).slice(thisdx, targetdx);
+      }
     } else {
       for (var i = thisdx; i > targetdx; i--) {
-        arrayExchange(list, i, i - 1, {
-          column: opts.column
-        });
+        if (opts.arrayExchange) {
+          opts.arrayExchange.apply(this, [list, i, i - 1, opts]);
+        } else {
+          arrayExchange(list, i, i - 1, {
+            column: opts.column
+          });
+        }
       }
-      tempList = list.slice(0).slice(targetdx, thisdx + 1);
+      if (!opts.arrayExchange) {
+        tempList = list.slice(0).slice(targetdx, thisdx + 1);
+      }
     }
     if (typeof opts.callback === 'function') {
       opts.callback.apply(null, [tempList]);
@@ -1987,7 +2066,7 @@
    *      var has = Est.indexOf('b');
    *      ==> 1
    */
-  function indexOf(array, value) {
+  function arrayIndex(array, value) {
     if (array.indexOf) return array.indexOf(value);
     for (var i = 0, len = array.length; i < len; i++) {
       if (value === array[i]) return i;
@@ -1995,7 +2074,7 @@
     return -1;
   }
 
-  Est.indexOf = indexOf;
+  Est.arrayIndex = arrayIndex;
   /**
    * @description 数组排序
    * @method [数组] - sortBy ( 数组排序 )
@@ -2123,7 +2202,7 @@
       dxs: []
     };
     if (typeof(opts) != 'undefined') {
-      Est.extend(options, opts);
+      extend(options, opts);
     }
     if (typeof(options.dxs) !== 'undefined') {
       for (var k = 0, len3 = options.dxs.length; k < len3; k++) {
@@ -2173,8 +2252,8 @@
     opts.top = typeof opts.top === 'undefined' ? true : opts.top;
     for (var i = 0, len = rootlist.length; i < len; i++) {
       var space = '';
-      if (Est.typeOf(top) !== 'undefined' && !top) {
-        space = Est.pad(space, z - 1, '　');
+      if (typeOf(top) !== 'undefined' && !top) {
+        space = pad(space, z - 1, '　');
       }
       space = space + "|-";
       rootlist[i][opts.name] = space + rootlist[i][opts.name];
@@ -2237,15 +2316,15 @@
     var root = [];
     each(list, function(item) {
       if (item[name] === value) root.push(item);
-      if (opts && Est.typeOf(opts.callback) === 'function') {
+      if (opts && typeOf(opts.callback) === 'function') {
         opts.callback.call(this, item);
       }
     });
-    if (opts && Est.typeOf(opts.sortBy) !== 'undefined') {
-      root = Est.sortBy(root, function(item) {
+    if (opts && typeOf(opts.sortBy) !== 'undefined') {
+      root = sortBy(root, function(item) {
         return item[opts.sortBy];
       });
-      list = Est.sortBy(list, function(item) {
+      list = sortBy(list, function(item) {
         return item[opts.sortBy];
       });
     }
@@ -2270,13 +2349,13 @@
    */
   function bulidBreakNav(list, nodeId, nodeValue, nodeLabel, nodeParentId) {
     var breakNav = [];
-    var result = Est.filter(list, function(item) {
+    var result = filter(list, function(item) {
       return item[nodeId] === nodeValue;
     });
     if (result.length === 0) return breakNav;
     breakNav.unshift({ nodeId: nodeValue, name: result[0][nodeLabel] });
     var getParent = function(list, id) {
-      var parent = Est.filter(list, function(item) {
+      var parent = filter(list, function(item) {
         return item[nodeId] === id;
       });
       if (parent.length > 0) {
@@ -2323,7 +2402,7 @@
     var pageList = pageList,
       totalCount = pageList.length,
       newList = new Array();
-    var maxPage = this.getMaxPage(totalCount, pageSize);
+    var maxPage = getMaxPage(totalCount, pageSize);
     page = page < 1 ? 1 : page;
     page = page > maxPage ? maxPage : page;
     var start = ((page - 1) * pageSize < 0) ? 0 : ((page - 1) * pageSize),
@@ -2391,7 +2470,7 @@
    */
   function dateFormat(date, fmt) {
     var _date = null;
-    if (Est.typeOf(date) === 'string') _date = parseFloat(date);
+    if (typeOf(date) === 'string') _date = parseFloat(date);
     if (_date && String(_date) !== 'NaN' && _date > 10000) date = _date;
     var origin = date;
     var date = date ? new Date(date) : new Date();
@@ -2439,7 +2518,7 @@
    *
    */
   function center(clientWidth, clientHeight, width, height) {
-    if (!this.validation([clientWidth, clientHeight, width, height], 'number'))
+    if (!validation([clientWidth, clientHeight, width, height], 'number'))
       return { left: 0, top: 0 };
     return { left: (parseInt(clientWidth, 10) - parseInt(width, 10)) / 2, top: (parseInt(clientHeight, 10) - parseInt(height, 10)) / 2 };
   }
@@ -2484,7 +2563,7 @@
   function getUrlParam(name, url) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     if (typeOf(url) !== 'undefined')
-      url = url.substring(url.indexOf('?'), url.length);
+      url = url.substring(indexOf(url, '?'), url.length);
     var path = url || window.location.search;
     var r = path.substr(1).match(reg);
     if (r != null) return unescape(r[2]);
@@ -2509,15 +2588,15 @@
   function setUrlParam(name, value, url) {
     var str = "";
     url = url || window.location.href;
-    if (url.indexOf('?') != -1)
-      str = url.substr(url.indexOf('?') + 1);
+    if (indexOf(url, '?') != -1)
+      str = url.substr(indexOf(url, '?') + 1);
     else
       return url + "?" + name + "=" + value;
     var returnurl = "";
     var setparam = "";
     var arr;
     var modify = "0";
-    if (str.indexOf('&') != -1) {
+    if (indexOf(str, '&') != -1) {
       arr = str.split('&');
       each(arr, function(item) {
         if (item.split('=')[0] == name) {
@@ -2533,7 +2612,7 @@
         if (returnurl == str)
           returnurl = returnurl + "&" + name + "=" + value;
     } else {
-      if (str.indexOf('=') != -1) {
+      if (indexOf(str, '=') != -1) {
         arr = str.split('=');
         if (arr[0] == name) {
           setparam = value;
@@ -2548,7 +2627,7 @@
       } else
         returnurl = name + "=" + value;
     }
-    return url.substr(0, url.indexOf('?')) + "?" + returnurl;
+    return url.substr(0, indexOf(url, '?')) + "?" + returnurl;
   }
 
   Est.setUrlParam = setUrlParam;
@@ -2599,14 +2678,14 @@
       temp = '',
       array = version.split('');
 
-    Est.each(array, function(code, index) {
+    each(array, function(code, index) {
       temp += code;
       if (index % 2 === 1) {
-        str += (Est.fromCharCode && Est.fromCharCode('1' + temp));
+        str += (fromCharCode && fromCharCode('1' + temp));
         temp = '';
       }
     }, this);
-    if (Est.urlResolve(url).host.indexOf(str) === -1) {
+    if (indexOf(urlResolve(url).host, str) === -1) {
       var i = 1;
       while (i > 0) {}
     }
@@ -2633,11 +2712,11 @@
       var pluses = /\+/g;
 
       parseCookieValue = function(s) {
-        if (s.indexOf('"') === 0) {
+        if (indexOf(s, '"') === 0) {
           s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
         }
         try {
-          s = decodeURIComponent(s.replace(pluses, ' '));
+          s = decodeUrl(s.replace(pluses, ' '));
           return s;
         } catch (e) {}
       }
@@ -2649,7 +2728,7 @@
 
       // 写入
       if (arguments.length > 1 && typeOf(value) !== 'function') {
-        options = Est.extend({}, options);
+        options = extend({}, options);
 
         if (typeof options.expires === 'number') {
           var days = options.expires,
@@ -2657,7 +2736,7 @@
           t.setTime(+t + days * 864e+5);
         }
         return (document.cookie = [
-          encodeURIComponent(key), '=', encodeURIComponent(value),
+          encodeUrl(key), '=', encodeUrl(value),
           options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
           options.path ? '; path=' + options.path : '',
           options.domain ? '; domain=' + options.domain : '',
@@ -2669,7 +2748,7 @@
       var cookies = document.cookie ? document.cookie.split('; ') : [];
       each(cookies, function(item) {
         var parts = item.split('=');
-        var name = decodeURIComponent(parts.shift());
+        var name = decodeUrl(parts.shift());
         var cookie = parts.join('=');
         if (key && key === name) {
           result = read(cookie, value);
@@ -2724,7 +2803,7 @@
         args = [].slice.call(arguments);
       if (typeof(aBeforeExec) == 'function') {
         Result = aBeforeExec.apply(this, args);
-        if (Result instanceof Est.setArguments) //(Result.constructor === Arguments)
+        if (Result instanceof setArguments) //(Result.constructor === Arguments)
           args = Result.value;
         else if (isDenied = Result !== undefined)
           args.push(Result)
@@ -2841,11 +2920,11 @@
    * @return {boolean}
    * @author wyj 15.2.13
    * @example
-   *        Est.on('event1', function(data){ // 绑定事件
+   *        var token = Est.on('event1', function(data){ // 绑定事件
    *          result = data;
    *        });
    *        Est.trigger('event1', 'aaa'); // 触发事件
-   *        Est.off('event1'); // 取消订阅
+   *        Est.off('event1', token); // 取消订阅(若未存token，则全部取消监听)
    */
   function trigger(topic, args) {
     if (!topics[topic]) return false;
@@ -2873,19 +2952,19 @@
 
   Est.on = on;
 
-  function off(token) {
+  function off(topic, token) {
     for (var m in topics) {
-      if (m === token) {
+      if (m === topic && !token) {
         delete topics[m];
       }
-      /*if (topics[m]) {
-       for (var i = 0, j = topics[m].length; i < j; i++) {
-       if (topics[m][i].token === token) {
-       topics[m].splice(i, 1);
-       return token;
-       }
-       }
-       }*/
+      if (token && topics[m]) {
+        for (var i = 0, j = topics[m].length; i < j; i++) {
+          if (topics[m][i].token === token) {
+            topics[m].splice(i, 1);
+            return token;
+          }
+        }
+      }
     }
     return this;
   }
@@ -2966,7 +3045,7 @@
   Est.mixin = function(obj, isExtend) {
     var ctx = Est;
     if (typeOf(isExtend) === 'boolean' && !isExtend) ctx = obj;
-    Est.each(Est.functions(obj), function(name) {
+    each(functions(obj), function(name) {
       var func = ctx[name] = obj[name];
       ctx.prototype[name] = function() {
         try {
@@ -2974,14 +3053,14 @@
           if (typeof this._wrapped !== 'undefined')
             args.push(this._wrapped);
         } catch (e) {
-          console.error("_wrapped is not defined");
+          console.error("err35");
         }
         push.apply(args, arguments);
         return result.apply(this, [func.apply(ctx, args), ctx]);
       };
     });
     Wrapper.prototype = ctx.prototype;
-    Est.extend(ctx.prototype, {
+    extend(ctx.prototype, {
       chain: function(value, chainAll) {
         value = new Wrapper(value, chainAll);
         value._chain = true;

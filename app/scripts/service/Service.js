@@ -14,7 +14,7 @@ var Service = {
     });
   },
   initUser: function() {
-    var UserModel = BaseModel.extend({
+    /*var UserModel = BaseModel.extend({
       defaults: Est.extend({
         name: '未登录',
         sex: '00'
@@ -23,13 +23,13 @@ var Service = {
       baseUrl: CONST.API + '/user/isLogin'
     });
     var userModel = new UserModel();
-    userModel.hideTip = true;
+    userModel.hideTip = true;*/
     // local
-    /*return {
+    return {
       done: function(fn) {
         fn && fn.call(null, {username: 'user'});
       }
-    };*/
+    };
     // remote
     return userModel.fetch({
       wait: true,

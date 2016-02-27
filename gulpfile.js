@@ -365,7 +365,7 @@ gulp.task('base', [], function() {
         'app/backbone/BaseModel.js',
         'app/backbone/BaseDetail.js'
       ],
-      dist: './app/scripts/core',
+      dist: 'C:/software/WorkProjects/Mobile/app/scripts/core',
       name: 'base.js'
     },
     doc: {
@@ -375,7 +375,40 @@ gulp.task('base', [], function() {
         'app/Est/Est.source.js'
       ],
       name: 'base_doc',
-      dist: './doc'
+      dist: 'C:/software/WorkProjects/Mobile/doc'
     }
   }, true);
+});
+
+gulp.task('mobile', function(){
+  baseTask({
+    scripts: {
+      source: [
+        'app/vendor/seajs/sea-debug.js',
+        'app/vendor/seajs/seajs-text-debug.js',
+        'app/vendor/zepto/zepto.js',
+        'app/Est/Est.mobile.js',
+        'C:/software/WorkProjects/Mobile/app/scripts/const/const.js',
+        'C:/software/WorkProjects/Mobile/app/scripts/config/config.local.js',
+        'C:/software/WorkProjects/Mobile/app/modules/plugins/main.js',
+        'C:/software/WorkProjects/Mobile/app/vendor/main.js',
+        'C:/software/WorkProjects/Mobile/app/scripts/config/config.js'
+      ],
+      name: 'base.js',
+      dist: 'C:/Users/yongjin/workspace/jhmobileWebsite/src/main/webapp/resources/scripts'
+    }
+  }, false);
+});
+
+
+gulp.task('jsmin', [], function() {
+  baseTask({
+    scripts: {
+      source: [
+        'app/backbone/BaseDetail.js'
+      ],
+      name: 'app.js',
+      dist: './test/dist'
+    }
+  }, false);
 });

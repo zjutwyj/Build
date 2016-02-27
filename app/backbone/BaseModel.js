@@ -14,7 +14,7 @@
 
 
 var BaseModel = Backbone.Model.extend({
-  defaults: { checked: false, children: [] },
+  defaults: { checked: false, children: []},
   baseId: '',
   /**
    * 初始化请求连接, 判断是否为新对象， 否自动加上ID

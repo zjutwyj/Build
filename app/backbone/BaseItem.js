@@ -332,8 +332,16 @@ var BaseItem = SuperView.extend({
    */
   _toggleChecked: function(e) {
     var checked = this.model.get('checked');
-    this._checkAppend = typeof this.model.get('_options')._checkAppend === 'undefined' ? true :
+    var beginDx = null;
+    var endDx = null;
+    var dx = null;
+
+    this._checkAppend = typeof this.model.get('_options')._checkAppend === 'undefined' ? false :
       this.model.get('_options')._checkAppend;
+    this._checkToggle = typeof this.model.get('_options')._checkToggle === 'undefined' ? false :
+      this.model.get('_options')._checkToggle;
+
+    // 单选， 清除选中项
     if (!this._checkAppend) {
       if (this._options.viewId) {
         if (app.getView(this._options.viewId))
@@ -344,27 +352,36 @@ var BaseItem = SuperView.extend({
         }); //debug__
       }
     }
-    this.model.attributes.checked = !checked;
-    if (this.model.get('checked')) {
+
+    if (this._checkToggle) {
+      this.model.attributes.checked = !checked;
+    } else {
+      this.model.attributes.checked = true;
       this._itemActive({
         add: this._checkAppend
       });
-    } else if (this.model.get('_options')._checkToggle) {
+    }
+    if (this.model.get('checked') && this._checkToggle) {
+      this._itemActive({
+        add: this._checkAppend
+      });
+    } else if (this._checkToggle) {
       this.$el.removeClass('item-active');
       this.model.set('checked', false);
     }
     //TODO shift + 多选
-    if (e && e.shiftKey) {
-      var beginDx = app.getData('curChecked');
-      var endDx = this.model.collection.indexOf(this.model);
+    if (e && e.shiftKey && this._checkAppend) {
+      beginDx = app.getData('curChecked');
+      endDx = this.model.get('dx');
       Est.each(this.model.collection.models, function(model) {
-        if (model.get('dx') > beginDx && model.get('dx') < endDx) {
-          model.set('checked', true);
+        dx = model.get('dx');
+        if (beginDx < dx && dx < endDx) {
+          model.attributes.checked = true;
           model.view.$el.addClass('item-active');
         }
       });
     } else {
-      app.addData('curChecked', this.model.collection.indexOf(this.model));
+      app.addData('curChecked', this.model.get('dx'));
     }
     if (e)
       e.stopImmediatePropagation();
@@ -410,7 +427,6 @@ var BaseItem = SuperView.extend({
    */
   _moveUp: function(e) {
     e.stopImmediatePropagation();
-    this._itemActive();
     this.collapsed = true;
     if (!this._options.viewId) {
       debug('Error22', {
@@ -429,7 +445,6 @@ var BaseItem = SuperView.extend({
    */
   _moveDown: function(e) {
     e.stopImmediatePropagation();
-    this._itemActive();
     this.collapsed = true;
     if (!this._options.viewId) {
       debug('Error23', {
@@ -608,7 +623,6 @@ var BaseItem = SuperView.extend({
    */
   _edit: function(options) {
     debug('1.BaseItem._edit'); //debug__
-    this._itemActive();
     options = Est.extend({}, options);
     options.detail = this._options.detail || options.detail;
     try {
