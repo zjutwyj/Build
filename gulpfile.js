@@ -380,7 +380,7 @@ gulp.task('base', [], function() {
   }, true);
 });
 
-gulp.task('mobile', function(){
+gulp.task('mobile', function() {
   baseTask({
     scripts: {
       source: [
@@ -396,6 +396,17 @@ gulp.task('mobile', function(){
       ],
       name: 'base.js',
       dist: 'C:/Users/yongjin/workspace/jhmobileWebsite/src/main/webapp/resources/scripts'
+    }
+  }, false);
+});
+gulp.task('mobile-util', function() {
+  baseTask({
+    scripts: {
+      source: [
+        'app/mobile/mobile-util.js'
+      ],
+      name: 'mobile-util.min.js',
+      dist: 'app/mobile'
     }
   }, false);
 });
