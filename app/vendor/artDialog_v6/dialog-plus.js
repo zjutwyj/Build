@@ -209,7 +209,7 @@ define('dialog-plus', function(require, exports, module){
     backdropBackground: '#000',
 
     /** 设置遮罩透明度 */
-    backdropOpacity: 0.7,
+    backdropOpacity: 0.2,
 
     /** 内部的 HTML 字符串 */
     innerHTML: '',
@@ -805,9 +805,9 @@ define('dialog-plus', function(require, exports, module){
     // 快捷关闭支持：点击对话框外快速关闭对话框
     if (options.quickClose) {
       options.modal = true;
-      if (!originalOptions.backdropOpacity) {
+      /*if (!originalOptions.backdropOpacity) {
         options.backdropOpacity = 0;
-      }
+      }*/
     }
 
 
@@ -876,7 +876,7 @@ define('dialog-plus', function(require, exports, module){
 
     // 更新 zIndex 全局配置
     if (options.zIndex) {
-      Popup.zIndex = options.zIndex;
+      Popup.zIndex = (Popup.zIndex > options.zIndex && Popup.zIndex !== 1024) ?  Popup.zIndex : options.zIndex;
     }
 
 
@@ -1206,7 +1206,8 @@ define('dialog-plus', function(require, exports, module){
   artDialog.defaults = defaults;
   var $window = $(window);
   var $document = $(document);
-  var isTouch = 'createTouch' in document;
+  //var isTouch = 'createTouch' in document;
+  var isTouch = false;
   var html = document.documentElement;
   var isIE6 = !('minWidth' in html.style);
   var isLosecapture = !isIE6 && 'onlosecapture' in html;

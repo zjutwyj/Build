@@ -239,8 +239,6 @@ var SuperView = Backbone.View.extend({
    */
   _viewReplace: function(selector, model, callback) {
     debug('_viewReplace selector: ' + selector); //debug__
-    var result = callback && callback.call(this, model);
-    if (Est.typeOf(result) !== 'undefined' && !result) return;
     Est.each(selector.split(','), Est.proxy(function(item) {
       if (!Est.isEmpty(item)) {
         this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
@@ -249,6 +247,7 @@ var SuperView = Backbone.View.extend({
         //this._modelBind(item);
       }
     }, this));
+    if (callback) callback.call(this, model);
   },
   /**
    * 双向绑定

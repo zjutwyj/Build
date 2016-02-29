@@ -29,7 +29,7 @@ var BaseDetail = SuperView.extend({
                  data: {} // 附加数据  获取方法为  _data.name
        *      });
    */
-  _initialize: function (options) {
+  _initialize: function(options) {
     this._initOptions(options);
     this._initTemplate(this._options);
     this._initList(this._options);
@@ -43,7 +43,7 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initOptions: function (options) {
+  _initOptions: function(options) {
     this._options = Est.extend(this.options, options || {});
     this._options.speed = this._options.speed || 9;
   },
@@ -54,7 +54,7 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initTemplate: function (options) {
+  _initTemplate: function(options) {
     this._data = options.data = options.data || {};
     if (options.template) {
       this.template = Handlebars.compile(options.template);
@@ -70,16 +70,16 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initList: function (options) {
+  _initList: function(options) {
     var ctx = this;
     this.list = options.render ? this.$(options.render) : this.$el;
     if (this.list.size() === 0)
       this.list = $(options.render);
-    debug(function () {
+    debug(function() {
       if (!ctx.list || ctx.list.size() === 0) {
         return 'Error15 viewId=' + ctx.options.viewId + (ctx._options.render ? ctx._options.render : ctx.el);
       }
-    }, {type: 'error'});//debug__
+    }, { type: 'error' }); //debug__
     return this.list;
   },
   /**
@@ -90,7 +90,7 @@ var BaseDetail = SuperView.extend({
    * @example
    *        this._render();
    */
-  _render: function () {
+  _render: function() {
     if (this._options.beforeRender) {
       this._options.beforeRender.call(this, this._options);
     }
@@ -116,11 +116,11 @@ var BaseDetail = SuperView.extend({
    * @param ctx
    * @author wyj 14.11.15
    */
-  _initModel: function (model, ctx) {
+  _initModel: function(model, ctx) {
 
-    debug(function () {
+    debug(function() {
       if (!model) return 'Error16';
-    }, {type: 'error'});//debug__
+    }, { type: 'error' }); //debug__
 
     ctx.passId = this.options.id || Est.getUrlParam('id', window.location.href);
 
@@ -129,7 +129,7 @@ var BaseDetail = SuperView.extend({
       ctx.model.set('id', ctx.passId);
       ctx.model.set('_data', ctx._options.data);
       ctx.model.set('CONST', CONST);
-      ctx.model.fetch().done(function (response) {
+      ctx.model.fetch().done(function(response) {
         if (response.msg === CONST.LANG.NOT_LOGIN) {
           Est.trigger('checkLogin');
         }
@@ -157,23 +157,23 @@ var BaseDetail = SuperView.extend({
    * @author wyj on 14.11.15
    * @example
    *        this._form('#J_Form')._validate()._init({
-       *          onBeforeSave: function(){
-       *            // 处理特殊字段
-       *            this.model.set('taglist', Est.map(ctx.tagInstance.collection.models, function (item) {
-       *              return item.get('name');
-       *            }).join(','));
-       *          },
-       *          onAfterSave : function(response){
-       *             if(response.attributes.success == false ){
-       *                ctx.refreshCode();
-       *                return true;
-       *             }
-       *            Utils.tip('请验证邮箱后再登录!');
-       *            window.location.href = '/member/modules/login/login.html';
-       *          }
-       *        });
+   *          beforeSave: function(){
+   *            // 处理特殊字段
+   *            this.model.set('taglist', Est.map(ctx.tagInstance.collection.models, function (item) {
+   *              return item.get('name');
+   *            }).join(','));
+   *          },
+   *          afterSave : function(response){
+   *             if(response.attributes.success == false ){
+   *                ctx.refreshCode();
+   *                return true;
+   *             }
+   *            Utils.tip('请验证邮箱后再登录!');
+   *            window.location.href = '/member/modules/login/login.html';
+   *          }
+   *        });
    */
-  _form: function (formSelector) {
+  _form: function(formSelector) {
     this.formSelector = formSelector;
     this.formElemnet = this.$(this.formSelector);
     return this;
@@ -187,29 +187,29 @@ var BaseDetail = SuperView.extend({
    * @author wyj 14.11.15
    * @example
    *        this._form('#J_Form')._validate({
-       *            url: CONST.API + '/user/validate',
-       *            fields: ['vali-username', 'vali-email'] // 注意， 字段前加vali-
-       *        });
+   *            url: CONST.API + '/user/validate',
+   *            fields: ['vali-username', 'vali-email'] // 注意， 字段前加vali-
+   *        });
    */
-  _validate: function (options) {
+  _validate: function(options) {
     var ctx = this;
     options = options || {};
-    BUI.use('bui/form', function (Form) {
+    BUI.use('bui/form', function(Form) {
       ctx.formValidate = new Form.Form({
         srcNode: ctx.formSelector
       }).render();
       if (options.url && options.fields) {
-        Est.each(options.fields, function (field) {
+        Est.each(options.fields, function(field) {
           app.addData(field, ctx.formValidate.getField(field));
-          debug(function () {
+          debug(function() {
             if (!ctx.formValidate.getField(field)) {
               return 'Error17';
             }
-          }, {type: 'error'});//debug__
+          }, { type: 'error' }); //debug__
           app.getData(field).set('remote', {
             url: options.url,
             dataType: 'json',
-            callback: function (data) {
+            callback: function(data) {
               if (data.success) {
                 return '';
               } else {
@@ -226,32 +226,33 @@ var BaseDetail = SuperView.extend({
    * 绑定提交按钮
    *
    * @method [表单] - _init ( 绑定提交按钮 )
-   * @param options [onBeforeSave: 保存前方法] [onAfterSave: 保存后方法]
+   * @param options [beforeSave: 保存前方法] [afterSave: 保存后方法]
    * @author wyj 14.11.15
    * @example
    *        this._form()._validate()._init({
-       *            onBeforeSave: function(){},
-       *            onAfterSave: function(){},
-       *            onErrorSave: function(){}
-       *        });
+   *            beforeSave: function(){},
+   *            afterSave: function(){},
+   *            onErrorSave: function(){}
+   *        });
    *
    *
    *        <input id="model-music.custom" name="music.custom" value="{{music.custom}}" type="text" class="input-large">
    *
    */
-  _init: function (options) {
+  _init: function(options) {
     var ctx = this,
       passed = true,
       modelObj = {},
       isPassed = true;
 
     options = options || {};
-    $('#submit', this.el).on('click', function () {
+    $('#submit', this.el).on('click', function() {
       var $button = $(this);
-      var preText = ctx.preText = $(this).html();
+      var bt = $button.is('input');
+      var preText = ctx.preText = bt ? $button.val() : $button.html();
       passed = true; // 设置验证通过
       ctx.formElemnet.submit();
-      $("input, textarea, select", $(ctx.formSelector)).each(function () {
+      $("input, textarea, select", $(ctx.formSelector)).each(function() {
         var name, val, pass, modelKey, modelList;
         name = $(this).attr('name');
         if ($(this).hasClass('bui-form-field-error')) {
@@ -267,7 +268,7 @@ var BaseDetail = SuperView.extend({
               val = $(this).is(':checked') ? (Est.isEmpty($(this).attr('true-value')) ? true : $(this).attr('true-value')) :
                 (Est.isEmpty($(this).attr('false-value')) ? false : $(this).attr('false-value'));
               break;
-            default :
+            default:
               val = $(this).val();
               break;
           }
@@ -281,7 +282,7 @@ var BaseDetail = SuperView.extend({
                 }
                 Est.setValue(ctx.model.attributes, modelKey, val);
               } catch (e) {
-                debug('Error18 ' + e);//debug__
+                debug('Error18 ' + e); //debug__
               }
               //ctx.model.set(modelList[0], modelObj[modelList[0]]);
             } else {
@@ -291,29 +292,38 @@ var BaseDetail = SuperView.extend({
         }
       });
       if (passed) {
-        if (typeof options.onBeforeSave !== 'undefined')
-          isPassed = options.onBeforeSave.call(ctx);
+        if (typeof options.beforeSave !== 'undefined')
+          isPassed = options.beforeSave.call(ctx);
         if (Est.typeOf(isPassed) !== 'undefined' && !isPassed) return false;
-        $button.html(CONST.LANG.SUBMIT);
+        if (bt) {
+          $button.val(CONST.LANG.SUBMIT);
+        } else {
+          $button.html(CONST.LANG.SUBMIT);
+        }
         $button.prop('disabled', true);
-        ctx._save(function (response) {
-          if (options.onAfterSave) {
-            options.onAfterSave = Est.inject(options.onAfterSave, function (response) {
+        ctx._save(function(response) {
+          if (options.afterSave) {
+            options.afterSave = Est.inject(options.afterSave, function(response) {
               return new Est.setArguments(arguments);
-            }, function (response) {
-              $button.html(preText);
+            }, function(response) {
+              if (bt) {
+                $button.val(preText);
+              } else {
+                $button.html(preText);
+              }
               $button.prop('disabled', false);
             });
-            options.onAfterSave.call(ctx, response);
+            options.afterSave.call(ctx, response, Est.typeOf(Est.getValue(response, 'attributes._response.success')) === 'boolean' ?
+              Est.getValue(response, 'attributes._response.success') : true);
           }
           $button.html(preText);
-        }, function (response) {
+        }, function(response) {
           if (respnse.msg === CONST.LANG.NOT_LOGIN) {
             Est.trigger('checkLogin');
           }
           options.onErrorSave.call(ctx, response);
         });
-        setTimeout(function () {
+        setTimeout(function() {
           $button.html(preText);
           $button.prop('disabled', false);
         }, 5000);
@@ -328,7 +338,7 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 14.11.18
    */
-  _save: function (callback, error) {
+  _save: function(callback, error) {
     this._saveItem(callback, error);
   },
   /**
@@ -340,11 +350,11 @@ var BaseDetail = SuperView.extend({
    * @param context
    * @author wyj 14.11.15
    */
-  _saveItem: function (callback, error) {
-    debug('- BaseDetail._saveItem');//debug__
-    if (Est.typeOf(this.model.url) === 'string') debug('Error29', {type: 'error'});//debug__
+  _saveItem: function(callback, error) {
+    debug('- BaseDetail._saveItem'); //debug__
+    if (Est.typeOf(this.model.url) === 'string') debug('Error29', { type: 'error' }); //debug__
     if (Est.isEmpty(this.model.url())) {
-      debug('Error19', {type: 'error'});//debug__
+      debug('Error19', { type: 'error' }); //debug__
       return;
     }
     if (this.model.attributes._response) {
@@ -352,8 +362,8 @@ var BaseDetail = SuperView.extend({
     }
     this.model.save(null, {
       wait: true,
-      success: function (response) {
-        debug('- BaseDetail._saveSuccess');//debug__
+      success: function(response) {
+        debug('- BaseDetail._saveSuccess'); //debug__
         app.addModel(Est.cloneDeep(response.attributes));
         if (top) {
           top.model = response.attributes;
@@ -361,7 +371,7 @@ var BaseDetail = SuperView.extend({
         if (callback && typeof callback === 'function')
           callback.call(this, response);
       },
-      error: function (XMLHttpRequest, textStatus, errorThrown) {
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
         if (error && typeof error === 'function')
           error.call(this, XMLHttpRequest, textStatus, errorThrown);
       }
@@ -373,7 +383,7 @@ var BaseDetail = SuperView.extend({
    * @method [表单] - _reset ( 重置表单 )
    * @author wyj 14.11.18
    */
-  _reset: function () {
+  _reset: function() {
     this.model.set(this.model.defaults);
   },
   /**
@@ -384,7 +394,7 @@ var BaseDetail = SuperView.extend({
    * @example
    *      this._empty();
    */
-  _empty: function () {
+  _empty: function() {
     this.model.off();
     this.$el.empty().off();
   },
@@ -394,8 +404,8 @@ var BaseDetail = SuperView.extend({
    * @method [事件] - _close ( 移除所有绑定事件 )
    * @author wyj 14.11.16
    */
-  _close: function () {
-    debug('- BaseDetail.close');//debug__
+  _close: function() {
+    debug('- BaseDetail.close'); //debug__
     this.undelegateEvents();
     this.stopListening();
     this.off();

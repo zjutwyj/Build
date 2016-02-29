@@ -74,7 +74,7 @@ var BaseUtils = {
         }
       };
       if (options.cover) {
-        options.quickClose = false;
+        //options.quickClose = false;
         app.addDialog(dialog(options), options.id).showModal(options.target);
       } else {
         app.addDialog(dialog(options), options.id).show(options.target);
