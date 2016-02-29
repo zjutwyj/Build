@@ -39,7 +39,7 @@ define('ItemCheck', [], function(require, exports, module) {
     },
     toggleChecked: function(e, init) {
       this._toggleChecked(e);
-      if (init || (this._checkAppend && !init)) {
+      if (init) {
         $(this._options.data.target).val(this.options.data.cur);
       } else {
         $(this._options.data.target).val(this._checkAppend && app.getView(this._options.viewId) ?

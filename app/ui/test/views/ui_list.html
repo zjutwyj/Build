@@ -13,12 +13,13 @@
 .test-item-btns {
   float: left;
 }
-.item-active .btn-play{
+
+.item-active .btn-play {
   text-indent: -27px;
 }
 </style>
 <div class="form" id="list-test" style="background: #fff;padding: 20px;">
-  <a href="javascript:;" class="checkAll">全选</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="javascript:;" class="checkAll">全选111</a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="javascript:;" class="addOne">插入到末尾</a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="javascript:;" class="insertOne">插入到第1个元素</a>&nbsp;&nbsp;&nbsp;&nbsp;
   <a href="javascript:;" class="insertThree">第3个元素</a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -32,8 +33,18 @@
     <div class="test-item-btns">
       <a href="javascript:;" class="btn-display">{{#compare isdisplay '==' '1'}}已显示{{else}}已隐藏{{/compare}}</a>
       <a href="javascript:;" class="btn-edit">编辑</a>
-      <a href="javascript:;" class="btn-play" style="display: inline-block; width: 27px; overflow: hidden; height: 14px; line-height: 14px;">播放 暂停</a> <a href="javascript:;" class="btn-move-up">上移</a> <a href="javascript:;" class="btn-move-down">下移</a> <a href="javascript:;" class="btn-delete">删除</a> </div>
+      <a href="javascript:;" class="btn-move-up">上移</a> <a href="javascript:;" class="btn-move-down">下移</a> <a href="javascript:;" class="btn-delete">删除</a> </div>
   </ul>
   <div id="pagination-container1" data-numLength="7" class="clearfix"></div>
+  <div id="list2">
+    <ul class="list-render2 clearfix">
+      <div class="test-item-name" style="cursor: pointer;">
+        <div class="test-item-btns">
+          {{text}}
+          <a href="javascript:;" class="btn-play" style="display: inline-block; width: 27px; overflow: hidden; height: 14px; line-height: 14px;">播放 暂停</a>
+        </div>
+      </div>
+    </ul>
+  </div>
   <div id="list-test-result"></div>
 </div>

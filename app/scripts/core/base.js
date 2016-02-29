@@ -12446,8 +12446,6 @@ return jQuery;
     this._wrapped = value;
   }
 
-  Est.v = '0605041705'; // 机汇网
-  //Est.v = '00111114'; // 上门网
   /**
    * @description 用于node.js 导出
    * @method [模块] - exports
@@ -12467,6 +12465,8 @@ return jQuery;
   }
 
   Est.identity = identity;
+  Est.v = '0605041705'; // 机汇网
+  //Est.v = '00111114'; // 上门网
   var matchCallback = function(value, context, argCount) {
     if (value == null) return identity;
     if (isFunction(value)) return createCallback(value, context, argCount);
@@ -13438,6 +13438,9 @@ return jQuery;
    * @return {number}      索引值
    */
   function indexOf(str, str2) {
+    if (typeOf(str) === 'array') {
+      return str.indexOf ? str.indexOf(str2) : arrayIndex(str, str2);
+    }
     return str.indexOf(str2);
   }
   Est.indexOf = indexOf;
@@ -14314,23 +14317,41 @@ return jQuery;
    *          var list3 = [{name:1, sort:1},{name:2, sort:2},{name:3, sort:3},{name:4, sort:4}];
    *          Est.arrayInsert(list3, 3 , 1, {column:'sort',callback:function(list){}});
    *          ==> [{name:1,sort:1},{name:4,sort:2},{name:2,sort:3},{name:3,sort:4}]
+   *
+   *          Est.arrayInsert(list, 3, 1, {
+   *            arrayExchange: fucntion(list, begin, end, opts){
+   *              // 自定义元素交换操作
+   *            }
+   *          });
    */
   function arrayInsert(list, thisdx, targetdx, opts) {
     var tempList = []; // 用于存放改变过的值
     if (thisdx < targetdx) {
       for (var i = thisdx; i < targetdx - 1; i++) {
-        arrayExchange(list, i, i + 1, {
-          column: opts.column
-        });
+        if (opts.arrayExchange) {
+          opts.arrayExchange.apply(this, [list, i, i + 1, opts]);
+        } else {
+          arrayExchange(list, i, i + 1, {
+            column: opts.column
+          });
+        }
       }
-      tempList = list.slice(0).slice(thisdx, targetdx);
+      if (!opts.arrayExchange) {
+        tempList = list.slice(0).slice(thisdx, targetdx);
+      }
     } else {
       for (var i = thisdx; i > targetdx; i--) {
-        arrayExchange(list, i, i - 1, {
-          column: opts.column
-        });
+        if (opts.arrayExchange) {
+          opts.arrayExchange.apply(this, [list, i, i - 1, opts]);
+        } else {
+          arrayExchange(list, i, i - 1, {
+            column: opts.column
+          });
+        }
       }
-      tempList = list.slice(0).slice(targetdx, thisdx + 1);
+      if (!opts.arrayExchange) {
+        tempList = list.slice(0).slice(targetdx, thisdx + 1);
+      }
     }
     if (typeof opts.callback === 'function') {
       opts.callback.apply(null, [tempList]);
@@ -15936,7 +15957,7 @@ return jQuery;
     Model.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.attributes);
-      return Est[method].apply(Est, args);
+      return _[method].apply(_, args);
     };
   });
   // Backbone.Collection
@@ -16288,7 +16309,7 @@ return jQuery;
     Collection.prototype[method] = function() {
       var args = slice.call(arguments);
       args.unshift(this.models);
-      return Est[method].apply(Est, args);
+      return _[method].apply(_, args);
     };
   });
   // Underscore methods that take a property name as an argument.
@@ -16877,7 +16898,7 @@ return jQuery;
   }
 
   Backbone.ModelBinder = function(){
-    _.bindAll.apply(Est, [this].concat(_.functions(this)));
+    _.bindAll.apply(_, [this].concat(_.functions(this)));
   };
 
   // Static setter for class level options
@@ -20417,7 +20438,7 @@ Handlebars.registerHelper('plus', function(num1, num2, opts) {
  *        {{minus 10 5}} => 5
  */
 Handlebars.registerHelper('minus', function(num1, num2, opts) {
-  return parseInt(num1, 10) - parseInt(num2, 10);
+  return (parseInt(num1, 10) - parseInt(num2, 10)) + '';
 });
 
 /**
@@ -21456,7 +21477,7 @@ var BaseUtils = {
         }
       };
       if (options.cover) {
-        options.quickClose = false;
+        //options.quickClose = false;
         app.addDialog(dialog(options), options.id).showModal(options.target);
       } else {
         app.addDialog(dialog(options), options.id).show(options.target);
@@ -21926,32 +21947,27 @@ var SuperView = Backbone.View.extend({
     var ctx = context || this;
     var viewId = Est.typeOf(options.id) === 'string' ? options.id : options.moduleId;
 
-    options.width = options.width || 700;
-    options.cover = Est.typeOf(options.cover) === 'boolean' ? options.cover : true;
-    options.button = options.button || [];
-    options.quickClose = options.cover ? false : options.quickClose;
+    /*    options.width = options.width || 'auto';
+        options.title = options.title || null;
+        options.cover = Est.typeOf(options.cover) === 'boolean' ? options.cover : false;
+        options.autofocus = Est.typeOf(options.autofocus) === 'boolean' ? options.autofocus : false;
+        options.hideOkBtn = Est.typeOf(options.hideOkBtn) === 'boolean' ? options.hideOkBtn : true;
+        options.hideCloseBtn = Est.typeOf(options.hideCloseBtn) === 'boolean' ? options.hideCloseBtn : true;
+        options.button = options.button || [];
+        options.quickClose = options.cover ? false : (Est.typeOf(options.autofocus) === 'boolean' ? options.quickClose : false);
+        options.skin = options.skin || 'dialog_min';*/
 
-    if (typeof options.hideSaveBtn === 'undefined' ||
-      (Est.typeOf(options.hideSaveBtn) === 'boolean' && !options.hideSaveBtn)) {
-      options.button.push({
-        value: CONST.LANG.COMMIT,
-        callback: function() {
-          Utils.addLoading();
-          $('#' + viewId + ' #submit').click();
-          try {
-            if (options.autoClose) {
-              Est.on('_dialog_submit_callback', Est.proxy(function() {
-                this.close().remove();
-              }, this));
-            }
-          } catch (e) {
-            console.log(e);
-          }
-          return false;
-        },
-        autofocus: true
-      });
-    }
+    options = Est.extend({
+      width: 'auto',
+      title: null,
+      cover: false,
+      autofocus: false,
+      hideOkBtn: true,
+      hideCloseBtn: true,
+      button: [],
+      quickClose: options.cover ? false : (Est.typeOf(options.autofocus) === 'boolean' ? options.quickClose : false),
+      skin: 'dialog_min'
+    }, options);
 
     options = Est.extend(options, {
       el: '#base_item_dialog' + viewId,
@@ -22092,8 +22108,6 @@ var SuperView = Backbone.View.extend({
    */
   _viewReplace: function(selector, model, callback) {
     debug('_viewReplace selector: ' + selector); //debug__
-    var result = callback && callback.call(this, model);
-    if (Est.typeOf(result) !== 'undefined' && !result) return;
     Est.each(selector.split(','), Est.proxy(function(item) {
       if (!Est.isEmpty(item)) {
         this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
@@ -22102,6 +22116,7 @@ var SuperView = Backbone.View.extend({
         //this._modelBind(item);
       }
     }, this));
+    if (callback) callback.call(this, model);
   },
   /**
    * 双向绑定
@@ -22378,7 +22393,7 @@ var SuperView = Backbone.View.extend({
         title: null,
         width: 'auto',
         offset: parseInt(offset, 10),
-        skin: 'tool-tip-dilog',
+        skin: 'tool-tip-dialog',
         align: $(this).attr('data-align') || 'top',
         content: '<div style="padding: 5px 6px;;font-size: 12px;">' + title + '</div>',
         hideCloseBtn: true,
@@ -22433,18 +22448,18 @@ var BaseView = SuperView.extend({
    * @author wyj 14.11.20
    * @example
    *      this._initialize({
-       *         viewId: 'productList'，
-       *         template: 字符串模板，
-       *         data: 对象数据
-       *         // 可选
-       *         enterRender: 执行回车后的按钮点击的元素选择符 如 #submit .btn-search
-       *         append: false // 视图是否是追加,
-       *         toolTip: true, // 是否显示title提示框   html代码： <div class="tool-tip" title="提示内容">内容</div>
-       *         beforeRender: function(){},
-       *         afterRender: function(){}
-       *      });
+   *         viewId: 'productList'，
+   *         template: 字符串模板，
+   *         data: 对象数据
+   *         // 可选
+   *         enterRender: 执行回车后的按钮点击的元素选择符 如 #submit .btn-search
+   *         append: false // 视图是否是追加,
+   *         toolTip: true, // 是否显示title提示框   html代码： <div class="tool-tip" title="提示内容">内容</div>
+   *         beforeRender: function(){},
+   *         afterRender: function(){}
+   *      });
    */
-  _initialize: function (options) {
+  _initialize: function(options) {
     this._initOptions(options);
     this._initTemplate(this._options);
     this._initModel(Backbone.Model.extend({}));
@@ -22459,7 +22474,7 @@ var BaseView = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initOptions: function (options) {
+  _initOptions: function(options) {
     this._options = Est.extend(this.options, options || {});
     this._options.data = this._options.data || {};
   },
@@ -22470,10 +22485,10 @@ var BaseView = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initTemplate: function (options) {
+  _initTemplate: function(options) {
     if (options.template) {
       this.template = Handlebars.compile(options.template);
-      this.$template = '<div>'+ options.template + '</div>';
+      this.$template = '<div>' + options.template + '</div>';
     }
   },
   /**
@@ -22484,7 +22499,9 @@ var BaseView = SuperView.extend({
    * @param model
    * @author wyj 14.11.20
    */
-  _initModel: function (model) {
+  _initModel: function(model) {
+    if (this._options.data)
+      this._options.data.CONST = CONST;
     this.model = new model(this._options.data);
   },
   /**
@@ -22494,7 +22511,7 @@ var BaseView = SuperView.extend({
    * @private
    * @author wyj 14.11.16
    */
-  _initBind: function (options) {
+  _initBind: function(options) {
     this.model.bind('reset', this.render, this);
   },
   /**
@@ -22505,9 +22522,9 @@ var BaseView = SuperView.extend({
    * @example
    *        this._render();
    */
-  _render: function () {
+  _render: function() {
     this.trigger('before', this);
-    if (this._options.beforeRender){
+    if (this._options.beforeRender) {
       this._options.beforeRender.call(this, this._options);
     }
     if (this._options.append)
@@ -22525,7 +22542,7 @@ var BaseView = SuperView.extend({
     }
     BaseUtils.removeLoading();
   },
-  render: function(){
+  render: function() {
     this._render();
   },
   /**
@@ -22536,8 +22553,8 @@ var BaseView = SuperView.extend({
    * @return {BaseView}
    * @author wyj 14.11.16
    */
-  _empty: function () {
-    debug('BaseView._empty');//debug__
+  _empty: function() {
+    debug('BaseView._empty'); //debug__
   }
 });
 
@@ -22673,6 +22690,8 @@ var BaseList = SuperView.extend({
    * @author wyj 14.11.20
    */
   _initDataModel: function(model) {
+    if (this._options.data)
+      this._options.data.CONST = CONST;
     this.model = new model(this._options.data);
   },
   /**
@@ -23147,7 +23166,9 @@ var BaseList = SuperView.extend({
   _addOne: function(model, arg1, arg2) {
     var ctx = this;
     if (!this.filter && !this.composite && this.dx < this._options.max) {
-      model.set('dx', this.dx++);
+      model.set({
+        'dx': this.dx++
+      });
       switch (this._options.speed) {
         case 1:
           model.set('_options', {});
@@ -23632,12 +23653,17 @@ var BaseList = SuperView.extend({
    * @example
    *    this._insertOrder(1, 6);
    */
-  _insertOrder: function(begin, end) {
+  _insertOrder: function(begin, end, callback) {
     if (begin < end) {
       end++;
     }
     Est.arrayInsert(this.collection.models, begin, end, {
-      callback: function(list) {}
+      arrayExchange: Est.proxy(function(list, begin, end, opts) {
+        this._exchangeOrder(begin, end, opts);
+      }, this),
+      callback: function(list) {
+        if (callback) callback.call(this, list);
+      }
     });
     this._resetDx();
   },
@@ -23657,6 +23683,7 @@ var BaseList = SuperView.extend({
       nextObj = {};
     var temp = this.collection.at(original_index);
     var next = this.collection.at(new_index);
+
     // 互换dx
     if (temp.view && next.view) {
       var thisDx = temp.view.model.get('dx');
@@ -23683,6 +23710,13 @@ var BaseList = SuperView.extend({
       temp.view.$el.before(next.view.$el).removeClass('hover');
     } else {
       temp.view.$el.after(next.view.$el).removeClass('hover');
+    }
+    if (temp.view.$el.hasClass('bui-grid-row-even')) {
+      temp.view.$el.removeClass('bui-grid-row-even');
+      next.view.$el.addClass('bui-grid-row-even');
+    } else {
+      temp.view.$el.addClass('bui-grid-row-even');
+      next.view.$el.removeClass('bui-grid-row-even');
     }
     if (options.success) {
       options.success.call(this, temp, next);
@@ -24384,7 +24418,6 @@ var BaseItem = SuperView.extend({
    */
   _moveUp: function(e) {
     e.stopImmediatePropagation();
-    this._itemActive();
     this.collapsed = true;
     if (!this._options.viewId) {
       debug('Error22', {
@@ -24403,7 +24436,6 @@ var BaseItem = SuperView.extend({
    */
   _moveDown: function(e) {
     e.stopImmediatePropagation();
-    this._itemActive();
     this.collapsed = true;
     if (!this._options.viewId) {
       debug('Error23', {
@@ -24582,7 +24614,6 @@ var BaseItem = SuperView.extend({
    */
   _edit: function(options) {
     debug('1.BaseItem._edit'); //debug__
-    this._itemActive();
     options = Est.extend({}, options);
     options.detail = this._options.detail || options.detail;
     try {
@@ -24854,7 +24885,7 @@ var BaseCollection = Backbone.Collection.extend({
 
 
 var BaseModel = Backbone.Model.extend({
-  defaults: { checked: false, children: [] },
+  defaults: { checked: false, children: []},
   baseId: '',
   /**
    * 初始化请求连接, 判断是否为新对象， 否自动加上ID
@@ -25175,7 +25206,7 @@ var BaseDetail = SuperView.extend({
                  data: {} // 附加数据  获取方法为  _data.name
        *      });
    */
-  _initialize: function (options) {
+  _initialize: function(options) {
     this._initOptions(options);
     this._initTemplate(this._options);
     this._initList(this._options);
@@ -25189,7 +25220,7 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initOptions: function (options) {
+  _initOptions: function(options) {
     this._options = Est.extend(this.options, options || {});
     this._options.speed = this._options.speed || 9;
   },
@@ -25200,7 +25231,7 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initTemplate: function (options) {
+  _initTemplate: function(options) {
     this._data = options.data = options.data || {};
     if (options.template) {
       this.template = Handlebars.compile(options.template);
@@ -25216,16 +25247,16 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 15.1.12
    */
-  _initList: function (options) {
+  _initList: function(options) {
     var ctx = this;
     this.list = options.render ? this.$(options.render) : this.$el;
     if (this.list.size() === 0)
       this.list = $(options.render);
-    debug(function () {
+    debug(function() {
       if (!ctx.list || ctx.list.size() === 0) {
         return 'Error15 viewId=' + ctx.options.viewId + (ctx._options.render ? ctx._options.render : ctx.el);
       }
-    }, {type: 'error'});//debug__
+    }, { type: 'error' }); //debug__
     return this.list;
   },
   /**
@@ -25236,7 +25267,7 @@ var BaseDetail = SuperView.extend({
    * @example
    *        this._render();
    */
-  _render: function () {
+  _render: function() {
     if (this._options.beforeRender) {
       this._options.beforeRender.call(this, this._options);
     }
@@ -25262,11 +25293,11 @@ var BaseDetail = SuperView.extend({
    * @param ctx
    * @author wyj 14.11.15
    */
-  _initModel: function (model, ctx) {
+  _initModel: function(model, ctx) {
 
-    debug(function () {
+    debug(function() {
       if (!model) return 'Error16';
-    }, {type: 'error'});//debug__
+    }, { type: 'error' }); //debug__
 
     ctx.passId = this.options.id || Est.getUrlParam('id', window.location.href);
 
@@ -25274,7 +25305,8 @@ var BaseDetail = SuperView.extend({
       ctx.model = new model();
       ctx.model.set('id', ctx.passId);
       ctx.model.set('_data', ctx._options.data);
-      ctx.model.fetch().done(function (response) {
+      ctx.model.set('CONST', CONST);
+      ctx.model.fetch().done(function(response) {
         if (response.msg === CONST.LANG.NOT_LOGIN) {
           Est.trigger('checkLogin');
         }
@@ -25302,23 +25334,23 @@ var BaseDetail = SuperView.extend({
    * @author wyj on 14.11.15
    * @example
    *        this._form('#J_Form')._validate()._init({
-       *          onBeforeSave: function(){
-       *            // 处理特殊字段
-       *            this.model.set('taglist', Est.map(ctx.tagInstance.collection.models, function (item) {
-       *              return item.get('name');
-       *            }).join(','));
-       *          },
-       *          onAfterSave : function(response){
-       *             if(response.attributes.success == false ){
-       *                ctx.refreshCode();
-       *                return true;
-       *             }
-       *            Utils.tip('请验证邮箱后再登录!');
-       *            window.location.href = '/member/modules/login/login.html';
-       *          }
-       *        });
+   *          beforeSave: function(){
+   *            // 处理特殊字段
+   *            this.model.set('taglist', Est.map(ctx.tagInstance.collection.models, function (item) {
+   *              return item.get('name');
+   *            }).join(','));
+   *          },
+   *          afterSave : function(response){
+   *             if(response.attributes.success == false ){
+   *                ctx.refreshCode();
+   *                return true;
+   *             }
+   *            Utils.tip('请验证邮箱后再登录!');
+   *            window.location.href = '/member/modules/login/login.html';
+   *          }
+   *        });
    */
-  _form: function (formSelector) {
+  _form: function(formSelector) {
     this.formSelector = formSelector;
     this.formElemnet = this.$(this.formSelector);
     return this;
@@ -25332,29 +25364,29 @@ var BaseDetail = SuperView.extend({
    * @author wyj 14.11.15
    * @example
    *        this._form('#J_Form')._validate({
-       *            url: CONST.API + '/user/validate',
-       *            fields: ['vali-username', 'vali-email'] // 注意， 字段前加vali-
-       *        });
+   *            url: CONST.API + '/user/validate',
+   *            fields: ['vali-username', 'vali-email'] // 注意， 字段前加vali-
+   *        });
    */
-  _validate: function (options) {
+  _validate: function(options) {
     var ctx = this;
     options = options || {};
-    BUI.use('bui/form', function (Form) {
+    BUI.use('bui/form', function(Form) {
       ctx.formValidate = new Form.Form({
         srcNode: ctx.formSelector
       }).render();
       if (options.url && options.fields) {
-        Est.each(options.fields, function (field) {
+        Est.each(options.fields, function(field) {
           app.addData(field, ctx.formValidate.getField(field));
-          debug(function () {
+          debug(function() {
             if (!ctx.formValidate.getField(field)) {
               return 'Error17';
             }
-          }, {type: 'error'});//debug__
+          }, { type: 'error' }); //debug__
           app.getData(field).set('remote', {
             url: options.url,
             dataType: 'json',
-            callback: function (data) {
+            callback: function(data) {
               if (data.success) {
                 return '';
               } else {
@@ -25371,32 +25403,33 @@ var BaseDetail = SuperView.extend({
    * 绑定提交按钮
    *
    * @method [表单] - _init ( 绑定提交按钮 )
-   * @param options [onBeforeSave: 保存前方法] [onAfterSave: 保存后方法]
+   * @param options [beforeSave: 保存前方法] [afterSave: 保存后方法]
    * @author wyj 14.11.15
    * @example
    *        this._form()._validate()._init({
-       *            onBeforeSave: function(){},
-       *            onAfterSave: function(){},
-       *            onErrorSave: function(){}
-       *        });
+   *            beforeSave: function(){},
+   *            afterSave: function(){},
+   *            onErrorSave: function(){}
+   *        });
    *
    *
    *        <input id="model-music.custom" name="music.custom" value="{{music.custom}}" type="text" class="input-large">
    *
    */
-  _init: function (options) {
+  _init: function(options) {
     var ctx = this,
       passed = true,
       modelObj = {},
       isPassed = true;
 
     options = options || {};
-    $('#submit', this.el).on('click', function () {
+    $('#submit', this.el).on('click', function() {
       var $button = $(this);
-      var preText = ctx.preText = $(this).html();
+      var bt = $button.is('input');
+      var preText = ctx.preText = bt ? $button.val() : $button.html();
       passed = true; // 设置验证通过
       ctx.formElemnet.submit();
-      $("input, textarea, select", $(ctx.formSelector)).each(function () {
+      $("input, textarea, select", $(ctx.formSelector)).each(function() {
         var name, val, pass, modelKey, modelList;
         name = $(this).attr('name');
         if ($(this).hasClass('bui-form-field-error')) {
@@ -25412,7 +25445,7 @@ var BaseDetail = SuperView.extend({
               val = $(this).is(':checked') ? (Est.isEmpty($(this).attr('true-value')) ? true : $(this).attr('true-value')) :
                 (Est.isEmpty($(this).attr('false-value')) ? false : $(this).attr('false-value'));
               break;
-            default :
+            default:
               val = $(this).val();
               break;
           }
@@ -25426,7 +25459,7 @@ var BaseDetail = SuperView.extend({
                 }
                 Est.setValue(ctx.model.attributes, modelKey, val);
               } catch (e) {
-                debug('Error18 ' + e);//debug__
+                debug('Error18 ' + e); //debug__
               }
               //ctx.model.set(modelList[0], modelObj[modelList[0]]);
             } else {
@@ -25436,29 +25469,38 @@ var BaseDetail = SuperView.extend({
         }
       });
       if (passed) {
-        if (typeof options.onBeforeSave !== 'undefined')
-          isPassed = options.onBeforeSave.call(ctx);
+        if (typeof options.beforeSave !== 'undefined')
+          isPassed = options.beforeSave.call(ctx);
         if (Est.typeOf(isPassed) !== 'undefined' && !isPassed) return false;
-        $button.html(CONST.LANG.SUBMIT);
+        if (bt) {
+          $button.val(CONST.LANG.SUBMIT);
+        } else {
+          $button.html(CONST.LANG.SUBMIT);
+        }
         $button.prop('disabled', true);
-        ctx._save(function (response) {
-          if (options.onAfterSave) {
-            options.onAfterSave = Est.inject(options.onAfterSave, function (response) {
+        ctx._save(function(response) {
+          if (options.afterSave) {
+            options.afterSave = Est.inject(options.afterSave, function(response) {
               return new Est.setArguments(arguments);
-            }, function (response) {
-              $button.html(preText);
+            }, function(response) {
+              if (bt) {
+                $button.val(preText);
+              } else {
+                $button.html(preText);
+              }
               $button.prop('disabled', false);
             });
-            options.onAfterSave.call(ctx, response);
+            options.afterSave.call(ctx, response, Est.typeOf(Est.getValue(response, 'attributes._response.success')) === 'boolean' ?
+              Est.getValue(response, 'attributes._response.success') : true);
           }
           $button.html(preText);
-        }, function (response) {
+        }, function(response) {
           if (respnse.msg === CONST.LANG.NOT_LOGIN) {
             Est.trigger('checkLogin');
           }
           options.onErrorSave.call(ctx, response);
         });
-        setTimeout(function () {
+        setTimeout(function() {
           $button.html(preText);
           $button.prop('disabled', false);
         }, 5000);
@@ -25473,7 +25515,7 @@ var BaseDetail = SuperView.extend({
    * @private
    * @author wyj 14.11.18
    */
-  _save: function (callback, error) {
+  _save: function(callback, error) {
     this._saveItem(callback, error);
   },
   /**
@@ -25485,11 +25527,11 @@ var BaseDetail = SuperView.extend({
    * @param context
    * @author wyj 14.11.15
    */
-  _saveItem: function (callback, error) {
-    debug('- BaseDetail._saveItem');//debug__
-    if (Est.typeOf(this.model.url) === 'string') debug('Error29', {type: 'error'});//debug__
+  _saveItem: function(callback, error) {
+    debug('- BaseDetail._saveItem'); //debug__
+    if (Est.typeOf(this.model.url) === 'string') debug('Error29', { type: 'error' }); //debug__
     if (Est.isEmpty(this.model.url())) {
-      debug('Error19', {type: 'error'});//debug__
+      debug('Error19', { type: 'error' }); //debug__
       return;
     }
     if (this.model.attributes._response) {
@@ -25497,8 +25539,8 @@ var BaseDetail = SuperView.extend({
     }
     this.model.save(null, {
       wait: true,
-      success: function (response) {
-        debug('- BaseDetail._saveSuccess');//debug__
+      success: function(response) {
+        debug('- BaseDetail._saveSuccess'); //debug__
         app.addModel(Est.cloneDeep(response.attributes));
         if (top) {
           top.model = response.attributes;
@@ -25506,7 +25548,7 @@ var BaseDetail = SuperView.extend({
         if (callback && typeof callback === 'function')
           callback.call(this, response);
       },
-      error: function (XMLHttpRequest, textStatus, errorThrown) {
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
         if (error && typeof error === 'function')
           error.call(this, XMLHttpRequest, textStatus, errorThrown);
       }
@@ -25518,7 +25560,7 @@ var BaseDetail = SuperView.extend({
    * @method [表单] - _reset ( 重置表单 )
    * @author wyj 14.11.18
    */
-  _reset: function () {
+  _reset: function() {
     this.model.set(this.model.defaults);
   },
   /**
@@ -25529,7 +25571,7 @@ var BaseDetail = SuperView.extend({
    * @example
    *      this._empty();
    */
-  _empty: function () {
+  _empty: function() {
     this.model.off();
     this.$el.empty().off();
   },
@@ -25539,8 +25581,8 @@ var BaseDetail = SuperView.extend({
    * @method [事件] - _close ( 移除所有绑定事件 )
    * @author wyj 14.11.16
    */
-  _close: function () {
-    debug('- BaseDetail.close');//debug__
+  _close: function() {
+    debug('- BaseDetail.close'); //debug__
     this.undelegateEvents();
     this.stopListening();
     this.off();

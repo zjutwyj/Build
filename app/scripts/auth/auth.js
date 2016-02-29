@@ -123,12 +123,12 @@ var NavigateAccount = BaseView.extend({
     } else {
       this.model.set('entLogo', CONST.PIC_URL_ADMIN + '/' + Est.getValue(CONST, 'USER.enterprise.logo'));
     }
-    if (!CONST.USER.username) {
+    if (!CONST.USER || !CONST.USER.username) {
       this.model.set('state', '01');
     }
   },
-  afterRender: function  () {
-      this.$formLogin = this.$formLogin || $('.form_login');
+  afterRender: function() {
+    this.$formLogin = this.$formLogin || $('.form_login');
   },
   login: function() {
     this.$mask = $('.mask');
@@ -185,7 +185,7 @@ Service.initUser().done(function(result) {
         hashName: '#/buy'
       }, {
         text: '我的手机网站',
-        hashName: '#/home_my'
+        hashName: '#/design_center'
       }],
       change: function(item, init) {
         if (init) return;

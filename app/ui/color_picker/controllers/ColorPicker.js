@@ -700,8 +700,10 @@ define('ColorPicker', ['template/color_picker', 'noUiSlider', 'ItemCheck'], func
       });
     },
     beforeRender: function() {
-      this.model.set('tpl', this._options.tpl || '<div class="ui-color-picker-inner" style="width: 25px;height: 25px;background-color: ' +
-        $(this._options.target).val() + ';"></div>');
+      this.model.set('color', this._options.target ? $(this._options.target).val() : this._options.cur);
+      this.model.set('tpl', this._options.tpl || '<div class="ui-color-picker-inner" style="width: ' +
+        (this._options.width || 25) + 'px;height: ' + (this._options.height || 25) + 'px;background-color: ' +
+        (this.model.get('color')) + ';"></div>');
     },
     afterRender: function() {
       /*this.picker = new Picker({
@@ -713,10 +715,12 @@ define('ColorPicker', ['template/color_picker', 'noUiSlider', 'ItemCheck'], func
         id: Est.nextUid('colorpicker'),
         moduleId: Picker,
         width: 'auto',
-        color: $(this._options.target).val(),
+        zIndex: 9999,
+        color: this.model.get('color'),
         target: this.el,
         change: Est.proxy(function(color) {
           $(this._options.target).val(color);
+          this.model.set('color', color);
           this.$('.ui-color-picker-inner').css('background-color', color);
           if (this._options.change) this._options.change.call(this, color);
         }, this),

@@ -40,7 +40,7 @@ define('UiData', [], function(require, exports, module) {
     { text: '最新', moduleId: 'HomeIntro', sortType: 'addTime' }, // 若存在moduleId,则配置项里require是否为false,都会根据模块类型渲染，el默认为nodeId
     { text: '浏览量', moduleId: 'HomeOutsourcing', sortType: 'views' }, // 若存在oneRender: true,则只渲染一次， 否则实时
     { text: '转发量', moduleId: 'Buy', sortType: 'mviews' },
-    { text: '反馈量', moduleId: 'CaseList', sortType: 'rviews' }
+    { text: '反馈量', moduleId: 'Buy', sortType: 'rviews' }
   ];
   var item_check = [
     { text: '选项1', value: 'value_1' },

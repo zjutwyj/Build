@@ -3,11 +3,12 @@
  * @class ModuleName
  * @author yongjin<zjut_wyj@163.com> 2016/2/6
  */
-define('UiList', ['template/ui_list', 'UiData'], function(require, exports, module) {
-  var UiList, template, model, collection, item, UiData;
+define('UiList', ['template/ui_list', 'UiData', 'Sortable'], function(require, exports, module) {
+  var UiList, template, model, collection, item, UiData, Sortable;
 
   template = require('template/ui_list');
   UiData = require('UiData');
+  Sortable = require('Sortable');
 
   model = BaseModel.extend({
 
@@ -61,6 +62,27 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
     }
   });
 
+  var UiList2 = BaseList.extend({
+    initialize: function() {
+      this._initialize({
+        model: model,
+        collection: collection,
+        item: item,
+        pagination: '#pagination-container2',
+        pageSize: 5,
+        checkToggle: true,
+        render: '.list-render2',
+        items: Est.cloneDeep(UiData.list),
+        afterRender: this.afterRender
+      });
+    },
+    afterRender: function() {},
+    showResult: function() {
+
+    }
+  });
+
+
   UiList = BaseList.extend({
     events: {
       'click .addOne': 'addOne',
@@ -78,6 +100,7 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
         pagination: '#pagination-container1',
         pageSize: 5,
         checkToggle: true,
+        checkAppend: true,
         template: template,
         render: '.list-render',
         items: Est.cloneDeep(UiData.list),
@@ -85,8 +108,25 @@ define('UiList', ['template/ui_list', 'UiData'], function(require, exports, modu
       });
     },
     afterRender: function() {
+      var ctx = this;
       this.$result = this.$('#list-test-result');
       this._index = 0;
+      this.$('#list2').empty();
+      app.addRegion('uiList2', UiList2, {
+        el: this.$('#list2'),
+        template: this.$template.find('#list2').html()
+      });
+      this.sortable = Sortable.create(this.$('.list-render').get(0), {
+        animation: 150,
+        handle: '.test-item',
+        draggable: ".test-item",
+        onStart: function( /**Event*/ evt) {},
+        onEnd: function( /**Event*/ evt) {
+          ctx._insertOrder(evt.oldIndex, evt.newIndex, function() {
+            ctx.showResult();
+          });
+        }
+      });
     },
     showResult: function() {
       var ctx = this;

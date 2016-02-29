@@ -7,18 +7,18 @@
  * 全局常量
  * */
 var CONST = {
-  HOST: 'http://wcd.jihui88.com',
-  API: 'http://wcd.jihui88.com/rest',
+  HOST: 'http://sj.jihui88.com/mobile',
+  API: 'http://sj.jihui88.com/rest/api',
   PUBLIC_API: 'http://www.jihui88.com/rest',
-  DOMAIN: 'http://wcd.jihui88.com',
+  DOMAIN: 'http://sj.jihui88.com',
   STATIC_URL: 'http://www.jihui88.com',
   DOMAIN_TAIL: 'jihui88.com', // 去http://
-  PIC_URL: 'http://img.jihui88.com/wcd',
+  PIC_URL: 'http://img.jihui88.com/sj',
   PIC_URL_ADMIN: 'http://img.easthardware.com',
-  CDN: 'http://img.jihui88.com/wcd/cnd', // 修改后记得改gulpfile里的cdn_root
+  CDN: 'http://img.jihui88.com/sj/cnd/mobile', // 修改后记得改gulpfile里的cdn_root
   MUSIC_URL: 'http://f.jihui88.com',
   SEP: '/',
-  PIC_NONE: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==',
+  PIC_NONE: '/mobile/images/nopic.png?v=001',
   BG_NONE: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGUlEQVQYV2M4gwH+YwCGIasIUwhT25BVBADtzYNYrHvv4gAAAABJRU5ErkJggg==',
   PIC_LOADING: 'upload/j/j2/jihui88/picture/2015/04/01/b772bcb5-14ab-43a7-b22c-a3ba257d0936.gif',
   ENTER_KEY: 13,

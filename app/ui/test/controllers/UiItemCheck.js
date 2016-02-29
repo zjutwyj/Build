@@ -91,7 +91,6 @@ define('UiItemCheck', ['template/ui_item_check', 'ItemCheck', 'UiData'], functio
         theme: 'ui-item-check-checkbox',
         checkAppend: true,
         checkToggle: true,
-        modelBind: true,
         items: UiData.item_check,
         change: Est.proxy(function(item) {
           if (app.getView('itemCheckCheckbox')) {
