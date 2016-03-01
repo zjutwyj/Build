@@ -240,11 +240,18 @@ var SuperView = Backbone.View.extend({
   _viewReplace: function(selector, model, callback) {
     debug('_viewReplace selector: ' + selector); //debug__
     Est.each(selector.split(','), Est.proxy(function(item) {
+      var list = [];
       if (!Est.isEmpty(item)) {
-        this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
-          Handlebars.compile($(this.$template).find(selector).wrapAll('<div>').parent().html());
-        this.$(item).replaceWith(this['h_temp_' + Est.hash(item)](model.toJSON()));
-        //this._modelBind(item);
+        list = item.split(':');
+        if (list.length > 1) {
+          this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
+            Handlebars.compile($(this.$template).find(list[0]).attr(list[1]));
+          this.$(list[0]).attr(list[1], this['h_temp_' + Est.hash(item)](model.toJSON()));
+        } else {
+          this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
+            Handlebars.compile($(this.$template).find(selector).wrapAll('<div>').parent().html());
+          this.$(item).replaceWith(this['h_temp_' + Est.hash(item)](model.toJSON()));
+        }
       }
     }, this));
     if (callback) callback.call(this, model);
@@ -274,6 +281,9 @@ var SuperView = Backbone.View.extend({
       modelId = item.replace(/^#model\d?-(.+)$/g, "$1");
       if (!_self._options.modelBind) _self._modelBind(item);
       if (modelId in temp_obj) return;
+      Est.off(temp_obj[modelId] = modelId).on(modelId, function() {
+        _self._viewReplace(selector, _self.model, callback);
+      });
       _self.model.on('change:' + (temp_obj[modelId] = modelId.split('.')[0]), function() {
         //if (Est.typeOf(window._singleBindId) === 'undefined' || item === '#' + window._singleBindId)
         _self._viewReplace(selector, _self.model, callback);
@@ -394,7 +404,8 @@ var SuperView = Backbone.View.extend({
   _setValue: function(path, val) {
     // just for trigger
     Est.setValue(this.model.attributes, path, val);
-    this.model.trigger('change:' + path.split('.')[0]);
+    Est.trigger(path);
+    //this.model.trigger('change:' + path.split('.')[0]);
   },
   /**
    * 绑定单个字段进行重渲染

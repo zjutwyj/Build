@@ -122,7 +122,7 @@ var BaseDetail = SuperView.extend({
       if (!model) return 'Error16';
     }, { type: 'error' }); //debug__
 
-    ctx.passId = this.options.id || Est.getUrlParam('id', window.location.href);
+    ctx.passId = this.options.id || this._options.data.id || Est.getUrlParam('id', window.location.href);
 
     if (!Est.isEmpty(this.passId)) {
       ctx.model = new model();

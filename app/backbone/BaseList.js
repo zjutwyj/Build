@@ -685,6 +685,15 @@ var BaseList = SuperView.extend({
     this._resetDx();
   },
   /**
+   * 通过索引值获取当前视图的jquery对象
+   * @method [集合] - _eq
+   * @param  {number} index 索引值
+   * @return {array}       [description]
+   */
+  _eq: function(index) {
+    return this.collection.models[index].view.$el;
+  },
+  /**
    * 重新排序dx列表
    * @method [private] - _resetDx
    * @private
@@ -1099,7 +1108,19 @@ var BaseList = SuperView.extend({
     }
     Est.arrayInsert(this.collection.models, begin, end, {
       arrayExchange: Est.proxy(function(list, begin, end, opts) {
-        this._exchangeOrder(begin, end, opts);
+        this._exchangeOrder(begin, end, {
+          path: this._options.sortField || 'sort',
+          success: function(thisNode, nextNode) {
+            if (thisNode.get('id') && nextNode.get('id')) {
+              //this._saveSort(thisNode);
+              //this._saveSort(nextNode);
+              thisNode.stopCollapse = false;
+              nextNode.stopCollapse = false;
+            } else {
+              debug('Error8'); //debug__
+            }
+          }
+        });
       }, this),
       callback: function(list) {
         if (callback) callback.call(this, list);
@@ -1199,7 +1220,7 @@ var BaseList = SuperView.extend({
     }
     //model.stopCollapse = true;
     this._exchangeOrder(first, last, {
-      path: this.sortField || 'sort',
+      path: this._options.sortField || 'sort',
       success: function(thisNode, nextNode) {
         if (thisNode.get('id') && nextNode.get('id')) {
           this._saveSort(thisNode);

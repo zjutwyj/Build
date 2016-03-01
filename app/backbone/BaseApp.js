@@ -86,7 +86,7 @@ Est.extend(BaseApp.prototype, {
       this.removeView(options.viewId);
     }
 
-    return this.addView(name, new instance(options));
+    return this.addView(options.viewId, new instance(options));
   },
   /**
    * 添加面板

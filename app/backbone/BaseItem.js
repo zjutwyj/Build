@@ -611,41 +611,5 @@ var BaseItem = SuperView.extend({
         app.getView(this._options.viewId)._options.items.splice(dx, 1);
       app.getView(this._options.viewId)._resetDx();
     }
-  },
-  /**
-   * 修改模型类
-   *
-   * @method [修改] - _edit ( 修改模型类 )
-   * @param options [title: 标题][width: 宽度][height: 高度]
-   *                [url: 地址][reload: 关闭后是否重新从服务器获取数据][close: 关闭回调方法]
-   *                [hideSaveBtn: 隐藏保存按钮][hideResetBtn: 隐藏重置按钮][oniframeload: 页面载入后回调]
-   * @author wyj 14.11.16
-   */
-  _edit: function(options) {
-    debug('1.BaseItem._edit'); //debug__
-    options = Est.extend({}, options);
-    options.detail = this._options.detail || options.detail;
-    try {
-      if (!this.model.get('_isSearch') && Est.typeOf(options.detail) === 'string' && options.detail.indexOf('#/') !== -1) {
-        this._navigate(options.detail + '/' + (this._options.encodeUrl ? Est.encodeId(this.model.get('id')) : this.model.get('id')), true);
-      } else if (this.model.get('_isSearch') && options.detail.indexOf('#/') !== -1) {
-        // 如果是搜索结果列表时， 新建一个窗口
-        window.open(options.detail + '/' + (this._options.encodeUrl ? Est.encodeId(this.model.get('id')) : this.model.get('id')));
-      } else {
-        // 当detail为moduleId时， 以对话框的形式打开
-        this._dialog({
-          moduleId: options.detail, // 模块ID
-          title: CONST.LANG.EDIT, // 对话框标题
-          id: this.model.get('id'), // 初始化模块时传入的ID
-          width: 1000, // 对话框宽度
-          height: 'auto', // 对话框高度
-          skin: 'form-horizontal', // className
-          onShow: function() {}, // 对话框弹出后调用
-          onClose: function() {}
-        }, this);
-      }
-    } catch (e) {
-      debug('Error24' + e); //debug__
-    }
   }
 });
