@@ -246,11 +246,11 @@ var SuperView = Backbone.View.extend({
         if (list.length > 1) {
           this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
             Handlebars.compile($(this.$template).find(list[0]).attr(list[1]));
-          this.$(list[0]).attr(list[1], this['h_temp_' + Est.hash(item)](model.toJSON()));
+          this.$(list[0]).attr(list[1], this['h_temp_' + Est.hash(item)](model.attributes));
         } else {
           this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
-            Handlebars.compile($(this.$template).find(selector).wrapAll('<div>').parent().html());
-          this.$(item).replaceWith(this['h_temp_' + Est.hash(item)](model.toJSON()));
+            Handlebars.compile($(this.$template).find(item).wrapAll('<div>').parent().html());
+          this.$(item).replaceWith(this['h_temp_' + Est.hash(item)](model.attributes));
         }
       }
     }, this));
@@ -305,7 +305,7 @@ var SuperView = Backbone.View.extend({
     Est.each(array, function(item) {
       keys = item.split('.');
       if (keys.length > 1) {
-        result = Est.getValue(this.model.toJSON(), item);
+        result = Est.getValue(this.model.attributes, item);
         Est.setValue(this.model.attributes, item, JSON.stringify(result));
       } else {
         Est.setValue(this.model.attributes, item, JSON.stringify(this.model.get(item)));
@@ -325,9 +325,9 @@ var SuperView = Backbone.View.extend({
     Est.each(array, function(item) {
       keys = item.split('.');
       if (keys.length > 1) {
-        result = Est.getValue(this.model.toJSON(), item);
+        result = Est.getValue(this.model.attributes, item);
         if (Est.typeOf(result) === 'string') {
-          Est.setValue(this.model.toJSON(), item, parse(result));
+          Est.setValue(this.model.attributes, item, parse(result));
         }
       } else {
         if (Est.typeOf(this.model.get(item)) === 'string') {

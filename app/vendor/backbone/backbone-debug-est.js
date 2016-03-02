@@ -261,7 +261,12 @@
     initialize: function() {},
     // Return a copy of the model's `attributes` object.
     toJSON: function(options) {
-      return _.clone(this.attributes);
+      var result = _.cloneDeep(this.attributes);
+      delete result.CONST;
+      delete result._data;
+      delete result._isAdd;
+      delete result.checked;
+      return result;
     },
     // Proxy `Backbone.sync` by default -- but override this if you need
     // custom syncing semantics for *this* particular model.

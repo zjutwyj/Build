@@ -91,16 +91,18 @@ var BaseDetail = SuperView.extend({
    *        this._render();
    */
   _render: function() {
-    if (this._options.beforeRender) {
-      this._options.beforeRender.call(this, this._options);
-    }
-    this.list.append(this.template(this.model.toJSON()));
+    if (this.beforeRender) this.beforeRender.call(this, this._options);
+    this.list.append(this.template(this.model.attributes));
     if (this._options.modelBind) this._modelBind();
-    if (window.topDialog) {
-      this.$('.form-actions').hide();
-    }
-    if (this._options.afterRender) {
-      this._options.afterRender.call(this, this._options);
+    if (window.topDialog) this.$('.form-actions').hide();
+    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
+    if (this.afterRender) this.afterRender.call(this, this._options);
+    if (this.watch) this.watch.call(this);
+    if (this._options.form) {
+      this._form(this._options.form)._init({
+        beforeSave: this.beforeSave,
+        afterSave: this.afterSave
+      });
     }
     if (this._options.toolTip) this._initToolTip();
     BaseUtils.removeLoading();

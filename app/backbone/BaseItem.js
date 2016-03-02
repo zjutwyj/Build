@@ -157,8 +157,8 @@ var BaseItem = SuperView.extend({
       this._options.filter.call(this, this.model);
     //TODO 添加判断是否存在this.$el debug
     //debug('BaseItem里的this.$el为空， 检查document中是否存在， 或设置传入的options.el为jquery对象(有时是DOM片段)', {type: 'error'});
-    this.$el.html(this.template ? this.template(this.model.toJSON()) :
-      this._options.viewId && app.getCompileTemp(this._options.viewId) && app.getCompileTemp(this._options.viewId)(this.model.toJSON()));
+    this.$el.html(this.template ? this.template(this.model.attributes) :
+      this._options.viewId && app.getCompileTemp(this._options.viewId) && app.getCompileTemp(this._options.viewId)(this.model.attributes));
     if (this._options.modelBind) this._modelBind();
     //TODO 判断是否存在子元素
     var modelOptions = this.model.get('_options');
@@ -283,7 +283,7 @@ var BaseItem = SuperView.extend({
    * @author wyj 14.12.3
    */
   _onBeforeRender: function() {
-    if (this._options.beforeRender) this._options.beforeRender.call(this, this.model);
+    if (this.beforeRender) this.beforeRender.call(this, this.model);
   },
   /**
    * 渲染后事件
@@ -294,7 +294,9 @@ var BaseItem = SuperView.extend({
    */
   _onAfterRender: function() {
     if (this._options.toolTip) this._initToolTip();
-    if (this._options.afterRender) this._options.afterRender.call(this, this.model);
+    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
+    if (this.afterRender) this.afterRender.call(this, this.model);
+    if (this.watch) this.watch.call(this);
   },
   /**
    * 移除监听
@@ -354,9 +356,9 @@ var BaseItem = SuperView.extend({
     }
 
     if (this._checkToggle) {
-      this.model.attributes.checked = !checked;
+      this.model.attributes.checked = Est.typeOf(e) === 'boolean' ? e : !checked;
     } else {
-      this.model.attributes.checked = true;
+      this.model.attributes.checked = Est.typeOf(e) === 'boolean' ? e : true;
       this._itemActive({
         add: this._checkAppend
       });
@@ -383,7 +385,7 @@ var BaseItem = SuperView.extend({
     } else {
       app.addData('curChecked', this.model.get('dx'));
     }
-    if (e)
+    if (Est.typeOf(e) !== 'boolean' && e)
       e.stopImmediatePropagation();
   },
   /**

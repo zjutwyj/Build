@@ -2004,9 +2004,7 @@
           });
         }
       }
-      if (!opts.arrayExchange) {
-        tempList = list.slice(0).slice(thisdx, targetdx);
-      }
+      tempList = list.slice(0).slice(thisdx, targetdx);
     } else {
       for (var i = thisdx; i > targetdx; i--) {
         if (opts.arrayExchange) {
@@ -2017,9 +2015,7 @@
           });
         }
       }
-      if (!opts.arrayExchange) {
-        tempList = list.slice(0).slice(targetdx, thisdx + 1);
-      }
+      tempList = list.slice(0).slice(targetdx, thisdx + 1);
     }
     if (typeof opts.callback === 'function') {
       opts.callback.apply(null, [tempList]);

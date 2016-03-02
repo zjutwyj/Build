@@ -71,6 +71,7 @@ var BaseModel = Backbone.Model.extend({
    * this.model.hideAddBtn = true; // 隐藏继续添加按钮
    * this.model.autoHide = true; // 自动隐藏提示信息
    * this.model.autoBack = true; // 保存成功后自动返回列表页面
+   * this.model.stopCheckLogin = true; // 取消登录判断
    *
    * @method [private] - parse
    * @param response
@@ -91,7 +92,7 @@ var BaseModel = Backbone.Model.extend({
     if (response && response.msg && response.msg === CONST.LANG.AUTH_FAILED){
       BaseUtils.tip(CONST.LANG.AUTH_LIMIT, {time: 2000});
     }
-    if (response.msg === CONST.LANG.NOT_LOGIN) {
+    if (response.msg === CONST.LANG.NOT_LOGIN && !this.stopCheckLogin) {
       Est.trigger('checkLogin');
     }
     // 当服务器有返回msg消息 并参数设置hideTip为false时  弹出提示信息
@@ -201,7 +202,7 @@ var BaseModel = Backbone.Model.extend({
     if (newModel.baseUrl) {
       newModel.save(null, {
         success: function (model, result) {
-          if (result.msg === CONST.LANG.NOT_LOGIN) {
+          if (result.msg === CONST.LANG.NOT_LOGIN && !this.stopCheckLogin) {
             Est.trigger('checkLogin');
           }
           if (typeof options.success != 'undefined') {

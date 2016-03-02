@@ -144,7 +144,7 @@ var BaseList = SuperView.extend({
   _initTemplate: function(options) {
     this._data = options.data = options.data || {};
     if (options.template) {
-      if (this._options.beforeRender) this._options.beforeRender.call(this);
+      if (this.beforeRender) this.beforeRender.call(this);
       this.$template = $('<div>' + options.template + '</div>');
       if (this._options.render) {
         this._options.itemTemp = this.$template.find(this._options.render).html();
@@ -157,9 +157,9 @@ var BaseList = SuperView.extend({
         this.$template.html());
       if (this._options.append) {
         this.$el.empty();
-        this.$el.append(this.template(this.model.toJSON()));
+        this.$el.append(this.template(this.model.attributes));
       } else {
-        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.html(this.template(this.model.attributes));
       }
     }
     if (this._options.modelBind) this._modelBind();
@@ -406,8 +406,9 @@ var BaseList = SuperView.extend({
    * @private
    */
   _finally: function() {
-    if (this._options.afterRender)
-      this._options.afterRender.call(this, this._options);
+    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
+    if (this.afterRender) this.afterRender.call(this, this._options);
+    if (this.watch) this.watch.call(this);
     if (this._options.toolTip) this._initToolTip();
     BaseUtils.removeLoading();
   },
@@ -419,8 +420,8 @@ var BaseList = SuperView.extend({
    * @private
    */
   _beforeLoad: function(options) {
-    if (options.beforeLoad)
-      options.beforeLoad.call(this, this.collection);
+    if (this.beforeLoad)
+      this.beforeLoad.call(this, this.collection);
   },
   /**
    * 列表载入后执行
@@ -429,8 +430,8 @@ var BaseList = SuperView.extend({
    * @private
    */
   _afterLoad: function(options) {
-    if (options.afterLoad)
-      options.afterLoad.call(this, this.collection);
+    if (this.afterLoad)
+      this.afterLoad.call(this, this.collection);
   },
   /**
    * 初始化items
@@ -1065,14 +1066,19 @@ var BaseList = SuperView.extend({
   _checkAll: function(e) {
     debug('BaseList._toggleAllChecked'); //debug__
     var checked = this.___checkAll;
-    var $check = this._getTarget(e);
-    if ($check.is('checkbox')) {
-      checked = $check.get(0).checked;
+    if (Est.typeOf(e) === 'boolean') {
+      checked = this.___checkAll = e;
     } else {
-      checked = this.___checkAll = !checked;
+      var $check = this._getEventTarget(e);
+      if ($check.is('checkbox')) {
+        checked = $check.get(0).checked;
+      } else {
+        checked = this.___checkAll = !checked;
+      }
     }
-    this.collection.each(function(product) {
-      product.set('checked', checked);
+    this.collection.each(function(model) {
+     model.view._toggleChecked(checked);
+     model.view.render();
     });
   },
   /**
