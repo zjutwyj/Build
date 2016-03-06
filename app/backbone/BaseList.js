@@ -134,6 +134,12 @@ var BaseList = SuperView.extend({
       this._options.data.CONST = CONST;
     this.model = new model(this._options.data);
   },
+  _getTemp: function() {
+
+  },
+  _getIeTemp: function() {
+
+  },
   /**
    * 初始化模板， 若传递一个Template模板字符中进来， 则渲染页面
    *
@@ -144,13 +150,30 @@ var BaseList = SuperView.extend({
   _initTemplate: function(options) {
     this._data = options.data = options.data || {};
     if (options.template) {
+      if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
       if (this.beforeRender) this.beforeRender.call(this);
       this.$template = $('<div>' + options.template + '</div>');
       if (this._options.render) {
-        this._options.itemTemp = this.$template.find(this._options.render).html();
+        if (Est.msie()) {
+          this.__template = options.template.replace(new RegExp('\\sstyle=', 'img'), ' ng-style=');
+          this._options.itemTemp = $('<div>' + this.__template + '</div>').find(this._options.render).html();
+          if (!Est.isEmpty(this._options.itemTemp)) {
+            this._options.itemTemp = this._options.itemTemp.replace(/ng-style/img, 'style')
+          }
+        } else {
+          this._options.itemTemp = this.$template.find(this._options.render).html();
+        }
         this.$template.find(this._options.render).empty();
       } else {
-        this._options.itemTemp = this.$template.html();
+        if (Est.msie()) {
+          this.__template = options.template.replace(new RegExp('\\sstyle=', 'img'), ' ng-style=');
+          this._options.itemTemp = $('<div>' + this.__template + '</div>').html();
+          if (!Est.isEmpty(this._options.itemTemp)) {
+            this._options.itemTemp = this._options.itemTemp.replace(/ng-style/img, 'style')
+          }
+        } else {
+          this._options.itemTemp = this.$template.html();
+        }
         this.$template.empty();
       }
       this.template = Handlebars.compile(Est.isEmpty(this._options.itemTemp) ? options.template :
@@ -406,7 +429,6 @@ var BaseList = SuperView.extend({
    * @private
    */
   _finally: function() {
-    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
     if (this.afterRender) this.afterRender.call(this, this._options);
     if (this.watch) this.watch.call(this);
     if (this._options.toolTip) this._initToolTip();
@@ -1077,8 +1099,8 @@ var BaseList = SuperView.extend({
       }
     }
     this.collection.each(function(model) {
-     model.view._toggleChecked(checked);
-     model.view.render();
+      model.view._toggleChecked(checked);
+      model.view.render();
     });
   },
   /**

@@ -283,6 +283,7 @@ var BaseItem = SuperView.extend({
    * @author wyj 14.12.3
    */
   _onBeforeRender: function() {
+    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
     if (this.beforeRender) this.beforeRender.call(this, this.model);
   },
   /**
@@ -294,7 +295,6 @@ var BaseItem = SuperView.extend({
    */
   _onAfterRender: function() {
     if (this._options.toolTip) this._initToolTip();
-    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
     if (this.afterRender) this.afterRender.call(this, this.model);
     if (this.watch) this.watch.call(this);
   },

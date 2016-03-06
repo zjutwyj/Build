@@ -690,12 +690,12 @@
           object[key] = value;
         } else {
           array.shift();
+          if (!object[key]) object[key] = {};
           set(object[key], array, value);
           return false;
         }
       });
     }
-
     set(object, array, value);
   }
 

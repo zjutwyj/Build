@@ -44,11 +44,11 @@ window.mobileUtil = (function(win, doc) {
 
             if ( !metaEl ) { // REM
                 var docEl = doc.documentElement,
-                    maxwidth = docEl.dataset.mw || 750, // 每 dpr 最大页面宽度
+                    maxwidth = (docEl.dataset && docEl.dataset.mw) || 750, // 每 dpr 最大页面宽度
                     dpr = isIos ? Math.min(win.devicePixelRatio, 3) : 1,
                     scale = 1 / dpr,
                     tid;
-
+                if (!docEl.dataset) docEl.dataset = {}; // ie
                 docEl.removeAttribute('data-mw');
                 docEl.dataset.dpr = dpr;
                 metaEl = doc.createElement('meta');

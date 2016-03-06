@@ -240,13 +240,29 @@ var SuperView = Backbone.View.extend({
   _viewReplace: function(selector, model, callback) {
     debug('_viewReplace selector: ' + selector); //debug__
     Est.each(selector.split(','), Est.proxy(function(item) {
-      var list = [];
+      var list = [],
+        _$template = '',
+        attrName = '';
+
       if (!Est.isEmpty(item)) {
         list = item.split(':');
         if (list.length > 1) {
+          if (Est.msie()) {
+            attrName = 'ng-' + list[1];
+            if (!this['h_temp_' + Est.hash(item)])
+              _$template = this.$template.replace(new RegExp('\\s' + list[1] + '=', "img"), ' ' + attrName + '=');
+            console.log(attrName);
+          } else {
+            _$template = this.$template;
+            attrName = list[1];
+          }
           this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
-            Handlebars.compile($(this.$template).find(list[0]).attr(list[1]));
-          this.$(list[0]).attr(list[1], this['h_temp_' + Est.hash(item)](model.attributes));
+            Handlebars.compile($(_$template).find(list[0]).attr(attrName));
+          if (attrName === 'value') {
+            this.$(list[0]).val(this['h_temp_' + Est.hash(item)](model.attributes));
+          } else {
+            this.$(list[0]).attr(list[1], this['h_temp_' + Est.hash(item)](model.attributes));
+          }
         } else {
           this['h_temp_' + Est.hash(item)] = this['h_temp_' + Est.hash(item)] ||
             Handlebars.compile($(this.$template).find(item).wrapAll('<div>').parent().html());
@@ -390,6 +406,33 @@ var SuperView = Backbone.View.extend({
    */
   _getValue: function(path) {
     return Est.getValue(this.model.attributes, path);
+  },
+  /**
+   * 获取model值,如果不存在，则设初始值
+   *
+   * @method [模型] - _getDefault ( 获取model值 )
+   * @param path
+   * @author wyj 15.1.30
+   * @example
+   *      this._getDefault('tip.name', 'd');
+   */
+  _getDefault: function(path, value) {
+    this._setDefault(path, value);
+    return Est.getValue(this.model.attributes, path);
+  },
+  /**
+   * 设置初始值
+   *
+   * @method [模型] - _setDefault ( 设置初始值 )
+   * @param path
+   * @author wyj 15.1.30
+   * @example
+   *      this._setDefault('tip.name', 'd');
+   */
+  _setDefault: function(path, value) {
+    var result = Est.getValue(this.model.attributes, path);
+    if (Est.typeOf(result) === 'undefined')
+      Est.setValue(this.model.attributes, path, value);
   },
   /**
    * 设置model值

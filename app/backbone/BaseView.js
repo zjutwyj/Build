@@ -101,31 +101,18 @@ var BaseView = SuperView.extend({
    *        this._render();
    */
   _render: function() {
-    this.trigger('before', this);
+    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
     if (this.beforeRender) this.beforeRender.call(this, this._options);
     if (this._options.append) this.$el.append(this.template(this.model.attributes));
     else this.$el.html(this.template(this.model.attributes));
-    this._initEnterEvent(this._options);
     if (this._options.modelBind) this._modelBind();
-    this.trigger('after', this);
-    if (this.init && Est.typeOf(this.init) === 'function') this.init.call(this);
     if (this.afterRender) this.afterRender.call(this, this._options);
     if (this.watch) this.watch.call(this);
     if (this._options.toolTip) this._initToolTip();
+    this._initEnterEvent(this._options);
     BaseUtils.removeLoading();
   },
   render: function() {
     this._render();
-  },
-  /**
-   * 移除事件
-   *
-   * @method [private] - _empty
-   * @private
-   * @return {BaseView}
-   * @author wyj 14.11.16
-   */
-  _empty: function() {
-    debug('BaseView._empty'); //debug__
   }
 });

@@ -172,7 +172,7 @@ var BaseUtils = {
   addLoading: function(options) {
     try {
       if (window.$loading) window.$loading.remove();
-      window.$loading = $('<div class="loading"></div>');
+      window.$loading = $('<div id="loading" class="loading"><div class="object" id="object_one"></div><div class="object" id="object_two"></div><div class="object" id="object_three"></div></div>');
       $('body').append(window.$loading);
     } catch (e) {
       debug('Error28' + e); //debug__
